@@ -1,0 +1,61 @@
+{
+  "status": "pass",
+  "scope": "PNG bytes, hashes, decompression, alpha, cells, bounds and anchor geometry only",
+  "notCertified": [
+    "species aesthetics",
+    "temporal animation quality",
+    "seamless shore tiling",
+    "engine integration",
+    "independent visual approval"
+  ],
+  "assets": [
+    {
+      "path": "artifacts/living/model.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "format": "image/png",
+      "color": "RGB",
+      "bytes": 1890768,
+      "sha256": "88ac8dfbf2b51b3f54323673db795c73985582f3b4892eee6b7eb97fe5ae6f0e",
+      "pngSignatureCRCAndDecompression": "pass"
+    },
+    {
+      "path": "artifacts/living/characters.png",
+      "dimensions": [
+        1920,
+        1920
+      ],
+      "format": "image/png",
+      "color": "RGBA",
+      "bytes": 1989884,
+      "sha256": "4c37695a5a4fc2f2fde45b82d867068965adb4f506c40ac96d8d470717dcf130",
+      "pngSignatureCRCAndDecompression": "pass",
+      "spriteCount": 36,
+      "allCellsNonempty": true,
+      "allAnchorsConsistent": true,
+      "minimumTransparentGutterPixels": 32,
+      "transparentFraction": 0.824712,
+      "sourceRegistrationAndAlphaBounds": "pass"
+    },
+    {
+      "path": "artifacts/living/world.png",
+      "dimensions": [
+        2560,
+        1280
+      ],
+      "format": "image/png",
+      "color": "RGBA",
+      "bytes": 2276073,
+      "sha256": "dbeeabaaee768a89ce868b1abba996a9d39e53ea3f54c6c18e7565094efff55c",
+      "pngSignatureCRCAndDecompression": "pass",
+      "spriteCount": 32,
+      "allCellsNonempty": true,
+      "allAnchorsConsistent": true,
+      "minimumTransparentGutterPixels": 40,
+      "transparentFraction": 0.810163,
+      "sourceRegistrationAndAlphaBounds": "pass"
+    }
+  ]
+}

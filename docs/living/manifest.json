@@ -1,0 +1,2104 @@
+{
+  "version": 1,
+  "pixelOrigin": "top-left",
+  "rectConvention": "x,y,width,height; half-open",
+  "pivotConvention": "cell-local pixels; ground contact; draw top-left = worldScreen - anchor",
+  "processing": "Lossless integer registration. Alpha <=16 discarded as matte residue; detached character extraction dust below 24 pixels removed. No painted pixels, resizing, mirrored frames or interpolated poses.",
+  "runtimeIntegrated": false,
+  "visualApproval": "Contributor inspection only; independent owner review pending",
+  "assets": [
+    {
+      "path": "artifacts/living/model.png",
+      "format": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "role": "opaque model sheet; not an atlas",
+      "sha256": "88ac8dfbf2b51b3f54323673db795c73985582f3b4892eee6b7eb97fe5ae6f0e",
+      "bytes": 1890768
+    },
+    {
+      "path": "artifacts/living/characters.png",
+      "format": "image/png",
+      "width": 1920,
+      "height": 1920,
+      "color": "RGBA",
+      "bitDepth": 8,
+      "grid": [
+        6,
+        6
+      ],
+      "cell": [
+        320,
+        320
+      ],
+      "sha256": "4c37695a5a4fc2f2fde45b82d867068965adb4f506c40ac96d8d470717dcf130",
+      "bytes": 1989884,
+      "transparentFraction": 0.824712,
+      "sourceSha256": "1e763411e2a4c1268138a29fcc177e003de7de19cfeac7b87b2e1f7165e2bd86",
+      "sprites": [
+        {
+          "id": "idle.front",
+          "rect": [
+            0,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            0,
+            218,
+            217
+          ],
+          "sourceAnchor": [
+            109,
+            207
+          ],
+          "visibleBounds": [
+            81,
+            105,
+            234,
+            279
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "idle.southeast",
+          "rect": [
+            320,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            218,
+            0,
+            212,
+            217
+          ],
+          "sourceAnchor": [
+            320,
+            207
+          ],
+          "visibleBounds": [
+            400,
+            104,
+            550,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "idle.east",
+          "rect": [
+            640,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            430,
+            0,
+            225,
+            217
+          ],
+          "sourceAnchor": [
+            529,
+            207
+          ],
+          "visibleBounds": [
+            728,
+            103,
+            863,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "idle.northeast",
+          "rect": [
+            960,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            655,
+            0,
+            202,
+            217
+          ],
+          "sourceAnchor": [
+            739,
+            207
+          ],
+          "visibleBounds": [
+            1037,
+            105,
+            1188,
+            279
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "idle.back",
+          "rect": [
+            1280,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            857,
+            0,
+            209,
+            217
+          ],
+          "sourceAnchor": [
+            950,
+            207
+          ],
+          "visibleBounds": [
+            1347,
+            107,
+            1509,
+            279
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "idle.southwest",
+          "rect": [
+            1600,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1066,
+            0,
+            188,
+            217
+          ],
+          "sourceAnchor": [
+            1157,
+            207
+          ],
+          "visibleBounds": [
+            1673,
+            105,
+            1826,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "walk.southeast.0",
+          "rect": [
+            0,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            217,
+            218,
+            202
+          ],
+          "sourceAnchor": [
+            109,
+            407
+          ],
+          "visibleBounds": [
+            88,
+            417,
+            245,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "walk.southeast.1",
+          "rect": [
+            320,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            218,
+            217,
+            212,
+            202
+          ],
+          "sourceAnchor": [
+            320,
+            407
+          ],
+          "visibleBounds": [
+            411,
+            420,
+            564,
+            601
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "walk.southeast.2",
+          "rect": [
+            640,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            430,
+            217,
+            225,
+            202
+          ],
+          "sourceAnchor": [
+            529,
+            407
+          ],
+          "visibleBounds": [
+            728,
+            417,
+            880,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "walk.southeast.3",
+          "rect": [
+            960,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            655,
+            217,
+            202,
+            202
+          ],
+          "sourceAnchor": [
+            739,
+            407
+          ],
+          "visibleBounds": [
+            1044,
+            420,
+            1198,
+            598
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "walk.southeast.4",
+          "rect": [
+            1280,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            857,
+            217,
+            209,
+            202
+          ],
+          "sourceAnchor": [
+            950,
+            407
+          ],
+          "visibleBounds": [
+            1355,
+            420,
+            1512,
+            601
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "walk.southeast.5",
+          "rect": [
+            1600,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1066,
+            217,
+            188,
+            202
+          ],
+          "sourceAnchor": [
+            1157,
+            407
+          ],
+          "visibleBounds": [
+            1675,
+            420,
+            1831,
+            601
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "fish.ready",
+          "rect": [
+            0,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            419,
+            234,
+            209
+          ],
+          "sourceAnchor": [
+            109,
+            610
+          ],
+          "visibleBounds": [
+            83,
+            751,
+            279,
+            918
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "fish.cast.0",
+          "rect": [
+            320,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            234,
+            419,
+            201,
+            209
+          ],
+          "sourceAnchor": [
+            320,
+            610
+          ],
+          "visibleBounds": [
+            394,
+            733,
+            572,
+            922
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "fish.cast.1",
+          "rect": [
+            640,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            435,
+            419,
+            231,
+            209
+          ],
+          "sourceAnchor": [
+            529,
+            610
+          ],
+          "visibleBounds": [
+            716,
+            749,
+            928,
+            921
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "fish.wait",
+          "rect": [
+            960,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            666,
+            419,
+            197,
+            209
+          ],
+          "sourceAnchor": [
+            739,
+            610
+          ],
+          "visibleBounds": [
+            1049,
+            749,
+            1235,
+            921
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "fish.reel",
+          "rect": [
+            1280,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            863,
+            419,
+            204,
+            209
+          ],
+          "sourceAnchor": [
+            950,
+            610
+          ],
+          "visibleBounds": [
+            1353,
+            753,
+            1557,
+            922
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "fish.catch",
+          "rect": [
+            1600,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1067,
+            419,
+            187,
+            209
+          ],
+          "sourceAnchor": [
+            1157,
+            610
+          ],
+          "visibleBounds": [
+            1670,
+            752,
+            1844,
+            923
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "gather.reach",
+          "rect": [
+            0,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            628,
+            218,
+            201
+          ],
+          "sourceAnchor": [
+            109,
+            816
+          ],
+          "visibleBounds": [
+            81,
+            1067,
+            242,
+            1238
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "gather.crouch",
+          "rect": [
+            320,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            218,
+            628,
+            212,
+            201
+          ],
+          "sourceAnchor": [
+            320,
+            816
+          ],
+          "visibleBounds": [
+            396,
+            1084,
+            564,
+            1237
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "gather.lift",
+          "rect": [
+            640,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            430,
+            628,
+            225,
+            201
+          ],
+          "sourceAnchor": [
+            529,
+            816
+          ],
+          "visibleBounds": [
+            724,
+            1062,
+            881,
+            1232
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "carry.berries",
+          "rect": [
+            960,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            655,
+            628,
+            202,
+            201
+          ],
+          "sourceAnchor": [
+            739,
+            816
+          ],
+          "visibleBounds": [
+            1036,
+            1058,
+            1190,
+            1234
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "carry.wood.0",
+          "rect": [
+            1280,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            857,
+            628,
+            209,
+            201
+          ],
+          "sourceAnchor": [
+            950,
+            816
+          ],
+          "visibleBounds": [
+            1353,
+            1057,
+            1522,
+            1237
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "carry.wood.1",
+          "rect": [
+            1600,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1066,
+            628,
+            188,
+            201
+          ],
+          "sourceAnchor": [
+            1157,
+            816
+          ],
+          "visibleBounds": [
+            1671,
+            1058,
+            1836,
+            1239
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "build.ready",
+          "rect": [
+            0,
+            1280,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            829,
+            218,
+            195
+          ],
+          "sourceAnchor": [
+            109,
+            1015
+          ],
+          "visibleBounds": [
+            84,
+            1389,
+            255,
+            1557
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "build.raise.0",
+          "rect": [
+            320,
+            1280,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            218,
+            829,
+            212,
+            195
+          ],
+          "sourceAnchor": [
+            320,
+            1015
+          ],
+          "visibleBounds": [
+            403,
+            1388,
+            586,
+            1558
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "build.strike.0",
+          "rect": [
+            640,
+            1280,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            430,
+            829,
+            225,
+            195
+          ],
+          "sourceAnchor": [
+            529,
+            1015
+          ],
+          "visibleBounds": [
+            713,
+            1395,
+            871,
+            1565
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "build.raise.1",
+          "rect": [
+            960,
+            1280,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            655,
+            829,
+            202,
+            195
+          ],
+          "sourceAnchor": [
+            739,
+            1015
+          ],
+          "visibleBounds": [
+            1036,
+            1387,
+            1202,
+            1555
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "build.strike.1",
+          "rect": [
+            1280,
+            1280,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            857,
+            829,
+            209,
+            195
+          ],
+          "sourceAnchor": [
+            950,
+            1015
+          ],
+          "visibleBounds": [
+            1347,
+            1395,
+            1521,
+            1565
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "build.lower",
+          "rect": [
+            1600,
+            1280,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1066,
+            829,
+            188,
+            195
+          ],
+          "sourceAnchor": [
+            1157,
+            1015
+          ],
+          "visibleBounds": [
+            1677,
+            1382,
+            1822,
+            1560
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "rest.settle",
+          "rect": [
+            0,
+            1600,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            1024,
+            218,
+            230
+          ],
+          "sourceAnchor": [
+            109,
+            1217
+          ],
+          "visibleBounds": [
+            84,
+            1710,
+            230,
+            1874
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "rest.drowsy",
+          "rect": [
+            320,
+            1600,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            218,
+            1024,
+            212,
+            230
+          ],
+          "sourceAnchor": [
+            320,
+            1217
+          ],
+          "visibleBounds": [
+            398,
+            1709,
+            549,
+            1873
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "rest.sleep.0",
+          "rect": [
+            640,
+            1600,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            430,
+            1024,
+            225,
+            230
+          ],
+          "sourceAnchor": [
+            529,
+            1217
+          ],
+          "visibleBounds": [
+            719,
+            1738,
+            887,
+            1870
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "rest.sleep.1",
+          "rect": [
+            960,
+            1600,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            655,
+            1024,
+            202,
+            230
+          ],
+          "sourceAnchor": [
+            739,
+            1217
+          ],
+          "visibleBounds": [
+            1041,
+            1735,
+            1209,
+            1870
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "rest.wake",
+          "rect": [
+            1280,
+            1600,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            857,
+            1024,
+            209,
+            230
+          ],
+          "sourceAnchor": [
+            950,
+            1217
+          ],
+          "visibleBounds": [
+            1354,
+            1703,
+            1506,
+            1875
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "rest.stretch",
+          "rect": [
+            1600,
+            1600,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1066,
+            1024,
+            188,
+            230
+          ],
+          "sourceAnchor": [
+            1157,
+            1217
+          ],
+          "visibleBounds": [
+            1677,
+            1694,
+            1836,
+            1876
+          ],
+          "edgeReviewRequired": true
+        }
+      ]
+    },
+    {
+      "path": "artifacts/living/world.png",
+      "format": "image/png",
+      "width": 2560,
+      "height": 1280,
+      "color": "RGBA",
+      "bitDepth": 8,
+      "grid": [
+        8,
+        4
+      ],
+      "cell": [
+        320,
+        320
+      ],
+      "sha256": "dbeeabaaee768a89ce868b1abba996a9d39e53ea3f54c6c18e7565094efff55c",
+      "bytes": 2276073,
+      "transparentFraction": 0.810163,
+      "sourceSha256": "cb7f6eb66bfb2326c9f3c89e836a7704d1d1b80674c6beb3e642129ff32c0cff",
+      "sprites": [
+        {
+          "id": "forest.tree.oak",
+          "rect": [
+            0,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            0,
+            257,
+            268
+          ],
+          "sourceAnchor": [
+            143,
+            251
+          ],
+          "visibleBounds": [
+            61,
+            70,
+            260,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "forest.berries.full",
+          "rect": [
+            320,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            257,
+            0,
+            190,
+            268
+          ],
+          "sourceAnchor": [
+            354,
+            255
+          ],
+          "visibleBounds": [
+            402,
+            147,
+            558,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "forest.berries.depleted",
+          "rect": [
+            640,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            447,
+            0,
+            206,
+            268
+          ],
+          "sourceAnchor": [
+            553,
+            254
+          ],
+          "visibleBounds": [
+            719,
+            149,
+            882,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "forest.stock.wood",
+          "rect": [
+            960,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            653,
+            0,
+            201,
+            268
+          ],
+          "sourceAnchor": [
+            755,
+            258
+          ],
+          "visibleBounds": [
+            1026,
+            141,
+            1214,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "forest.shore.river",
+          "rect": [
+            1280,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            854,
+            0,
+            256,
+            268
+          ],
+          "sourceAnchor": [
+            983,
+            266
+          ],
+          "visibleBounds": [
+            1326,
+            105,
+            1555,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "forest.shelter.foundation",
+          "rect": [
+            1600,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1110,
+            0,
+            208,
+            268
+          ],
+          "sourceAnchor": [
+            1219,
+            262
+          ],
+          "visibleBounds": [
+            1672,
+            150,
+            1849,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "forest.shelter.frame",
+          "rect": [
+            1920,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1318,
+            0,
+            220,
+            268
+          ],
+          "sourceAnchor": [
+            1424,
+            261
+          ],
+          "visibleBounds": [
+            1986,
+            101,
+            2174,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "forest.shelter.complete",
+          "rect": [
+            2240,
+            0,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1538,
+            0,
+            236,
+            268
+          ],
+          "sourceAnchor": [
+            1638,
+            260
+          ],
+          "visibleBounds": [
+            2308,
+            90,
+            2493,
+            280
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "desert.tree.palm",
+          "rect": [
+            0,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            268,
+            257,
+            206
+          ],
+          "sourceAnchor": [
+            143,
+            474
+          ],
+          "visibleBounds": [
+            68,
+            396,
+            253,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "desert.cactus",
+          "rect": [
+            320,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            257,
+            268,
+            190,
+            206
+          ],
+          "sourceAnchor": [
+            351,
+            460
+          ],
+          "visibleBounds": [
+            403,
+            454,
+            558,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "desert.stone.sandstone",
+          "rect": [
+            640,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            447,
+            268,
+            206,
+            206
+          ],
+          "sourceAnchor": [
+            549,
+            457
+          ],
+          "visibleBounds": [
+            706,
+            462,
+            895,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "desert.stock.stone-reeds",
+          "rect": [
+            960,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            653,
+            268,
+            201,
+            206
+          ],
+          "sourceAnchor": [
+            749,
+            464
+          ],
+          "visibleBounds": [
+            1033,
+            488,
+            1207,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "desert.shore.oasis",
+          "rect": [
+            1280,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            854,
+            268,
+            256,
+            206
+          ],
+          "sourceAnchor": [
+            980,
+            474
+          ],
+          "visibleBounds": [
+            1323,
+            410,
+            1558,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "desert.shelter.foundation",
+          "rect": [
+            1600,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1110,
+            268,
+            208,
+            206
+          ],
+          "sourceAnchor": [
+            1218,
+            468
+          ],
+          "visibleBounds": [
+            1672,
+            472,
+            1848,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "desert.shelter.frame",
+          "rect": [
+            1920,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1318,
+            268,
+            220,
+            206
+          ],
+          "sourceAnchor": [
+            1432,
+            464
+          ],
+          "visibleBounds": [
+            1975,
+            442,
+            2186,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "desert.shelter.complete",
+          "rect": [
+            2240,
+            320,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1538,
+            268,
+            236,
+            206
+          ],
+          "sourceAnchor": [
+            1639,
+            462
+          ],
+          "visibleBounds": [
+            2299,
+            423,
+            2501,
+            600
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "cold.tree.spruce",
+          "rect": [
+            0,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            474,
+            257,
+            206
+          ],
+          "sourceAnchor": [
+            143,
+            671
+          ],
+          "visibleBounds": [
+            78,
+            723,
+            243,
+            920
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "cold.berries.frost",
+          "rect": [
+            320,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            257,
+            474,
+            190,
+            206
+          ],
+          "sourceAnchor": [
+            346,
+            662
+          ],
+          "visibleBounds": [
+            399,
+            792,
+            562,
+            920
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "cold.stone.granite",
+          "rect": [
+            640,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            447,
+            474,
+            206,
+            206
+          ],
+          "sourceAnchor": [
+            552,
+            668
+          ],
+          "visibleBounds": [
+            705,
+            751,
+            895,
+            920
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "cold.stock.firewood",
+          "rect": [
+            960,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            653,
+            474,
+            201,
+            206
+          ],
+          "sourceAnchor": [
+            754,
+            666
+          ],
+          "visibleBounds": [
+            1037,
+            791,
+            1203,
+            920
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "cold.shore.ice",
+          "rect": [
+            1280,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            854,
+            474,
+            256,
+            206
+          ],
+          "sourceAnchor": [
+            981,
+            671
+          ],
+          "visibleBounds": [
+            1324,
+            739,
+            1557,
+            920
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "cold.shelter.foundation",
+          "rect": [
+            1600,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1110,
+            474,
+            208,
+            206
+          ],
+          "sourceAnchor": [
+            1218,
+            674
+          ],
+          "visibleBounds": [
+            1672,
+            798,
+            1849,
+            920
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "cold.shelter.frame",
+          "rect": [
+            1920,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1318,
+            474,
+            220,
+            206
+          ],
+          "sourceAnchor": [
+            1424,
+            671
+          ],
+          "visibleBounds": [
+            1985,
+            746,
+            2176,
+            920
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "cold.shelter.complete",
+          "rect": [
+            2240,
+            640,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1538,
+            474,
+            236,
+            206
+          ],
+          "sourceAnchor": [
+            1639,
+            680
+          ],
+          "visibleBounds": [
+            2301,
+            722,
+            2499,
+            920
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "coast.tree.pine",
+          "rect": [
+            0,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            0,
+            680,
+            257,
+            207
+          ],
+          "sourceAnchor": [
+            126,
+            858
+          ],
+          "visibleBounds": [
+            60,
+            1066,
+            261,
+            1240
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "coast.reeds",
+          "rect": [
+            320,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            257,
+            680,
+            190,
+            207
+          ],
+          "sourceAnchor": [
+            349,
+            860
+          ],
+          "visibleBounds": [
+            393,
+            1074,
+            567,
+            1240
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "coast.stone.coastal",
+          "rect": [
+            640,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            447,
+            680,
+            206,
+            207
+          ],
+          "sourceAnchor": [
+            551,
+            863
+          ],
+          "visibleBounds": [
+            701,
+            1096,
+            899,
+            1240
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "coast.fishing.supplies",
+          "rect": [
+            960,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            653,
+            680,
+            201,
+            207
+          ],
+          "sourceAnchor": [
+            760,
+            855
+          ],
+          "visibleBounds": [
+            1031,
+            1132,
+            1210,
+            1240
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "coast.shore.sea",
+          "rect": [
+            1280,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            854,
+            680,
+            256,
+            207
+          ],
+          "sourceAnchor": [
+            983,
+            869
+          ],
+          "visibleBounds": [
+            1324,
+            1072,
+            1556,
+            1240
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "coast.shelter.foundation",
+          "rect": [
+            1600,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1110,
+            680,
+            208,
+            207
+          ],
+          "sourceAnchor": [
+            1218,
+            866
+          ],
+          "visibleBounds": [
+            1671,
+            1079,
+            1850,
+            1240
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "coast.shelter.frame",
+          "rect": [
+            1920,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1318,
+            680,
+            220,
+            207
+          ],
+          "sourceAnchor": [
+            1422,
+            867
+          ],
+          "visibleBounds": [
+            1981,
+            1066,
+            2180,
+            1240
+          ],
+          "edgeReviewRequired": true
+        },
+        {
+          "id": "coast.shelter.complete",
+          "rect": [
+            2240,
+            960,
+            320,
+            320
+          ],
+          "anchor": [
+            160,
+            280
+          ],
+          "sourceRect": [
+            1538,
+            680,
+            236,
+            207
+          ],
+          "sourceAnchor": [
+            1642,
+            866
+          ],
+          "visibleBounds": [
+            2301,
+            1054,
+            2500,
+            1240
+          ],
+          "edgeReviewRequired": true
+        }
+      ]
+    }
+  ]
+}

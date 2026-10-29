@@ -1,0 +1,9 @@
+{
+  "status": "pass",
+  "method": "Repacked both checked-in generated source sheets and compared both atlas hashes and manifest byte hash against previous run. No network or third-party packages.",
+  "hashes": {
+    "artifacts/living/characters.png": "4c37695a5a4fc2f2fde45b82d867068965adb4f506c40ac96d8d470717dcf130",
+    "artifacts/living/world.png": "dbeeabaaee768a89ce868b1abba996a9d39e53ea3f54c6c18e7565094efff55c",
+    "docs/living/manifest.json": "ee2e361c048ea941d000feec9d9fdf5db6d800c4a681782fbf34eae01eaba6d2"
+  }
+}
