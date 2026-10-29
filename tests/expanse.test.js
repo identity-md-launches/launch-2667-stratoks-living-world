@@ -314,13 +314,13 @@ test('legacy Phase 2A snapshot migrates without resetting brains, ids or history
   assert.equal(e.tick, w.tick); e.run(200); assert.ok(e.tick === w.tick + 200);
   // expanse v1 -> v2
   const st = e.toState(); st.schema = 1; for (const c of st.creatures) { delete c.warmth; delete c.reputation; c.knownNodes = c.mind.known; c.mind.known = {}; delete c.mind.shelters; delete c.mind.memoryVersion; }
-  const m = migrateExpanse(st); assert.equal(m.from, 1); assert.equal(m.to, 3);
+  const m = migrateExpanse(st); assert.equal(m.from, 1); assert.equal(m.to, 4); // schema 4 (living world) follows v3
   const e2 = Expanse.fromState(m.state); assert.equal(e2.creatures[0].warmth, 90); assert.ok(Object.keys(e2.creatures[0].mind.known).length > 0);
   assert.deepEqual(e2.creatures[0].mind.shelters, []); assert.equal(e2.creatures[0].mind.memoryVersion, MEMORY_VERSION);
   assert.equal(e2.cfg.invCapacity, 12);
   const old2 = e.toState(); old2.schema = 2; old2.cfg.invCapacity = 10;
   for (const c of old2.creatures) { c.energy = -55; delete c.mind.shelters; delete c.mind.memoryVersion; }
-  const m2 = migrateExpanse(old2); assert.equal(m2.from, 2); assert.equal(m2.to, 3);
+  const m2 = migrateExpanse(old2); assert.equal(m2.from, 2); assert.equal(m2.to, 4);
   const e3 = Expanse.fromState(m2.state); assert.equal(e3.cfg.invCapacity, 12); assert.equal(e3.creatures[0].energy, 0);
   assert.deepEqual(e3.creatures[0].mind.episodes, e.creatures[0].mind.episodes);
   assert.throws(() => migrateExpanse({ ...e.toState(), schema: 99 }), /newer/);

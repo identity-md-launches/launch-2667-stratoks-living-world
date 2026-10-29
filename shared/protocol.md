@@ -43,3 +43,15 @@ Then one `delta` per broadcast: `{type,n,tick,seq,liveSeq,epoch,serverTime,upser
 * `POST /api/dev/reset {confirm:"RESET <worldId>", seed?, initialSeedCount?}` – the only way to start a new world.
 
 Errors: `{error:"code", ...}` with HTTP status.
+
+## Expanse frame — living-world extension (schema 4, additive)
+
+`GET /api/expanse/frame` keeps `v: 1`; every schema-4 field is additive, and `view.living: 1` marks it. Full rules, the state table and migration steps are in `server/docs/LIVING.md`. A real sample frame is at `shared/fixtures/living-frame.json`.
+
+* `view.creatures[i]` = `[id, name, x, y, prim|null, health, state, phase|null, progress 0..1, loadWeight]`. `state` ∈ `travel, starting, fish, inspect, gather, construct, repair, store, craft, eat, drink, make-fire, tend-fire, place, social, fight, rest, sleep, idle, follow`. `phase` for fishing is `cast|wait|reel`. For building it is `mark|deliver|construct|idle`.
+* `view.shelters[i]` = `[id, x, y, kind, integrity, storedUnits]`, **finished shelters only**. `kind` ∈ `timber_home, desert_shade, snow_refuge, coast_hut`. Integrity 0 = ruin (no protection).
+* `view.sites[]` = `{id, x, y, kind, stage 0..2, materials, need, work, workNeed}`: unfinished construction.
+* `view.piles[]` = `{id, x, y, items}`. `view.stores[]` = `{shelter, x, y, items}` (non-empty stores only).
+* `view.nodes` may include `fish` nodes, which sit on water tiles (renderer-visible; residents only perceive them within 3 tiles).
+* `residents[i]` adds `state, phase, progress, load, carrying{item:n}, tools[], target{x,y}|null`. `inspector` adds `activity, toolWear, home`. `summary` adds `sites, standing, stored, fishCaught`, and `summary.shelters` counts finished shelters only.
+* New events: `site_founded, shelter_built(kind), shelter_ruined, shelter_restored, fish_depleted, tool_worn`.

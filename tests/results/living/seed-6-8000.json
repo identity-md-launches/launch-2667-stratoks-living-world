@@ -1,0 +1,484 @@
+{
+ "seed": 6,
+ "ticks": 8000,
+ "final": {
+  "tick": 8000,
+  "population": 135,
+  "byBiome": {
+   "temperate": 127,
+   "cold": 6,
+   "arid": 2
+  },
+  "fires": 0,
+  "shelters": 55,
+  "sites": 24,
+  "standing": 55,
+  "stored": 1066,
+  "fishCaught": 63,
+  "chunks": 28,
+  "births": 112,
+  "deaths": 1
+ },
+ "births": 112,
+ "deaths": 1,
+ "deathsByCause": {
+  "dehydration": 1
+ },
+ "residentTicksByBiome": {
+  "temperate": 498500,
+  "arid": 7700,
+  "cold": 14750,
+  "coast": 5900
+ },
+ "gathered": {
+  "berry": 3920,
+  "stone": 588,
+  "wood": 2119,
+  "stick": 677,
+  "cactus_fruit": 64,
+  "flint": 70,
+  "fiber": 344,
+  "lichen": 24,
+  "fish": 63,
+  "shellfish": 85
+ },
+ "eaten": {
+  "berry": 3892,
+  "cactus_fruit": 64,
+  "lichen": 24,
+  "fish": 62,
+  "shellfish": 85
+ },
+ "crafted": {
+  "stone_club": 150,
+  "hand_axe": 26,
+  "bundle": 95,
+  "fish_line": 33
+ },
+ "wornOut": {
+  "fish_line": 13
+ },
+ "built": {
+  "stone": 126,
+  "wood": 237,
+  "stick": 6,
+  "fiber": 20
+ },
+ "repaired": {
+  "wood": 16,
+  "stone": 3,
+  "stick": 1,
+  "fiber": 1
+ },
+ "deposited": {
+  "stone": 503,
+  "wood": 800,
+  "berry": 369,
+  "stick": 133,
+  "cactus_fruit": 5,
+  "fiber": 64,
+  "flint": 35,
+  "fish": 3,
+  "shellfish": 15
+ },
+ "retrieved": {
+  "stone": 244,
+  "wood": 217,
+  "berry": 368,
+  "cactus_fruit": 5,
+  "fiber": 4,
+  "fish": 3,
+  "shellfish": 15,
+  "stick": 5
+ },
+ "shelters": {
+  "timber_home:standing": 48,
+  "desert_shade:standing": 3,
+  "timber_home:stage1": 5,
+  "desert_shade:stage1": 2,
+  "coast_hut:standing": 1,
+  "snow_refuge:standing": 3,
+  "timber_home:stage2": 5,
+  "coast_hut:stage1": 3,
+  "desert_shade:stage0": 3,
+  "timber_home:stage0": 2,
+  "snow_refuge:stage2": 1,
+  "snow_refuge:stage1": 1,
+  "coast_hut:stage2": 1,
+  "snow_refuge:stage0": 1
+ },
+ "sheltersOutsideSettlement": 57,
+ "settlementDiscoveries": 5,
+ "chunksGenerated": 40,
+ "learnedLivingKeys": {
+  "build|contribute|timber_home": {
+   "creatures": 66,
+   "own": 173,
+   "meanReward": 0.184,
+   "meanSuccess": 0.894
+  },
+  "deposit|material|": {
+   "creatures": 130,
+   "own": 1498,
+   "meanReward": -0.043,
+   "meanSuccess": 0.627
+  },
+  "retrieve|material|": {
+   "creatures": 80,
+   "own": 198,
+   "meanReward": -0.048,
+   "meanSuccess": 0.925
+  },
+  "deposit|food|": {
+   "creatures": 113,
+   "own": 384,
+   "meanReward": -0.059,
+   "meanSuccess": 0.569
+  },
+  "retrieve|food|": {
+   "creatures": 107,
+   "own": 470,
+   "meanReward": -0.079,
+   "meanSuccess": 0.53
+  },
+  "build|found|timber_home:dry": {
+   "creatures": 25,
+   "own": 37,
+   "meanReward": 0.011,
+   "meanSuccess": 0.797
+  },
+  "gather|fish|bare": {
+   "creatures": 130,
+   "own": 2012,
+   "meanReward": -0.125,
+   "meanSuccess": 0
+  },
+  "build|found|timber_home:water": {
+   "creatures": 32,
+   "own": 41,
+   "meanReward": 0.077,
+   "meanSuccess": 0.804
+  },
+  "combine|bundle+fiber|": {
+   "creatures": 100,
+   "own": 51,
+   "meanReward": 0.424,
+   "meanSuccess": 0.91
+  },
+  "gather|fish|line": {
+   "creatures": 107,
+   "own": 120,
+   "meanReward": 0.137,
+   "meanSuccess": 0.847
+  },
+  "repair|wood|timber_home": {
+   "creatures": 19,
+   "own": 22,
+   "meanReward": -0.03,
+   "meanSuccess": 0.64
+  },
+  "build|contribute|desert_shade": {
+   "creatures": 5,
+   "own": 9,
+   "meanReward": 0.156,
+   "meanSuccess": 0.856
+  },
+  "build|found|desert_shade:dry": {
+   "creatures": 6,
+   "own": 6,
+   "meanReward": 0.082,
+   "meanSuccess": 1
+  },
+  "build|found|coast_hut:dry": {
+   "creatures": 4,
+   "own": 4,
+   "meanReward": 0.008,
+   "meanSuccess": 0.75
+  },
+  "repair|stone|timber_home": {
+   "creatures": 4,
+   "own": 5,
+   "meanReward": -0.02,
+   "meanSuccess": 0.625
+  },
+  "build|found|snow_refuge:dry": {
+   "creatures": 2,
+   "own": 3,
+   "meanReward": -0.007,
+   "meanSuccess": 0.75
+  },
+  "build|found|snow_refuge:water": {
+   "creatures": 4,
+   "own": 5,
+   "meanReward": -0.084,
+   "meanSuccess": 0.75
+  },
+  "build|contribute|snow_refuge": {
+   "creatures": 10,
+   "own": 11,
+   "meanReward": 0.162,
+   "meanSuccess": 0.95
+  },
+  "repair|wood|coast_hut": {
+   "creatures": 1,
+   "own": 1,
+   "meanReward": 0.054,
+   "meanSuccess": 1
+  },
+  "build|contribute|coast_hut": {
+   "creatures": 3,
+   "own": 4,
+   "meanReward": 0.042,
+   "meanSuccess": 1
+  },
+  "build|found|coast_hut:water": {
+   "creatures": 1,
+   "own": 1,
+   "meanReward": 0.029,
+   "meanSuccess": 1
+  },
+  "build|found|desert_shade:water": {
+   "creatures": 2,
+   "own": 2,
+   "meanReward": -0.029,
+   "meanSuccess": 1
+  },
+  "repair|stick|desert_shade": {
+   "creatures": 1,
+   "own": 1,
+   "meanReward": 0.058,
+   "meanSuccess": 1
+  },
+  "repair|fiber|desert_shade": {
+   "creatures": 1,
+   "own": 1,
+   "meanReward": 0.055,
+   "meanSuccess": 1
+  }
+ },
+ "cpu": {
+  "msPerTickMean": 3.41,
+  "msPerTickMax": 31.47
+ },
+ "rssMB": 284,
+ "series": [
+  {
+   "tick": 500,
+   "population": 25,
+   "byBiome": {
+    "temperate": 24,
+    "arid": 1
+   },
+   "standing": 6,
+   "sites": 2,
+   "stored": 66,
+   "fishCaught": 0,
+   "rssMB": 106
+  },
+  {
+   "tick": 1000,
+   "population": 28,
+   "byBiome": {
+    "temperate": 28
+   },
+   "standing": 10,
+   "sites": 3,
+   "stored": 120,
+   "fishCaught": 0,
+   "rssMB": 110
+  },
+  {
+   "tick": 1500,
+   "population": 31,
+   "byBiome": {
+    "temperate": 31
+   },
+   "standing": 12,
+   "sites": 7,
+   "stored": 167,
+   "fishCaught": 0,
+   "rssMB": 145
+  },
+  {
+   "tick": 2000,
+   "population": 35,
+   "byBiome": {
+    "temperate": 35
+   },
+   "standing": 16,
+   "sites": 10,
+   "stored": 207,
+   "fishCaught": 0,
+   "rssMB": 150
+  },
+  {
+   "tick": 2500,
+   "population": 39,
+   "byBiome": {
+    "temperate": 38,
+    "arid": 1
+   },
+   "standing": 24,
+   "sites": 5,
+   "stored": 263,
+   "fishCaught": 0,
+   "rssMB": 154
+  },
+  {
+   "tick": 3000,
+   "population": 42,
+   "byBiome": {
+    "temperate": 41,
+    "arid": 1
+   },
+   "standing": 25,
+   "sites": 9,
+   "stored": 333,
+   "fishCaught": 0,
+   "rssMB": 223
+  },
+  {
+   "tick": 3500,
+   "population": 50,
+   "byBiome": {
+    "temperate": 50
+   },
+   "standing": 27,
+   "sites": 12,
+   "stored": 403,
+   "fishCaught": 5,
+   "rssMB": 228
+  },
+  {
+   "tick": 4000,
+   "population": 59,
+   "byBiome": {
+    "temperate": 57,
+    "cold": 1,
+    "coast": 1
+   },
+   "standing": 33,
+   "sites": 9,
+   "stored": 440,
+   "fishCaught": 7,
+   "rssMB": 231
+  },
+  {
+   "tick": 4500,
+   "population": 69,
+   "byBiome": {
+    "temperate": 66,
+    "cold": 2,
+    "coast": 1
+   },
+   "standing": 34,
+   "sites": 11,
+   "stored": 546,
+   "fishCaught": 13,
+   "rssMB": 232
+  },
+  {
+   "tick": 5000,
+   "population": 73,
+   "byBiome": {
+    "temperate": 69,
+    "arid": 3,
+    "coast": 1
+   },
+   "standing": 40,
+   "sites": 11,
+   "stored": 601,
+   "fishCaught": 15,
+   "rssMB": 233
+  },
+  {
+   "tick": 5500,
+   "population": 84,
+   "byBiome": {
+    "temperate": 82,
+    "arid": 1,
+    "coast": 1
+   },
+   "standing": 40,
+   "sites": 14,
+   "stored": 687,
+   "fishCaught": 23,
+   "rssMB": 240
+  },
+  {
+   "tick": 6000,
+   "population": 95,
+   "byBiome": {
+    "temperate": 92,
+    "cold": 3
+   },
+   "standing": 43,
+   "sites": 13,
+   "stored": 767,
+   "fishCaught": 27,
+   "rssMB": 255
+  },
+  {
+   "tick": 6500,
+   "population": 103,
+   "byBiome": {
+    "temperate": 91,
+    "coast": 5,
+    "arid": 3,
+    "cold": 4
+   },
+   "standing": 45,
+   "sites": 19,
+   "stored": 829,
+   "fishCaught": 30,
+   "rssMB": 268
+  },
+  {
+   "tick": 7000,
+   "population": 117,
+   "byBiome": {
+    "temperate": 110,
+    "cold": 4,
+    "arid": 2,
+    "coast": 1
+   },
+   "standing": 46,
+   "sites": 25,
+   "stored": 929,
+   "fishCaught": 42,
+   "rssMB": 284
+  },
+  {
+   "tick": 7500,
+   "population": 125,
+   "byBiome": {
+    "temperate": 116,
+    "cold": 8,
+    "coast": 1
+   },
+   "standing": 52,
+   "sites": 22,
+   "stored": 996,
+   "fishCaught": 58,
+   "rssMB": 284
+  },
+  {
+   "tick": 8000,
+   "population": 135,
+   "byBiome": {
+    "temperate": 127,
+    "cold": 6,
+    "arid": 2
+   },
+   "standing": 55,
+   "sites": 24,
+   "stored": 1066,
+   "fishCaught": 63,
+   "rssMB": 284
+  }
+ ],
+ "platform": {
+  "node": "v24.21.0",
+  "arch": "x64"
+ }
+}

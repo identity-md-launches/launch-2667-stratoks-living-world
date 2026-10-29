@@ -26,7 +26,13 @@ export const NODE_KINDS = {
   shellfish: { item: 'shellfish', max: 4, regrow: 700, blocks: false },
   lichen: { item: 'lichen', max: 3, regrow: 1200, blocks: false },
   driftwood: { item: 'wood', max: 2, regrow: 2000, blocks: false },
+  // Schema 4: a fish stock lives on a water tile next to walkable shore. It is fished from the shore (reach 1),
+  // never entered. `max` and `regrow` are the explicit stock limit and renewal period (one fish per period).
+  fish: { item: 'fish', max: 6, regrow: 450, blocks: false, water: true },
 };
+// Water tiles that can carry a fish stock, and per-biome placement density for shoreline water tiles.
+export const FISH_WATER = new Set([T.LAKE, T.STREAM, T.SHALLOW, T.SEA]);
+export const FISH_DENSITY = { temperate: 0.07, arid: 0.05, cold: 0.09, coast: 0.035 };
 
 // ---- deterministic value noise ----
 function lattice(seed, ix, iy) { return hashSeed(`${seed}:${ix}:${iy}`) / 4294967296; }
@@ -59,6 +65,7 @@ export function generateChunk(seed, cx, cy, base) {
     for (const t of base.trees.filter(own)) nodes.push({ id: `t${t.id}`, kind: 'tree', x: t.x, y: t.y, units: t.wood, t: 0 });
     for (const s of base.stones.filter(own)) nodes.push({ id: `s${s.id}`, kind: 'stone', x: s.x, y: s.y, units: s.units, t: 0 });
     for (const b of base.bushes.filter(own)) nodes.push({ id: `b${b.id}`, kind: 'bush', x: b.x, y: b.y, units: Math.max(1, Math.round(b.amount)), t: 0 });
+    nodes.push(...fishNodes(seed, cx, cy, tiles, biome));
     return { cx, cy, tiles, biome, nodes, piles: [], dirty: false };
   }
   const rng = new Rng(hashSeed(`stratoks:chunk:${seed}:${cx}:${cy}`));
@@ -83,7 +90,28 @@ export function generateChunk(seed, cx, cy, base) {
     else if (b === 'cold') { if (r < 0.025) add('stone', x, y); else if (r < 0.04) add('flint', x, y); else if (r < 0.05) add('lichen', x, y); else if (r < 0.065) add('tree', x, y); else if (r < 0.07) add('deadfall', x, y); }
     else if (tile !== T.SHALLOW) { if (r < 0.05) add('shellfish', x, y); else if (r < 0.07) add('driftwood', x, y); else if (r < 0.08) add('scrub', x, y); else if (r < 0.085) add('bush', x, y); else if (r < 0.09) add('stone', x, y); }
   }
+  nodes.push(...fishNodes(seed, cx, cy, tiles, biome));
   return { cx, cy, tiles, biome, nodes, piles: [], dirty: false };
+}
+
+// Fish stocks: a separate seeded pass appended after all schema-3 nodes, so every earlier node id, position and
+// unit count is unchanged. Only water tiles with a walkable (non-water, non-cliff) in-chunk neighbour qualify,
+// so every stock is reachable from a shore tile by the ordinary path finder; open sea away from land holds none.
+export function fishNodes(seed, cx, cy, tiles, biome) {
+  const rng = new Rng(hashSeed(`stratoks:fish:${seed}:${cx}:${cy}`)), out = [];
+  let k = 0;
+  for (let j = 0; j < CHUNK; j++) for (let i = 0; i < CHUNK; i++) {
+    const tile = tiles[j * CHUNK + i];
+    if (!FISH_WATER.has(tile)) continue;
+    let shore = false;
+    for (let dy = -1; dy <= 1 && !shore; dy++) for (let dx = -1; dx <= 1; dx++) {
+      const ii = i + dx, jj = j + dy;
+      if ((dx || dy) && ii >= 0 && jj >= 0 && ii < CHUNK && jj < CHUNK) { const n = tiles[jj * CHUNK + ii]; if (MOVE_COST[n] !== Infinity && !FISH_WATER.has(n)) { shore = true; break; } }
+    }
+    const r = rng.next();
+    if (shore && r < FISH_DENSITY[biome[j * CHUNK + i]]) out.push({ id: `f${cx},${cy}:${k++}`, kind: 'fish', x: cx * CHUNK + i, y: cy * CHUNK + j, units: NODE_KINDS.fish.max, t: 0 });
+  }
+  return out;
 }
 
 // Exact lazy regrowth: integer units every `regrow` ticks, so evaluating late gives the identical value as per-tick

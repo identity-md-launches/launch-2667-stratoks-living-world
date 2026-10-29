@@ -1,0 +1,1 @@
+{"initialPopulation":250,"finalPopulation":252,"ticks":600,"msPerTick":{"p50":11.525,"p95":22.049,"max":41.037},"cpuUserMs":9922,"cpuSystemMs":356,"rssMB":409,"heapMB":74,"frameMs":3.96,"frameBytes":118346,"budgetAt1000msTick":"within (p95 < 25% of a 1 s tick)","node":"v24.21.0","arch":"x64"}

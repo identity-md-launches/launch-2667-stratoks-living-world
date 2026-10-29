@@ -2,8 +2,8 @@
 // (success, reward, duration, energy and produced items of each (action, argument, context) seen in the
 // creature's own or observed transitions) and the mb-v1 circuit weights. What is DESIGNED: the primitive set,
 // affordance enumeration, need-based reward, reflexes, and the planner's search procedure.
-export const OBSERVATION_VERSION = 2;
-export const MEMORY_VERSION = 2;
+export const OBSERVATION_VERSION = 3; // v3: shelters expose stage/integrity/store when perceived; fish only within shore range
+export const MEMORY_VERSION = 3; // v3: remembered shelters carry the last SEEN store contents, stage and integrity
 export const MODEL_VERSION = 1;
 export const PLANNER_VERSION = 2;
 export const LIMITS = Object.freeze({ episodes: 48, modelEntries: 96, producedKinds: 3, knownNodes: 40, knownWater: 6, knownShelters: 16, visited: 384, plans: 8, horizon: 3, beam: 5 });
@@ -106,8 +106,10 @@ export function rememberWater(mind, x, y, tick) {
 export function rememberShelter(mind, shelter, tick) {
   mind.shelters ??= [];
   const known = mind.shelters.find((s) => s.id === shelter.id);
-  if (known) { known.x = shelter.x; known.y = shelter.y; known.t = tick; return; }
-  mind.shelters.push({ id: shelter.id, x: shelter.x, y: shelter.y, t: tick });
+  // Only what was actually perceived is copied; an unseen store stays `null` (unknown), never looked up later.
+  const seen = shelter.store ? { stock: { ...shelter.store }, complete: shelter.complete !== false, integrity: Math.round(shelter.integrity ?? 100) } : {};
+  if (known) { known.x = shelter.x; known.y = shelter.y; known.t = tick; Object.assign(known, seen); return; }
+  mind.shelters.push({ id: shelter.id, x: shelter.x, y: shelter.y, t: tick, stock: null, ...seen });
   if (mind.shelters.length > LIMITS.knownShelters) {
     let oldest = 0;
     for (let i = 1; i < mind.shelters.length; i++) if (mind.shelters[i].t < mind.shelters[oldest].t) oldest = i;

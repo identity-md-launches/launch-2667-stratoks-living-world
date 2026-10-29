@@ -1,0 +1,410 @@
+{
+ "generated": "2026-10-29",
+ "machine": "x86_64, 4 vCPU, Node v24.21.0 (NOT the ARM VPS)",
+ "note": "Seeds 1-6 ran 3 at a time in parallel (8000 ticks); the two 24000-tick runs ran 2 at a time, so ms/tick includes contention. baseline-v3-* are the pinned schema-3 engine on the same machine.",
+ "runs": [
+  {
+   "file": "seed-1-8000.json",
+   "seed": 1,
+   "ticks": 8000,
+   "population": 100,
+   "births": 77,
+   "deaths": 1,
+   "deathsByCause": {
+    "old_age": 1
+   },
+   "residentTicksByBiome": {
+    "temperate": 394250,
+    "arid": 200,
+    "cold": 35950,
+    "coast": 4500
+   },
+   "fishCaught": 47,
+   "fishLinesCrafted": 20,
+   "fishLinesWornOut": 7,
+   "bareFishingAttempts": 1477,
+   "sheltersStanding": 49,
+   "sitesUnfinished": 9,
+   "sheltersOutsideSettlement": 41,
+   "settlementDiscoveries": 2,
+   "repaired": {
+    "wood": 8,
+    "stone": 4
+   },
+   "storedNow": 975,
+   "deposited": 1663,
+   "retrieved": 688,
+   "chunksGenerated": 34,
+   "msPerTickMean": 3.358,
+   "msPerTickMax": 33.43,
+   "rssMB": 282
+  },
+  {
+   "file": "seed-2-24000.json",
+   "seed": 2,
+   "ticks": 24000,
+   "population": 351,
+   "births": 471,
+   "deaths": 144,
+   "deathsByCause": {
+    "exposure": 79,
+    "old_age": 37,
+    "starvation": 13,
+    "injury": 11,
+    "dehydration": 1,
+    "burns": 3
+   },
+   "residentTicksByBiome": {
+    "temperate": 3002100,
+    "arid": 328400,
+    "cold": 582450,
+    "coast": 295350
+   },
+   "fishCaught": 538,
+   "fishLinesCrafted": 219,
+   "fishLinesWornOut": 178,
+   "bareFishingAttempts": 20974,
+   "sheltersStanding": 147,
+   "sitesUnfinished": 26,
+   "sheltersOutsideSettlement": 145,
+   "settlementDiscoveries": 3,
+   "repaired": {
+    "wood": 185,
+    "stone": 106,
+    "fiber": 17,
+    "stick": 2
+   },
+   "storedNow": 3607,
+   "deposited": 6096,
+   "retrieved": 2489,
+   "chunksGenerated": 60,
+   "msPerTickMean": 11.097,
+   "msPerTickMax": 72,
+   "rssMB": 534
+  },
+  {
+   "file": "seed-2-8000.json",
+   "seed": 2,
+   "ticks": 8000,
+   "population": 92,
+   "births": 70,
+   "deaths": 2,
+   "deathsByCause": {
+    "exposure": 1,
+    "old_age": 1
+   },
+   "residentTicksByBiome": {
+    "temperate": 304250,
+    "arid": 43850,
+    "cold": 43650,
+    "coast": 4900
+   },
+   "fishCaught": 25,
+   "fishLinesCrafted": 13,
+   "fishLinesWornOut": 8,
+   "bareFishingAttempts": 1822,
+   "sheltersStanding": 42,
+   "sitesUnfinished": 14,
+   "sheltersOutsideSettlement": 37,
+   "settlementDiscoveries": 2,
+   "repaired": {
+    "wood": 8,
+    "stone": 5
+   },
+   "storedNow": 811,
+   "deposited": 1374,
+   "retrieved": 563,
+   "chunksGenerated": 34,
+   "msPerTickMean": 2.472,
+   "msPerTickMax": 32.37,
+   "rssMB": 257
+  },
+  {
+   "file": "seed-3-24000.json",
+   "seed": 3,
+   "ticks": 24000,
+   "population": 602,
+   "births": 777,
+   "deaths": 199,
+   "deathsByCause": {
+    "old_age": 49,
+    "exposure": 104,
+    "injury": 13,
+    "burns": 8,
+    "starvation": 25
+   },
+   "residentTicksByBiome": {
+    "temperate": 4940050,
+    "arid": 428950,
+    "cold": 657250,
+    "coast": 567050
+   },
+   "fishCaught": 831,
+   "fishLinesCrafted": 376,
+   "fishLinesWornOut": 279,
+   "bareFishingAttempts": 26752,
+   "sheltersStanding": 171,
+   "sitesUnfinished": 41,
+   "sheltersOutsideSettlement": 183,
+   "settlementDiscoveries": 1,
+   "repaired": {
+    "wood": 250,
+    "stone": 105,
+    "fiber": 35,
+    "stick": 9
+   },
+   "storedNow": 4441,
+   "deposited": 7893,
+   "retrieved": 3452,
+   "chunksGenerated": 70,
+   "msPerTickMean": 16.824,
+   "msPerTickMax": 141.58,
+   "rssMB": 655
+  },
+  {
+   "file": "seed-3-8000.json",
+   "seed": 3,
+   "ticks": 8000,
+   "population": 109,
+   "births": 86,
+   "deaths": 1,
+   "deathsByCause": {
+    "old_age": 1
+   },
+   "residentTicksByBiome": {
+    "temperate": 408750,
+    "arid": 13200,
+    "cold": 1350,
+    "coast": 25150
+   },
+   "fishCaught": 34,
+   "fishLinesCrafted": 19,
+   "fishLinesWornOut": 7,
+   "bareFishingAttempts": 2300,
+   "sheltersStanding": 43,
+   "sitesUnfinished": 23,
+   "sheltersOutsideSettlement": 48,
+   "settlementDiscoveries": 5,
+   "repaired": {
+    "wood": 14,
+    "stone": 2,
+    "fiber": 1
+   },
+   "storedNow": 734,
+   "deposited": 1435,
+   "retrieved": 701,
+   "chunksGenerated": 35,
+   "msPerTickMean": 2.519,
+   "msPerTickMax": 34.23,
+   "rssMB": 254
+  },
+  {
+   "file": "seed-4-8000.json",
+   "seed": 4,
+   "ticks": 8000,
+   "population": 121,
+   "births": 99,
+   "deaths": 2,
+   "deathsByCause": {
+    "old_age": 1,
+    "exposure": 1
+   },
+   "residentTicksByBiome": {
+    "temperate": 407100,
+    "arid": 0,
+    "cold": 48450,
+    "coast": 8900
+   },
+   "fishCaught": 60,
+   "fishLinesCrafted": 21,
+   "fishLinesWornOut": 9,
+   "bareFishingAttempts": 1312,
+   "sheltersStanding": 47,
+   "sitesUnfinished": 18,
+   "sheltersOutsideSettlement": 47,
+   "settlementDiscoveries": 3,
+   "repaired": {
+    "stone": 9,
+    "wood": 16
+   },
+   "storedNow": 821,
+   "deposited": 1614,
+   "retrieved": 793,
+   "chunksGenerated": 31,
+   "msPerTickMean": 3.154,
+   "msPerTickMax": 22,
+   "rssMB": 290
+  },
+  {
+   "file": "seed-5-8000.json",
+   "seed": 5,
+   "ticks": 8000,
+   "population": 78,
+   "births": 55,
+   "deaths": 1,
+   "deathsByCause": {
+    "dehydration": 1
+   },
+   "residentTicksByBiome": {
+    "temperate": 305300,
+    "arid": 5500,
+    "cold": 19400,
+    "coast": 1100
+   },
+   "fishCaught": 32,
+   "fishLinesCrafted": 13,
+   "fishLinesWornOut": 9,
+   "bareFishingAttempts": 1825,
+   "sheltersStanding": 34,
+   "sitesUnfinished": 22,
+   "sheltersOutsideSettlement": 39,
+   "settlementDiscoveries": 2,
+   "repaired": {
+    "wood": 3,
+    "stone": 6
+   },
+   "storedNow": 622,
+   "deposited": 1051,
+   "retrieved": 429,
+   "chunksGenerated": 30,
+   "msPerTickMean": 1.884,
+   "msPerTickMax": 24.54,
+   "rssMB": 255
+  },
+  {
+   "file": "seed-6-8000.json",
+   "seed": 6,
+   "ticks": 8000,
+   "population": 135,
+   "births": 112,
+   "deaths": 1,
+   "deathsByCause": {
+    "dehydration": 1
+   },
+   "residentTicksByBiome": {
+    "temperate": 498500,
+    "arid": 7700,
+    "cold": 14750,
+    "coast": 5900
+   },
+   "fishCaught": 63,
+   "fishLinesCrafted": 33,
+   "fishLinesWornOut": 13,
+   "bareFishingAttempts": 2012,
+   "sheltersStanding": 55,
+   "sitesUnfinished": 24,
+   "sheltersOutsideSettlement": 57,
+   "settlementDiscoveries": 5,
+   "repaired": {
+    "wood": 16,
+    "stone": 3,
+    "stick": 1,
+    "fiber": 1
+   },
+   "storedNow": 1066,
+   "deposited": 1927,
+   "retrieved": 861,
+   "chunksGenerated": 40,
+   "msPerTickMean": 3.41,
+   "msPerTickMax": 31.47,
+   "rssMB": 284
+  }
+ ],
+ "bench": {
+  "baseline-v3-bench-24-600.json": {
+   "initialPopulation": 24,
+   "finalPopulation": 24,
+   "ticks": 600,
+   "msPerTick": {
+    "p50": 0.78,
+    "p95": 2.703,
+    "max": 29.911
+   },
+   "cpuUserMs": 1135,
+   "cpuSystemMs": 63,
+   "rssMB": 113,
+   "heapMB": 23,
+   "frameMs": 1.7,
+   "frameBytes": 52337,
+   "budgetAt1000msTick": "within (p95 < 25% of a 1 s tick)",
+   "node": "v24.21.0",
+   "arch": "x64"
+  },
+  "baseline-v3-bench-250-600.json": {
+   "initialPopulation": 250,
+   "finalPopulation": 250,
+   "ticks": 600,
+   "msPerTick": {
+    "p50": 7.518,
+    "p95": 13.696,
+    "max": 31.152
+   },
+   "cpuUserMs": 6896,
+   "cpuSystemMs": 315,
+   "rssMB": 337,
+   "heapMB": 158,
+   "frameMs": 2.25,
+   "frameBytes": 83241,
+   "budgetAt1000msTick": "within (p95 < 25% of a 1 s tick)",
+   "node": "v24.21.0",
+   "arch": "x64"
+  },
+  "bench-100-600.json": {
+   "initialPopulation": 100,
+   "finalPopulation": 101,
+   "ticks": 600,
+   "msPerTick": {
+    "p50": 3.992,
+    "p95": 7.578,
+    "max": 46.889
+   },
+   "cpuUserMs": 3975,
+   "cpuSystemMs": 204,
+   "rssMB": 232,
+   "heapMB": 71,
+   "frameMs": 3.02,
+   "frameBytes": 77993,
+   "budgetAt1000msTick": "within (p95 < 25% of a 1 s tick)",
+   "node": "v24.21.0",
+   "arch": "x64"
+  },
+  "bench-24-600.json": {
+   "initialPopulation": 24,
+   "finalPopulation": 25,
+   "ticks": 600,
+   "msPerTick": {
+    "p50": 1.06,
+    "p95": 3.266,
+    "max": 16.01
+   },
+   "cpuUserMs": 1432,
+   "cpuSystemMs": 69,
+   "rssMB": 109,
+   "heapMB": 15,
+   "frameMs": 2.51,
+   "frameBytes": 54994,
+   "budgetAt1000msTick": "within (p95 < 25% of a 1 s tick)",
+   "node": "v24.21.0",
+   "arch": "x64"
+  },
+  "bench-250-600.json": {
+   "initialPopulation": 250,
+   "finalPopulation": 252,
+   "ticks": 600,
+   "msPerTick": {
+    "p50": 11.525,
+    "p95": 22.049,
+    "max": 41.037
+   },
+   "cpuUserMs": 9922,
+   "cpuSystemMs": 356,
+   "rssMB": 409,
+   "heapMB": 74,
+   "frameMs": 3.96,
+   "frameBytes": 118346,
+   "budgetAt1000msTick": "within (p95 < 25% of a 1 s tick)",
+   "node": "v24.21.0",
+   "arch": "x64"
+  }
+ }
+}

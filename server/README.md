@@ -2,7 +2,7 @@
 
 Authoritative, persistent, zero-dependency Node.js (>= 22) simulation service. It runs the world with or without browsers connected and exposes the simulation API/WebSocket protocol to the separately hosted static client.
 
-* Contract: `../shared/protocol.md` · rules: `docs/WORLD.md` · learning: `docs/LEARNING.md`
+* Contract: `../shared/protocol.md` · rules: `docs/WORLD.md` · learning: `docs/LEARNING.md` · living world (Expanse schema 4: fishing, stores, staged shelters, migration): `docs/LIVING.md`
 * Deploy on your own Ubuntu ARM64 VPS: `../deploy/INSTALL.md`
 * Current integration and recovery evidence: `../artifacts/phase-1.1/VALIDATION.md`. Earlier measurements in `../docs/VALIDATION.md` and `../tests/RESULTS.md` remain historical.
 * Static client, build and preview: `../README.md` and `../web/`.
