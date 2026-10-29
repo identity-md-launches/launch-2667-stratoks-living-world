@@ -1,5 +1,7 @@
 # STRATOKS living-world art
 
+Current integration: see [FRONTEND.md](FRONTEND.md) and [the active atlas contract](../art/INTEGRATION.md). The art-only delivery notes below describe the preceding contribution; the new website bundles the model and transparent atlases as WebP derivatives and binds them to the schema-4 engine. Independent owner approval is not claimed.
+
 Original generated art for the bounded **art assignment**, replacing the rejected animal design. The new species has a compact golden-yellow scalloped body, short limbs, large eyes and a small botanical green crown sprout. There are no long ears, animal muzzles or tails. No lettering, speech bubbles or emoji appear in the images.
 
 ## Delivered images

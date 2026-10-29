@@ -122,12 +122,11 @@ export function drawCreature(
           : 0;
     line(ctx, -11, -18, -15, -10 + arm, "#ddb548", 4);
     line(ctx, 11, -18, 15, -10 - arm, "#ddb548", 4);
-    rounded(ctx, -12, -30, 24, 28, 10, distress ? "#e3b544" : "#eac451");
-    rounded(ctx, -10, -29, 17, 24, 9, "#f8dc76");
-    line(ctx, -6, -29, -10, -35, "#edcc5d", 3.5);
-    ellipse(ctx, -11, -35, 3, 2, "#edcc5d");
-    line(ctx, 6, -29, 10, -35, "#edcc5d", 3.5);
-    ellipse(ctx, 11, -35, 3, 2, "#edcc5d");
+    // Archived vector fallback uses the same round leaf-crowned species.
+    for (let i=0;i<10;i++) { const a=i*Math.PI/5;ellipse(ctx,Math.cos(a)*9,-17+Math.sin(a)*11,6,6,distress ? "#e3b544" : "#eac451"); }
+    ellipse(ctx,0,-17,11,14,"#f8dc76");
+    line(ctx,0,-29,0,-33,"#728648",2);
+    ellipse(ctx,-3,-33,4,2,"#8da85c");ellipse(ctx,3,-34,4,2,"#96ad62");
     const facing = (e.face ?? 1) * 1.3;
     ellipse(ctx, -4 + facing, -21, 1.7, distress ? 2.8 : 2.3, "#364b32");
     ellipse(ctx, 5 + facing, -21, 1.7, distress ? 2.8 : 2.3, "#364b32");

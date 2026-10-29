@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "kind": "isolated demo checkpoint",
+  "seed": 2,
+  "tick": 12000,
+  "worldId": "isolated-demo-seed-2",
+  "sha256": "cf2dcd95a83ffa1cc50975b40f9c6cb5829637ae0b3b9ff3f07846be12a5d716",
+  "bytes": 1912937,
+  "recipe": "Expanse.create({initialCount:24},{seed:2}); assign isolated-demo-seed-2 as its ID; 12000 ordinary step() calls. No other edits.",
+  "summary": {
+    "tick": 12000,
+    "population": 156,
+    "byBiome": {
+      "temperate": 118,
+      "arid": 14,
+      "cold": 20,
+      "coast": 4
+    },
+    "fires": 0,
+    "shelters": 68,
+    "sites": 26,
+    "standing": 68,
+    "stored": 1285,
+    "fishCaught": 93,
+    "chunks": 29,
+    "births": 145,
+    "deaths": 13
+  },
+  "sheltersByBiome": {
+    "temperate": 45,
+    "arid": 7,
+    "cold": 11,
+    "coast": 5
+  },
+  "measurements": {
+    "tick": 12000,
+    "summary": {
+      "tick": 12000,
+      "population": 156,
+      "byBiome": {
+        "temperate": 118,
+        "arid": 14,
+        "cold": 20,
+        "coast": 4
+      },
+      "fires": 0,
+      "shelters": 68,
+      "sites": 26,
+      "standing": 68,
+      "stored": 1285,
+      "fishCaught": 93,
+      "chunks": 29,
+      "births": 145,
+      "deaths": 13
+    },
+    "sheltersByBiome": {
+      "temperate": 45,
+      "arid": 7,
+      "cold": 11,
+      "coast": 5
+    },
+    "jsonBytes": 8195817,
+    "gzipBytes": 1912937,
+    "elapsedMs": 107333.46044099999,
+    "cpu": {
+      "user": 115851250,
+      "system": 1524587
+    },
+    "rssMB": 242.55078125,
+    "node": "v22.23.3",
+    "arch": "x64"
+  },
+  "warning": "Independent demo history, never the owner world. Reopening restores this demo checkpoint."
+}

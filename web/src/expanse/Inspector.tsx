@@ -218,14 +218,14 @@ export function CreatureInspector({
         <div className="exp-empty">
           <h3>
             {pending
-              ? "Loading recorded evidence…"
+              ? "Loading resident evidence…"
               : recorded
                 ? "Inspector not in this capture"
                 : "Resident evidence unavailable"}
           </h3>
           <p>
             {pending
-              ? "Waiting for the server’s observation and plan."
+              ? "Waiting for the next engine frame."
               : recorded
                 ? "This frozen frame includes the roster, but no detailed inspector for this resident. Connect live or open the private demo to inspect decisions."
                 : "The server did not return this resident. Choose another living resident or reconnect."}
@@ -266,9 +266,20 @@ export function CreatureInspector({
           </div>
           {detail.needs.injury > 0 && (
             <p className="exp-evidence-notice">
-              Recorded injury: {detail.needs.injury}
+              Injury: {detail.needs.injury}
             </p>
           )}
+          {detail.activity && <section className="exp-activity" aria-label="Confirmed activity">
+            <h3><Icon name="eye" size={16}/>Confirmed activity</h3>
+            <dl>
+              <div><dt>State / phase</dt><dd>{label(detail.activity.state)} · {detail.activity.phase ?? "between actions"}</dd></div>
+              <div><dt>Carried weight</dt><dd>{detail.activity.load} / {detail.activity.capacity ?? "unknown"}</dd></div>
+              <div><dt>Target</dt><dd>{detail.activity.target ? `${detail.activity.target.x}, ${detail.activity.target.y}` : "None"}</dd></div>
+              <div><dt>Tools</dt><dd>{detail.activity.tools.length ? detail.activity.tools.map(label).join(", ") : "None"}</dd></div>
+            </dl>
+            {detail.activity.progress > 0 && <><meter min={0} max={1} value={detail.activity.progress} aria-label="Current action progress"/><p className="exp-small exp-muted">{Math.round(detail.activity.progress*100)}% of this action</p></>}
+            <p className="exp-small exp-muted">{detail.activity.state === "fish" ? "A line is held; casting, waiting and reeling follow the engine phase. Catch is not guaranteed." : detail.activity.state === "inspect" ? "Looking is not fishing. No cast is shown without a line." : "This is the received engine state. The plan below may describe a destination still being approached."}</p>
+          </section>}
           <details className="exp-science exp-details" open>
             <summary>
               <Icon name="leaf" size={17} />

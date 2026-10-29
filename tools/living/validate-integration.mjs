@@ -1,0 +1,10 @@
+// Runtime geometry/transparency checks; does not claim independent species approval.
+import fs from 'node:fs/promises';import path from'node:path';import {createRequire}from'node:module';
+const sharp=createRequire(import.meta.url)(process.env.STRATOKS_SHARP??'/tmp/stratoks-art/node_modules/sharp');
+const root=path.resolve(import.meta.dirname,'../..');const a=JSON.parse(await fs.readFile(path.join(root,'web/src/expanse/atlas.json'),'utf8'));
+if(JSON.stringify(a)!==JSON.stringify(JSON.parse(await fs.readFile(path.join(root,'web/public/art/manifest.json'),'utf8'))))throw Error('Manifest copies differ');
+const sheets={};for(const [k,s]of Object.entries(a.sheets)){const {data,info}=await sharp(path.join(root,'web/public/art',s.file)).ensureAlpha().raw().toBuffer({resolveWithObject:true});if(info.width!==s.width||info.height!==s.height||info.channels!==4)throw Error('dimensions/channels');sheets[k]={data,info};}
+const results=[];
+for(const [name,s]of Object.entries(a.sprites)){const {data,info}=sheets[s.sheet];const [x,y,w,h]=s.rect;let n=0,pad=320;for(let j=y;j<y+h;j++)for(let i=x;i<x+w;i++)if(data[(j*info.width+i)*4+3]){n++;pad=Math.min(pad,i-x,j-y,x+w-1-i,y+h-1-j);}if(!n||pad<11)throw Error(`${name}: gutter ${pad}`);if(s.anchor.join(',')!=='160,280')throw Error('anchor');results.push({name,opaquePixels:n,transparentGutter:pad});}
+const report={status:'pass',sprites:results.length,characters:results.filter(r=>a.sprites[r.name].sheet==='characters').length,world:results.filter(r=>a.sprites[r.name].sheet==='world').length,minimumGutter:Math.min(...results.map(r=>r.transparentGutter)),manifestCopies:'identical',alpha:'RGBA with transparent cell gutters',limitations:['Geometry and alpha checks do not independently approve species aesthetics or animation quality.','Supplied work poses are southeast; southwest is mirrored and backward travel keeps a rear idle view.']};
+await fs.writeFile(path.join(root,'artifacts/living-interface/atlas-validation.json'),JSON.stringify(report,null,2)+'\n');console.log(report);

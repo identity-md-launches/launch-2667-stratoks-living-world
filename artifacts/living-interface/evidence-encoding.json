@@ -1,0 +1,31 @@
+{
+  "processing": "JPEG quality-45 packaging of large actual browser captures only; dimensions/content unchanged. No capture dropped.",
+  "bytesSaved": 42124,
+  "results": [
+    {
+      "file": "actual-fishing.jpg",
+      "before": 84624,
+      "after": 76122
+    },
+    {
+      "file": "coast-1280.jpg",
+      "before": 110065,
+      "after": 103081
+    },
+    {
+      "file": "cold-1280.jpg",
+      "before": 101333,
+      "after": 95849
+    },
+    {
+      "file": "first-screen-1440.jpg",
+      "before": 141985,
+      "after": 127289
+    },
+    {
+      "file": "temperate-1280.jpg",
+      "before": 106576,
+      "after": 100118
+    }
+  ]
+}

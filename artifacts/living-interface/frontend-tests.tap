@@ -1,0 +1,182 @@
+
+> stratoks-client@0.1.0 test
+> tsx --test src/*.test.ts
+
+TAP version 13
+# Subtest: isometric basis points preserve existing coordinates, including negative chunk boundaries
+ok 1 - isometric basis points preserve existing coordinates, including negative chunk boundaries
+  ---
+  duration_ms: 11.826343
+  type: 'test'
+  ...
+# Subtest: all screen corners are covered by the bounded API query at every zoom and aspect
+ok 2 - all screen corners are covered by the bounded API query at every zoom and aspect
+  ---
+  duration_ms: 5.622277
+  type: 'test'
+  ...
+# Subtest: zoom keeps the pointer world coordinate stable, while minimap uses the same world bounds
+ok 3 - zoom keeps the pointer world coordinate stable, while minimap uses the same world bounds
+  ---
+  duration_ms: 0.553084
+  type: 'test'
+  ...
+# Subtest: primitive intentions cannot make a false work/rest/fishing pose
+ok 4 - primitive intentions cannot make a false work/rest/fishing pose
+  ---
+  duration_ms: 0.634025
+  type: 'test'
+  ...
+# Subtest: fishing casts only with actual phase and obtainable line; no catch frame is invented
+ok 5 - fishing casts only with actual phase and obtainable line; no catch frame is invented
+  ---
+  duration_ms: 0.789179
+  type: 'test'
+  ...
+# Subtest: loads and construction follow confirmed inventory/materials instead of destination plans
+ok 6 - loads and construction follow confirmed inventory/materials instead of destination plans
+  ---
+  duration_ms: 0.494516
+  type: 'test'
+  ...
+# Subtest: configuration permits HTTPS subpaths and refuses credentials or mixed content
+ok 7 - configuration permits HTTPS subpaths and refuses credentials or mixed content
+  ---
+  duration_ms: 0.884277
+  type: 'test'
+  ...
+# Subtest: wire query preserves negative world coordinates and selected creature
+ok 8 - wire query preserves negative world coordinates and selected creature
+  ---
+  duration_ms: 0.389085
+  type: 'test'
+  ...
+# Subtest: incompatible and incoherent frames are not presented as shared state
+ok 9 - incompatible and incoherent frames are not presented as shared state
+  ---
+  duration_ms: 0.989417
+  type: 'test'
+  ...
+# Subtest: paint caches survive pan/zoom and invalidate changed terrain and world identity
+ok 10 - paint caches survive pan/zoom and invalidate changed terrain and world identity
+  ---
+  duration_ms: 28.614245
+  type: 'test'
+  ...
+# Subtest: worn paint uses reported shelters and adjacent travel without crossing blocked land or water
+ok 11 - worn paint uses reported shelters and adjacent travel without crossing blocked land or water
+  ---
+  duration_ms: 1.668809
+  type: 'test'
+  ...
+# Subtest: three real policies acquire, reverse and lose preference with output ablation across ten seeds
+ok 12 - three real policies acquire, reverse and lose preference with output ablation across ten seeds
+  ---
+  duration_ms: 6862.396276
+  type: 'test'
+  ...
+# Subtest: lab reproducibility, validation and bounded retained evidence
+ok 13 - lab reproducibility, validation and bounded retained evidence
+  ---
+  duration_ms: 841.477142
+  type: 'test'
+  ...
+# Subtest: uncertain interventions stay owned by the actor, world and service across reloads
+ok 14 - uncertain interventions stay owned by the actor, world and service across reloads
+  ---
+  duration_ms: 3.244347
+  type: 'test'
+  ...
+# Subtest: legacy payloads remain readable but cannot be mistaken for actor-owned storage
+ok 15 - legacy payloads remain readable but cannot be mistaken for actor-owned storage
+  ---
+  duration_ms: 0.518234
+  type: 'test'
+  ...
+# Subtest: invalid stored requests cannot be retried
+ok 16 - invalid stored requests cannot be retried
+  ---
+  duration_ms: 0.483505
+  type: 'test'
+  ...
+# Subtest: 429 and durability/busy errors expose actionable honest server guidance
+ok 17 - 429 and durability/busy errors expose actionable honest server guidance
+  ---
+  duration_ms: 49.911813
+  type: 'test'
+  ...
+# Subtest: event cursor is bounded and pagination uses the server cursor unchanged
+ok 18 - event cursor is bounded and pagination uses the server cursor unchanged
+  ---
+  duration_ms: 2.344209
+  type: 'test'
+  ...
+# Subtest: responses from a stopped connection cannot update a new world
+ok 19 - responses from a stopped connection cannot update a new world
+  ---
+  duration_ms: 7.638126
+  type: 'test'
+  ...
+# Subtest: actual simulation snapshot is rendered as an entity map with its real population
+ok 20 - actual simulation snapshot is rendered as an entity map with its real population
+  ---
+  duration_ms: 83.387517
+  type: 'test'
+  ...
+# Subtest: delta updates one creature, removes consumed resources, and deduplicates replayed events
+ok 21 - delta updates one creature, removes consumed resources, and deduplicates replayed events
+  ---
+  duration_ms: 31.215963
+  type: 'test'
+  ...
+# Subtest: a sequence gap freezes existing state and asks for a full snapshot
+ok 22 - a sequence gap freezes existing state and asks for a full snapshot
+  ---
+  duration_ms: 20.686719
+  type: 'test'
+  ...
+# Subtest: reconnect snapshot replaces entities without duplicating past events
+ok 23 - reconnect snapshot replaces entities without duplicating past events
+  ---
+  duration_ms: 26.818087
+  type: 'test'
+  ...
+# Subtest: developer reset replaces world, history, events and sequence rather than merging old identities
+ok 24 - developer reset replaces world, history, events and sequence rather than merging old identities
+  ---
+  duration_ms: 25.716019
+  type: 'test'
+  ...
+# Subtest: a snapshot from an earlier restored backup discards events from the abandoned timeline
+ok 25 - a snapshot from an earlier restored backup discards events from the abandoned timeline
+  ---
+  duration_ms: 21.039787
+  type: 'test'
+  ...
+# Subtest: malformed snapshot is refused without changing the current world
+ok 26 - malformed snapshot is refused without changing the current world
+  ---
+  duration_ms: 20.713601
+  type: 'test'
+  ...
+# Subtest: same-tick snapshot recovery discards uncommitted events as well as lower-tick recovery
+ok 27 - same-tick snapshot recovery discards uncommitted events as well as lower-tick recovery
+  ---
+  duration_ms: 21.514358
+  type: 'test'
+  ...
+# Subtest: restart epoch clears abandoned events even when the new sequence has already caught up
+ok 28 - restart epoch clears abandoned events even when the new sequence has already caught up
+  ---
+  duration_ms: 19.640056
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7999.408218

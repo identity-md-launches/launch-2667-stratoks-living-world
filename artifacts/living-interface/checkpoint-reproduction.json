@@ -1,0 +1,45 @@
+{
+  "seed": 2,
+  "tick": 12000,
+  "sha256": "cf2dcd95a83ffa1cc50975b40f9c6cb5829637ae0b3b9ff3f07846be12a5d716",
+  "reproduces": true,
+  "recipe": "Expanse.create({initialCount:24},{seed:2}), then 12000 ordinary step() calls. Only the isolated world ID is assigned. No forced actions, supplies, relocated residents or prebuilt structures.",
+  "summary": {
+    "tick": 12000,
+    "population": 156,
+    "byBiome": {
+      "temperate": 118,
+      "arid": 14,
+      "cold": 20,
+      "coast": 4
+    },
+    "fires": 0,
+    "shelters": 68,
+    "sites": 26,
+    "standing": 68,
+    "stored": 1285,
+    "fishCaught": 93,
+    "chunks": 29,
+    "births": 145,
+    "deaths": 13
+  },
+  "measurements": {
+    "elapsedMs": 104361.019958,
+    "cpu": {
+      "user": 112151175,
+      "system": 1044490
+    },
+    "rssMB": 211.87890625,
+    "medianTickMs": 7.008449000000837,
+    "p95TickMs": 21.713289000006625,
+    "maxTickMs": 50.07957399999577,
+    "node": "v22.23.3",
+    "arch": "x64"
+  },
+  "sheltersByBiome": {
+    "temperate": 45,
+    "arid": 7,
+    "cold": 11,
+    "coast": 5
+  }
+}

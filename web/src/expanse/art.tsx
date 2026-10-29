@@ -6,7 +6,6 @@ export type Sprite = {
   widthInHalfTiles: number;
 };
 export const sprites = atlas.sprites as Record<string, Sprite>;
-export const wornGround = atlas.presentation.wornGround;
 export type Art = Record<string, HTMLImageElement>;
 let pending: Promise<Art> | null = null;
 export function loadArt(): Promise<Art> {
@@ -59,7 +58,7 @@ export function Portrait({
   id?: number;
   size?: number;
 }) {
-  const col = Math.abs(id) % 4;
+  const col = [0,1,5][Math.abs(id) % 3];
   return (
     <span
       aria-hidden="true"
@@ -67,9 +66,9 @@ export function Portrait({
       style={{
         width: size,
         height: size,
-        backgroundImage: `url("${import.meta.env.BASE_URL}art/characters.png")`,
-        backgroundSize: `${size * 8}px ${size * 8}px`,
-        backgroundPosition: `-${col * size}px 0`,
+        backgroundImage: `url("${import.meta.env.BASE_URL}art/living-characters.webp")`,
+        backgroundSize: `${size * 12}px ${size * 12}px`,
+        backgroundPosition: `${-col * size * 2 - size * .5}px ${-size * .63}px`,
       }}
     />
   );

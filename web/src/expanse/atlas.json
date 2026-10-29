@@ -1,3108 +1,1428 @@
 {
   "version": 2,
-  "style": "Original painted STRATOKS miniatures, upper-left sunlight",
-  "license": "MIT",
-  "attribution": "Original STRATOKS contributor artwork generated with OpenAI image generation, 2026. Technical extraction and registration by STRATOKS interface contributor.",
-  "sourceInputs": {
-    "characters": "69fd01ffb49b65f57972d659362b84afc71578a6e2aea8b91065d3826b5c90e5",
-    "world": "dc89961da7a33f7ad0cbaaeb3779431ff0bfa9fe9bf41d0a87347c48989a8878"
-  },
-  "coordinates": "pixels, top-left origin; rectangles [x,y,width,height]; anchors cell-local ground contact",
+  "species": "Original golden scalloped Stratok with a leaf crown; no animal substitute.",
   "sheets": {
     "characters": {
-      "file": "characters.png",
-      "width": 1024,
-      "height": 1024,
-      "cell": 128,
-      "padding": 8,
-      "sha256": "2e17130f99ef443828fae036cddfdaaec8e872da60053325fb075a0fdf6c898f",
-      "editableSource": "web/art-source/characters.png"
+      "file": "living-characters.webp",
+      "width": 1920,
+      "height": 1920
     },
     "world": {
-      "file": "world.png",
-      "width": 1024,
-      "height": 1024,
-      "cell": 128,
-      "padding": 8,
-      "sha256": "60d178921fcf812ce01368910ce55a57df5571a4b39da144ad388e7df989b68c",
-      "editableSource": "web/art-source/world.png"
-    },
-    "extra": {
-      "file": "extra.png",
-      "width": 384,
-      "height": 256,
-      "cell": 128,
-      "padding": 8,
-      "sha256": "dec18c1d0de9caf3db7330ea2533c99af32ea4ebffab2ead3a51ff905fa57a93",
-      "editableSource": "web/art-source/extra.png"
+      "file": "living-world.webp",
+      "width": 2560,
+      "height": 1280
     }
   },
   "sprites": {
-    "se.idle.0": {
+    "idle.front": {
       "sheet": "characters",
       "rect": [
         0,
         0,
-        128,
-        128
+        320,
+        320
       ],
       "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        47,
-        25,
-        110,
-        146
-      ],
-      "sourceGroundPivot": [
-        49.0,
-        141
-      ]
-    },
-    "se.idle.1": {
-      "sheet": "characters",
-      "rect": [
-        128,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        206,
-        23,
-        107,
-        148
-      ],
-      "sourceGroundPivot": [
-        45.0,
-        143
-      ]
-    },
-    "se.idle.2": {
-      "sheet": "characters",
-      "rect": [
-        256,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        362,
-        23,
-        108,
-        148
-      ],
-      "sourceGroundPivot": [
-        50.0,
-        143
-      ]
-    },
-    "se.idle.3": {
-      "sheet": "characters",
-      "rect": [
-        384,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        517,
-        23,
-        107,
-        150
-      ],
-      "sourceGroundPivot": [
-        48.0,
-        145
-      ]
-    },
-    "se.walk.0": {
-      "sheet": "characters",
-      "rect": [
-        512,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        673,
-        23,
-        107,
-        146
-      ],
-      "sourceGroundPivot": [
-        51.0,
-        141
-      ]
-    },
-    "se.walk.1": {
-      "sheet": "characters",
-      "rect": [
-        640,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        823,
-        23,
-        101,
-        149
-      ],
-      "sourceGroundPivot": [
-        44.0,
-        144
-      ]
-    },
-    "se.walk.2": {
-      "sheet": "characters",
-      "rect": [
-        768,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        972,
-        24,
-        103,
-        146
-      ],
-      "sourceGroundPivot": [
-        53.0,
-        141
-      ]
-    },
-    "se.walk.3": {
-      "sheet": "characters",
-      "rect": [
-        896,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        1118,
-        24,
-        109,
-        147
-      ],
-      "sourceGroundPivot": [
-        47.0,
-        142
-      ]
-    },
-    "sw.idle.0": {
-      "sheet": "characters",
-      "rect": [
-        0,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        48,
-        182,
-        107,
-        146
-      ],
-      "sourceGroundPivot": [
-        53.0,
-        141
-      ]
-    },
-    "sw.idle.1": {
-      "sheet": "characters",
-      "rect": [
-        128,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        204,
-        182,
-        104,
-        148
-      ],
-      "sourceGroundPivot": [
-        56.0,
-        143
-      ]
-    },
-    "sw.idle.2": {
-      "sheet": "characters",
-      "rect": [
-        256,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        362,
-        182,
-        103,
-        146
-      ],
-      "sourceGroundPivot": [
-        50.5,
-        141
-      ]
-    },
-    "sw.idle.3": {
-      "sheet": "characters",
-      "rect": [
-        384,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        518,
-        183,
-        105,
-        145
-      ],
-      "sourceGroundPivot": [
-        53.0,
-        140
-      ]
-    },
-    "sw.walk.0": {
-      "sheet": "characters",
-      "rect": [
-        512,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        675,
-        183,
-        101,
-        147
-      ],
-      "sourceGroundPivot": [
-        50.0,
-        142
-      ]
-    },
-    "sw.walk.1": {
-      "sheet": "characters",
-      "rect": [
-        640,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        827,
-        183,
-        101,
-        148
-      ],
-      "sourceGroundPivot": [
-        52.0,
-        143
-      ]
-    },
-    "sw.walk.2": {
-      "sheet": "characters",
-      "rect": [
-        768,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        977,
-        183,
-        102,
-        146
-      ],
-      "sourceGroundPivot": [
-        49.0,
-        141
-      ]
-    },
-    "sw.walk.3": {
-      "sheet": "characters",
-      "rect": [
-        896,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        1121,
-        182,
-        105,
-        147
-      ],
-      "sourceGroundPivot": [
-        56.0,
-        142
-      ]
-    },
-    "ne.idle.0": {
-      "sheet": "characters",
-      "rect": [
-        0,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        48,
-        338,
-        109,
-        151
-      ],
-      "sourceGroundPivot": [
-        64.0,
-        146
-      ]
-    },
-    "ne.idle.1": {
-      "sheet": "characters",
-      "rect": [
-        128,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        206,
-        339,
-        105,
-        150
-      ],
-      "sourceGroundPivot": [
-        61.0,
-        145
-      ]
-    },
-    "ne.idle.2": {
-      "sheet": "characters",
-      "rect": [
-        256,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        363,
-        338,
-        107,
-        151
-      ],
-      "sourceGroundPivot": [
-        63.0,
-        146
-      ]
-    },
-    "ne.idle.3": {
-      "sheet": "characters",
-      "rect": [
-        384,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        518,
-        338,
-        108,
-        151
-      ],
-      "sourceGroundPivot": [
-        64.0,
-        146
-      ]
-    },
-    "ne.walk.0": {
-      "sheet": "characters",
-      "rect": [
-        512,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        673,
-        338,
-        108,
-        151
-      ],
-      "sourceGroundPivot": [
-        61.0,
-        146
-      ]
-    },
-    "ne.walk.1": {
-      "sheet": "characters",
-      "rect": [
-        640,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        828,
-        339,
-        105,
-        151
-      ],
-      "sourceGroundPivot": [
-        55.0,
-        146
-      ]
-    },
-    "ne.walk.2": {
-      "sheet": "characters",
-      "rect": [
-        768,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        979,
-        338,
-        109,
-        151
-      ],
-      "sourceGroundPivot": [
-        53.0,
-        146
-      ]
-    },
-    "ne.walk.3": {
-      "sheet": "characters",
-      "rect": [
-        896,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        1126,
-        338,
-        108,
-        151
-      ],
-      "sourceGroundPivot": [
-        61.0,
-        146
-      ]
-    },
-    "nw.idle.0": {
-      "sheet": "characters",
-      "rect": [
-        0,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        39,
-        504,
-        113,
-        149
-      ],
-      "sourceGroundPivot": [
-        43.5,
-        144
-      ]
-    },
-    "nw.idle.1": {
-      "sheet": "characters",
-      "rect": [
-        128,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        198,
-        503,
-        110,
-        150
-      ],
-      "sourceGroundPivot": [
-        42.0,
-        145
-      ]
-    },
-    "nw.idle.2": {
-      "sheet": "characters",
-      "rect": [
-        256,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        359,
-        503,
-        109,
-        149
-      ],
-      "sourceGroundPivot": [
-        43.0,
-        144
-      ]
-    },
-    "nw.idle.3": {
-      "sheet": "characters",
-      "rect": [
-        384,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        511,
-        503,
-        113,
-        147
-      ],
-      "sourceGroundPivot": [
-        47.0,
-        142
-      ]
-    },
-    "nw.walk.0": {
-      "sheet": "characters",
-      "rect": [
-        512,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        672,
-        504,
-        107,
-        151
-      ],
-      "sourceGroundPivot": [
-        41.0,
-        146
-      ]
-    },
-    "nw.walk.1": {
-      "sheet": "characters",
-      "rect": [
-        640,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        822,
-        504,
-        109,
-        152
-      ],
-      "sourceGroundPivot": [
-        39.0,
-        147
-      ]
-    },
-    "nw.walk.2": {
-      "sheet": "characters",
-      "rect": [
-        768,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        968,
-        504,
-        108,
-        152
-      ],
-      "sourceGroundPivot": [
-        44.0,
-        147
-      ]
-    },
-    "nw.walk.3": {
-      "sheet": "characters",
-      "rect": [
-        896,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        1122,
-        504,
-        108,
-        149
-      ],
-      "sourceGroundPivot": [
-        40.5,
-        144
-      ]
-    },
-    "se.rest.0": {
-      "sheet": "characters",
-      "rect": [
-        0,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        27,
-        696,
-        138,
-        105
-      ],
-      "sourceGroundPivot": [
-        63.0,
-        100
-      ]
-    },
-    "se.rest.1": {
-      "sheet": "characters",
-      "rect": [
-        128,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        185,
-        698,
-        134,
-        103
-      ],
-      "sourceGroundPivot": [
-        57.0,
-        98
-      ]
-    },
-    "se.gather.0": {
-      "sheet": "characters",
-      "rect": [
-        256,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        350,
-        666,
-        119,
-        135
-      ],
-      "sourceGroundPivot": [
-        50.0,
-        130
-      ]
-    },
-    "se.gather.1": {
-      "sheet": "characters",
-      "rect": [
-        384,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        514,
-        668,
-        117,
-        135
-      ],
-      "sourceGroundPivot": [
-        54.0,
-        130
-      ]
-    },
-    "se.carry.0": {
-      "sheet": "characters",
-      "rect": [
-        512,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        665,
-        666,
-        118,
-        139
-      ],
-      "sourceGroundPivot": [
-        57.0,
-        134
-      ]
-    },
-    "se.carry.1": {
-      "sheet": "characters",
-      "rect": [
-        640,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        814,
-        665,
-        121,
-        140
-      ],
-      "sourceGroundPivot": [
-        52.0,
-        135
-      ]
-    },
-    "se.build.0": {
-      "sheet": "characters",
-      "rect": [
-        768,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        76,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        966,
-        669,
-        141,
-        140
-      ],
-      "sourceGroundPivot": [
-        105.0,
-        135
-      ]
-    },
-    "se.build.1": {
-      "sheet": "characters",
-      "rect": [
-        896,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        1117,
-        679,
-        129,
-        131
-      ],
-      "sourceGroundPivot": [
-        76.0,
-        126
-      ]
-    },
-    "sw.rest.0": {
-      "sheet": "characters",
-      "rect": [
-        0,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        38,
-        814,
-        131,
-        126
-      ],
-      "sourceGroundPivot": [
-        73.0,
-        121
-      ]
-    },
-    "sw.rest.1": {
-      "sheet": "characters",
-      "rect": [
-        128,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        197,
-        815,
-        128,
-        125
-      ],
-      "sourceGroundPivot": [
-        72.0,
-        120
-      ]
-    },
-    "sw.gather.0": {
-      "sheet": "characters",
-      "rect": [
-        256,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        362,
-        810,
-        112,
-        133
-      ],
-      "sourceGroundPivot": [
-        63.0,
-        128
-      ]
-    },
-    "sw.gather.1": {
-      "sheet": "characters",
-      "rect": [
-        384,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        509,
-        813,
-        122,
-        136
-      ],
-      "sourceGroundPivot": [
-        48.0,
-        131
-      ]
-    },
-    "sw.carry.0": {
-      "sheet": "characters",
-      "rect": [
-        512,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        654,
-        810,
-        122,
-        141
-      ],
-      "sourceGroundPivot": [
-        60.0,
-        136
-      ]
-    },
-    "sw.carry.1": {
-      "sheet": "characters",
-      "rect": [
-        640,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        802,
-        810,
-        122,
-        141
-      ],
-      "sourceGroundPivot": [
-        56.0,
-        136
-      ]
-    },
-    "sw.build.0": {
-      "sheet": "characters",
-      "rect": [
-        768,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        51,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        953,
-        810,
-        133,
-        143
-      ],
-      "sourceGroundPivot": [
-        26.0,
-        138
-      ]
-    },
-    "sw.build.1": {
-      "sheet": "characters",
-      "rect": [
-        896,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        1106,
-        815,
-        132,
-        138
-      ],
-      "sourceGroundPivot": [
-        49.5,
-        133
-      ]
-    },
-    "ne.rest.0": {
-      "sheet": "characters",
-      "rect": [
-        0,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        27,
-        957,
-        128,
-        127
-      ],
-      "sourceGroundPivot": [
-        59.0,
-        122
-      ]
-    },
-    "ne.rest.1": {
-      "sheet": "characters",
-      "rect": [
-        128,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        196,
-        960,
-        126,
-        124
-      ],
-      "sourceGroundPivot": [
-        56.5,
-        119
-      ]
-    },
-    "ne.gather.0": {
-      "sheet": "characters",
-      "rect": [
-        256,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        351,
-        953,
-        128,
-        129
-      ],
-      "sourceGroundPivot": [
-        71.0,
-        124
-      ]
-    },
-    "ne.gather.1": {
-      "sheet": "characters",
-      "rect": [
-        384,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        507,
-        954,
-        121,
-        130
-      ],
-      "sourceGroundPivot": [
-        55.0,
-        125
-      ]
-    },
-    "ne.carry.0": {
-      "sheet": "characters",
-      "rect": [
-        512,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        663,
-        955,
-        122,
-        135
-      ],
-      "sourceGroundPivot": [
-        61.0,
-        130
-      ]
-    },
-    "ne.carry.1": {
-      "sheet": "characters",
-      "rect": [
-        640,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        820,
-        953,
-        121,
-        136
-      ],
-      "sourceGroundPivot": [
-        62.0,
-        131
-      ]
-    },
-    "ne.build.0": {
-      "sheet": "characters",
-      "rect": [
-        768,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        963,
-        960,
-        144,
-        131
-      ],
-      "sourceGroundPivot": [
-        68.0,
-        126
-      ]
-    },
-    "ne.build.1": {
-      "sheet": "characters",
-      "rect": [
-        896,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        1113,
-        957,
-        129,
-        135
-      ],
-      "sourceGroundPivot": [
-        56.0,
-        130
-      ]
-    },
-    "nw.rest.0": {
-      "sheet": "characters",
-      "rect": [
-        0,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        35,
-        1093,
-        128,
-        133
-      ],
-      "sourceGroundPivot": [
-        66.0,
-        128
-      ]
-    },
-    "nw.rest.1": {
-      "sheet": "characters",
-      "rect": [
-        128,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        199,
-        1093,
-        131,
-        133
-      ],
-      "sourceGroundPivot": [
-        69.0,
-        128
-      ]
-    },
-    "nw.gather.0": {
-      "sheet": "characters",
-      "rect": [
-        256,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        361,
-        1091,
-        123,
-        135
-      ],
-      "sourceGroundPivot": [
-        56.0,
-        130
-      ]
-    },
-    "nw.gather.1": {
-      "sheet": "characters",
-      "rect": [
-        384,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        512,
-        1093,
-        123,
-        135
-      ],
-      "sourceGroundPivot": [
-        59.0,
-        130
-      ]
-    },
-    "nw.carry.0": {
-      "sheet": "characters",
-      "rect": [
-        512,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        653,
-        1091,
-        125,
-        140
-      ],
-      "sourceGroundPivot": [
-        64.0,
-        135
-      ]
-    },
-    "nw.carry.1": {
-      "sheet": "characters",
-      "rect": [
-        640,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        805,
-        1094,
-        123,
-        138
-      ],
-      "sourceGroundPivot": [
-        57.0,
-        133
-      ]
-    },
-    "nw.build.0": {
-      "sheet": "characters",
-      "rect": [
-        768,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        51,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        953,
-        1094,
-        135,
-        137
-      ],
-      "sourceGroundPivot": [
-        29.0,
-        132
-      ]
-    },
-    "nw.build.1": {
-      "sheet": "characters",
-      "rect": [
-        896,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        114
-      ],
-      "widthInHalfTiles": 2.6,
-      "sourceRect": [
-        1107,
-        1096,
-        133,
-        134
-      ],
-      "sourceGroundPivot": [
-        69.0,
-        129
-      ]
-    },
-    "temperate.tree": {
-      "sheet": "world",
-      "rect": [
-        0,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 3.9,
-      "sourceRect": [
-        20,
-        22,
-        157,
-        166
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.tree-small": {
-      "sheet": "world",
-      "rect": [
-        128,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 3.9,
-      "sourceRect": [
-        189,
-        40,
-        138,
-        145
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.bush": {
-      "sheet": "world",
-      "rect": [
-        256,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        345,
-        79,
-        125,
-        106
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.bush-empty": {
-      "sheet": "world",
-      "rect": [
-        384,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        489,
-        87,
-        122,
-        100
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.stone": {
-      "sheet": "world",
-      "rect": [
-        512,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.2,
-      "sourceRect": [
-        633,
-        73,
-        155,
-        119
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.stone-small": {
-      "sheet": "world",
-      "rect": [
-        640,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.2,
-      "sourceRect": [
-        810,
-        103,
-        114,
-        83
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.wood": {
-      "sheet": "world",
-      "rect": [
-        768,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.4,
-      "sourceRect": [
-        948,
-        87,
-        150,
-        100
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.scrub": {
-      "sheet": "world",
-      "rect": [
-        896,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 1.5,
-      "sourceRect": [
-        1115,
-        95,
-        113,
-        94
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.shelter-frame": {
-      "sheet": "world",
-      "rect": [
-        0,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        22,
-        206,
-        144,
-        124
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.shelter-partial": {
-      "sheet": "world",
-      "rect": [
-        128,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        178,
-        204,
-        139,
-        128
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.shelter": {
-      "sheet": "world",
-      "rect": [
-        256,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        328,
-        204,
-        143,
-        131
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.ground": {
-      "sheet": "world",
-      "rect": [
-        384,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        484,
-        224,
-        142,
-        102
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.transition": {
-      "sheet": "world",
-      "rect": [
-        512,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        638,
-        223,
-        150,
-        106
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.shore": {
-      "sheet": "world",
-      "rect": [
-        640,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        800,
-        222,
-        149,
-        111
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.water": {
-      "sheet": "world",
-      "rect": [
-        768,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        955,
-        221,
-        150,
-        108
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "temperate.foliage": {
-      "sheet": "world",
-      "rect": [
-        896,
-        128,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        1114,
-        227,
-        119,
-        100
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.tree": {
-      "sheet": "world",
-      "rect": [
-        0,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 3.9,
-      "sourceRect": [
-        20,
-        345,
-        166,
-        157
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.tree-small": {
-      "sheet": "world",
-      "rect": [
-        128,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 3.9,
-      "sourceRect": [
-        189,
-        367,
-        130,
-        132
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.bush": {
-      "sheet": "world",
-      "rect": [
-        256,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        338,
-        391,
-        134,
-        108
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.bush-empty": {
-      "sheet": "world",
-      "rect": [
-        384,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        496,
-        396,
-        112,
-        105
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.stone": {
-      "sheet": "world",
-      "rect": [
-        512,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.2,
-      "sourceRect": [
-        630,
-        371,
-        161,
-        134
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.stone-small": {
-      "sheet": "world",
-      "rect": [
-        640,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.2,
-      "sourceRect": [
-        811,
-        406,
-        112,
-        93
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.wood": {
-      "sheet": "world",
-      "rect": [
-        768,
-        256,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.4,
-      "sourceRect": [
-        943,
-        388,
         160,
-        112
+        280
       ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        81,
+        105,
+        234,
+        279
+      ]
     },
-    "arid.scrub": {
-      "sheet": "world",
+    "idle.southeast": {
+      "sheet": "characters",
       "rect": [
-        896,
-        256,
-        128,
-        128
+        320,
+        0,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        109
+        160,
+        280
       ],
-      "widthInHalfTiles": 1.5,
-      "sourceRect": [
-        1114,
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        400,
+        104,
+        550,
+        280
+      ]
+    },
+    "idle.east": {
+      "sheet": "characters",
+      "rect": [
+        640,
+        0,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        728,
+        103,
+        863,
+        280
+      ]
+    },
+    "idle.northeast": {
+      "sheet": "characters",
+      "rect": [
+        960,
+        0,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1037,
+        105,
+        1188,
+        279
+      ]
+    },
+    "idle.back": {
+      "sheet": "characters",
+      "rect": [
+        1280,
+        0,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1347,
+        107,
+        1509,
+        279
+      ]
+    },
+    "idle.southwest": {
+      "sheet": "characters",
+      "rect": [
+        1600,
+        0,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1673,
+        105,
+        1826,
+        280
+      ]
+    },
+    "walk.southeast.0": {
+      "sheet": "characters",
+      "rect": [
+        0,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        88,
+        417,
+        245,
+        600
+      ]
+    },
+    "walk.southeast.1": {
+      "sheet": "characters",
+      "rect": [
+        320,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        411,
+        420,
+        564,
+        601
+      ]
+    },
+    "walk.southeast.2": {
+      "sheet": "characters",
+      "rect": [
+        640,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        728,
+        417,
+        880,
+        600
+      ]
+    },
+    "walk.southeast.3": {
+      "sheet": "characters",
+      "rect": [
+        960,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1044,
+        420,
+        1198,
+        598
+      ]
+    },
+    "walk.southeast.4": {
+      "sheet": "characters",
+      "rect": [
+        1280,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1355,
+        420,
+        1512,
+        601
+      ]
+    },
+    "walk.southeast.5": {
+      "sheet": "characters",
+      "rect": [
+        1600,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1675,
+        420,
+        1831,
+        601
+      ]
+    },
+    "fish.ready": {
+      "sheet": "characters",
+      "rect": [
+        0,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        83,
+        751,
+        279,
+        918
+      ]
+    },
+    "fish.cast.0": {
+      "sheet": "characters",
+      "rect": [
+        320,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        394,
+        733,
+        572,
+        922
+      ]
+    },
+    "fish.cast.1": {
+      "sheet": "characters",
+      "rect": [
+        640,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        716,
+        749,
+        928,
+        921
+      ]
+    },
+    "fish.wait": {
+      "sheet": "characters",
+      "rect": [
+        960,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1049,
+        749,
+        1235,
+        921
+      ]
+    },
+    "fish.reel": {
+      "sheet": "characters",
+      "rect": [
+        1280,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1353,
+        753,
+        1557,
+        922
+      ]
+    },
+    "fish.catch": {
+      "sheet": "characters",
+      "rect": [
+        1600,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1670,
+        752,
+        1844,
+        923
+      ]
+    },
+    "gather.reach": {
+      "sheet": "characters",
+      "rect": [
+        0,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        81,
+        1067,
+        242,
+        1238
+      ]
+    },
+    "gather.crouch": {
+      "sheet": "characters",
+      "rect": [
+        320,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
         396,
-        117,
-        103
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+        1084,
+        564,
+        1237
+      ]
     },
-    "arid.shelter-frame": {
-      "sheet": "world",
-      "rect": [
-        0,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        19,
-        508,
-        146,
-        132
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.shelter-partial": {
-      "sheet": "world",
-      "rect": [
-        128,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        178,
-        510,
-        141,
-        132
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.shelter": {
-      "sheet": "world",
-      "rect": [
-        256,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        330,
-        508,
-        147,
-        135
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.ground": {
-      "sheet": "world",
-      "rect": [
-        384,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        486,
-        533,
-        146,
-        102
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.transition": {
-      "sheet": "world",
-      "rect": [
-        512,
-        384,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        637,
-        529,
-        153,
-        108
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "arid.shore": {
-      "sheet": "world",
+    "gather.lift": {
+      "sheet": "characters",
       "rect": [
         640,
-        384,
-        128,
-        128
+        960,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        798,
-        530,
-        153,
-        111
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        724,
+        1062,
+        881,
+        1232
+      ]
     },
-    "arid.water": {
-      "sheet": "world",
+    "carry.berries": {
+      "sheet": "characters",
       "rect": [
-        768,
-        384,
-        128,
-        128
+        960,
+        960,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        956,
-        527,
-        149,
-        108
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1036,
+        1058,
+        1190,
+        1234
+      ]
     },
-    "arid.foliage": {
-      "sheet": "world",
+    "carry.wood.0": {
+      "sheet": "characters",
       "rect": [
-        896,
-        384,
-        128,
-        128
+        1280,
+        960,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        1115,
-        533,
-        117,
-        103
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1353,
+        1057,
+        1522,
+        1237
+      ]
     },
-    "cold.tree": {
-      "sheet": "world",
+    "carry.wood.1": {
+      "sheet": "characters",
+      "rect": [
+        1600,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1671,
+        1058,
+        1836,
+        1239
+      ]
+    },
+    "build.ready": {
+      "sheet": "characters",
       "rect": [
         0,
-        512,
-        128,
-        128
+        1280,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        109
+        160,
+        280
       ],
-      "widthInHalfTiles": 3.9,
-      "sourceRect": [
-        21,
-        651,
-        147,
-        174
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        84,
+        1389,
+        255,
+        1557
+      ]
     },
-    "cold.tree-small": {
-      "sheet": "world",
+    "build.raise.0": {
+      "sheet": "characters",
       "rect": [
-        128,
-        512,
-        128,
-        128
+        320,
+        1280,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        109
+        160,
+        280
       ],
-      "widthInHalfTiles": 3.9,
-      "sourceRect": [
-        194,
-        670,
-        116,
-        149
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        403,
+        1388,
+        586,
+        1558
+      ]
     },
-    "cold.bush": {
-      "sheet": "world",
-      "rect": [
-        256,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        335,
-        694,
-        139,
-        123
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.bush-empty": {
-      "sheet": "world",
-      "rect": [
-        384,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        498,
-        715,
-        106,
-        100
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.stone": {
-      "sheet": "world",
-      "rect": [
-        512,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.2,
-      "sourceRect": [
-        624,
-        672,
-        167,
-        147
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.stone-small": {
-      "sheet": "world",
+    "build.strike.0": {
+      "sheet": "characters",
       "rect": [
         640,
-        512,
-        128,
-        128
+        1280,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        109
+        160,
+        280
       ],
-      "widthInHalfTiles": 2.2,
-      "sourceRect": [
-        810,
-        719,
-        120,
-        93
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.wood": {
-      "sheet": "world",
-      "rect": [
-        768,
-        512,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.4,
-      "sourceRect": [
-        945,
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
         713,
-        157,
-        104
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+        1395,
+        871,
+        1565
+      ]
     },
-    "cold.scrub": {
-      "sheet": "world",
+    "build.raise.1": {
+      "sheet": "characters",
       "rect": [
-        896,
-        512,
-        128,
-        128
+        960,
+        1280,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        109
+        160,
+        280
       ],
-      "widthInHalfTiles": 1.5,
-      "sourceRect": [
-        1114,
-        712,
-        119,
-        105
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1036,
+        1387,
+        1202,
+        1555
+      ]
     },
-    "cold.shelter-frame": {
+    "build.strike.1": {
+      "sheet": "characters",
+      "rect": [
+        1280,
+        1280,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1347,
+        1395,
+        1521,
+        1565
+      ]
+    },
+    "build.lower": {
+      "sheet": "characters",
+      "rect": [
+        1600,
+        1280,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1677,
+        1382,
+        1822,
+        1560
+      ]
+    },
+    "rest.settle": {
+      "sheet": "characters",
+      "rect": [
+        0,
+        1600,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        84,
+        1710,
+        230,
+        1874
+      ]
+    },
+    "rest.drowsy": {
+      "sheet": "characters",
+      "rect": [
+        320,
+        1600,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        398,
+        1709,
+        549,
+        1873
+      ]
+    },
+    "rest.sleep.0": {
+      "sheet": "characters",
+      "rect": [
+        640,
+        1600,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        719,
+        1738,
+        887,
+        1870
+      ]
+    },
+    "rest.sleep.1": {
+      "sheet": "characters",
+      "rect": [
+        960,
+        1600,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1041,
+        1735,
+        1209,
+        1870
+      ]
+    },
+    "rest.wake": {
+      "sheet": "characters",
+      "rect": [
+        1280,
+        1600,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1354,
+        1703,
+        1506,
+        1875
+      ]
+    },
+    "rest.stretch": {
+      "sheet": "characters",
+      "rect": [
+        1600,
+        1600,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 3.2,
+      "visibleBounds": [
+        1677,
+        1694,
+        1836,
+        1876
+      ]
+    },
+    "forest.tree.oak": {
       "sheet": "world",
       "rect": [
         0,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        19,
-        830,
-        146,
-        128
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.shelter-partial": {
-      "sheet": "world",
-      "rect": [
-        128,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        178,
-        829,
-        140,
-        131
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.shelter": {
-      "sheet": "world",
-      "rect": [
-        256,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        330,
-        824,
-        144,
-        137
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.ground": {
-      "sheet": "world",
-      "rect": [
-        384,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        484,
-        844,
-        151,
-        111
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.transition": {
-      "sheet": "world",
-      "rect": [
-        512,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        641,
-        841,
-        151,
-        115
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.shore": {
-      "sheet": "world",
-      "rect": [
-        640,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        799,
-        841,
-        156,
-        119
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.water": {
-      "sheet": "world",
-      "rect": [
-        768,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        956,
-        849,
-        153,
-        107
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "cold.foliage": {
-      "sheet": "world",
-      "rect": [
-        896,
-        640,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        1117,
-        866,
-        118,
-        92
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.tree": {
-      "sheet": "world",
-      "rect": [
         0,
-        768,
-        128,
-        128
+        320,
+        320
       ],
       "anchor": [
-        64,
-        109
+        160,
+        280
       ],
-      "widthInHalfTiles": 3.9,
-      "sourceRect": [
-        20,
-        961,
-        163,
-        136
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        61,
+        70,
+        260,
+        280
+      ]
     },
-    "coast.tree-small": {
+    "forest.berries.full": {
       "sheet": "world",
       "rect": [
-        128,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 3.9,
-      "sourceRect": [
-        193,
-        977,
-        130,
-        118
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.bush": {
-      "sheet": "world",
-      "rect": [
-        256,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        341,
-        987,
-        128,
-        104
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.bush-empty": {
-      "sheet": "world",
-      "rect": [
-        384,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        485,
-        995,
-        126,
-        101
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.stone": {
-      "sheet": "world",
-      "rect": [
-        512,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.2,
-      "sourceRect": [
-        632,
-        978,
-        163,
-        125
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.stone-small": {
-      "sheet": "world",
-      "rect": [
-        640,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.2,
-      "sourceRect": [
-        812,
-        1016,
-        124,
-        80
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.wood": {
-      "sheet": "world",
-      "rect": [
-        768,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 2.4,
-      "sourceRect": [
-        946,
-        989,
-        159,
-        110
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.scrub": {
-      "sheet": "world",
-      "rect": [
-        896,
-        768,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        109
-      ],
-      "widthInHalfTiles": 1.5,
-      "sourceRect": [
-        1114,
-        996,
-        119,
-        100
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.shelter-frame": {
-      "sheet": "world",
-      "rect": [
+        320,
         0,
-        896,
-        128,
-        128
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        19,
-        1105,
-        146,
-        128
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.shelter-partial": {
-      "sheet": "world",
-      "rect": [
-        128,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        178,
-        1105,
-        140,
-        128
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.shelter": {
-      "sheet": "world",
-      "rect": [
-        256,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 3.8,
-      "sourceRect": [
-        329,
-        1100,
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        402,
         147,
-        133
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+        558,
+        280
+      ]
     },
-    "coast.ground": {
-      "sheet": "world",
-      "rect": [
-        384,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        484,
-        1121,
-        146,
-        106
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.transition": {
-      "sheet": "world",
-      "rect": [
-        512,
-        896,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        641,
-        1121,
-        151,
-        106
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "coast.shore": {
+    "forest.berries.depleted": {
       "sheet": "world",
       "rect": [
         640,
-        896,
-        128,
-        128
+        0,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        801,
-        1123,
-        154,
-        112
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        719,
+        149,
+        882,
+        280
+      ]
     },
-    "coast.water": {
+    "forest.stock.wood": {
       "sheet": "world",
       "rect": [
-        768,
-        896,
-        128,
-        128
+        960,
+        0,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        956,
-        1122,
-        155,
-        109
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1026,
+        141,
+        1214,
+        280
+      ]
     },
-    "coast.foliage": {
+    "forest.shore.river": {
       "sheet": "world",
       "rect": [
-        896,
-        896,
-        128,
-        128
+        1280,
+        0,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 2.0,
-      "sourceRect": [
-        1117,
-        1133,
-        117,
-        98
-      ],
-      "sourceGroundPivot": "bottom-center, foliage baseline"
-    },
-    "extra.cactus": {
-      "sheet": "extra",
-      "rect": [
-        0,
-        0,
-        128,
-        128
-      ],
-      "anchor": [
-        64,
-        110
-      ],
-      "widthInHalfTiles": 1.9,
-      "sourceRect": [
-        65,
-        189,
-        306,
-        351
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1326,
+        105,
+        1555,
+        280
       ]
     },
-    "extra.flint": {
-      "sheet": "extra",
+    "forest.shelter.foundation": {
+      "sheet": "world",
       "rect": [
-        128,
+        1600,
         0,
-        128,
-        128
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 1.5,
-      "sourceRect": [
-        473,
-        264,
-        315,
-        276
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1672,
+        150,
+        1849,
+        280
       ]
     },
-    "extra.lichen": {
-      "sheet": "extra",
+    "forest.shelter.frame": {
+      "sheet": "world",
       "rect": [
-        256,
+        1920,
         0,
-        128,
-        128
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 1.5,
-      "sourceRect": [
-        868,
-        295,
-        360,
-        253
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1986,
+        101,
+        2174,
+        280
       ]
     },
-    "extra.shellfish": {
-      "sheet": "extra",
+    "forest.shelter.complete": {
+      "sheet": "world",
+      "rect": [
+        2240,
+        0,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        2308,
+        90,
+        2493,
+        280
+      ]
+    },
+    "desert.tree.palm": {
+      "sheet": "world",
       "rect": [
         0,
-        128,
-        128,
-        128
+        320,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 1.5,
-      "sourceRect": [
-        36,
-        836,
-        341,
-        237
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        68,
+        396,
+        253,
+        600
       ]
     },
-    "extra.fire.0": {
-      "sheet": "extra",
+    "desert.cactus": {
+      "sheet": "world",
       "rect": [
-        128,
-        128,
-        128,
-        128
+        320,
+        320,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 2,
-      "sourceRect": [
-        468,
-        737,
-        322,
-        341
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        403,
+        454,
+        558,
+        600
       ]
     },
-    "extra.fire.1": {
-      "sheet": "extra",
+    "desert.stone.sandstone": {
+      "sheet": "world",
       "rect": [
-        256,
-        128,
-        128,
-        128
+        640,
+        320,
+        320,
+        320
       ],
       "anchor": [
-        64,
-        110
+        160,
+        280
       ],
-      "widthInHalfTiles": 2,
-      "sourceRect": [
-        886,
-        772,
-        314,
-        306
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        706,
+        462,
+        895,
+        600
+      ]
+    },
+    "desert.stock.stone-reeds": {
+      "sheet": "world",
+      "rect": [
+        960,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1033,
+        488,
+        1207,
+        600
+      ]
+    },
+    "desert.shore.oasis": {
+      "sheet": "world",
+      "rect": [
+        1280,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1323,
+        410,
+        1558,
+        600
+      ]
+    },
+    "desert.shelter.foundation": {
+      "sheet": "world",
+      "rect": [
+        1600,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1672,
+        472,
+        1848,
+        600
+      ]
+    },
+    "desert.shelter.frame": {
+      "sheet": "world",
+      "rect": [
+        1920,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1975,
+        442,
+        2186,
+        600
+      ]
+    },
+    "desert.shelter.complete": {
+      "sheet": "world",
+      "rect": [
+        2240,
+        320,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        2299,
+        423,
+        2501,
+        600
+      ]
+    },
+    "cold.tree.spruce": {
+      "sheet": "world",
+      "rect": [
+        0,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        78,
+        723,
+        243,
+        920
+      ]
+    },
+    "cold.berries.frost": {
+      "sheet": "world",
+      "rect": [
+        320,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        399,
+        792,
+        562,
+        920
+      ]
+    },
+    "cold.stone.granite": {
+      "sheet": "world",
+      "rect": [
+        640,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        705,
+        751,
+        895,
+        920
+      ]
+    },
+    "cold.stock.firewood": {
+      "sheet": "world",
+      "rect": [
+        960,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1037,
+        791,
+        1203,
+        920
+      ]
+    },
+    "cold.shore.ice": {
+      "sheet": "world",
+      "rect": [
+        1280,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1324,
+        739,
+        1557,
+        920
+      ]
+    },
+    "cold.shelter.foundation": {
+      "sheet": "world",
+      "rect": [
+        1600,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1672,
+        798,
+        1849,
+        920
+      ]
+    },
+    "cold.shelter.frame": {
+      "sheet": "world",
+      "rect": [
+        1920,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1985,
+        746,
+        2176,
+        920
+      ]
+    },
+    "cold.shelter.complete": {
+      "sheet": "world",
+      "rect": [
+        2240,
+        640,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        2301,
+        722,
+        2499,
+        920
+      ]
+    },
+    "coast.tree.pine": {
+      "sheet": "world",
+      "rect": [
+        0,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        60,
+        1066,
+        261,
+        1240
+      ]
+    },
+    "coast.reeds": {
+      "sheet": "world",
+      "rect": [
+        320,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        393,
+        1074,
+        567,
+        1240
+      ]
+    },
+    "coast.stone.coastal": {
+      "sheet": "world",
+      "rect": [
+        640,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        701,
+        1096,
+        899,
+        1240
+      ]
+    },
+    "coast.fishing.supplies": {
+      "sheet": "world",
+      "rect": [
+        960,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1031,
+        1132,
+        1210,
+        1240
+      ]
+    },
+    "coast.shore.sea": {
+      "sheet": "world",
+      "rect": [
+        1280,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1324,
+        1072,
+        1556,
+        1240
+      ]
+    },
+    "coast.shelter.foundation": {
+      "sheet": "world",
+      "rect": [
+        1600,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1671,
+        1079,
+        1850,
+        1240
+      ]
+    },
+    "coast.shelter.frame": {
+      "sheet": "world",
+      "rect": [
+        1920,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        1981,
+        1066,
+        2180,
+        1240
+      ]
+    },
+    "coast.shelter.complete": {
+      "sheet": "world",
+      "rect": [
+        2240,
+        960,
+        320,
+        320
+      ],
+      "anchor": [
+        160,
+        280
+      ],
+      "widthInHalfTiles": 4.6,
+      "visibleBounds": [
+        2301,
+        1054,
+        2500,
+        1240
       ]
     }
   },
-  "animation": {
-    "idle": {
-      "frames": 4,
-      "fps": 2,
-      "sequence": [
-        0,
-        1,
-        2,
-        3,
-        2,
-        1
-      ]
+  "provenance": [
+    {
+      "file": "living-characters.webp",
+      "input": "artifacts/living/characters.png",
+      "inputSHA256": "4c37695a5a4fc2f2fde45b82d867068965adb4f506c40ac96d8d470717dcf130",
+      "bytes": 308812,
+      "processing": "Registered source cells, unchanged geometry. WebP quality 88; alpha quality 100."
     },
-    "walk": {
-      "frames": 4,
-      "fps": 6,
-      "sequence": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "requires": "interpolation between adjacent confirmed different positions; takes precedence over destination work/rest action"
-    },
-    "rest": {
-      "frames": 2,
-      "fps": 1,
-      "requires": "rest action after confirmed movement completes"
-    },
-    "gather": {
-      "frames": 2,
-      "fps": 3,
-      "requires": "gather action after confirmed movement completes"
-    },
-    "carry": {
-      "frames": 2,
-      "fps": 3,
-      "requires": "inspected inventory.wood > 0 AND (confirmed movement OR carry/move action)"
-    },
-    "build": {
-      "frames": 2,
-      "fps": 3,
-      "requires": "build action after confirmed movement completes"
-    },
-    "distress": {
-      "requires": "health < 30; static ring overlay, no invented action"
+    {
+      "file": "living-world.webp",
+      "input": "artifacts/living/world.png",
+      "inputSHA256": "dbeeabaaee768a89ce868b1abba996a9d39e53ea3f54c6c18e7565094efff55c",
+      "bytes": 461134,
+      "processing": "Registered source cells, unchanged geometry. WebP quality 88; alpha quality 100."
     }
-  },
-  "limitations": [
-    "Raster source only; no layered painting or rig. Generated loops are registered pose sequences, not a skeletal animation.",
-    "Only completed shelters are exposed by the API; frame/partial artwork remains unused.",
-    "Resource variants are chosen from actual units; no decorative resource nodes are added."
   ],
-  "presentation": {
-    "wornGround": {
-      "sheet": "world",
-      "sourceSprite": "arid.ground",
-      "rect": [
-        438,
-        449,
-        20,
-        12
-      ],
-      "purpose": "Bare-earth texture only; excludes resource rocks and plants. Cosmetic clear-land shelter approaches and up to 256 adjacent confirmed travel segments retained only in the viewer session. No API, terrain or walk-cost mutation."
-    }
+  "license": "licenses/living-art.txt",
+  "anchors": "Cell-local foot contact [160,280], unchanged from the supplied registration. Rectangles are half-open x,y,w,h.",
+  "runtimeIntegrated": true,
+  "stateContract": {
+    "version": "living:1",
+    "source": "web/src/expanse/appearance.ts",
+    "movement": "Only adjacent confirmed endpoints in consecutive engine ticks; skipped paths snap.",
+    "fish": {
+      "state": "fish",
+      "tool": "fish_line",
+      "phases": {
+        "cast": [
+          "fish.cast.0",
+          "fish.cast.1"
+        ],
+        "wait": [
+          "fish.wait"
+        ],
+        "reel": [
+          "fish.reel"
+        ]
+      },
+      "catchPose": "Unused; no catch-result API phase."
+    },
+    "sleep": {
+      "state": "sleep",
+      "frames": [
+        "rest.sleep.0",
+        "rest.sleep.1"
+      ]
+    },
+    "loads": "Positive matching carrying item; other materials use a neutral pouch.",
+    "construction": "Actual site target + delivered materials + construct phase. Empty sites are outline markers. Tool-work art additionally requires held hand_axe or stone_club."
   }
 }

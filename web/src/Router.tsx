@@ -1,50 +1,10 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import ExpanseApp from "./expanse/App";
-const Settlement = lazy(() => import("./Legacy"));
-export default function Router() {
-  const [hash, setHash] = useState(location.hash);
-  const [legacyAvailable, setLegacyAvailable] = useState<boolean | null>(null);
-  useEffect(() => {
-    const listener = () => setHash(location.hash);
-    addEventListener("hashchange", listener);
-    return () => removeEventListener("hashchange", listener);
-  }, []);
-  useEffect(() => {
-    let closed = false;
-    fetch("./expanse-config.json", { cache: "no-store" })
-      .then((r) => r.json())
-      .then((c) => {
-        if (!closed) setLegacyAvailable(c.legacyAvailable === true);
-      })
-      .catch(() => {
-        if (!closed) setLegacyAvailable(false);
-      });
-    return () => {
-      closed = true;
-    };
-  }, []);
-  if (hash !== "#settlement") return <ExpanseApp />;
-  if (legacyAvailable === null) return <p>Checking settlement availability…</p>;
-  if (!legacyAvailable)
-    return (
-      <main className="fatal">
-        <h1>The settlement is now part of the Expanse</h1>
-        <p>
-          The shared world continues in the expanded map. The previous engine is
-          archived for recovery.
-        </p>
-        <a href="#">Return to the live world</a>
-      </main>
-    );
-  return (
-    <>
-      <div className="exp-legacy-return">
-        <a href="#">Return to Expanse</a>
-        <span>Preserved settlement client & authentication</span>
-      </div>
-      <Suspense fallback={<p>Loading settlement…</p>}>
-        <Settlement />
-      </Suspense>
-    </>
-  );
+import { useEffect, useState } from 'react';
+import ExpanseApp from './expanse/App';
+// The archived writable settlement UI is never bundled into this observer.
+// Backend recovery tools and historical records remain available to the owner.
+export default function Router(){
+ const [hash,setHash]=useState(location.hash);
+ useEffect(()=>{const change=()=>setHash(location.hash);addEventListener('hashchange',change);return()=>removeEventListener('hashchange',change);},[]);
+ if(hash==='#settlement')return <main className="fatal"><h1>The settlement is part of the Expanse</h1><p>The persistent world continues at its original coordinates. The archived client is unavailable (legacyAvailable: false).</p><a href="#">Explore the Expanse</a></main>;
+ return <ExpanseApp/>;
 }

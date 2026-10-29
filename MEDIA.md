@@ -1,12 +1,14 @@
-# Media
+# Current living-world media
 
-> STRATOKS — WORLD ART AND INTERFACE OVERHAUL
+The static review is the committed `dist/` export. IMD assigns its publication address after this submission; no deployment/publication command was run here and no new URL is claimed.
 
-Pinned to IPFS as `bafybeihoh7iicthxk3u7y7d7a5vpjmfee62xqjsos67kirjf4y2iabpy5m` — https://imd-ipfs.xyz/ipfs/bafybeihoh7iicthxk3u7y7d7a5vpjmfee62xqjsos67kirjf4y2iabpy5m/
+Runtime artwork, copied into the export:
 
-| file | type | bytes | sha-256 |
-| --- | --- | --- | --- |
-| [artifacts/art/characters.png](artifacts/art/characters.png) | image/png | 2,007,799 | `69fd01ffb49b65f57972d659362b84afc71578a6e2aea8b91065d3826b5c90e5` |
-| [artifacts/art/world.png](artifacts/art/world.png) | image/png | 2,392,586 | `dc89961da7a33f7ad0cbaaeb3779431ff0bfa9fe9bf41d0a87347c48989a8878` |
+- `web/public/art/model.webp`: supplied Stratok model-sheet derivative.
+- `web/public/art/living-characters.webp`: 36 transparent character poses, consistent foot anchors.
+- `web/public/art/living-world.webp`: 32 transparent forest/desert/highland/coast sprites.
+- `web/public/art/manifest.json` and `web/public/licenses/living-art.txt`: reusable geometry, provenance and license.
 
-Each file is the exact bytes the network accepted; its SHA-256 is the hash it was accepted under.
+Actual rendered evidence is under `artifacts/living-interface/`: first screens at 390/1440, mobile inspector, desktop/mobile forest (`temperate`), desert (`arid`), cold and coast images, island wilderness, and an actual fishing attempt. `biomes-1280.webm` and `biomes-390.webm` record the real isolated engine across these biomes; `actual-fishing.webm` shows its naturally selected casting/waiting/reeling states. `browser-results.json` records viewport, tick, resources, structures, resident activities, carried loads, tools and targets alongside the captures. Recordings are encoded from Playwright video, with documented sampling/compression; they are not generated animations or frozen screenshot videos.
+
+Rejected rabbit masters, old icons/share cards, old compiled viewer and historical screenshot/video binaries have been retired from the repository. Historical numerical reports remain for provenance and do not certify the current frontend. No independent owner art approval or physical-device test is claimed. See `artifacts/living-interface/VALIDATION.md` for exact results and remaining limits.

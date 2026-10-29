@@ -7,6 +7,13 @@ export type Resident = {
   y: number;
   health: number;
   action: string | null;
+  state?: string;
+  phase?: string | null;
+  progress?: number;
+  load?: number;
+  carrying?: Record<string, number>;
+  tools?: string[];
+  target?: { x: number; y: number } | null;
 };
 export type Step = {
   prim: string;
@@ -96,6 +103,9 @@ export type Inspector = {
   reputation: Record<string, number>;
   following: { id: number; until: number } | null;
   note: string;
+  activity?: { state: string; prim: string | null; phase: string | null; progress: number; target: {x: number; y: number} | null; item: string | null; load: number; capacity?: number; carrying: Record<string, number>; tools: string[] };
+  toolWear?: Record<string, number>;
+  home?: { x: number; y: number };
 };
 export type Discovery = {
   tick: number;
@@ -119,6 +129,10 @@ export type WorldFrame = {
     deaths: number;
     chunks: number;
     byBiome: Record<string, number>;
+    sites?: number;
+    standing?: number;
+    stored?: number;
+    fishCaught?: number;
   };
   view: {
     v: number;
@@ -128,11 +142,17 @@ export type WorldFrame = {
     w: number;
     h: number;
     tiles: number[];
+    biomes?: string[];
     biome: string;
+    climate?: {temperature: number; rain: boolean; daylight: number};
     nodes: [string, string, number, number, number][];
     creatures: [number, string, number, number, string | null, number][];
     fires: [number, number, number][];
-    shelters: [number, number, number][];
+    shelters: [number, number, number, string?, number?, number?][];
+    sites?: {id:number; x:number; y:number; kind:string; stage:number; materials:Record<string,number>; need:Record<string,number>; work:number; workNeed:number}[];
+    stores?: {shelter:number; x:number; y:number; items:Record<string,number>}[];
+    piles?: {id:string; x:number; y:number; items:Record<string,number>}[];
+    living?: number;
   };
   minimap: {
     cx0: number;
@@ -143,6 +163,7 @@ export type WorldFrame = {
     biomes: [number, number, string][];
   };
   residents: Resident[];
+  places?: {id:number; x:number; y:number; biome:string; kind:string; complete:boolean; integrity:number; stored:number}[];
   inspector: Inspector | null;
   discoveries: Discovery[];
   social: {
@@ -152,6 +173,7 @@ export type WorldFrame = {
     target: number | null;
     result: unknown;
   }[];
+  demo?: { seed: number; checkpointTick: number; description: string; stepMs?: number; measuredTickMs?: number; paused?: boolean };
 };
 export type FrameQuery = {
   x: number;

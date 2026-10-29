@@ -1,6 +1,6 @@
 import { tileAt, WATER } from "./ground";
 import { project, scale, type Point, type Size } from "./projection";
-import { wornGround, type Art } from "./art";
+import { type Art } from "./art";
 import type { Camera, WorldFrame } from "./types";
 export type WornSegment = { from: Point; to: Point };
 const key = (p: Point) => `${p.x},${p.y}`;
@@ -43,14 +43,6 @@ export class WornPaths {
   constructor(private art: Art) {}
   draw(ctx: CanvasRenderingContext2D, segments: WornSegment[], c: Camera, size: Size) {
     if (!segments.length) return;
-    if (!this.texture && this.art.world) {
-      const swatch = document.createElement("canvas");
-      const [x, y, w, h] = wornGround.rect;
-      swatch.width = w; swatch.height = h;
-      // Bare earth at the center of arid.ground: no resource rocks or plants.
-      swatch.getContext("2d")!.drawImage(this.art[wornGround.sheet], x, y, w, h, 0, 0, w, h);
-      this.texture = ctx.createPattern(swatch, "repeat");
-    }
     const s = scale(c, size);
     ctx.save();
     ctx.lineCap = "round"; ctx.lineJoin = "round";

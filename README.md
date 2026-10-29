@@ -1,12 +1,12 @@
-# STRATOKS · A little world, unfolding
+# STRATOKS · A world taking root
 
-A working illustrated observer for the existing Expanse simulation. The frontend uses original transparent sprite atlases, a coordinate-accurate isometric renderer, touch/keyboard navigation, resident search, follow, minimap and expandable scientific evidence. The matching static export is **`dist/`**, with relative URLs for gateway subpaths.
+A full-screen isometric observer for the persistent 280×280 Expanse. Golden, leaf-crowned Stratoks explore, gather, fish, carry finite inventories, use shared stores, construct/repair biome-specific shelters, rest, form families, age and die in the existing learning engine. The original settlement coordinate system, owner world identity and saved-data migration tools are retained. This contribution integrates the preceding living-world art and schema-4 engine; it does not deploy or reset the live VPS.
 
-The review opens a **recorded preview** of `world-20260101-0` at tick 171,933, captured on 29 October 2026. It is labeled throughout. **Explore demo** starts the existing engine in an isolated browser worker, discarded on exit. **Connect live** reads the owner-operated service at https://stratoks.2-29-11-211.sslip.io. That service currently blocks cross-origin browser reads; a static preview cannot change its policy. No connection is fabricated. The recording's detailed inspector exists only for the resident returned in that capture; other residents explicitly report missing inspector evidence.
+The review **opens a real isolated browser demo**, naturally simulated from 24 seed-2 founders to tick 12,000 and then continued in a worker with the production engine. Its 156 residents, families, memories, learned weights, supplies, 68 completed shelters and 26 sites come from that history. No job, tool, resource or settlement is injected for a scene. The owner capture remains available as **Recorded preview**. **Live world** is shown only after a successful owner API read. Cross-origin access needs the owner's allowed-origin configuration.
 
 ## Install, preview and rebuild
 
-Use Node 22.12+; this revision used Node 22.23.3 (the original accepted build used Node 24). The existing frontend manifest and lockfile are unchanged.
+Use Node 22.12+ (this task used Node 22.23.3). The existing frontend manifest, lockfile and Vite configuration are preserved.
 
 ```sh
 cd web
@@ -18,74 +18,77 @@ cd ..
 node web/scripts/preview.mjs 4173
 ```
 
-Open `http://127.0.0.1:4173/preview/`. The preview command only serves the static export; stop it with Ctrl+C. Vite retains `base: './'` and writes `../dist/`. Use HTTP rather than opening `index.html` as a file, because the demo uses module workers and runtime JSON. Dependencies and caches must stay out of Git. The existing `web/scripts/task.mjs` helper can alternatively install, typecheck, test and build in `/tmp`: `node web/scripts/task.mjs <task>`. `npm test` discovers the Expanse projection, appearance, transport and terrain suites through `src/expanse.test.ts`, alongside the existing client tests; the protected package manifest and lockfile remain unchanged.
+Open `http://127.0.0.1:4173/preview/`. Stop the server with Ctrl+C. The production export is **`dist/index.html` and its complete local assets**. Vite uses `base: './'`; assets, workers, checkpoint and metadata work at a static gateway subpath. Use HTTP rather than `file://`, because the demo uses module workers and runtime asset requests. No credentials or backend are bundled into the export. The site is submitted for IMD's static preview publication; no publishing or deployment command was run here.
 
-The source patch at `artifacts/overhaul/stratoks-source.patch.gz` applies against pinned commit `fc1df0f9e641d05b7e32e1c96cb1b963e61576aa`. It includes editable source, art and documentation; the matching prebuilt `dist/` and rendered validation evidence are delivered alongside it, rather than duplicated inside the patch. Apply it on a separate review branch, then rebuild with the commands above:
+Dependencies can instead stay entirely outside the repository:
 
 ```sh
-git switch -c review/stratoks-world-art fc1df0f9e641d05b7e32e1c96cb1b963e61576aa
-gzip -dc /path/to/stratoks-source.patch.gz | git apply --binary
+node web/scripts/task.mjs install
+node web/scripts/task.mjs typecheck
+node web/scripts/task.mjs test
+node web/scripts/task.mjs build
 ```
 
-This worker left `.git/` untouched under the task's explicit restriction, so delivery uses a patch rather than a worker-created commit or branch. Earlier accepted artwork documentation remains included. The network can commit the complete working tree, including `dist/`.
+Run those commands sequentially: the helper copies source into a shared temporary build tree. `node web/scripts/task.mjs path` prints that tree for external browser tools. Package caches, dependencies and unnecessary archives are excluded at every nesting level. The submission includes source, the existing lockfile, reusable atlases, model sheet, demo checkpoint, export, installation instructions and actual evidence. No submodule is created, and `.git/` remains untouched.
 
-## Owner installation on the existing world
+## Explore and inspect
 
-Only replace the static frontend after review. Do not start another shared server, reset the world, migrate saves or replace server source. The existing `server/`, `shared/`, tests, deployment source, world identity and simulation contracts are unchanged.
+Drag or use arrow keys to pan. Scroll, pinch, use +/−, or use the zoom controls. Select a Stratok on the map, or use **Find residents** and search by name/ID. **Follow resident** tracks its confirmed position; manual pan stops following. Escape closes the resident sheet and returns focus to the map.
 
-The shipped `dist/expanse-config.json` contains:
+Click empty terrain to inspect its actual coordinates, resources, construction progress, shelter integrity and stores. **Explore settlements** lists real structures by biome; choosing one moves your camera. The atlas supports pointer and arrow navigation, and closes after choosing a location. Observer travel never moves residents. Water crossings remain subject to the engine's original movement rules.
+
+Plans retains predictions, uncertainty, candidates and measured outcomes. Perception is the resident's last decision observation, not current global truth. Learning retains its actual model/episode/mb-v1 evidence. JSON downloads contain the actual inspector. World records expose bounded discovery/social history and real population, births, deaths, stores, sites and fish totals. No speech, thoughts, invented events, wallet/payment UI or fake IMD control is added. The archived `#settlement` route stays unavailable with `legacyAvailable:false`.
+
+## Mode and owner installation
+
+The shipped runtime file, `web/public/expanse-config.json` (copied to `dist/`), is:
 
 ```json
-{
-  "httpUrl": "https://stratoks.2-29-11-211.sslip.io",
-  "legacyAvailable": false,
-  "startMode": "recording"
-}
+{"httpUrl":"https://stratoks.2-29-11-211.sslip.io","legacyAvailable":false,"startMode":"demo"}
 ```
 
-For the owner's same-origin installation, set `startMode` to `live` in that runtime file. Set the same values in `web/public/expanse-config.json` before future rebuilds. Existing owner configs with `httpUrl` and no `startMode` still connect automatically. A deliberate remembered source choice takes precedence. Keep `legacyAvailable:false`; the archived `#settlement` route fails closed and exposes no wallet or old writable client. The production build does not eagerly load its wallet providers.
+For an owner same-origin installation, serve `dist/` with the existing read-only Expanse API and set `startMode` to `live` in that runtime file. Keep `legacyAvailable:false`. The source offers **Choose world** for an owner HTTPS endpoint, `?server=<URL-encoded HTTPS base>`, `?demo=1` and `?recorded=1`. An explicitly remembered source choice takes precedence. Local HTTP is accepted only from a local HTTP preview. A static export cannot change a different server's CORS policy. Failed connections retain a labeled recorded capture or last confirmed frame and provide reconnect.
 
-Other owner endpoints can be selected through **Choose world**, or `?server=<URL-encoded HTTPS base URL>`. A local HTTP endpoint is accepted only from a local HTTP preview. `?demo=1` explicitly opens the private demo. HTTPS server prefixes are supported by the existing API transport. Cross-origin deployment needs the owner to allow that frontend origin; same-origin deployment needs no CORS change. There are no frontend credentials, contracts, payments or new write APIs.
-
-Live polling remains one coherent `/api/expanse/frame` GET per second, one request at a time, with the real viewport and selected creature. A timeout retains the last confirmed frame; Reconnect retries. Manual navigation stops following. Tick is the engine's world-time unit; no date, thoughts or social meaning are invented.
-
-## Art and interaction
-
-See [DESIGN.md](DESIGN.md) for the implemented tokens, typography, components and responsive rules, and [art integration](docs/art/INTEGRATION.md) for the 134 registered sprites, dimensions, anchors, animation gates, source derivatives and licenses. Runtime manifests and PNGs live in `web/public/art/`; editable raster masters are in `web/art-source/`.
-
-Drag or use arrow keys to pan. Scroll, pinch, use +/−, or use the zoom controls. Select a creature or search **Find residents**. Follow tracks its confirmed position. The atlas supports pointer and arrow navigation. Plans, Perception and Learning retain actual predictions, uncertainty, observations, inventories, memories and outcomes. JSON downloads contain the actual inspector. Counts are scoped to the indicated world/capture and tick. World records retain the API's bounded history.
-
-The map and inspector use separate viewports on phones. Short phones use a horizontal rail, separate zoom and notice rows, and a collapsed atlas. Follow flows below the actual connection notice height. Canvas picking, pointer-centered zoom, viewport requests, camera limits, knowledge overlays and the atlas share the same projection module. Minimap Enter/Space preserve the camera; arrows choose a chunk and pointer clicks choose a location. Terrain uses fixed world-coordinate caches across pan/zoom, and sprites are culled and sorted by ground depth. Worn ground marks clear shelter approaches and adjacent travel observed in the viewer session; it has no simulation behavior. Decorative art never changes pathfinding or adds a resource/building.
-
-## Validation and review evidence
-
-Actual results are recorded in [artifacts/overhaul/VALIDATION.md](artifacts/overhaul/VALIDATION.md), with raw browser results, rendered desktop/tablet/mobile screenshots and `live-interactions.webm`. The live recording uses a clearly labeled **read-only validation proxy in Playwright** to observe the existing API despite CORS; that proxy is not shipped. It shows real movement, selection, follow, pan, zoom, minimap, interruption and reconnect. Separate synthetic fixtures measure renderer performance; no 60fps claim is made.
-
-Reproduce browser validation after building:
+The owner-run backend has zero runtime dependencies:
 
 ```sh
-cd web
-npx playwright install chromium webkit
-cd ..
-node web/scripts/overhaul-check.mjs
-# Reopened-review regressions: short layouts, keyboard minimap, moving-camera performance.
-node web/scripts/revision-check.mjs
-# Optional: contact the existing public world read-only, test CORS and record live interactions.
-node web/scripts/overhaul-check.mjs --live
-# With the static preview running, also render the actual private-worker biomes.
-node web/scripts/biomes-check.mjs
+node server/src/expanse/server.js
 ```
 
-Playwright needs its platform libraries. On this machine, browser binaries and extracted WebKit/Mesa libraries were installed only under `/tmp`; none are shipped. `IMD_PLAYWRIGHT` can point at an external Playwright `index.mjs`. `STRATOKS_FFMPEG` can select a VP9 encoder; the script also finds Playwright's bundled encoder for compact recording output. Without `--live`, validation uses the static capture, browser demo and labeled synthetic fixtures.
+Use an explicit data directory for a new local installation. For an existing owner world, first stop its process cleanly and copy its complete data directory to a separate review location. On that **copy**, run:
 
-The pinned Better Interface review covers all six domains; findings, fixes and coverage limits are in the validation document. The revision's reproduction evidence, final commands, browser results and performance phases are in [revision validation](artifacts/overhaul/REVISION.md) and `revision-results.json`. The standard test command runs 27 tests, including the new travel-priority and terrain-cache/path regressions. These are worker observations, not independent certification. Earlier backend/scientific reports remain in their existing documentation and are not substituted for these frontend checks.
+```sh
+node server/bin/expanse-upgrade.js /absolute/path/to/copied-world
+node server/bin/expanse-upgrade.js /absolute/path/to/copied-world --write
+```
 
-## Limits and provenance
+The first command is a dry run. The second preserves original pre-migration bytes before applying schema 3→4; do not point either command at the only copy of a world. See [owner installation and rollback](deploy/INSTALL-LIVING.md) for concrete backup, startup, API and rollback steps, including environment settings. The frontend adds only observer fields and portable save decoding; it introduces no new persisted schema beyond the preceding schema 4. Existing IDs, brains, learned weights, family/relationship records, memories, discoveries and modified terrain are never replaced by the demo checkpoint.
 
-The snapshot covers only its recorded 80×80 viewport, and detailed evidence for one resident. The demo/live service supplies new views; the capture does not invent terrain beyond its coverage. Generated animation frames have subtle shape variation. Only adjacent confirmed movement is interpolated; larger changes snap because intermediate paths are unavailable. Confirmed travel takes precedence over the destination task's work/rest pose; carrying art is limited to inspected wood inventory. Incomplete shelter stages remain unused because the API does not expose them. Biome decoration uses the API's representative chunk biome. Cosmetic motion respects reduced motion and has a pause control. The renderer caps visual updates at 30 Hz. New/changed chunks still need rasterization; fixed-resolution terrain can soften at high zoom. Performance measurements are machine-specific, with synthetic pan, zoom and follow separated from live evidence.
+## Art, physics and provenance
 
-Physical phones, assistive screen readers, native 200% browser zoom, RTL/localization, all canvas-background contrast combinations and owner installation were not independently checked. No change was deployed to the owner's VPS. IMD publication is a separate review preview, recorded in `artifacts/overhaul/publication.json` when available.
+[Art integration](docs/art/INTEGRATION.md) describes the 36 character and 32 environmental sprites, transparent gutters, common foot anchors, supplied input hashes, animation gates, mirroring and licenses. The model sheet is at `web/public/art/model.webp` and is linked from Help. The runtime uses the API's actual per-tile biomes, connected water neighbours, material-progress sites and resource/store contents. It does not stamp resource-bearing decorative islands or bridges into walkable tiles.
 
-Repository source: https://github.com/kilicsln/stratoks, pinned at the commit above, plus the earlier accepted art contribution. Existing recovery/deployment/science documents remain under `docs/`, `deploy/` and `artifacts/phase2b/`.
+[Living rules](server/docs/LIVING.md) document the designed recipes, tool wear, fish stock limits/regrowth, storage, construction, exposure and survival rules. [Frontend contract](docs/living/FRONTEND.md) explains the demo history, engine integration and state-to-animation mapping. [DESIGN.md](DESIGN.md) documents the final implemented interface system.
 
-Licenses: [client and artwork](docs/licenses/client-and-art.txt), [Manrope](docs/licenses/manrope.txt), [dependency notices](web/public/licenses/THIRD_PARTY_NOTICES.txt), [Better Interface / Impeccable guidance](docs/licenses/better-interface.txt). Original backend and scientific notices remain in place.
+The rejected rabbit media, old share cards and compiled archived observer have been removed, including historical screenshot binaries. Their old numerical JSON/TAP measurements remain historical data, not evidence for this revision. Current media and worker observations are in `artifacts/living-interface/`; [MEDIA.md](MEDIA.md) identifies them. Existing original art sources under `docs/living/source/` remain intact.
+
+## Validation
+
+The actual commands, browser results, six-domain Better Interface review, fixes and limitations are in [validation](artifacts/living-interface/VALIDATION.md), with raw JSON/TAP, desktop/mobile screenshots and recordings. These are contributor observations, not independent certification.
+
+Reproduce meaningful checks after building:
+
+```sh
+node --test --test-concurrency=2 tests/expanse.test.js tests/living.test.js tests/living-interface.test.js
+node tools/living/demo-checkpoint.mjs 2 12000 test/scratch/reproduced
+node web/scripts/living-check.mjs
+node .imd/reads/skills/design-critic/scripts/taste.mjs --out test/scratch/taste
+```
+
+`living-check.mjs` owns and closes a local subpath preview, tests the real export, and never contacts the owner VPS. Browser dependencies come from the existing frontend lockfile; install Chromium/WebKit with Playwright outside the submission. `IMD_PLAYWRIGHT` may name an external Playwright `index.mjs`. `STRATOKS_FFMPEG` may name a VP9 encoder. Atlas validation uses externally installed `sharp`, as described in the art integration document. Missing platform/browser tools are reported explicitly; no recording, timing or test result is inferred.
+
+## Remaining limits
+
+The supplied work/walk poses face southeast. Southwest work/walk uses mirroring; backward travel uses the supplied rear view. Some generated poses vary slightly in shape. There is no eight-direction work rig, growth-specific body art, exact-unit load depiction, unlit-house variant or catch-result API phase. The fish-on-hook catch pose is delivered but unused. Work-tool art is withheld if a resident has no held supported tool; engine construction can still proceed according to its designed rules.
+
+Only adjacent positions in consecutive engine ticks interpolate; skipped paths snap. A 96-chunk terrain cache and a 30 Hz visual cap bound rendering work, but newly exposed terrain can cause spikes and high zoom can soften cached paint. Learning histories and per-tick decisions are bounded; total simulation cost still grows with naturally growing populations. Local x64 CPU/RSS and emulated-browser results do not establish ARM VPS or physical-device performance. Native screen readers, physical phones, native 200% browser zoom and owner installation require further validation. No paid inference, live deployment or public-world write occurred.

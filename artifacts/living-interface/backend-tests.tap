@@ -1,0 +1,256 @@
+TAP version 13
+# Subtest: original 56x56 settlement terrain, IDs and coordinates are preserved
+ok 1 - original 56x56 settlement terrain, IDs and coordinates are preserved
+  ---
+  duration_ms: 35.428581
+  type: 'test'
+  ...
+# Subtest: extent is at least 16x the settlement and contains all four biomes with distinct physics
+ok 2 - extent is at least 16x the settlement and contains all four biomes with distinct physics
+  ---
+  duration_ms: 461.486021
+  type: 'test'
+  ...
+# Subtest: unvisited chunks generate reproducibly; revisited chunks keep modifications across save/load
+ok 3 - unvisited chunks generate reproducibly; revisited chunks keep modifications across save/load
+  ---
+  duration_ms: 89.84637
+  type: 'test'
+  ...
+# Subtest: no spawn traps: every initial creature can reach a large connected area
+ok 4 - no spawn traps: every initial creature can reach a large connected area
+  ---
+  duration_ms: 164.700138
+  type: 'test'
+  ...
+# Subtest: item and node accounting is conserved over a full simulation (no free resources)
+ok 5 - item and node accounting is conserved over a full simulation (no free resources)
+  ---
+  duration_ms: 3634.550483
+  type: 'test'
+  ...
+# Subtest: restart is exact: save/load mid-run equals an uninterrupted run
+ok 6 - restart is exact: save/load mid-run equals an uninterrupted run
+  ---
+  duration_ms: 3455.976913
+  type: 'test'
+  ...
+# Subtest: outcome model, episodic memory and knowledge stay bounded
+ok 7 - outcome model, episodic memory and knowledge stay bounded
+  ---
+  duration_ms: 2975.151615
+  type: 'test'
+  ...
+# Subtest: outcome model learns from transitions with shrinking uncertainty; planner chains on learned produced items only
+ok 8 - outcome model learns from transitions with shrinking uncertainty; planner chains on learned produced items only
+  ---
+  duration_ms: 0.873053
+  type: 'test'
+  ...
+# Subtest: planner compares all root affordances and does not enumerate away later primitive branches
+ok 9 - planner compares all root affordances and does not enumerate away later primitive branches
+  ---
+  duration_ms: 14.215781
+  type: 'test'
+  ...
+# Subtest: energy costs block gathering, shelter construction and attacks without allowing negative energy
+ok 10 - energy costs block gathering, shelter construction and attacks without allowing negative energy
+  ---
+  duration_ms: 6.541932
+  type: 'test'
+  ...
+# Subtest: shelter choices and mb features use only observed or individually remembered shelters
+ok 11 - shelter choices and mb features use only observed or individually remembered shelters
+  ---
+  duration_ms: 6.37774
+  type: 'test'
+  ...
+# Subtest: shelter materials fit the inventory limit and normal gather actions can build one
+ok 12 - shelter materials fit the inventory limit and normal gather actions can build one
+  ---
+  duration_ms: 3.7649
+  type: 'test'
+  ...
+# Subtest: share affordances depend on observed neighbor data, and exhaustion deaths are attributed
+ok 13 - share affordances depend on observed neighbor data, and exhaustion deaths are attributed
+  ---
+  duration_ms: 4.929385
+  type: 'test'
+  ...
+# Subtest: followers pay terrain movement time and energy like other walkers
+ok 14 - followers pay terrain movement time and energy like other walkers
+  ---
+  duration_ms: 184.721722
+  type: 'test'
+  ...
+# Subtest: leadership and read-only world views leave persisted state unchanged
+ok 15 - leadership and read-only world views leave persisted state unchanged
+  ---
+  duration_ms: 34.196277
+  type: 'test'
+  ...
+# Subtest: affordances use only individually acquired knowledge (no omniscient coordinates)
+ok 16 - affordances use only individually acquired knowledge (no omniscient coordinates)
+  ---
+  duration_ms: 12.869341
+  type: 'test'
+  ...
+# Subtest: gathering requires reach; the hand_axe (learned combine) doubles wood yield per step and speeds it
+ok 17 - gathering requires reach; the hand_axe (learned combine) doubles wood yield per step and speeds it
+  ---
+  duration_ms: 5.904612
+  type: 'test'
+  ...
+# Subtest: fire: ignition needs fuel + flint struck with stone; warms, burns, spreads and is extinguished
+ok 18 - fire: ignition needs fuel + flint struck with stone; warms, burns, spreads and is extinguished
+  ---
+  duration_ms: 16.159667
+  type: 'test'
+  ...
+# Subtest: social: attacks need range, cost energy, injure; death only through the health rule; refusal and reputation
+ok 19 - social: attacks need range, cost energy, injure; death only through the health rule; refusal and reputation
+  ---
+  duration_ms: 13.096289
+  type: 'test'
+  ...
+# Subtest: salt water does not quench thirst; water barriers block walking (no teleport)
+ok 20 - salt water does not quench thirst; water barriers block walking (no teleport)
+  ---
+  duration_ms: 260.626639
+  type: 'test'
+  ...
+# Subtest: legacy Phase 2A snapshot migrates without resetting brains, ids or history; newer schema refused
+ok 21 - legacy Phase 2A snapshot migrates without resetting brains, ids or history; newer schema refused
+  ---
+  duration_ms: 611.976604
+  type: 'test'
+  ...
+# Subtest: backup, restore and rollback operate on copies and never discard data
+ok 22 - backup, restore and rollback operate on copies and never discard data
+  ---
+  duration_ms: 781.8385
+  type: 'test'
+  ...
+# Subtest: decisions connect mb-v1 and the planner and record prediction vs actual
+ok 23 - decisions connect mb-v1 and the planner and record prediction vs actual
+  ---
+  duration_ms: 3442.289485
+  type: 'test'
+  ...
+# Subtest: read-only service: runs without viewers, two clients see the same world, writes are rejected, restart resumes
+ok 24 - read-only service: runs without viewers, two clients see the same world, writes are rejected, restart resumes
+  ---
+  duration_ms: 479.551546
+  type: 'test'
+  ...
+# Subtest: GET /api/expanse/info leaves the saved world state unchanged
+ok 25 - GET /api/expanse/info leaves the saved world state unchanged
+  ---
+  duration_ms: 33.126458
+  type: 'test'
+  ...
+# Subtest: portable browser restore preserves the exact owner save representation and deterministic continuation
+ok 26 - portable browser restore preserves the exact owner save representation and deterministic continuation
+  ---
+  duration_ms: 320.296
+  type: 'test'
+  ...
+# Subtest: living viewport biome, climate, construction and store fields describe the same engine without exposing knowledge to agents
+ok 27 - living viewport biome, climate, construction and store fields describe the same engine without exposing knowledge to agents
+  ---
+  duration_ms: 268.619428
+  type: 'test'
+  ...
+# Subtest: shipped demo is a complete schema-4 world with natural histories and functional shelters across all biomes
+ok 28 - shipped demo is a complete schema-4 world with natural histories and functional shelters across all biomes
+  ---
+  duration_ms: 1040.989484
+  type: 'test'
+  ...
+# Subtest: fish stocks exist in every biome, sit on water and are reachable from a walkable shore
+ok 29 - fish stocks exist in every biome, sit on water and are reachable from a walkable shore
+  ---
+  duration_ms: 1135.470716
+  type: 'test'
+  ...
+# Subtest: fishing requires a line, time and energy; stock depletes, regrows exactly and never exceeds its limit; lines wear out
+ok 30 - fishing requires a line, time and energy; stock depletes, regrows exactly and never exceeds its limit; lines wear out
+  ---
+  duration_ms: 192.029211
+  type: 'test'
+  ...
+# Subtest: fish are perceived only from the shore, not across the whole perception radius
+ok 31 - fish are perceived only from the shore, not across the whole perception radius
+  ---
+  duration_ms: 210.250924
+  type: 'test'
+  ...
+# Subtest: construction needs the biome design's materials; stages follow delivered materials and labour; sites give no shelter
+ok 32 - construction needs the biome design's materials; stages follow delivered materials and labour; sites give no shelter
+  ---
+  duration_ms: 197.986523
+  type: 'test'
+  ...
+# Subtest: shelters decay with biome-specific rates, ruins give no protection and repair consumes a building material
+ok 33 - shelters decay with biome-specific rates, ruins give no protection and repair consumes a building material
+  ---
+  duration_ms: 7.43283
+  type: 'test'
+  ...
+# Subtest: shared stores: deposit and retrieve conserve items, respect capacity, and stale memories are corrected not trusted
+ok 34 - shared stores: deposit and retrieve conserve items, respect capacity, and stale memories are corrected not trusted
+  ---
+  duration_ms: 8.158265
+  type: 'test'
+  ...
+# Subtest: climate: desert heat raises thirst and walking cost, cold drains warmth, shelters insulate and shade
+ok 35 - climate: desert heat raises thirst and walking cost, cold drains warmth, shelters insulate and shade
+  ---
+  duration_ms: 267.813093
+  type: 'test'
+  ...
+# Subtest: conservation holds over long multi-seed runs including stores, construction, repair, fishing and tool wear
+ok 36 - conservation holds over long multi-seed runs including stores, construction, repair, fishing and tool wear
+  ---
+  duration_ms: 26909.919797
+  type: 'test'
+  ...
+# Subtest: render states follow engine state: fishing only while fishing, loads only when carried, construction only with progress
+ok 37 - render states follow engine state: fishing only while fishing, loads only when carried, construction only with progress
+  ---
+  duration_ms: 4846.942373
+  type: 'test'
+  ...
+# Subtest: agents explore beyond the original settlement, found shelters away from it and keep births/deaths
+ok 38 - agents explore beyond the original settlement, found shelters away from it and keep births/deaths
+  ---
+  duration_ms: 31672.235172
+  type: 'test'
+  ...
+# Subtest: same seed gives identical saves (determinism) and restart mid-run equals an uninterrupted run
+ok 39 - same seed gives identical saves (determinism) and restart mid-run equals an uninterrupted run
+  ---
+  duration_ms: 6720.926393
+  type: 'test'
+  ...
+# Subtest: real schema-3 save migrates to 4 on a copy: identity, learned data and memories kept, original preserved, restart and rollback work
+ok 40 - real schema-3 save migrates to 4 on a copy: identity, learned data and memories kept, original preserved, restart and rollback work
+  ---
+  duration_ms: 4334.651342
+  type: 'test'
+  ...
+# Subtest: the v3 fixture keeps running for a long time after migration with bounded memory per creature
+ok 41 - the v3 fixture keeps running for a long time after migration with bounded memory per creature
+  ---
+  duration_ms: 7268.985128
+  type: 'test'
+  ...
+1..41
+# tests 41
+# suites 0
+# pass 41
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 85778.547861

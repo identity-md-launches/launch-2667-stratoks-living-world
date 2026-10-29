@@ -14,13 +14,13 @@ export function viewport(e, x0, y0, w, h) {
   h = Math.min(MAX_H, b.y1 - b.y0, Math.max(1, finite(h, 32)));
   x0 = Math.max(b.x0, Math.min(b.x1 - w, finite(x0, 0)));
   y0 = Math.max(b.y0, Math.min(b.y1 - h, finite(y0, 0)));
-  const tiles = new Array(w * h);
-  for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) tiles[j * w + i] = e.tile(x0 + i, y0 + j);
+  const tiles = new Array(w * h), biomes = new Array(w * h);
+  for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) { tiles[j * w + i] = e.tile(x0 + i, y0 + j); biomes[j * w + i] = e.biome(x0 + i, y0 + j); }
   const nodes = e.nodesNear(x0 + (w >> 1), y0 + (h >> 1), Math.max(w, h) >> 1, false).filter((n) => n.x >= x0 && n.y >= y0 && n.x < x0 + w && n.y < y0 + h).map((n) => [n.id, n.kind, n.x, n.y, settleNode({ ...n }, e.tick).units]);
   // Tuple elements 0..5 are unchanged; 6 = activity state, 7 = phase, 8 = progress 0..1, 9 = carried load weight.
   const creatures = e.creaturesNear(x0 + (w >> 1), y0 + (h >> 1), Math.max(w, h) >> 1).filter((c) => c.x >= x0 && c.y >= y0 && c.x < x0 + w && c.y < y0 + h).map((c) => { const a = e.activity(c); return [c.id, c.name, c.x, c.y, c.act?.prim ?? null, Math.round(c.health), a.state, a.phase, a.progress, a.load]; });
   const inView = (s) => s.x >= x0 && s.y >= y0 && s.x < x0 + w && s.y < y0 + h;
-  return { v: VIEW_VERSION, tick: e.tick, x0, y0, w, h, tiles, biome: e.biome(x0 + (w >> 1), y0 + (h >> 1)), nodes, creatures,
+  return { v: VIEW_VERSION, tick: e.tick, x0, y0, w, h, tiles, biomes, biome: e.biome(x0 + (w >> 1), y0 + (h >> 1)), climate: { temperature: r(e.ambient(x0 + (w >> 1), y0 + (h >> 1))), rain: e.weather.rain, daylight: r(e.daylight()) }, nodes, creatures,
     fires: e.fires.filter((f) => f.x >= x0 && f.y >= y0 && f.x < x0 + w && f.y < y0 + h).map((f) => [f.id, f.x, f.y]),
     // Finished shelters only (old clients draw every entry as a home): [id, x, y, kind, integrity, storedUnits].
     shelters: e.shelters.filter((s) => inView(s) && s.complete !== false).map((s) => [s.id, s.x, s.y, s.kind ?? null, Math.round(s.integrity), units(s.store)]),
@@ -72,5 +72,7 @@ export function frame(e, { x = 0, y = 0, w = 48, h = 32, creature = null } = {})
     residents: e.creatures.map((c) => { const a = e.activity(c); return { id: c.id, name: c.name, x: c.x, y: c.y, health: Math.round(c.health), action: c.act?.prim ?? null, state: a.state, phase: a.phase, progress: a.progress, load: a.load, carrying: a.carrying, tools: a.tools, target: a.target }; }),
     inspector: creature === null ? null : inspect(e, creature),
     discoveries: e.discoveries.slice(-200), social: e.social.slice(-100),
+    // Observer navigation only; never part of an agent's observation or memory.
+    places: e.shelters.map(s => ({ id: s.id, x: s.x, y: s.y, biome: s.biome ?? e.biome(s.x,s.y), kind: s.kind, complete: s.complete !== false, integrity: Math.round(s.integrity), stored: units(s.store) })),
     limits: { residents: 'all living', discoveries: 200, social: 100, recentPlans: 8, observation: 'last decision, not current omniscient state' } };
 }

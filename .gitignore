@@ -23,6 +23,12 @@ artifacts/*
 *.pem
 
 # Interface evidence and patch: artifacts/overhaul/** has an explicit 4 MiB budget.
-# Runtime art, editable PNG sources and dist together have a separate 4 MiB budget.
+# The historical 4 MiB runtime allowance is superseded by the living budgets below.
 !artifacts/overhaul/
 !artifacts/overhaul/**
+
+# Living interface evidence: artifacts/living-interface/** has a 1664 KiB budget.
+# Runtime assets + checkpoint source/export have a separate 6.125 MiB path budget
+# across web/public/art/**, web/public/demo/** and dist/**; no dependencies here.
+!artifacts/living-interface/
+!artifacts/living-interface/**

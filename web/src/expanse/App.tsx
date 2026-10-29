@@ -9,22 +9,25 @@ import { ExpanseClient, validateServer } from "./transport";
 import type { Camera, Source, WorldFrame } from "./types";
 import recordedData from "./recording.json";
 import "./expanse.css";
+import "./living.css";
 const RECORDING = recordedData as unknown as WorldFrame;
 const STORAGE = "stratoks-expanse-server-v1";
 const VIEW_STORAGE = "stratoks-expanse-view-v2";
 const PUBLIC_SERVER = "https://stratoks.2-29-11-211.sslip.io";
 function initialSource(): Source {
   const q = new URLSearchParams(location.search);
-  if (q.get("demo") === "1") return { kind: "demo", seed: 20260101 };
+  if (q.get("recorded") === "1") return { kind: "recording" };
+  if (q.get("demo") === "1") return { kind: "demo", seed: 2 };
   try {
+    if (!q.has("server") && localStorage.getItem(VIEW_STORAGE) === "recording") return {kind:"recording"};
     const url =
       q.get("server") ??
-      (localStorage.getItem(VIEW_STORAGE) !== "recording"
+      (localStorage.getItem(VIEW_STORAGE) === "server"
         ? localStorage.getItem(STORAGE)
         : null);
     if (url) return { kind: "server", url: validateServer(url) };
   } catch {}
-  return { kind: "recording" };
+  return { kind: "demo", seed: 2 };
 }
 export default function ExpanseApp() {
   const [source, setSource] = useState<Source>(initialSource);
@@ -32,7 +35,7 @@ export default function ExpanseApp() {
   const [camera, setCamera] = useState<Camera>({
     x: 24,
     y: 24,
-    span: innerWidth < 600 ? 12 : 22,
+    span: innerWidth < 600 ? 9.5 : 22,
   });
   const [aspect, setAspect] = useState(1.5);
   const [selected, setSelected] = useState<number | null>(null);
@@ -45,7 +48,7 @@ export default function ExpanseApp() {
       matchMedia("(prefers-reduced-motion: reduce)").matches,
     );
   const [side, setSide] = useState<
-    "residents" | "inspector" | "records" | null
+    "residents" | "inspector" | "records" | "places" | null
   >(null);
   const [modal, setModal] = useState<"settings" | "help" | null>(null),
     [search, setSearch] = useState(""),
@@ -57,7 +60,9 @@ export default function ExpanseApp() {
     [retry, setRetry] = useState(0),
     [lastRead, setLastRead] = useState<number | null>(null);
   const [serverUrl, setServerUrl] = useState(PUBLIC_SERVER);
+  const [placeBiome,setPlaceBiome]=useState("all");
   const client = useRef<ExpanseClient | null>(null);
+  const viewportWidth = useRef(innerWidth);
   const display = frame ?? RECORDING,
     recorded = source.kind === "recording" || !frame;
   const query = useRef({ camera, aspect, bounds: display.bounds });
@@ -83,17 +88,19 @@ export default function ExpanseApp() {
             const q = new URLSearchParams(location.search);
             let preferred = false;
             try {
-              preferred = localStorage.getItem(VIEW_STORAGE) === "recording";
+              preferred = ["recording","demo","server"].includes(localStorage.getItem(VIEW_STORAGE) ?? "");
             } catch {}
             if (
-              c.startMode !== "recording" &&
-              source.kind === "recording" &&
+              (c.startMode === "live" || !c.startMode) &&
+              source.kind !== "server" &&
               !preferred &&
               q.get("demo") !== "1" &&
+              q.get("recorded") !== "1" &&
               !q.has("server")
             ) {
-              setSource({ kind: "server", url });
-              setStatus("connecting");
+              choose({ kind: "server", url }, false);
+            } else if(c.startMode === "recording" && !preferred && !q.has("server") && !q.has("demo") && !q.has("recorded")) {
+              choose({kind:"recording"}, false);
             }
           } catch {
             setError(
@@ -162,7 +169,7 @@ export default function ExpanseApp() {
       if (!closed)
         timer = setTimeout(
           read,
-          failed ? 5000 : source.kind === "demo" ? 500 : 1000,
+          failed ? 5000 : source.kind === "demo" ? 250 : 1000,
         );
     };
     read();
@@ -201,14 +208,23 @@ export default function ExpanseApp() {
     addEventListener("keydown", key);
     return () => removeEventListener("keydown", key);
   }, [side, modal, closePanel]);
-  const onAspect = useCallback((a: number) => setAspect(a), []);
-  function choose(s: Source) {
-    try {
+  const onAspect = useCallback((a: number, width: number) => {
+    // Keep a resident's screen size when a desktop inspector takes map width.
+    // Phone sheets change height only, so their zoom stays unchanged.
+    const ratio=width/viewportWidth.current;
+    viewportWidth.current=width;
+    if(Math.abs(ratio-1)>.001) setCamera(c=>({...c,span:c.span*ratio}));
+    setAspect(a);
+  }, []);
+  function choose(s: Source, remember = true) {
+    viewportWidth.current=innerWidth;
+    try { if(remember) {
       localStorage.setItem(
         VIEW_STORAGE,
-        s.kind === "server" ? "server" : "recording",
+        s.kind,
       );
       if (s.kind === "server") localStorage.setItem(STORAGE, s.url);
+    }
     } catch {}
     setFrame(null);
     setSource(s);
@@ -220,11 +236,11 @@ export default function ExpanseApp() {
     setError("");
     setLastRead(null);
     setStatus(s.kind === "recording" ? "idle" : "connecting");
-    setCamera({ x: 24, y: 24, span: innerWidth < 600 ? 12 : 22 });
+    setCamera({ x: 24, y: 24, span: innerWidth < 600 ? 9.5 : 22 });
     setSide(null);
     setModal(null);
   }
-  const demo = () => choose({ kind: "demo", seed: 20260101 });
+  const demo = () => choose({ kind: "demo", seed: 2 });
   function move(c: Camera) {
     setFollowing(false);
     setCamera(clampCamera(c, display.bounds, aspect));
@@ -282,8 +298,7 @@ export default function ExpanseApp() {
       </a>
       <header className="exp-header">
         <a className="exp-brand" href="#" aria-label="Stratoks home">
-          <Portrait size={40} />
-          <span>STRATOKS</span>
+          <img className="exp-logo" src={`${import.meta.env.BASE_URL}logo.svg`} alt="STRATOKS" width="162" height="40" />
         </a>
         <button
           className="exp-world-choice"
@@ -364,9 +379,9 @@ export default function ExpanseApp() {
               <span className="exp-leaf-mark" aria-hidden="true">
                 <Icon name="leaf" size={20} />
               </span>
-              <h1>The Expanse</h1>
+              <h1>A world taking root</h1>
             </div>
-            <p>A little world, unfolding.</p>
+            <p>{BIOME_NAMES[display.view.biome] ?? "The Expanse"}{display.view.climate ? ` · ${display.view.climate.temperature} °C${display.view.climate.rain ? " · Rain" : ""}` : " · Recorded terrain"}</p>
             <div className="exp-scene-actions">
               {recorded && (
                 <button
@@ -381,7 +396,7 @@ export default function ExpanseApp() {
                 </button>
               )}
               <button
-                className="exp-button"
+                className={`exp-button ${!recorded ? "primary" : ""}`}
                 onClick={() => toggle("residents")}
               >
                 <Icon name="search" size={16} />
@@ -403,6 +418,9 @@ export default function ExpanseApp() {
               onClick={() => toggle("records")}
             >
               <Icon name="history" />
+            </button>
+            <button aria-label="Explore settlements" aria-pressed={side === "places"} onClick={() => toggle("places")}>
+              <Icon name="home" />
             </button>
             <span />
             <button
@@ -497,7 +515,7 @@ export default function ExpanseApp() {
             ) : source.kind === "demo" ? (
               <>
                 <Icon name="shield" size={17} />
-                <span>Private browser demo · resets on exit</span>
+                <span>Isolated demo · seed 2 · resets on exit</span>
                 <button
                   className="exp-text-button"
                   onClick={() => choose({ kind: "recording" })}
@@ -541,7 +559,7 @@ export default function ExpanseApp() {
                 ? "Residents"
                 : side === "records"
                   ? "World records"
-                  : "Resident inspector"
+                  : side === "places" ? "Settlements" : "Resident inspector"
             }
           >
             <div className="exp-panel-title">
@@ -647,6 +665,27 @@ export default function ExpanseApp() {
                   )}
                 </>
               )}
+              {side === "places" && (
+                <div className="exp-places">
+                  <p className="exp-small exp-muted">Structures from this world’s history. Travel here moves only your camera.</p>
+                  <label htmlFor="place-biome">Explore a biome</label>
+                  <select id="place-biome" value={placeBiome} onChange={e=>setPlaceBiome(e.target.value)}>
+                    <option value="all">All biomes</option>
+                    {Object.entries(BIOME_NAMES).map(([key,name])=><option key={key} value={key}>{name}</option>)}
+                  </select>
+                  {['temperate','arid','cold','coast'].filter(b=>placeBiome==='all'||placeBiome===b).map(b=>{
+                    const places=(display.places ?? []).filter(p=>p.biome===b);
+                    return <section key={b} className="exp-place-group">
+                      <h3><i style={{background:{temperate:'#729451',arid:'#d5bb82',cold:'#d2e2e3',coast:'#65b4b3'}[b]}} />{BIOME_NAMES[b]}</h3>
+                      <p className="exp-small exp-muted">{display.summary.byBiome[b] ?? 0} residents · {places.filter(p=>p.complete&&p.integrity>0).length} standing shelters</p>
+                      {places.length ? places.filter((p,i,a)=>a.findIndex(q=>Math.hypot(p.x-q.x,p.y-q.y)<10)===i).slice(0,8).map(p=><button key={p.id} className="exp-place" onClick={()=>{move({...camera,x:p.x+.5,y:p.y+.5,span:(innerWidth<600?10:18)*viewportWidth.current/innerWidth});closePanel();}}>
+                        <Icon name="home" size={18}/><span><strong>{p.kind.replaceAll('_',' ')} · #{p.id}</strong><span>{p.x}, {p.y} · {p.complete?(p.integrity>0?`${p.integrity}% integrity`:'Ruined'):'Under construction'} · {p.stored} stored</span></span><Icon name="chevron" size={16}/>
+                      </button>) : <p className="exp-small">No structures recorded here. Use the atlas to explore the wilderness.</p>}
+                    </section>;
+                  })}
+                  <p className="exp-small exp-muted">The atlas shows materialized terrain, which may include observer views. Agent knowledge is individual; inspect Perception to see it.</p>
+                </div>
+              )}
               {side === "records" && (
                 <div className="exp-records">
                   <p className="exp-small exp-muted">
@@ -672,6 +711,12 @@ export default function ExpanseApp() {
                       <dd>{display.summary.deaths}</dd>
                     </div>
                   </dl>
+                  {display.view.living && <dl className="exp-world-totals">
+                    <div><dt>Building sites</dt><dd>{display.summary.sites ?? "Unavailable"}</dd></div>
+                    <div><dt>Stored units</dt><dd>{display.summary.stored ?? "Unavailable"}</dd></div>
+                    <div><dt>Fish gathered</dt><dd>{display.summary.fishCaught ?? "Unavailable"}</dd></div>
+                    <div><dt>Standing shelters</dt><dd>{display.summary.standing ?? "Unavailable"}</dd></div>
+                  </dl>}
                   <details className="exp-details" open>
                     <summary>
                       Discoveries · latest {display.discoveries.length} / 200
@@ -790,6 +835,7 @@ export default function ExpanseApp() {
         <Modal title="A world to observe" onClose={() => setModal(null)}>
           <div className="exp-help">
             <Portrait size={96} />
+            <a href={`${import.meta.env.BASE_URL}art/model.webp`} target="_blank" rel="noreferrer">View the Stratok model sheet</a>
             <p>
               These creatures learn from the outcomes of their actions. Watch
               their lives unfold, then select a resident to inspect the
@@ -809,9 +855,9 @@ export default function ExpanseApp() {
             </p>
             <h3>Three separate views</h3>
             <p>
-              Live reads the owner’s server. Recorded preview is a frozen API
-              capture. The isolated demo runs privately in this browser and
-              resets on exit; it never writes to the shared world.
+              Live reads the owner’s server. Recorded preview is a frozen API capture.
+              The default isolated demo resumes seed 2 after 12,000 natural engine ticks,
+              then runs privately in this browser. It resets on exit and never writes to the shared world.
             </p>
             <button
               className="exp-button"
@@ -851,7 +897,7 @@ function WorldSettings({
     [error, setError] = useState("");
   return (
     <div className="exp-settings">
-      <p>One shared world, hosted by its owner. Viewing is read only.</p>
+      <p>Observe the owner’s world, or explore a separate browser simulation.</p>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -903,12 +949,12 @@ function WorldSettings({
         </button>
         <button
           className="exp-world-option"
-          onClick={() => onChoose({ kind: "demo", seed: 20260101 })}
+          onClick={() => onChoose({ kind: "demo", seed: 2 })}
         >
           <Icon name="leaf" />
           <span>
             <strong>Explore isolated demo</strong>
-            <span>Private, temporary simulation in this browser.</span>
+            <span>Resumes 12,000 natural ticks of seed 2. Resets on exit.</span>
           </span>
           <Icon name="chevron" size={16} />
         </button>

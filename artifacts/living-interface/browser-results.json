@@ -1,0 +1,6767 @@
+{
+  "date": "2026-10-29T16:37:17.469Z",
+  "mode": "actual production export + isolated schema-4 engine; no VPS access",
+  "browsers": [
+    {
+      "name": "Chromium",
+      "version": "156.0.8078.4"
+    },
+    {
+      "name": "WebKit",
+      "version": "27.2"
+    }
+  ],
+  "checks": [
+    {
+      "name": "actual 1280px biome recording",
+      "passed": true,
+      "evidence": "biomes-1280.webm"
+    },
+    {
+      "name": "actual 390px biome recording",
+      "passed": true,
+      "evidence": "biomes-390.webm"
+    },
+    {
+      "name": "natural fishing recording",
+      "passed": true,
+      "evidence": {
+        "resident": 116,
+        "tick": 12053
+      }
+    },
+    {
+      "name": "terrain picking across chunks 27.5,27.5",
+      "passed": true,
+      "evidence": {
+        "actualCamera": {
+          "span": 22,
+          "x": 26.313253012048193,
+          "y": 26.313253012048193
+        },
+        "selected": "26,26",
+        "note": "Minimap pixels are coarse; picking must match the actual camera transform."
+      }
+    },
+    {
+      "name": "terrain picking across chunks 28.5,28.5",
+      "passed": true,
+      "evidence": {
+        "actualCamera": {
+          "span": 22,
+          "x": 28,
+          "y": 28
+        },
+        "selected": "28,28",
+        "note": "Minimap pixels are coarse; picking must match the actual camera transform."
+      }
+    },
+    {
+      "name": "terrain picking across chunks -0.5,-0.5",
+      "passed": true,
+      "evidence": {
+        "actualCamera": {
+          "span": 22,
+          "x": -0.6746987951807171,
+          "y": -0.6746987951807171
+        },
+        "selected": "-1,-1",
+        "note": "Minimap pixels are coarse; picking must match the actual camera transform."
+      }
+    },
+    {
+      "name": "terrain picking across chunks -28.5,-28.5",
+      "passed": true,
+      "evidence": {
+        "actualCamera": {
+          "span": 22,
+          "x": -29.34939759036145,
+          "y": -29.34939759036145
+        },
+        "selected": "-30,-30",
+        "note": "Minimap pixels are coarse; picking must match the actual camera transform."
+      }
+    },
+    {
+      "name": "terrain picking across chunks 56.5,-28.5",
+      "passed": true,
+      "evidence": {
+        "actualCamera": {
+          "span": 22,
+          "x": 54.98795180722891,
+          "y": -29.34939759036145
+        },
+        "selected": "54,-30",
+        "note": "Minimap pixels are coarse; picking must match the actual camera transform."
+      }
+    },
+    {
+      "name": "resident sprite picking",
+      "passed": true,
+      "evidence": 1
+    },
+    {
+      "name": "download inspector evidence",
+      "passed": true,
+      "evidence": {
+        "id": 1,
+        "plans": 8
+      }
+    },
+    {
+      "name": "reduced motion enabled",
+      "passed": true,
+      "evidence": "CSS and renderer stop cosmetic interpolation; the simulation keeps running"
+    },
+    {
+      "name": "invalid live URL and modal keyboard recovery",
+      "passed": true,
+      "evidence": "inline validation; Escape restores focus"
+    },
+    {
+      "name": "recorded mode remains truthful",
+      "passed": true,
+      "evidence": "frozen owner capture; no living actions guessed"
+    },
+    {
+      "name": "demo reopening isolates its state",
+      "passed": true,
+      "evidence": "resumes supplied checkpoint, never owner data"
+    },
+    {
+      "name": "unavailable live access is labeled",
+      "passed": true,
+      "evidence": "failed read keeps recorded preview, offers reconnect; no simulated live state"
+    },
+    {
+      "name": "owner startup configuration and explicit source precedence",
+      "passed": true,
+      "evidence": "live/recorded config honored; ?demo and remembered demo override it; failed live read never displays private demo as live"
+    },
+    {
+      "name": "responsive primary interactions",
+      "passed": true,
+      "evidence": "12 layouts; real search, follow, selection, inspector, minimap and settlements"
+    }
+  ],
+  "layouts": [
+    {
+      "browser": "Chromium",
+      "width": 390,
+      "height": 844,
+      "readyMs": 2092,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 20.526315789473685,
+        "after": 20.526315789473685
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "Chromium",
+      "width": 320,
+      "height": 568,
+      "readyMs": 1833,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 16.842105263157894,
+        "after": 16.842105263157894
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "Chromium",
+      "width": 390,
+      "height": 600,
+      "readyMs": 1726,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 20.526315789473685,
+        "after": 20.526315789473685
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "Chromium",
+      "width": 667,
+      "height": 390,
+      "readyMs": 1892,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 15.159090909090908,
+        "after": 15.159090909090908
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "Chromium",
+      "width": 851,
+      "height": 650,
+      "readyMs": 1985,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 19.340909090909086,
+        "after": 19.340909090909086
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "Chromium",
+      "width": 1440,
+      "height": 900,
+      "readyMs": 1583,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 32.72727272727272,
+        "after": 32.72727272727272
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "WebKit",
+      "width": 390,
+      "height": 844,
+      "readyMs": 6197,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 20.526315789473685,
+        "after": 20.526315789473685
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "WebKit",
+      "width": 320,
+      "height": 568,
+      "readyMs": 5368,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 16.842105263157894,
+        "after": 16.842105263157894
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "WebKit",
+      "width": 390,
+      "height": 600,
+      "readyMs": 5598,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 20.526315789473685,
+        "after": 20.526315789473685
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "WebKit",
+      "width": 667,
+      "height": 390,
+      "readyMs": 5874,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 15.159090909090908,
+        "after": 15.159090909090908
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "WebKit",
+      "width": 851,
+      "height": 650,
+      "readyMs": 5847,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 19.340909090909086,
+        "after": 19.340909090909086
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    },
+    {
+      "browser": "WebKit",
+      "width": 1440,
+      "height": 900,
+      "readyMs": 6666,
+      "searchEmpty": true,
+      "searchClear": true,
+      "resident": 28,
+      "follow": true,
+      "inspectorScale": {
+        "before": 32.72727272727272,
+        "after": 32.72727272727272
+      },
+      "keyboardPan": true,
+      "minimapKeyboard": true,
+      "biomeFilter": "desert shade · #25\n67, -7 · 82% integrity · 29 stored",
+      "axeViolations": []
+    }
+  ],
+  "performance": [
+    {
+      "phase": "actual island wilderness after biome navigation",
+      "width": 1280,
+      "samples": 120,
+      "medianMs": 1.2000000476837158,
+      "p95Ms": 2.5,
+      "maxMs": 107.39999985694885,
+      "drawn": 20,
+      "culled": 173,
+      "terrainChunks": 96,
+      "terrainBuilds": 186,
+      "dpr": 1,
+      "workerTickMs": 19.5
+    },
+    {
+      "phase": "actual island wilderness after biome navigation",
+      "width": 390,
+      "samples": 120,
+      "medianMs": 1.0999999046325684,
+      "p95Ms": 2.299999952316284,
+      "maxMs": 113.70000004768372,
+      "drawn": 15,
+      "culled": 189,
+      "terrainChunks": 96,
+      "terrainBuilds": 191,
+      "dpr": 2,
+      "workerTickMs": 31.5
+    },
+    {
+      "phase": "desktop idle with real 156-resident worker",
+      "width": 1440,
+      "samples": 120,
+      "medianMs": 1.7999999523162842,
+      "p95Ms": 3,
+      "maxMs": 58.299999952316284,
+      "drawn": 333,
+      "culled": 213,
+      "terrainChunks": 96,
+      "terrainBuilds": 225,
+      "dpr": 1,
+      "workerTickMs": 18.4
+    },
+    {
+      "phase": "desktop keyboard pan",
+      "width": 1440,
+      "samples": 120,
+      "medianMs": 2.1000001430511475,
+      "p95Ms": 28.299999952316284,
+      "maxMs": 42.09999990463257,
+      "drawn": 331,
+      "culled": 216,
+      "terrainChunks": 96,
+      "terrainBuilds": 225,
+      "dpr": 1,
+      "workerTickMs": 25.4
+    }
+  ],
+  "biomes": [
+    {
+      "biome": "temperate",
+      "width": 1280,
+      "height": 800,
+      "tick": 12011,
+      "anchor": {
+        "id": 70,
+        "x": 19,
+        "y": 66,
+        "biome": "temperate",
+        "kind": "timber_home",
+        "complete": true,
+        "integrity": 86,
+        "stored": 24
+      },
+      "viewport": {
+        "x": -8,
+        "y": 39,
+        "w": 52,
+        "h": 52
+      },
+      "tileCounts": {
+        "0": 929,
+        "1": 191,
+        "2": 907,
+        "3": 60,
+        "4": 3,
+        "8": 614
+      },
+      "resourceKinds": [
+        "stone",
+        "bush",
+        "deadfall",
+        "scrub",
+        "tree",
+        "fish",
+        "driftwood"
+      ],
+      "shelters": [
+        [
+          4,
+          23,
+          41,
+          "timber_home",
+          97,
+          37
+        ],
+        [
+          5,
+          29,
+          40,
+          "timber_home",
+          69,
+          28
+        ],
+        [
+          7,
+          41,
+          40,
+          "timber_home",
+          72,
+          40
+        ],
+        [
+          8,
+          11,
+          40,
+          "timber_home",
+          72,
+          40
+        ],
+        [
+          15,
+          33,
+          58,
+          "timber_home",
+          86,
+          24
+        ],
+        [
+          24,
+          25,
+          58,
+          "timber_home",
+          88,
+          40
+        ],
+        [
+          27,
+          0,
+          40,
+          "timber_home",
+          86,
+          40
+        ],
+        [
+          29,
+          -4,
+          51,
+          "timber_home",
+          87,
+          22
+        ],
+        [
+          32,
+          23,
+          64,
+          "timber_home",
+          87,
+          40
+        ],
+        [
+          40,
+          12,
+          69,
+          "timber_home",
+          95,
+          30
+        ],
+        [
+          41,
+          11,
+          55,
+          "timber_home",
+          97,
+          12
+        ],
+        [
+          45,
+          39,
+          72,
+          "timber_home",
+          94,
+          1
+        ],
+        [
+          46,
+          42,
+          61,
+          "timber_home",
+          83,
+          15
+        ],
+        [
+          56,
+          -8,
+          40,
+          "timber_home",
+          81,
+          10
+        ],
+        [
+          59,
+          26,
+          49,
+          "timber_home",
+          82,
+          9
+        ],
+        [
+          60,
+          31,
+          51,
+          "timber_home",
+          82,
+          13
+        ],
+        [
+          70,
+          19,
+          66,
+          "timber_home",
+          86,
+          24
+        ],
+        [
+          73,
+          29,
+          77,
+          "timber_home",
+          94,
+          12
+        ],
+        [
+          80,
+          19,
+          74,
+          "timber_home",
+          94,
+          0
+        ],
+        [
+          83,
+          11,
+          61,
+          "timber_home",
+          93,
+          2
+        ]
+      ],
+      "sites": [],
+      "stores": [
+        {
+          "shelter": 4,
+          "x": 23,
+          "y": 41,
+          "items": {
+            "stone": 25,
+            "fiber": 1,
+            "stick": 7,
+            "wood": 4
+          }
+        },
+        {
+          "shelter": 5,
+          "x": 29,
+          "y": 40,
+          "items": {
+            "wood": 20,
+            "stone": 7,
+            "stick": 1
+          }
+        },
+        {
+          "shelter": 7,
+          "x": 41,
+          "y": 40,
+          "items": {
+            "wood": 34,
+            "flint": 2,
+            "stone": 3,
+            "fiber": 1
+          }
+        },
+        {
+          "shelter": 8,
+          "x": 11,
+          "y": 40,
+          "items": {
+            "stone": 20,
+            "stick": 5,
+            "wood": 11,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 15,
+          "x": 33,
+          "y": 58,
+          "items": {
+            "stick": 5,
+            "fiber": 3,
+            "wood": 16
+          }
+        },
+        {
+          "shelter": 24,
+          "x": 25,
+          "y": 58,
+          "items": {
+            "wood": 33,
+            "stick": 5,
+            "stone": 2
+          }
+        },
+        {
+          "shelter": 27,
+          "x": 0,
+          "y": 40,
+          "items": {
+            "stone": 21,
+            "wood": 9,
+            "stick": 6,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 29,
+          "x": -4,
+          "y": 51,
+          "items": {
+            "stick": 4,
+            "stone": 9,
+            "wood": 5,
+            "fiber": 3,
+            "fish": 1
+          }
+        },
+        {
+          "shelter": 32,
+          "x": 23,
+          "y": 64,
+          "items": {
+            "wood": 27,
+            "stick": 9,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 40,
+          "x": 12,
+          "y": 69,
+          "items": {
+            "wood": 21,
+            "stick": 7,
+            "fiber": 1,
+            "stone": 1
+          }
+        },
+        {
+          "shelter": 41,
+          "x": 11,
+          "y": 55,
+          "items": {
+            "stick": 9,
+            "wood": 3
+          }
+        },
+        {
+          "shelter": 45,
+          "x": 39,
+          "y": 72,
+          "items": {
+            "wood": 1
+          }
+        },
+        {
+          "shelter": 46,
+          "x": 42,
+          "y": 61,
+          "items": {
+            "wood": 15
+          }
+        },
+        {
+          "shelter": 56,
+          "x": -8,
+          "y": 40,
+          "items": {
+            "stone": 5,
+            "wood": 3,
+            "fiber": 2
+          }
+        },
+        {
+          "shelter": 59,
+          "x": 26,
+          "y": 49,
+          "items": {
+            "stone": 3,
+            "wood": 6
+          }
+        },
+        {
+          "shelter": 60,
+          "x": 31,
+          "y": 51,
+          "items": {
+            "stick": 4,
+            "wood": 9
+          }
+        },
+        {
+          "shelter": 70,
+          "x": 19,
+          "y": 66,
+          "items": {
+            "stick": 7,
+            "wood": 15,
+            "stone": 2
+          }
+        },
+        {
+          "shelter": 73,
+          "x": 29,
+          "y": 77,
+          "items": {
+            "wood": 6,
+            "stick": 3,
+            "stone": 3
+          }
+        },
+        {
+          "shelter": 83,
+          "x": 11,
+          "y": 61,
+          "items": {
+            "wood": 2
+          }
+        }
+      ],
+      "states": [
+        {
+          "id": 11,
+          "x": 7,
+          "y": 57,
+          "state": "starting",
+          "phase": null,
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 11,
+            "y": 61
+          }
+        },
+        {
+          "id": 16,
+          "x": 26,
+          "y": 62,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "wood": 1,
+            "stick": 1
+          },
+          "tools": [
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 17,
+          "x": 22,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 18,
+          "x": -1,
+          "y": 43,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 19,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "berry": 2
+          },
+          "tools": [
+            "stone_club",
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 26,
+          "x": 12,
+          "y": 65,
+          "state": "drink",
+          "phase": "use",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 12,
+            "y": 64
+          }
+        },
+        {
+          "id": 31,
+          "x": 12,
+          "y": 69,
+          "state": "rest",
+          "phase": "rest",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 33,
+          "x": 24,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 37,
+          "x": 29,
+          "y": 40,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "wood": 2,
+            "stone": 1
+          },
+          "tools": [
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 39,
+          "x": 24,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 40,
+          "x": 28,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 31,
+            "y": 65
+          }
+        },
+        {
+          "id": 43,
+          "x": 21,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 12,
+          "carrying": {
+            "wood": 5
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 47,
+          "x": 24,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 49,
+          "x": 18,
+          "y": 67,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 19,
+            "y": 65
+          }
+        },
+        {
+          "id": 52,
+          "x": 21,
+          "y": 64,
+          "state": "inspect",
+          "phase": "inspect",
+          "load": 4,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 20,
+            "y": 63
+          }
+        },
+        {
+          "id": 54,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 60,
+          "x": 25,
+          "y": 61,
+          "state": "social",
+          "phase": "socialize",
+          "load": 4,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 62,
+          "x": 39,
+          "y": 39,
+          "state": "travel",
+          "phase": "travel",
+          "load": 8,
+          "carrying": {
+            "stone": 3,
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 41,
+            "y": 40
+          }
+        },
+        {
+          "id": 66,
+          "x": 25,
+          "y": 58,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 68,
+          "x": 23,
+          "y": 57,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 70,
+          "x": 25,
+          "y": 62,
+          "state": "social",
+          "phase": "socialize",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 71,
+          "x": 12,
+          "y": 67,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "wood": 1,
+            "stick": 1,
+            "berry": 1
+          },
+          "tools": [
+            "fish_line",
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 72,
+          "x": 27,
+          "y": 62,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 74,
+          "x": 22,
+          "y": 63,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 23,
+            "y": 64
+          }
+        },
+        {
+          "id": 77,
+          "x": 26,
+          "y": 59,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 25,
+            "y": 58
+          }
+        },
+        {
+          "id": 84,
+          "x": 1,
+          "y": 42,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "fish_line"
+          ],
+          "target": {
+            "x": 10,
+            "y": 39
+          }
+        },
+        {
+          "id": 86,
+          "x": 8,
+          "y": 40,
+          "state": "travel",
+          "phase": "travel",
+          "load": 8,
+          "carrying": {
+            "wood": 1,
+            "stone": 1,
+            "shellfish": 2
+          },
+          "tools": [
+            "fish_line",
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 88,
+          "x": -4,
+          "y": 51,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "shellfish": 1
+          },
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 89,
+          "x": 24,
+          "y": 63,
+          "state": "travel",
+          "phase": "travel",
+          "load": 4,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 23,
+            "y": 64
+          }
+        },
+        {
+          "id": 90,
+          "x": 22,
+          "y": 63,
+          "state": "starting",
+          "phase": null,
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 20,
+            "y": 63
+          }
+        },
+        {
+          "id": 91,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 94,
+          "x": 31,
+          "y": 52,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 30,
+            "y": 51
+          }
+        },
+        {
+          "id": 95,
+          "x": 36,
+          "y": 40,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 101,
+          "x": 30,
+          "y": 64,
+          "state": "gather",
+          "phase": "gather",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 31,
+            "y": 65
+          }
+        },
+        {
+          "id": 108,
+          "x": 21,
+          "y": 63,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 109,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 4,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 112,
+          "x": 19,
+          "y": 66,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1,
+            "stick": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 114,
+          "x": 21,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 20,
+            "y": 61
+          }
+        },
+        {
+          "id": 115,
+          "x": 23,
+          "y": 39,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 116,
+          "x": 26,
+          "y": 49,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 118,
+          "x": 0,
+          "y": 40,
+          "state": "travel",
+          "phase": "travel",
+          "load": 6,
+          "carrying": {
+            "wood": 2,
+            "berry": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 0,
+            "y": 40
+          }
+        },
+        {
+          "id": 119,
+          "x": 27,
+          "y": 68,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 23,
+            "y": 64
+          }
+        },
+        {
+          "id": 124,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 4,
+          "carrying": {
+            "stone": 2
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 125,
+          "x": 13,
+          "y": 68,
+          "state": "rest",
+          "phase": "rest",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 127,
+          "x": 22,
+          "y": 64,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 20,
+            "y": 63
+          }
+        },
+        {
+          "id": 129,
+          "x": 22,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "fish_line",
+            "stone_club"
+          ],
+          "target": {
+            "x": 20,
+            "y": 60
+          }
+        },
+        {
+          "id": 130,
+          "x": 24,
+          "y": 66,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 17,
+            "y": 65
+          }
+        },
+        {
+          "id": 131,
+          "x": 21,
+          "y": 59,
+          "state": "drink",
+          "phase": "use",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 20,
+            "y": 58
+          }
+        },
+        {
+          "id": 132,
+          "x": 26,
+          "y": 59,
+          "state": "rest",
+          "phase": "rest",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 134,
+          "x": 21,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 10,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club",
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 137,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 138,
+          "x": 11,
+          "y": 40,
+          "state": "starting",
+          "phase": null,
+          "load": 9,
+          "carrying": {
+            "wood": 2,
+            "stone": 2
+          },
+          "tools": [
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 139,
+          "x": 26,
+          "y": 49,
+          "state": "starting",
+          "phase": null,
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 27,
+            "y": 49
+          }
+        },
+        {
+          "id": 141,
+          "x": 23,
+          "y": 41,
+          "state": "store",
+          "phase": "store",
+          "load": 6,
+          "carrying": {
+            "stone": 3
+          },
+          "tools": [],
+          "target": {
+            "x": 23,
+            "y": 41
+          }
+        },
+        {
+          "id": 142,
+          "x": 15,
+          "y": 40,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 26,
+            "y": 40
+          }
+        },
+        {
+          "id": 143,
+          "x": -4,
+          "y": 51,
+          "state": "eat",
+          "phase": "use",
+          "load": 1,
+          "carrying": {
+            "berry": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 144,
+          "x": 22,
+          "y": 63,
+          "state": "travel",
+          "phase": "travel",
+          "load": 4,
+          "carrying": {
+            "wood": 1,
+            "fiber": 2
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 146,
+          "x": 25,
+          "y": 58,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 148,
+          "x": -7,
+          "y": 43,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "wood": 2,
+            "fiber": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 156,
+          "x": 25,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 158,
+          "x": 22,
+          "y": 64,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {
+            "stick": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 160,
+          "x": 12,
+          "y": 69,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {
+            "stick": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 161,
+          "x": 32,
+          "y": 60,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 33,
+            "y": 58
+          }
+        },
+        {
+          "id": 168,
+          "x": 24,
+          "y": 63,
+          "state": "rest",
+          "phase": "rest",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 169,
+          "x": 25,
+          "y": 63,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 31,
+            "y": 65
+          }
+        }
+      ]
+    },
+    {
+      "biome": "arid",
+      "width": 1280,
+      "height": 800,
+      "tick": 12018,
+      "anchor": {
+        "id": 54,
+        "x": 98,
+        "y": 24,
+        "biome": "arid",
+        "kind": "desert_shade",
+        "complete": true,
+        "integrity": 92,
+        "stored": 4
+      },
+      "viewport": {
+        "x": 71,
+        "y": -3,
+        "w": 52,
+        "h": 52
+      },
+      "tileCounts": {
+        "1": 143,
+        "4": 1769,
+        "9": 792
+      },
+      "resourceKinds": [
+        "scrub",
+        "deadfall",
+        "stone",
+        "fish",
+        "cactus",
+        "flint"
+      ],
+      "shelters": [
+        [
+          33,
+          79,
+          7,
+          "desert_shade",
+          84,
+          0
+        ],
+        [
+          34,
+          71,
+          13,
+          "desert_shade",
+          82,
+          31
+        ],
+        [
+          42,
+          87,
+          15,
+          "desert_shade",
+          92,
+          11
+        ],
+        [
+          48,
+          98,
+          13,
+          "desert_shade",
+          88,
+          1
+        ],
+        [
+          50,
+          87,
+          29,
+          "desert_shade",
+          80,
+          10
+        ],
+        [
+          54,
+          98,
+          24,
+          "desert_shade",
+          92,
+          4
+        ]
+      ],
+      "sites": [
+        {
+          "id": 28,
+          "x": 72,
+          "y": -1,
+          "kind": "desert_shade",
+          "stage": 2,
+          "materials": {
+            "fiber": 3,
+            "stone": 1,
+            "stick": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 20,
+          "workNeed": 24
+        },
+        {
+          "id": 53,
+          "x": 85,
+          "y": -3,
+          "kind": "desert_shade",
+          "stage": 0,
+          "materials": {
+            "stone": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 4,
+          "workNeed": 24
+        },
+        {
+          "id": 58,
+          "x": 90,
+          "y": -3,
+          "kind": "desert_shade",
+          "stage": 0,
+          "materials": {
+            "stone": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 4,
+          "workNeed": 24
+        },
+        {
+          "id": 86,
+          "x": 73,
+          "y": 27,
+          "kind": "desert_shade",
+          "stage": 1,
+          "materials": {
+            "stone": 1,
+            "fiber": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 8,
+          "workNeed": 24
+        }
+      ],
+      "stores": [
+        {
+          "shelter": 34,
+          "x": 71,
+          "y": 13,
+          "items": {
+            "flint": 4,
+            "stone": 9,
+            "wood": 14,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 42,
+          "x": 87,
+          "y": 15,
+          "items": {
+            "stone": 5,
+            "flint": 5,
+            "wood": 1
+          }
+        },
+        {
+          "shelter": 48,
+          "x": 98,
+          "y": 13,
+          "items": {
+            "fiber": 1
+          }
+        },
+        {
+          "shelter": 50,
+          "x": 87,
+          "y": 29,
+          "items": {
+            "stone": 6,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 54,
+          "x": 98,
+          "y": 24,
+          "items": {
+            "flint": 4
+          }
+        }
+      ],
+      "states": [
+        {
+          "id": 65,
+          "x": 87,
+          "y": 28,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {},
+          "tools": [
+            "stone_club",
+            "hand_axe",
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 76,
+          "x": 93,
+          "y": 23,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "stone": 1
+          },
+          "tools": [
+            "hand_axe",
+            "fish_line",
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 104,
+          "x": 87,
+          "y": 30,
+          "state": "travel",
+          "phase": "travel",
+          "load": 4,
+          "carrying": {
+            "fish": 1
+          },
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": {
+            "x": 94,
+            "y": 24
+          }
+        },
+        {
+          "id": 105,
+          "x": 71,
+          "y": 13,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        }
+      ]
+    },
+    {
+      "biome": "cold",
+      "width": 1280,
+      "height": 800,
+      "tick": 12025,
+      "anchor": {
+        "id": 23,
+        "x": 50,
+        "y": -8,
+        "biome": "cold",
+        "kind": "snow_refuge",
+        "complete": true,
+        "integrity": 93,
+        "stored": 40
+      },
+      "viewport": {
+        "x": 24,
+        "y": -35,
+        "w": 52,
+        "h": 52
+      },
+      "tileCounts": {
+        "0": 493,
+        "1": 203,
+        "4": 171,
+        "5": 386,
+        "6": 1094,
+        "7": 146,
+        "8": 26,
+        "9": 164,
+        "10": 21
+      },
+      "resourceKinds": [
+        "flint",
+        "stone",
+        "deadfall",
+        "lichen",
+        "tree",
+        "scrub",
+        "bush",
+        "fish",
+        "cactus"
+      ],
+      "shelters": [
+        [
+          10,
+          48,
+          14,
+          "timber_home",
+          74,
+          40
+        ],
+        [
+          11,
+          35,
+          6,
+          "timber_home",
+          72,
+          40
+        ],
+        [
+          14,
+          34,
+          -9,
+          "snow_refuge",
+          74,
+          40
+        ],
+        [
+          17,
+          42,
+          -19,
+          "snow_refuge",
+          69,
+          3
+        ],
+        [
+          20,
+          56,
+          3,
+          "timber_home",
+          81,
+          40
+        ],
+        [
+          22,
+          59,
+          13,
+          "timber_home",
+          80,
+          40
+        ],
+        [
+          23,
+          50,
+          -8,
+          "snow_refuge",
+          93,
+          40
+        ],
+        [
+          25,
+          67,
+          -7,
+          "desert_shade",
+          82,
+          29
+        ],
+        [
+          26,
+          24,
+          4,
+          "timber_home",
+          74,
+          10
+        ],
+        [
+          34,
+          71,
+          13,
+          "desert_shade",
+          82,
+          31
+        ],
+        [
+          55,
+          65,
+          -13,
+          "snow_refuge",
+          69,
+          3
+        ],
+        [
+          57,
+          65,
+          -20,
+          "snow_refuge",
+          90,
+          0
+        ],
+        [
+          61,
+          74,
+          -26,
+          "snow_refuge",
+          92,
+          0
+        ],
+        [
+          75,
+          46,
+          6,
+          "timber_home",
+          93,
+          3
+        ],
+        [
+          78,
+          38,
+          -1,
+          "timber_home",
+          91,
+          11
+        ],
+        [
+          93,
+          39,
+          -7,
+          "snow_refuge",
+          99,
+          0
+        ]
+      ],
+      "sites": [
+        {
+          "id": 28,
+          "x": 72,
+          "y": -1,
+          "kind": "desert_shade",
+          "stage": 2,
+          "materials": {
+            "fiber": 3,
+            "stone": 1,
+            "stick": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 20,
+          "workNeed": 24
+        },
+        {
+          "id": 35,
+          "x": 42,
+          "y": -30,
+          "kind": "snow_refuge",
+          "stage": 1,
+          "materials": {
+            "stone": 1,
+            "wood": 1
+          },
+          "need": {
+            "stone": 4,
+            "wood": 2
+          },
+          "work": 12,
+          "workNeed": 36
+        },
+        {
+          "id": 87,
+          "x": 24,
+          "y": -20,
+          "kind": "snow_refuge",
+          "stage": 0,
+          "materials": {
+            "wood": 1
+          },
+          "need": {
+            "stone": 4,
+            "wood": 2
+          },
+          "work": 6,
+          "workNeed": 36
+        }
+      ],
+      "stores": [
+        {
+          "shelter": 10,
+          "x": 48,
+          "y": 14,
+          "items": {
+            "wood": 18,
+            "flint": 8,
+            "stone": 14
+          }
+        },
+        {
+          "shelter": 11,
+          "x": 35,
+          "y": 6,
+          "items": {
+            "flint": 17,
+            "stone": 15,
+            "wood": 8
+          }
+        },
+        {
+          "shelter": 14,
+          "x": 34,
+          "y": -9,
+          "items": {
+            "flint": 12,
+            "wood": 17,
+            "stone": 10,
+            "fiber": 1
+          }
+        },
+        {
+          "shelter": 17,
+          "x": 42,
+          "y": -19,
+          "items": {
+            "flint": 3
+          }
+        },
+        {
+          "shelter": 20,
+          "x": 56,
+          "y": 3,
+          "items": {
+            "wood": 3,
+            "flint": 12,
+            "stone": 23,
+            "fiber": 2
+          }
+        },
+        {
+          "shelter": 22,
+          "x": 59,
+          "y": 13,
+          "items": {
+            "wood": 23,
+            "flint": 9,
+            "stone": 8
+          }
+        },
+        {
+          "shelter": 23,
+          "x": 50,
+          "y": -8,
+          "items": {
+            "flint": 8,
+            "stone": 25,
+            "wood": 7
+          }
+        },
+        {
+          "shelter": 25,
+          "x": 67,
+          "y": -7,
+          "items": {
+            "stone": 12,
+            "flint": 10,
+            "fiber": 2,
+            "wood": 5
+          }
+        },
+        {
+          "shelter": 26,
+          "x": 24,
+          "y": 4,
+          "items": {
+            "flint": 3,
+            "stone": 5,
+            "wood": 2
+          }
+        },
+        {
+          "shelter": 34,
+          "x": 71,
+          "y": 13,
+          "items": {
+            "flint": 4,
+            "stone": 9,
+            "wood": 14,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 55,
+          "x": 65,
+          "y": -13,
+          "items": {
+            "stone": 3
+          }
+        },
+        {
+          "shelter": 75,
+          "x": 46,
+          "y": 6,
+          "items": {
+            "stick": 1,
+            "wood": 1,
+            "stone": 1
+          }
+        },
+        {
+          "shelter": 78,
+          "x": 38,
+          "y": -1,
+          "items": {
+            "stone": 3,
+            "flint": 6,
+            "wood": 2
+          }
+        }
+      ],
+      "states": [
+        {
+          "id": 15,
+          "x": 57,
+          "y": -2,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "flint": 1,
+            "stone": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 20,
+          "x": 50,
+          "y": -8,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "wood": 1,
+            "flint": 1,
+            "stone": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 25,
+          "x": 35,
+          "y": 6,
+          "state": "rest",
+          "phase": "rest",
+          "load": 10,
+          "carrying": {
+            "stone": 4,
+            "wood": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 27,
+          "x": 50,
+          "y": -8,
+          "state": "rest",
+          "phase": "rest",
+          "load": 12,
+          "carrying": {
+            "stone": 5
+          },
+          "tools": [
+            "hand_axe",
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 35,
+          "x": 55,
+          "y": 2,
+          "state": "travel",
+          "phase": "travel",
+          "load": 8,
+          "carrying": {
+            "stone": 2,
+            "flint": 1
+          },
+          "tools": [
+            "hand_axe",
+            "stone_club"
+          ],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 38,
+          "x": 35,
+          "y": 7,
+          "state": "rest",
+          "phase": "rest",
+          "load": 6,
+          "carrying": {
+            "fiber": 1,
+            "wood": 2
+          },
+          "tools": [
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 48,
+          "x": 39,
+          "y": -7,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "stone": 2,
+            "flint": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 50,
+          "x": 58,
+          "y": -4,
+          "state": "drink",
+          "phase": "use",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 59,
+            "y": -5
+          }
+        },
+        {
+          "id": 51,
+          "x": 63,
+          "y": -3,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "stick": 2,
+            "flint": 1
+          },
+          "tools": [
+            "hand_axe",
+            "stone_club"
+          ],
+          "target": {
+            "x": 57,
+            "y": -2
+          }
+        },
+        {
+          "id": 53,
+          "x": 59,
+          "y": 13,
+          "state": "starting",
+          "phase": null,
+          "load": 11,
+          "carrying": {
+            "wood": 4
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 57,
+          "x": 37,
+          "y": 3,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 38,
+            "y": -1
+          }
+        },
+        {
+          "id": 58,
+          "x": 56,
+          "y": 3,
+          "state": "travel",
+          "phase": "travel",
+          "load": 9,
+          "carrying": {
+            "fiber": 2,
+            "stone": 2
+          },
+          "tools": [
+            "stone_club",
+            "hand_axe"
+          ],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 73,
+          "x": 35,
+          "y": -2,
+          "state": "drink",
+          "phase": "use",
+          "load": 3,
+          "carrying": {
+            "flint": 2
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 35,
+            "y": -2
+          }
+        },
+        {
+          "id": 75,
+          "x": 42,
+          "y": -19,
+          "state": "rest",
+          "phase": "rest",
+          "load": 8,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club",
+            "hand_axe",
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 79,
+          "x": 50,
+          "y": -4,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "fiber": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 96,
+          "x": 35,
+          "y": 6,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 97,
+          "x": 58,
+          "y": -4,
+          "state": "drink",
+          "phase": "use",
+          "load": 6,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 59,
+            "y": -5
+          }
+        },
+        {
+          "id": 99,
+          "x": 32,
+          "y": 7,
+          "state": "travel",
+          "phase": "travel",
+          "load": 7,
+          "carrying": {
+            "flint": 1,
+            "stone": 1
+          },
+          "tools": [
+            "hand_axe",
+            "stone_club"
+          ],
+          "target": {
+            "x": 29,
+            "y": 9
+          }
+        },
+        {
+          "id": 105,
+          "x": 71,
+          "y": 13,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 110,
+          "x": 36,
+          "y": 5,
+          "state": "drink",
+          "phase": "use",
+          "load": 5,
+          "carrying": {
+            "stone": 1,
+            "wood": 1
+          },
+          "tools": [
+            "hand_axe"
+          ],
+          "target": {
+            "x": 37,
+            "y": 5
+          }
+        },
+        {
+          "id": 121,
+          "x": 35,
+          "y": 6,
+          "state": "starting",
+          "phase": null,
+          "load": 2,
+          "carrying": {
+            "stone": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 36,
+            "y": 6
+          }
+        },
+        {
+          "id": 126,
+          "x": 55,
+          "y": 2,
+          "state": "travel",
+          "phase": "travel",
+          "load": 10,
+          "carrying": {
+            "stone": 3,
+            "wood": 1,
+            "fiber": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 133,
+          "x": 66,
+          "y": -3,
+          "state": "travel",
+          "phase": "travel",
+          "load": 8,
+          "carrying": {
+            "wood": 4
+          },
+          "tools": [],
+          "target": {
+            "x": 71,
+            "y": -6
+          }
+        },
+        {
+          "id": 140,
+          "x": 55,
+          "y": 0,
+          "state": "travel",
+          "phase": "travel",
+          "load": 11,
+          "carrying": {
+            "wood": 3,
+            "fiber": 1,
+            "stone": 2
+          },
+          "tools": [],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 150,
+          "x": 50,
+          "y": -8,
+          "state": "starting",
+          "phase": null,
+          "load": 3,
+          "carrying": {
+            "flint": 1,
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 78,
+            "y": -21
+          }
+        },
+        {
+          "id": 151,
+          "x": 68,
+          "y": -6,
+          "state": "rest",
+          "phase": "rest",
+          "load": 8,
+          "carrying": {
+            "wood": 3,
+            "flint": 2
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 153,
+          "x": 52,
+          "y": -4,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {
+            "stone": 1,
+            "stick": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 50,
+            "y": -4
+          }
+        },
+        {
+          "id": 155,
+          "x": 37,
+          "y": 4,
+          "state": "travel",
+          "phase": "travel",
+          "load": 8,
+          "carrying": {
+            "stone": 3,
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 38,
+            "y": 5
+          }
+        },
+        {
+          "id": 165,
+          "x": 56,
+          "y": 3,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1,
+            "fiber": 1
+          },
+          "tools": [],
+          "target": null
+        }
+      ]
+    },
+    {
+      "biome": "coast",
+      "width": 1280,
+      "height": 800,
+      "tick": 12032,
+      "anchor": {
+        "id": 21,
+        "x": -19,
+        "y": 43,
+        "biome": "coast",
+        "kind": "coast_hut",
+        "complete": true,
+        "integrity": 93,
+        "stored": 7
+      },
+      "viewport": {
+        "x": -45,
+        "y": 17,
+        "w": 52,
+        "h": 52
+      },
+      "tileCounts": {
+        "0": 1235,
+        "1": 24,
+        "2": 133,
+        "3": 217,
+        "4": 877,
+        "8": 218
+      },
+      "resourceKinds": [
+        "bush",
+        "shellfish",
+        "driftwood",
+        "scrub",
+        "deadfall",
+        "tree",
+        "stone",
+        "fish"
+      ],
+      "shelters": [
+        [
+          21,
+          -19,
+          43,
+          "coast_hut",
+          93,
+          7
+        ],
+        [
+          27,
+          0,
+          40,
+          "timber_home",
+          86,
+          40
+        ],
+        [
+          29,
+          -4,
+          51,
+          "timber_home",
+          87,
+          21
+        ],
+        [
+          30,
+          -12,
+          29,
+          "timber_home",
+          76,
+          6
+        ],
+        [
+          37,
+          -19,
+          51,
+          "coast_hut",
+          94,
+          1
+        ],
+        [
+          38,
+          -20,
+          32,
+          "timber_home",
+          67,
+          6
+        ],
+        [
+          43,
+          -5,
+          29,
+          "timber_home",
+          74,
+          27
+        ],
+        [
+          56,
+          -8,
+          40,
+          "timber_home",
+          81,
+          10
+        ],
+        [
+          64,
+          -40,
+          23,
+          "coast_hut",
+          89,
+          3
+        ],
+        [
+          66,
+          -30,
+          41,
+          "coast_hut",
+          95,
+          0
+        ],
+        [
+          72,
+          -33,
+          30,
+          "coast_hut",
+          81,
+          11
+        ]
+      ],
+      "sites": [
+        {
+          "id": 65,
+          "x": -45,
+          "y": 39,
+          "kind": "coast_hut",
+          "stage": 1,
+          "materials": {
+            "wood": 2
+          },
+          "need": {
+            "wood": 3,
+            "fiber": 2
+          },
+          "work": 11,
+          "workNeed": 28
+        },
+        {
+          "id": 89,
+          "x": -34,
+          "y": 52,
+          "kind": "coast_hut",
+          "stage": 1,
+          "materials": {
+            "fiber": 1,
+            "wood": 2
+          },
+          "need": {
+            "wood": 3,
+            "fiber": 2
+          },
+          "work": 16,
+          "workNeed": 28
+        },
+        {
+          "id": 91,
+          "x": -38,
+          "y": 44,
+          "kind": "coast_hut",
+          "stage": 1,
+          "materials": {
+            "wood": 1,
+            "fiber": 1
+          },
+          "need": {
+            "wood": 3,
+            "fiber": 2
+          },
+          "work": 11,
+          "workNeed": 28
+        }
+      ],
+      "stores": [
+        {
+          "shelter": 21,
+          "x": -19,
+          "y": 43,
+          "items": {
+            "stone": 3,
+            "stick": 1,
+            "wood": 3
+          }
+        },
+        {
+          "shelter": 27,
+          "x": 0,
+          "y": 40,
+          "items": {
+            "stone": 21,
+            "wood": 9,
+            "stick": 6,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 29,
+          "x": -4,
+          "y": 51,
+          "items": {
+            "stick": 4,
+            "stone": 9,
+            "wood": 5,
+            "fiber": 3
+          }
+        },
+        {
+          "shelter": 30,
+          "x": -12,
+          "y": 29,
+          "items": {
+            "stone": 3,
+            "wood": 3
+          }
+        },
+        {
+          "shelter": 37,
+          "x": -19,
+          "y": 51,
+          "items": {
+            "stick": 1
+          }
+        },
+        {
+          "shelter": 38,
+          "x": -20,
+          "y": 32,
+          "items": {
+            "stick": 2,
+            "stone": 4
+          }
+        },
+        {
+          "shelter": 43,
+          "x": -5,
+          "y": 29,
+          "items": {
+            "wood": 12,
+            "flint": 3,
+            "stone": 9,
+            "stick": 3
+          }
+        },
+        {
+          "shelter": 56,
+          "x": -8,
+          "y": 40,
+          "items": {
+            "stone": 5,
+            "wood": 3,
+            "fiber": 2
+          }
+        },
+        {
+          "shelter": 64,
+          "x": -40,
+          "y": 23,
+          "items": {
+            "wood": 2,
+            "stone": 1
+          }
+        },
+        {
+          "shelter": 72,
+          "x": -33,
+          "y": 30,
+          "items": {
+            "stone": 5,
+            "stick": 2,
+            "wood": 2,
+            "fiber": 2
+          }
+        }
+      ],
+      "states": [
+        {
+          "id": 10,
+          "x": -14,
+          "y": 39,
+          "state": "travel",
+          "phase": "travel",
+          "load": 4,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [],
+          "target": {
+            "x": -20,
+            "y": 44
+          }
+        },
+        {
+          "id": 29,
+          "x": -2,
+          "y": 45,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 11,
+            "y": 39
+          }
+        },
+        {
+          "id": 67,
+          "x": -19,
+          "y": 43,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": -19,
+            "y": 43
+          }
+        },
+        {
+          "id": 78,
+          "x": 0,
+          "y": 40,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "stone": 1,
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 83,
+          "x": -40,
+          "y": 23,
+          "state": "rest",
+          "phase": "rest",
+          "load": 6,
+          "carrying": {
+            "fiber": 1,
+            "berry": 1,
+            "wood": 1
+          },
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 88,
+          "x": -5,
+          "y": 51,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "shellfish": 1
+          },
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": {
+            "x": 12,
+            "y": 56
+          }
+        },
+        {
+          "id": 92,
+          "x": 3,
+          "y": 45,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {},
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": {
+            "x": 11,
+            "y": 39
+          }
+        },
+        {
+          "id": 93,
+          "x": 6,
+          "y": 34,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 0,
+            "y": 40
+          }
+        },
+        {
+          "id": 106,
+          "x": -7,
+          "y": 40,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {},
+          "tools": [
+            "fish_line",
+            "stone_club"
+          ],
+          "target": {
+            "x": 12,
+            "y": 39
+          }
+        },
+        {
+          "id": 107,
+          "x": -18,
+          "y": 36,
+          "state": "rest",
+          "phase": "rest",
+          "load": 6,
+          "carrying": {
+            "stone": 2,
+            "berry": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 117,
+          "x": -34,
+          "y": 27,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": -35,
+            "y": 14
+          }
+        },
+        {
+          "id": 118,
+          "x": 0,
+          "y": 40,
+          "state": "starting",
+          "phase": null,
+          "load": 6,
+          "carrying": {
+            "wood": 2,
+            "berry": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 122,
+          "x": -10,
+          "y": 23,
+          "state": "travel",
+          "phase": "travel",
+          "load": 10,
+          "carrying": {
+            "wood": 3,
+            "stone": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": -5,
+            "y": 29
+          }
+        },
+        {
+          "id": 143,
+          "x": -4,
+          "y": 51,
+          "state": "starting",
+          "phase": null,
+          "load": 3,
+          "carrying": {
+            "fish": 1,
+            "berry": 1,
+            "fiber": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 154,
+          "x": -5,
+          "y": 29,
+          "state": "place",
+          "phase": "place",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 157,
+          "x": 6,
+          "y": 35,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {
+            "stick": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 166,
+          "x": -14,
+          "y": 43,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {
+            "fiber": 1
+          },
+          "tools": [],
+          "target": null
+        }
+      ]
+    },
+    {
+      "biome": "coast-islands-wilderness",
+      "width": 1280,
+      "height": 800,
+      "tick": 12037,
+      "viewport": {
+        "x": -102,
+        "y": 83,
+        "w": 51,
+        "h": 52
+      },
+      "tileCounts": {
+        "0": 40,
+        "2": 1602,
+        "3": 400,
+        "4": 610
+      },
+      "resourceKinds": [
+        "driftwood",
+        "shellfish",
+        "stone",
+        "bush",
+        "fish",
+        "scrub"
+      ],
+      "residents": 0,
+      "note": "Camera-only observer exploration. No island inhabitants or water crossings are fabricated."
+    },
+    {
+      "biome": "temperate",
+      "width": 390,
+      "height": 844,
+      "tick": 12012,
+      "anchor": {
+        "id": 70,
+        "x": 19,
+        "y": 66,
+        "biome": "temperate",
+        "kind": "timber_home",
+        "complete": true,
+        "integrity": 86,
+        "stored": 24
+      },
+      "viewport": {
+        "x": -9,
+        "y": 41,
+        "w": 52,
+        "h": 51
+      },
+      "tileCounts": {
+        "0": 824,
+        "1": 178,
+        "2": 965,
+        "3": 93,
+        "8": 592
+      },
+      "resourceKinds": [
+        "deadfall",
+        "bush",
+        "scrub",
+        "tree",
+        "stone",
+        "fish",
+        "driftwood"
+      ],
+      "shelters": [
+        [
+          4,
+          23,
+          41,
+          "timber_home",
+          97,
+          34
+        ],
+        [
+          15,
+          33,
+          58,
+          "timber_home",
+          86,
+          24
+        ],
+        [
+          24,
+          25,
+          58,
+          "timber_home",
+          88,
+          40
+        ],
+        [
+          29,
+          -4,
+          51,
+          "timber_home",
+          87,
+          22
+        ],
+        [
+          32,
+          23,
+          64,
+          "timber_home",
+          87,
+          40
+        ],
+        [
+          40,
+          12,
+          69,
+          "timber_home",
+          95,
+          30
+        ],
+        [
+          41,
+          11,
+          55,
+          "timber_home",
+          97,
+          12
+        ],
+        [
+          45,
+          39,
+          72,
+          "timber_home",
+          94,
+          1
+        ],
+        [
+          46,
+          42,
+          61,
+          "timber_home",
+          83,
+          15
+        ],
+        [
+          59,
+          26,
+          49,
+          "timber_home",
+          82,
+          9
+        ],
+        [
+          60,
+          31,
+          51,
+          "timber_home",
+          82,
+          13
+        ],
+        [
+          70,
+          19,
+          66,
+          "timber_home",
+          86,
+          24
+        ],
+        [
+          73,
+          29,
+          77,
+          "timber_home",
+          94,
+          12
+        ],
+        [
+          80,
+          19,
+          74,
+          "timber_home",
+          94,
+          0
+        ],
+        [
+          83,
+          11,
+          61,
+          "timber_home",
+          93,
+          2
+        ]
+      ],
+      "sites": [],
+      "stores": [
+        {
+          "shelter": 4,
+          "x": 23,
+          "y": 41,
+          "items": {
+            "stone": 25,
+            "fiber": 1,
+            "stick": 7,
+            "wood": 1
+          }
+        },
+        {
+          "shelter": 15,
+          "x": 33,
+          "y": 58,
+          "items": {
+            "stick": 5,
+            "fiber": 3,
+            "wood": 16
+          }
+        },
+        {
+          "shelter": 24,
+          "x": 25,
+          "y": 58,
+          "items": {
+            "wood": 33,
+            "stick": 5,
+            "stone": 2
+          }
+        },
+        {
+          "shelter": 29,
+          "x": -4,
+          "y": 51,
+          "items": {
+            "stick": 4,
+            "stone": 9,
+            "wood": 5,
+            "fiber": 3,
+            "fish": 1
+          }
+        },
+        {
+          "shelter": 32,
+          "x": 23,
+          "y": 64,
+          "items": {
+            "wood": 27,
+            "stick": 9,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 40,
+          "x": 12,
+          "y": 69,
+          "items": {
+            "wood": 21,
+            "stick": 7,
+            "fiber": 1,
+            "stone": 1
+          }
+        },
+        {
+          "shelter": 41,
+          "x": 11,
+          "y": 55,
+          "items": {
+            "stick": 9,
+            "wood": 3
+          }
+        },
+        {
+          "shelter": 45,
+          "x": 39,
+          "y": 72,
+          "items": {
+            "wood": 1
+          }
+        },
+        {
+          "shelter": 46,
+          "x": 42,
+          "y": 61,
+          "items": {
+            "wood": 15
+          }
+        },
+        {
+          "shelter": 59,
+          "x": 26,
+          "y": 49,
+          "items": {
+            "stone": 3,
+            "wood": 6
+          }
+        },
+        {
+          "shelter": 60,
+          "x": 31,
+          "y": 51,
+          "items": {
+            "stick": 4,
+            "wood": 9
+          }
+        },
+        {
+          "shelter": 70,
+          "x": 19,
+          "y": 66,
+          "items": {
+            "stick": 7,
+            "wood": 15,
+            "stone": 2
+          }
+        },
+        {
+          "shelter": 73,
+          "x": 29,
+          "y": 77,
+          "items": {
+            "wood": 6,
+            "stick": 3,
+            "stone": 3
+          }
+        },
+        {
+          "shelter": 83,
+          "x": 11,
+          "y": 61,
+          "items": {
+            "wood": 2
+          }
+        }
+      ],
+      "states": [
+        {
+          "id": 11,
+          "x": 8,
+          "y": 58,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 11,
+            "y": 61
+          }
+        },
+        {
+          "id": 16,
+          "x": 26,
+          "y": 62,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "wood": 1,
+            "stick": 1
+          },
+          "tools": [
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 17,
+          "x": 22,
+          "y": 63,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 18,
+          "x": -1,
+          "y": 43,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 19,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "berry": 2
+          },
+          "tools": [
+            "stone_club",
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 26,
+          "x": 12,
+          "y": 65,
+          "state": "drink",
+          "phase": "use",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 12,
+            "y": 64
+          }
+        },
+        {
+          "id": 29,
+          "x": -9,
+          "y": 45,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 31,
+          "x": 12,
+          "y": 69,
+          "state": "rest",
+          "phase": "rest",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 33,
+          "x": 24,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 39,
+          "x": 23,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 40,
+          "x": 29,
+          "y": 63,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 31,
+            "y": 65
+          }
+        },
+        {
+          "id": 43,
+          "x": 21,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 12,
+          "carrying": {
+            "wood": 5
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 47,
+          "x": 24,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 49,
+          "x": 18,
+          "y": 66,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 19,
+            "y": 65
+          }
+        },
+        {
+          "id": 52,
+          "x": 21,
+          "y": 64,
+          "state": "starting",
+          "phase": null,
+          "load": 4,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 23,
+            "y": 64
+          }
+        },
+        {
+          "id": 54,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 60,
+          "x": 25,
+          "y": 61,
+          "state": "social",
+          "phase": "socialize",
+          "load": 4,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 66,
+          "x": 25,
+          "y": 58,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 68,
+          "x": 23,
+          "y": 57,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 70,
+          "x": 25,
+          "y": 62,
+          "state": "starting",
+          "phase": null,
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 23,
+            "y": 64
+          }
+        },
+        {
+          "id": 71,
+          "x": 12,
+          "y": 67,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "wood": 1,
+            "stick": 1,
+            "berry": 1
+          },
+          "tools": [
+            "fish_line",
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 72,
+          "x": 27,
+          "y": 62,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 74,
+          "x": 23,
+          "y": 64,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 23,
+            "y": 64
+          }
+        },
+        {
+          "id": 77,
+          "x": 26,
+          "y": 59,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 25,
+            "y": 58
+          }
+        },
+        {
+          "id": 84,
+          "x": 2,
+          "y": 42,
+          "state": "travel",
+          "phase": "travel",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "fish_line"
+          ],
+          "target": {
+            "x": 10,
+            "y": 39
+          }
+        },
+        {
+          "id": 88,
+          "x": -4,
+          "y": 51,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "shellfish": 1
+          },
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 89,
+          "x": 23,
+          "y": 64,
+          "state": "travel",
+          "phase": "travel",
+          "load": 4,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 23,
+            "y": 64
+          }
+        },
+        {
+          "id": 90,
+          "x": 22,
+          "y": 63,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 20,
+            "y": 63
+          }
+        },
+        {
+          "id": 91,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 94,
+          "x": 31,
+          "y": 52,
+          "state": "drink",
+          "phase": "use",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 30,
+            "y": 51
+          }
+        },
+        {
+          "id": 101,
+          "x": 30,
+          "y": 64,
+          "state": "starting",
+          "phase": null,
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 108,
+          "x": 21,
+          "y": 63,
+          "state": "starting",
+          "phase": null,
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 20,
+            "y": 63
+          }
+        },
+        {
+          "id": 109,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 4,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 112,
+          "x": 19,
+          "y": 66,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1,
+            "stick": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 114,
+          "x": 21,
+          "y": 62,
+          "state": "drink",
+          "phase": "use",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 20,
+            "y": 61
+          }
+        },
+        {
+          "id": 116,
+          "x": 26,
+          "y": 49,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {},
+          "tools": [
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 119,
+          "x": 27,
+          "y": 68,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 23,
+            "y": 64
+          }
+        },
+        {
+          "id": 124,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 4,
+          "carrying": {
+            "stone": 2
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 125,
+          "x": 13,
+          "y": 68,
+          "state": "rest",
+          "phase": "rest",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 127,
+          "x": 21,
+          "y": 64,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 20,
+            "y": 63
+          }
+        },
+        {
+          "id": 129,
+          "x": 22,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {},
+          "tools": [
+            "fish_line",
+            "stone_club"
+          ],
+          "target": {
+            "x": 20,
+            "y": 60
+          }
+        },
+        {
+          "id": 130,
+          "x": 24,
+          "y": 66,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 17,
+            "y": 65
+          }
+        },
+        {
+          "id": 131,
+          "x": 21,
+          "y": 59,
+          "state": "starting",
+          "phase": null,
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 25,
+            "y": 58
+          }
+        },
+        {
+          "id": 132,
+          "x": 26,
+          "y": 59,
+          "state": "rest",
+          "phase": "rest",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 134,
+          "x": 21,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 10,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club",
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 137,
+          "x": 23,
+          "y": 64,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 139,
+          "x": 26,
+          "y": 49,
+          "state": "inspect",
+          "phase": "inspect",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 27,
+            "y": 49
+          }
+        },
+        {
+          "id": 141,
+          "x": 23,
+          "y": 41,
+          "state": "starting",
+          "phase": null,
+          "load": 12,
+          "carrying": {
+            "stone": 3,
+            "wood": 3
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 143,
+          "x": -4,
+          "y": 51,
+          "state": "starting",
+          "phase": null,
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": -4,
+            "y": 51
+          }
+        },
+        {
+          "id": 144,
+          "x": 22,
+          "y": 63,
+          "state": "social",
+          "phase": "socialize",
+          "load": 4,
+          "carrying": {
+            "wood": 1,
+            "fiber": 2
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 146,
+          "x": 25,
+          "y": 58,
+          "state": "rest",
+          "phase": "rest",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 148,
+          "x": -6,
+          "y": 43,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "wood": 2,
+            "fiber": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 156,
+          "x": 25,
+          "y": 62,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 158,
+          "x": 22,
+          "y": 64,
+          "state": "social",
+          "phase": "socialize",
+          "load": 1,
+          "carrying": {
+            "stick": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 160,
+          "x": 12,
+          "y": 69,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {
+            "stick": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 161,
+          "x": 32,
+          "y": 60,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 33,
+            "y": 58
+          }
+        },
+        {
+          "id": 168,
+          "x": 24,
+          "y": 63,
+          "state": "rest",
+          "phase": "rest",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 169,
+          "x": 26,
+          "y": 64,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 31,
+            "y": 65
+          }
+        }
+      ]
+    },
+    {
+      "biome": "arid",
+      "width": 390,
+      "height": 844,
+      "tick": 12019,
+      "anchor": {
+        "id": 54,
+        "x": 98,
+        "y": 24,
+        "biome": "arid",
+        "kind": "desert_shade",
+        "complete": true,
+        "integrity": 92,
+        "stored": 4
+      },
+      "viewport": {
+        "x": 71,
+        "y": -3,
+        "w": 51,
+        "h": 51
+      },
+      "tileCounts": {
+        "1": 138,
+        "4": 1706,
+        "9": 757
+      },
+      "resourceKinds": [
+        "scrub",
+        "deadfall",
+        "stone",
+        "fish",
+        "cactus",
+        "flint"
+      ],
+      "shelters": [
+        [
+          33,
+          79,
+          7,
+          "desert_shade",
+          84,
+          0
+        ],
+        [
+          34,
+          71,
+          13,
+          "desert_shade",
+          82,
+          31
+        ],
+        [
+          42,
+          87,
+          15,
+          "desert_shade",
+          92,
+          11
+        ],
+        [
+          48,
+          98,
+          13,
+          "desert_shade",
+          88,
+          1
+        ],
+        [
+          50,
+          87,
+          29,
+          "desert_shade",
+          80,
+          10
+        ],
+        [
+          54,
+          98,
+          24,
+          "desert_shade",
+          92,
+          4
+        ]
+      ],
+      "sites": [
+        {
+          "id": 28,
+          "x": 72,
+          "y": -1,
+          "kind": "desert_shade",
+          "stage": 2,
+          "materials": {
+            "fiber": 3,
+            "stone": 1,
+            "stick": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 20,
+          "workNeed": 24
+        },
+        {
+          "id": 53,
+          "x": 85,
+          "y": -3,
+          "kind": "desert_shade",
+          "stage": 0,
+          "materials": {
+            "stone": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 4,
+          "workNeed": 24
+        },
+        {
+          "id": 58,
+          "x": 90,
+          "y": -3,
+          "kind": "desert_shade",
+          "stage": 0,
+          "materials": {
+            "stone": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 4,
+          "workNeed": 24
+        },
+        {
+          "id": 86,
+          "x": 73,
+          "y": 27,
+          "kind": "desert_shade",
+          "stage": 1,
+          "materials": {
+            "stone": 1,
+            "fiber": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 8,
+          "workNeed": 24
+        }
+      ],
+      "stores": [
+        {
+          "shelter": 34,
+          "x": 71,
+          "y": 13,
+          "items": {
+            "flint": 4,
+            "stone": 9,
+            "wood": 14,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 42,
+          "x": 87,
+          "y": 15,
+          "items": {
+            "stone": 5,
+            "flint": 5,
+            "wood": 1
+          }
+        },
+        {
+          "shelter": 48,
+          "x": 98,
+          "y": 13,
+          "items": {
+            "fiber": 1
+          }
+        },
+        {
+          "shelter": 50,
+          "x": 87,
+          "y": 29,
+          "items": {
+            "stone": 6,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 54,
+          "x": 98,
+          "y": 24,
+          "items": {
+            "flint": 4
+          }
+        }
+      ],
+      "states": [
+        {
+          "id": 65,
+          "x": 87,
+          "y": 28,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {},
+          "tools": [
+            "stone_club",
+            "hand_axe",
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 76,
+          "x": 93,
+          "y": 23,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "stone": 1
+          },
+          "tools": [
+            "hand_axe",
+            "fish_line",
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 104,
+          "x": 87,
+          "y": 30,
+          "state": "travel",
+          "phase": "travel",
+          "load": 4,
+          "carrying": {
+            "fish": 1
+          },
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": {
+            "x": 94,
+            "y": 24
+          }
+        },
+        {
+          "id": 105,
+          "x": 71,
+          "y": 13,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        }
+      ]
+    },
+    {
+      "biome": "cold",
+      "width": 390,
+      "height": 844,
+      "tick": 12026,
+      "anchor": {
+        "id": 23,
+        "x": 50,
+        "y": -8,
+        "biome": "cold",
+        "kind": "snow_refuge",
+        "complete": true,
+        "integrity": 93,
+        "stored": 40
+      },
+      "viewport": {
+        "x": 24,
+        "y": -34,
+        "w": 52,
+        "h": 52
+      },
+      "tileCounts": {
+        "0": 524,
+        "1": 213,
+        "4": 180,
+        "5": 375,
+        "6": 1058,
+        "7": 141,
+        "8": 28,
+        "9": 164,
+        "10": 21
+      },
+      "resourceKinds": [
+        "flint",
+        "stone",
+        "deadfall",
+        "lichen",
+        "tree",
+        "scrub",
+        "bush",
+        "fish",
+        "cactus"
+      ],
+      "shelters": [
+        [
+          10,
+          48,
+          14,
+          "timber_home",
+          74,
+          40
+        ],
+        [
+          11,
+          35,
+          6,
+          "timber_home",
+          72,
+          40
+        ],
+        [
+          14,
+          34,
+          -9,
+          "snow_refuge",
+          74,
+          40
+        ],
+        [
+          17,
+          42,
+          -19,
+          "snow_refuge",
+          69,
+          3
+        ],
+        [
+          20,
+          56,
+          3,
+          "timber_home",
+          81,
+          40
+        ],
+        [
+          22,
+          59,
+          13,
+          "timber_home",
+          80,
+          40
+        ],
+        [
+          23,
+          50,
+          -8,
+          "snow_refuge",
+          93,
+          40
+        ],
+        [
+          25,
+          67,
+          -7,
+          "desert_shade",
+          82,
+          29
+        ],
+        [
+          26,
+          24,
+          4,
+          "timber_home",
+          74,
+          10
+        ],
+        [
+          34,
+          71,
+          13,
+          "desert_shade",
+          82,
+          31
+        ],
+        [
+          55,
+          65,
+          -13,
+          "snow_refuge",
+          69,
+          3
+        ],
+        [
+          57,
+          65,
+          -20,
+          "snow_refuge",
+          90,
+          0
+        ],
+        [
+          61,
+          74,
+          -26,
+          "snow_refuge",
+          92,
+          0
+        ],
+        [
+          75,
+          46,
+          6,
+          "timber_home",
+          93,
+          3
+        ],
+        [
+          78,
+          38,
+          -1,
+          "timber_home",
+          91,
+          11
+        ],
+        [
+          93,
+          39,
+          -7,
+          "snow_refuge",
+          99,
+          0
+        ]
+      ],
+      "sites": [
+        {
+          "id": 28,
+          "x": 72,
+          "y": -1,
+          "kind": "desert_shade",
+          "stage": 2,
+          "materials": {
+            "fiber": 3,
+            "stone": 1,
+            "stick": 1
+          },
+          "need": {
+            "fiber": 3,
+            "stick": 2,
+            "stone": 1
+          },
+          "work": 20,
+          "workNeed": 24
+        },
+        {
+          "id": 35,
+          "x": 42,
+          "y": -30,
+          "kind": "snow_refuge",
+          "stage": 1,
+          "materials": {
+            "stone": 1,
+            "wood": 1
+          },
+          "need": {
+            "stone": 4,
+            "wood": 2
+          },
+          "work": 12,
+          "workNeed": 36
+        },
+        {
+          "id": 87,
+          "x": 24,
+          "y": -20,
+          "kind": "snow_refuge",
+          "stage": 0,
+          "materials": {
+            "wood": 1
+          },
+          "need": {
+            "stone": 4,
+            "wood": 2
+          },
+          "work": 6,
+          "workNeed": 36
+        }
+      ],
+      "stores": [
+        {
+          "shelter": 10,
+          "x": 48,
+          "y": 14,
+          "items": {
+            "wood": 18,
+            "flint": 8,
+            "stone": 14
+          }
+        },
+        {
+          "shelter": 11,
+          "x": 35,
+          "y": 6,
+          "items": {
+            "flint": 17,
+            "stone": 15,
+            "wood": 8
+          }
+        },
+        {
+          "shelter": 14,
+          "x": 34,
+          "y": -9,
+          "items": {
+            "flint": 12,
+            "wood": 17,
+            "stone": 10,
+            "fiber": 1
+          }
+        },
+        {
+          "shelter": 17,
+          "x": 42,
+          "y": -19,
+          "items": {
+            "flint": 3
+          }
+        },
+        {
+          "shelter": 20,
+          "x": 56,
+          "y": 3,
+          "items": {
+            "wood": 3,
+            "flint": 12,
+            "stone": 23,
+            "fiber": 2
+          }
+        },
+        {
+          "shelter": 22,
+          "x": 59,
+          "y": 13,
+          "items": {
+            "wood": 23,
+            "flint": 9,
+            "stone": 8
+          }
+        },
+        {
+          "shelter": 23,
+          "x": 50,
+          "y": -8,
+          "items": {
+            "flint": 8,
+            "stone": 25,
+            "wood": 7
+          }
+        },
+        {
+          "shelter": 25,
+          "x": 67,
+          "y": -7,
+          "items": {
+            "stone": 12,
+            "flint": 10,
+            "fiber": 2,
+            "wood": 5
+          }
+        },
+        {
+          "shelter": 26,
+          "x": 24,
+          "y": 4,
+          "items": {
+            "flint": 3,
+            "stone": 5,
+            "wood": 2
+          }
+        },
+        {
+          "shelter": 34,
+          "x": 71,
+          "y": 13,
+          "items": {
+            "flint": 4,
+            "stone": 9,
+            "wood": 14,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 55,
+          "x": 65,
+          "y": -13,
+          "items": {
+            "stone": 3
+          }
+        },
+        {
+          "shelter": 75,
+          "x": 46,
+          "y": 6,
+          "items": {
+            "stick": 1,
+            "wood": 1,
+            "stone": 1
+          }
+        },
+        {
+          "shelter": 78,
+          "x": 38,
+          "y": -1,
+          "items": {
+            "stone": 3,
+            "flint": 6,
+            "wood": 2
+          }
+        }
+      ],
+      "states": [
+        {
+          "id": 15,
+          "x": 56,
+          "y": -1,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "flint": 1,
+            "stone": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 20,
+          "x": 50,
+          "y": -8,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "wood": 1,
+            "flint": 1,
+            "stone": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 25,
+          "x": 35,
+          "y": 6,
+          "state": "rest",
+          "phase": "rest",
+          "load": 10,
+          "carrying": {
+            "stone": 4,
+            "wood": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 27,
+          "x": 50,
+          "y": -8,
+          "state": "rest",
+          "phase": "rest",
+          "load": 12,
+          "carrying": {
+            "stone": 5
+          },
+          "tools": [
+            "hand_axe",
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 35,
+          "x": 56,
+          "y": 3,
+          "state": "travel",
+          "phase": "travel",
+          "load": 8,
+          "carrying": {
+            "stone": 2,
+            "flint": 1
+          },
+          "tools": [
+            "hand_axe",
+            "stone_club"
+          ],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 38,
+          "x": 35,
+          "y": 7,
+          "state": "rest",
+          "phase": "rest",
+          "load": 6,
+          "carrying": {
+            "fiber": 1,
+            "wood": 2
+          },
+          "tools": [
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 48,
+          "x": 39,
+          "y": -7,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "stone": 2,
+            "flint": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 50,
+          "x": 58,
+          "y": -4,
+          "state": "drink",
+          "phase": "use",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 59,
+            "y": -5
+          }
+        },
+        {
+          "id": 51,
+          "x": 63,
+          "y": -3,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "stick": 2,
+            "flint": 1
+          },
+          "tools": [
+            "hand_axe",
+            "stone_club"
+          ],
+          "target": {
+            "x": 57,
+            "y": -2
+          }
+        },
+        {
+          "id": 53,
+          "x": 59,
+          "y": 13,
+          "state": "rest",
+          "phase": "rest",
+          "load": 11,
+          "carrying": {
+            "wood": 4
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 57,
+          "x": 37,
+          "y": 2,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 38,
+            "y": -1
+          }
+        },
+        {
+          "id": 58,
+          "x": 56,
+          "y": 3,
+          "state": "starting",
+          "phase": null,
+          "load": 9,
+          "carrying": {
+            "fiber": 2,
+            "stone": 2
+          },
+          "tools": [
+            "stone_club",
+            "hand_axe"
+          ],
+          "target": null
+        },
+        {
+          "id": 73,
+          "x": 35,
+          "y": -2,
+          "state": "drink",
+          "phase": "use",
+          "load": 3,
+          "carrying": {
+            "flint": 2
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 35,
+            "y": -2
+          }
+        },
+        {
+          "id": 75,
+          "x": 42,
+          "y": -19,
+          "state": "rest",
+          "phase": "rest",
+          "load": 8,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club",
+            "hand_axe",
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 79,
+          "x": 50,
+          "y": -4,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "fiber": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 96,
+          "x": 35,
+          "y": 6,
+          "state": "rest",
+          "phase": "rest",
+          "load": 5,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 97,
+          "x": 58,
+          "y": -4,
+          "state": "drink",
+          "phase": "use",
+          "load": 6,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 59,
+            "y": -5
+          }
+        },
+        {
+          "id": 99,
+          "x": 31,
+          "y": 8,
+          "state": "travel",
+          "phase": "travel",
+          "load": 7,
+          "carrying": {
+            "flint": 1,
+            "stone": 1
+          },
+          "tools": [
+            "hand_axe",
+            "stone_club"
+          ],
+          "target": {
+            "x": 29,
+            "y": 9
+          }
+        },
+        {
+          "id": 105,
+          "x": 71,
+          "y": 13,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 110,
+          "x": 36,
+          "y": 5,
+          "state": "drink",
+          "phase": "use",
+          "load": 5,
+          "carrying": {
+            "stone": 1,
+            "wood": 1
+          },
+          "tools": [
+            "hand_axe"
+          ],
+          "target": {
+            "x": 37,
+            "y": 5
+          }
+        },
+        {
+          "id": 121,
+          "x": 35,
+          "y": 6,
+          "state": "drink",
+          "phase": "use",
+          "load": 2,
+          "carrying": {
+            "stone": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 36,
+            "y": 6
+          }
+        },
+        {
+          "id": 126,
+          "x": 56,
+          "y": 3,
+          "state": "travel",
+          "phase": "travel",
+          "load": 10,
+          "carrying": {
+            "stone": 3,
+            "wood": 1,
+            "fiber": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 133,
+          "x": 66,
+          "y": -3,
+          "state": "travel",
+          "phase": "travel",
+          "load": 8,
+          "carrying": {
+            "wood": 4
+          },
+          "tools": [],
+          "target": {
+            "x": 71,
+            "y": -6
+          }
+        },
+        {
+          "id": 140,
+          "x": 55,
+          "y": 1,
+          "state": "travel",
+          "phase": "travel",
+          "load": 11,
+          "carrying": {
+            "wood": 3,
+            "fiber": 1,
+            "stone": 2
+          },
+          "tools": [],
+          "target": {
+            "x": 56,
+            "y": 3
+          }
+        },
+        {
+          "id": 150,
+          "x": 50,
+          "y": -8,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {
+            "flint": 1,
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 78,
+            "y": -21
+          }
+        },
+        {
+          "id": 151,
+          "x": 68,
+          "y": -6,
+          "state": "rest",
+          "phase": "rest",
+          "load": 8,
+          "carrying": {
+            "wood": 3,
+            "flint": 2
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 153,
+          "x": 51,
+          "y": -4,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {
+            "stone": 1,
+            "stick": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 50,
+            "y": -4
+          }
+        },
+        {
+          "id": 155,
+          "x": 37,
+          "y": 4,
+          "state": "inspect",
+          "phase": "inspect",
+          "load": 8,
+          "carrying": {
+            "stone": 3,
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 38,
+            "y": 5
+          }
+        },
+        {
+          "id": 165,
+          "x": 56,
+          "y": 3,
+          "state": "rest",
+          "phase": "rest",
+          "load": 3,
+          "carrying": {
+            "wood": 1,
+            "fiber": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 172,
+          "x": 35,
+          "y": 6,
+          "state": "idle",
+          "phase": null,
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": null
+        }
+      ]
+    },
+    {
+      "biome": "coast",
+      "width": 390,
+      "height": 844,
+      "tick": 12033,
+      "anchor": {
+        "id": 21,
+        "x": -19,
+        "y": 43,
+        "biome": "coast",
+        "kind": "coast_hut",
+        "complete": true,
+        "integrity": 93,
+        "stored": 7
+      },
+      "viewport": {
+        "x": -45,
+        "y": 16,
+        "w": 52,
+        "h": 52
+      },
+      "tileCounts": {
+        "0": 1265,
+        "1": 26,
+        "2": 119,
+        "3": 207,
+        "4": 858,
+        "8": 229
+      },
+      "resourceKinds": [
+        "stone",
+        "shellfish",
+        "tree",
+        "bush",
+        "driftwood",
+        "scrub",
+        "deadfall",
+        "fish"
+      ],
+      "shelters": [
+        [
+          21,
+          -19,
+          43,
+          "coast_hut",
+          93,
+          7
+        ],
+        [
+          27,
+          0,
+          40,
+          "timber_home",
+          86,
+          40
+        ],
+        [
+          29,
+          -4,
+          51,
+          "timber_home",
+          87,
+          21
+        ],
+        [
+          30,
+          -12,
+          29,
+          "timber_home",
+          76,
+          6
+        ],
+        [
+          37,
+          -19,
+          51,
+          "coast_hut",
+          94,
+          1
+        ],
+        [
+          38,
+          -20,
+          32,
+          "timber_home",
+          67,
+          6
+        ],
+        [
+          43,
+          -5,
+          29,
+          "timber_home",
+          74,
+          27
+        ],
+        [
+          56,
+          -8,
+          40,
+          "timber_home",
+          81,
+          10
+        ],
+        [
+          64,
+          -40,
+          23,
+          "coast_hut",
+          89,
+          3
+        ],
+        [
+          66,
+          -30,
+          41,
+          "coast_hut",
+          95,
+          0
+        ],
+        [
+          72,
+          -33,
+          30,
+          "coast_hut",
+          81,
+          11
+        ]
+      ],
+      "sites": [
+        {
+          "id": 65,
+          "x": -45,
+          "y": 39,
+          "kind": "coast_hut",
+          "stage": 1,
+          "materials": {
+            "wood": 2
+          },
+          "need": {
+            "wood": 3,
+            "fiber": 2
+          },
+          "work": 11,
+          "workNeed": 28
+        },
+        {
+          "id": 89,
+          "x": -34,
+          "y": 52,
+          "kind": "coast_hut",
+          "stage": 1,
+          "materials": {
+            "fiber": 1,
+            "wood": 2
+          },
+          "need": {
+            "wood": 3,
+            "fiber": 2
+          },
+          "work": 16,
+          "workNeed": 28
+        },
+        {
+          "id": 91,
+          "x": -38,
+          "y": 44,
+          "kind": "coast_hut",
+          "stage": 1,
+          "materials": {
+            "wood": 1,
+            "fiber": 1
+          },
+          "need": {
+            "wood": 3,
+            "fiber": 2
+          },
+          "work": 11,
+          "workNeed": 28
+        }
+      ],
+      "stores": [
+        {
+          "shelter": 21,
+          "x": -19,
+          "y": 43,
+          "items": {
+            "stone": 3,
+            "stick": 1,
+            "wood": 3
+          }
+        },
+        {
+          "shelter": 27,
+          "x": 0,
+          "y": 40,
+          "items": {
+            "stone": 21,
+            "wood": 9,
+            "stick": 6,
+            "fiber": 4
+          }
+        },
+        {
+          "shelter": 29,
+          "x": -4,
+          "y": 51,
+          "items": {
+            "stick": 4,
+            "stone": 9,
+            "wood": 5,
+            "fiber": 3
+          }
+        },
+        {
+          "shelter": 30,
+          "x": -12,
+          "y": 29,
+          "items": {
+            "stone": 3,
+            "wood": 3
+          }
+        },
+        {
+          "shelter": 37,
+          "x": -19,
+          "y": 51,
+          "items": {
+            "stick": 1
+          }
+        },
+        {
+          "shelter": 38,
+          "x": -20,
+          "y": 32,
+          "items": {
+            "stick": 2,
+            "stone": 4
+          }
+        },
+        {
+          "shelter": 43,
+          "x": -5,
+          "y": 29,
+          "items": {
+            "wood": 12,
+            "flint": 3,
+            "stone": 9,
+            "stick": 3
+          }
+        },
+        {
+          "shelter": 56,
+          "x": -8,
+          "y": 40,
+          "items": {
+            "stone": 5,
+            "wood": 3,
+            "fiber": 2
+          }
+        },
+        {
+          "shelter": 64,
+          "x": -40,
+          "y": 23,
+          "items": {
+            "wood": 2,
+            "stone": 1
+          }
+        },
+        {
+          "shelter": 72,
+          "x": -33,
+          "y": 30,
+          "items": {
+            "stone": 5,
+            "stick": 2,
+            "wood": 2,
+            "fiber": 2
+          }
+        }
+      ],
+      "states": [
+        {
+          "id": 10,
+          "x": -15,
+          "y": 39,
+          "state": "travel",
+          "phase": "travel",
+          "load": 4,
+          "carrying": {
+            "wood": 2
+          },
+          "tools": [],
+          "target": {
+            "x": -20,
+            "y": 44
+          }
+        },
+        {
+          "id": 29,
+          "x": -1,
+          "y": 45,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {},
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": 11,
+            "y": 39
+          }
+        },
+        {
+          "id": 67,
+          "x": -19,
+          "y": 43,
+          "state": "starting",
+          "phase": null,
+          "load": 3,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": -17,
+            "y": 43
+          }
+        },
+        {
+          "id": 78,
+          "x": 0,
+          "y": 40,
+          "state": "rest",
+          "phase": "rest",
+          "load": 7,
+          "carrying": {
+            "stone": 1,
+            "wood": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 83,
+          "x": -40,
+          "y": 23,
+          "state": "starting",
+          "phase": null,
+          "load": 6,
+          "carrying": {
+            "fiber": 1,
+            "berry": 1,
+            "wood": 1
+          },
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": null
+        },
+        {
+          "id": 88,
+          "x": -4,
+          "y": 51,
+          "state": "travel",
+          "phase": "travel",
+          "load": 5,
+          "carrying": {
+            "shellfish": 1
+          },
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": {
+            "x": 12,
+            "y": 56
+          }
+        },
+        {
+          "id": 92,
+          "x": 4,
+          "y": 45,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {},
+          "tools": [
+            "stone_club",
+            "fish_line"
+          ],
+          "target": {
+            "x": 11,
+            "y": 39
+          }
+        },
+        {
+          "id": 93,
+          "x": 5,
+          "y": 35,
+          "state": "travel",
+          "phase": "travel",
+          "load": 2,
+          "carrying": {
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": 0,
+            "y": 40
+          }
+        },
+        {
+          "id": 106,
+          "x": -6,
+          "y": 40,
+          "state": "travel",
+          "phase": "travel",
+          "load": 3,
+          "carrying": {},
+          "tools": [
+            "fish_line",
+            "stone_club"
+          ],
+          "target": {
+            "x": 12,
+            "y": 39
+          }
+        },
+        {
+          "id": 107,
+          "x": -18,
+          "y": 36,
+          "state": "rest",
+          "phase": "rest",
+          "load": 6,
+          "carrying": {
+            "stone": 2,
+            "berry": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 117,
+          "x": -34,
+          "y": 26,
+          "state": "travel",
+          "phase": "travel",
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": -35,
+            "y": 14
+          }
+        },
+        {
+          "id": 118,
+          "x": 0,
+          "y": 40,
+          "state": "rest",
+          "phase": "rest",
+          "load": 6,
+          "carrying": {
+            "wood": 2,
+            "berry": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": null
+        },
+        {
+          "id": 122,
+          "x": -10,
+          "y": 23,
+          "state": "travel",
+          "phase": "travel",
+          "load": 10,
+          "carrying": {
+            "wood": 3,
+            "stone": 1
+          },
+          "tools": [
+            "stone_club"
+          ],
+          "target": {
+            "x": -5,
+            "y": 29
+          }
+        },
+        {
+          "id": 143,
+          "x": -4,
+          "y": 51,
+          "state": "craft",
+          "phase": "combine",
+          "load": 3,
+          "carrying": {
+            "fish": 1,
+            "berry": 1,
+            "fiber": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 149,
+          "x": 6,
+          "y": 41,
+          "state": "travel",
+          "phase": "travel",
+          "load": 4,
+          "carrying": {
+            "stone": 1,
+            "wood": 1
+          },
+          "tools": [],
+          "target": {
+            "x": -4,
+            "y": 50
+          }
+        },
+        {
+          "id": 154,
+          "x": -5,
+          "y": 29,
+          "state": "starting",
+          "phase": null,
+          "load": 0,
+          "carrying": {},
+          "tools": [],
+          "target": {
+            "x": 9,
+            "y": 34
+          }
+        },
+        {
+          "id": 157,
+          "x": 6,
+          "y": 35,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {
+            "stick": 1
+          },
+          "tools": [],
+          "target": null
+        },
+        {
+          "id": 166,
+          "x": -14,
+          "y": 43,
+          "state": "rest",
+          "phase": "rest",
+          "load": 1,
+          "carrying": {
+            "fiber": 1
+          },
+          "tools": [],
+          "target": null
+        }
+      ]
+    },
+    {
+      "biome": "coast-islands-wilderness",
+      "width": 390,
+      "height": 844,
+      "tick": 12038,
+      "viewport": {
+        "x": -102,
+        "y": 82,
+        "w": 52,
+        "h": 51
+      },
+      "tileCounts": {
+        "0": 54,
+        "2": 1578,
+        "3": 377,
+        "4": 643
+      },
+      "resourceKinds": [
+        "shellfish",
+        "driftwood",
+        "stone",
+        "bush",
+        "fish",
+        "scrub"
+      ],
+      "residents": 0,
+      "note": "Camera-only observer exploration. No island inhabitants or water crossings are fabricated."
+    }
+  ],
+  "errors": [],
+  "expectedFailures": [
+    {
+      "label": "picking-performance",
+      "console": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "label": "picking-performance",
+      "request": "/api/expanse/frame",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "label": "local-owner-startup-config",
+      "console": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "label": "local-owner-startup-config",
+      "request": "/api/expanse/frame",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "limitations": [],
+  "fishing": {
+    "observed": {
+      "id": 116,
+      "name": "Yeru",
+      "x": 26,
+      "y": 49,
+      "health": 100,
+      "action": "gather",
+      "state": "fish",
+      "phase": "cast",
+      "progress": 0.08,
+      "load": 1,
+      "carrying": {},
+      "tools": [
+        "fish_line"
+      ],
+      "target": {
+        "x": 27,
+        "y": 48
+      }
+    },
+    "startTick": 12053,
+    "startActivity": {
+      "state": "fish",
+      "prim": "gather",
+      "phase": "cast",
+      "progress": 0.17,
+      "target": {
+        "x": 27,
+        "y": 48
+      },
+      "item": "fish",
+      "load": 1,
+      "capacity": 12,
+      "carrying": {},
+      "tools": [
+        "fish_line"
+      ]
+    },
+    "endTick": 12063,
+    "endActivity": {
+      "state": "starting",
+      "prim": "share",
+      "phase": null,
+      "progress": 0,
+      "target": null,
+      "item": "fish",
+      "load": 1,
+      "capacity": 12,
+      "carrying": {
+        "fish": 1
+      },
+      "tools": []
+    },
+    "episodes": [
+      {
+        "tick": 11612,
+        "key": "use|berry@self|",
+        "success": true,
+        "reward": 0.609,
+        "duration": 3,
+        "produced": {},
+        "reason": null,
+        "x": 47,
+        "y": 15,
+        "novel": false
+      },
+      {
+        "tick": 11722,
+        "key": "use|berry@self|",
+        "success": true,
+        "reward": 0.416,
+        "duration": 3,
+        "produced": {},
+        "reason": null,
+        "x": 44,
+        "y": 34,
+        "novel": false
+      },
+      {
+        "tick": 11910,
+        "key": "drink|known-fresh|",
+        "success": true,
+        "reward": 0.289,
+        "duration": 6,
+        "produced": {},
+        "reason": null,
+        "x": 21,
+        "y": 56,
+        "novel": false
+      },
+      {
+        "tick": 11976,
+        "key": "use|fish@self|",
+        "success": true,
+        "reward": 0.258,
+        "duration": 3,
+        "produced": {},
+        "reason": null,
+        "x": 26,
+        "y": 49,
+        "novel": false
+      },
+      {
+        "tick": 12041,
+        "key": "drink|known-fresh|",
+        "success": true,
+        "reward": -0.006,
+        "duration": 4,
+        "produced": {},
+        "reason": null,
+        "x": 26,
+        "y": 49,
+        "novel": false
+      },
+      {
+        "tick": 12042,
+        "key": "rest|shelter|temperate",
+        "success": true,
+        "reward": -0.001,
+        "duration": 2,
+        "produced": {},
+        "reason": null,
+        "x": 26,
+        "y": 49,
+        "novel": false
+      },
+      {
+        "tick": 12044,
+        "key": "use|fish_line@pile|",
+        "success": false,
+        "reward": -0.124,
+        "duration": 3,
+        "produced": {},
+        "reason": "no-ignition",
+        "x": 26,
+        "y": 49,
+        "novel": false
+      },
+      {
+        "tick": 12046,
+        "key": "rest|shelter|temperate",
+        "success": true,
+        "reward": 0.008,
+        "duration": 3,
+        "produced": {},
+        "reason": null,
+        "x": 26,
+        "y": 49,
+        "novel": false
+      },
+      {
+        "tick": 12047,
+        "key": "rest|shelter|temperate",
+        "success": true,
+        "reward": -0.003,
+        "duration": 2,
+        "produced": {},
+        "reason": null,
+        "x": 26,
+        "y": 49,
+        "novel": false
+      },
+      {
+        "tick": 12050,
+        "key": "drink|known-fresh|",
+        "success": true,
+        "reward": 0.008,
+        "duration": 4,
+        "produced": {},
+        "reason": null,
+        "x": 26,
+        "y": 49,
+        "novel": false
+      },
+      {
+        "tick": 12051,
+        "key": "rest|shelter|temperate",
+        "success": true,
+        "reward": -0.003,
+        "duration": 2,
+        "produced": {},
+        "reason": null,
+        "x": 26,
+        "y": 49,
+        "novel": false
+      },
+      {
+        "tick": 12063,
+        "key": "gather|fish|line",
+        "success": true,
+        "reward": 0.052,
+        "duration": 13,
+        "produced": {
+          "fish": 1
+        },
+        "reason": null,
+        "x": 26,
+        "y": 49,
+        "novel": false
+      }
+    ],
+    "phases": [
+      {
+        "tick": 12042,
+        "state": "starting",
+        "phase": null
+      },
+      {
+        "tick": 12043,
+        "state": "make-fire",
+        "phase": "use"
+      },
+      {
+        "tick": 12044,
+        "state": "starting",
+        "phase": null
+      },
+      {
+        "tick": 12045,
+        "state": "rest",
+        "phase": "rest"
+      },
+      {
+        "tick": 12046,
+        "state": "starting",
+        "phase": null
+      },
+      {
+        "tick": 12047,
+        "state": "starting",
+        "phase": null
+      },
+      {
+        "tick": 12048,
+        "state": "drink",
+        "phase": "use"
+      },
+      {
+        "tick": 12049,
+        "state": "drink",
+        "phase": "use"
+      },
+      {
+        "tick": 12050,
+        "state": "starting",
+        "phase": null
+      },
+      {
+        "tick": 12051,
+        "state": "starting",
+        "phase": null
+      },
+      {
+        "tick": 12052,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12053,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12053,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12053,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12053,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12053,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12053,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12053,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12054,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12055,
+        "state": "fish",
+        "phase": "cast"
+      },
+      {
+        "tick": 12056,
+        "state": "fish",
+        "phase": "wait"
+      },
+      {
+        "tick": 12057,
+        "state": "fish",
+        "phase": "wait"
+      },
+      {
+        "tick": 12058,
+        "state": "fish",
+        "phase": "wait"
+      },
+      {
+        "tick": 12059,
+        "state": "fish",
+        "phase": "wait"
+      },
+      {
+        "tick": 12060,
+        "state": "fish",
+        "phase": "wait"
+      },
+      {
+        "tick": 12061,
+        "state": "fish",
+        "phase": "reel"
+      },
+      {
+        "tick": 12062,
+        "state": "fish",
+        "phase": "reel"
+      },
+      {
+        "tick": 12063,
+        "state": "starting",
+        "phase": null
+      },
+      {
+        "tick": 12063,
+        "state": "starting",
+        "phase": null
+      },
+      {
+        "tick": 12063,
+        "state": "starting",
+        "phase": null
+      }
+    ],
+    "note": "Engine-chosen fishing attempt, no injected action or tool. Demo paused briefly to inspect, then resumed."
+  },
+  "contrast": [
+    {
+      "fg": "--hud-text",
+      "bg": "--hud",
+      "foreground": "#f5efd9",
+      "background": "#28362d",
+      "ratio": 11.01
+    },
+    {
+      "fg": "--hud-muted",
+      "bg": "--hud",
+      "foreground": "#bdc8b6",
+      "background": "#28362d",
+      "ratio": 7.31
+    },
+    {
+      "fg": "--hud-muted",
+      "bg": "--hud-hover",
+      "foreground": "#bdc8b6",
+      "background": "#425546",
+      "ratio": 4.62
+    },
+    {
+      "fg": "--hud-deep",
+      "bg": "--gold",
+      "foreground": "#202a24",
+      "background": "#e8c36e",
+      "ratio": 8.79
+    },
+    {
+      "fg": "--gold",
+      "bg": "--hud-deep",
+      "foreground": "#e8c36e",
+      "background": "#202a24",
+      "ratio": 8.79
+    },
+    {
+      "fg": "--focus",
+      "bg": "--hud",
+      "foreground": "#ffe1a0",
+      "background": "#28362d",
+      "ratio": 9.98
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Manrope Variable",
+      "status": "loaded",
+      "weight": "200 800"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import type { FrameQuery, WorldFrame } from './types';
+import demoManifest from './demoManifest.json';
 
 export function validateServer(value: string, pageProtocol = location.protocol): string {
   let u: URL;
@@ -20,10 +21,10 @@ export class ExpanseClient {
   private worker: Worker | null = null;
   private calls = new Map<number, { resolve: (v: WorldFrame) => void; reject: (e: Error) => void; timer: ReturnType<typeof setTimeout> }>();
   private next = 0;
-  constructor(private url?: string, seed = 20260101) {
+  constructor(private url?: string, seed = demoManifest.seed) {
     if (url) return;
     this.worker = new Worker(new URL('./demo.worker.ts', import.meta.url), { type: 'module' });
-    this.worker.postMessage({ type: 'start', seed });
+    this.worker.postMessage({ type: 'start', seed, sha256: demoManifest.sha256, checkpointUrl: new URL(`${import.meta.env.BASE_URL}demo/checkpoint.json.gz`,location.href).href });
     this.worker.onmessage = ({ data }) => {
       const call = this.calls.get(data.id); if (!call) return;
       clearTimeout(call.timer); this.calls.delete(data.id);

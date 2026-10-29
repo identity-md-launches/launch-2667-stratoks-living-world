@@ -1,46 +1,42 @@
-# Renderer art integration
+# Living Stratok artwork
 
-This completes the integration of the earlier contributor's generated atlases; it does not replace that contribution or alter the simulation. The earlier `README.md`, `DIRECTION.md`, diagnostic manifest and validation file describe the original inputs. The runtime manifest is **`web/public/art/manifest.json`**, mirrored for typed imports in `web/src/expanse/atlas.json`.
+The previously rejected rabbit artwork, icons, share images, compiled archive viewer and screenshots have been removed. Historical numerical JSON/TAP reports and owner engine/recovery source remain. The active source is `web/src/expanse/`; its final runtime manifest is `web/public/art/manifest.json`, identical to `web/src/expanse/atlas.json`.
 
-## Delivered art
+## Delivered assets
 
-| Sheet | Dimensions | Registered sprites | Runtime PNG |
-| --- | --- | --- | --- |
-| Characters | 1024×1024 | 64 | `web/public/art/characters.png` |
-| World | 1024×1024 | 64 | `web/public/art/world.png` |
-| Supplemental resources/effects | 384×256 | 6 | `web/public/art/extra.png` |
+| File in `web/public/art/` and `dist/art/` | Geometry | Purpose |
+| --- | --- | --- |
+| `living-characters.webp` | 1920×1920, 6×6 cells, 320 px | 36 transparent registered poses |
+| `living-world.webp` | 2560×1280, 8×4 cells, 320 px | 32 transparent biome/resource/shelter sprites |
+| `model.webp` | 1536×1024 | Supplied species model sheet, quality-86 derivative |
+| `manifest.json` | Rectangles, foot pivots, bounds, hashes | Reusable atlas contract |
 
-All are real alpha PNG atlases, bundled in `dist/art/` as well. Sprite cells are 128×128 with a nominal 8px packing gutter and measured antialiased paint kept at least 4px from the cell edge. Every rectangle and its cell-local ground anchor is in the manifest. Character widths are 2.6 half-tile units; mature trees use 3.9, shelters 3.8, and smaller resources 1.5–2.4. The renderer's unit is the isometric tile's half-width.
+The original species is a compact, upright, golden-yellow scalloped body with short limbs, expressive eyes and a leaf crown. There are no long ears, animal muzzle or rabbit tail. The contributor inspected the supplied model/atlases and rendered result. This is contributor review; independent owner art approval remains pending.
 
-The two supplied 1254×1254 RGBA inputs were visually inspected, then stored as editable 256-color raster masters in `web/art-source/characters.png` and `world.png`. Their original input hashes remain in the runtime manifest and the earlier source documentation. Palette conversion is a size-conscious derivative; these masters do not claim byte identity with the original inputs. A newly generated `extra.png` master adds cactus, flint, lichen, shellfish and two campfire poses in the same miniature painted style. No remote art is loaded. No layered painting, rig or authored 3D model exists.
+The source manifests in `docs/living/manifest.json` retain the supplied PNG SHA-256s: model `88ac8df…e6f0e`, characters `4c37695…cf130`, world `dbeeabaa…ff55c`. Registered PNG inputs were encoded as WebP at quality 88 with alpha quality 100, retaining full cell dimensions and `[160,280]` foot pivots. Geometry and transparent gutters are checked by `tools/living/validate-integration.mjs`. Source registration removed matte alpha ≤16 and detached character dust below 24 pixels; its accepted editable generated sources remain in `docs/living/source/`. WebP compression is a documented derivative, not a claim of lossless colour identity.
 
-Attribution: original STRATOKS contributor artwork generated with OpenAI image generation, 2026; extraction, registration, supplemental art and renderer integration by the interface contributor. Reuse is offered under the repository's client/art MIT license (`docs/licenses/client-and-art.txt`, also bundled under `dist/licenses/`). No third-party artwork was intentionally incorporated.
-
-## Reproduce technical preparation
-
-Ordinary frontend builds use the committed PNGs and do not require Python. To regenerate the atlases from the committed editable masters, install Pillow, numpy and scipy in an external virtual environment, then run:
+Runtime builds need only the committed WebP files. Re-extraction uses `tools/living/pack.py` on the retained generated sources; `tools/living/integrate.mjs` packages the supplied registered PNGs (or regenerates missing character/world PNGs). It uses `sharp`, installed outside this repository, and never installs or archives dependencies in the submission. The model WebP remains bundled when the original task-only PNG is unavailable.
 
 ```sh
-python tools/art/prepare_renderer.py
-python tools/art/validate_renderer.py
+npm install --prefix /tmp/stratoks-art sharp@0.35.5
+STRATOKS_SHARP=/tmp/stratoks-art/node_modules/sharp node tools/living/integrate.mjs
+STRATOKS_SHARP=/tmp/stratoks-art/node_modules/sharp node tools/living/validate-integration.mjs
 ```
 
-The preparer identifies the 64 disconnected opaque silhouettes in each supplied sheet, removes disconnected edge ghosts using a three-pixel halo, crops complete silhouettes rather than uniform grid cells, registers ground contacts and repacks. It records source rectangles and runtime pivots. It normalizes source scale, clamps packing positions to retain complete silhouettes, and exports 256-color PNGs. The validator checks all 134 sprites, dimensions, hashes, real transparency, safe paint bounds, anchors and matching manifest copies. `--import-inputs` is only for the original task inputs; normal reproduction does not need them.
+All characters use the same cell-local foot pivot. The canvas scales a full cell to 3.2 tile half-widths; visible body width is roughly half that. Trees use 4.4 half-widths, homes 5.6, resource nodes 1.8–2.9. The map uses the API's exact per-tile biome field, with a representative-chunk fallback for older recordings. Vegetation maps to real nodes; piles and supplies map to real inventories/stores. Their footprints scale with actual item counts and disappear at zero; painted units remain qualitative. Transparent art is depth-sorted by ground contact. The renderer never changes the projection to fit the painting.
 
-## Runtime gates and animation
+The new SVG wordmark, favicon, share image and archived vector fallback follow the same leaf-crowned species. HUD portraits crop the same character atlas. All assets load locally with relative URLs. There are no emoji stand-ins, remote image URLs, wallet icons or animal substitutes in the static export.
 
-Four diagonal directions have idle (four poses, 2fps, ping-pong) and walking (four poses, 6fps) loops. Resting uses two poses at 1fps; gathering, carrying and building use two at 3fps. These are registered generated pose sequences, not a skeletal rig. Identity phase/fur glint derives from the resident ID and is stable across sessions.
+## State-to-animation mapping
 
-Position interpolation is restricted to adjacent confirmed roster positions. While those confirmed endpoints are being interpolated, directional walking takes precedence over the destination action (including gather/build/rest/socialize/use/follow); the engine walks toward those targets before executing work. Inspected positive wood inventory permits the carrying appearance during that movement. After interpolation completes, rest/gather/build appearances require the corresponding engine action; stationary carrying also requires carry/move. Larger changes snap; no omitted intermediate path is inferred. Other residents' inventories are not guessed. Low health below 30 uses a static distress ring. No speech or invented affect is displayed.
+See [the authoritative visual contract](../living/FRONTEND.md#authoritative-visual-contract). Fishing uses only actual `fish` phases with a held line. The fish-on-hook catch pose is intentionally unused because the API has no catch-result phase. Loads require actual items. Construction requires the actual target site and materials. Rest and sleep are separate engine states. Backward travel keeps the real rear pose; southwest work/walk uses mirrored southeast art. Original PNG work sequences are reusable but are not a fabricated eight-direction rig.
 
-Resource kinds map to actual engine nodes; bushes and stone have depleted/reduced variants. Empty trees and exhausted loose resources disappear. Four biome art families use the API's representative chunk biome; the API does not expose an exact biome for every tile. Completed shelter art is used only for reported shelters. Frame and partial-shelter sprites remain shipped but unused because the API exposes no construction stage. The illustrative shoreline/water variants remain reusable artwork; renderer shoreline edges instead follow exact server tile neighbors, avoiding decorative resource rocks in unreported locations. Every received ground tile is clipped to its correct isometric diamond and painted with the supplied ground texture.
+Water ripples, small foliage sway and procedural fire motion are restrained. Fire requires an engine fire record. Animation and interpolation stop under reduced motion or the visual pause control, while the simulation remains independent. Recorded poses are frozen. Missing consecutive movement frames snap rather than creating a path.
 
-Worn ground uses the manifest's `presentation.wornGround` bare-earth swatch from `arid.ground` (20×12 pixels at sheet coordinate 438,449). It excludes the rocks/plants in the full transition sprites. Soft strokes mark clear approaches and short clear connections around reported shelters, plus at most 256 adjacent travel segments observed during the current viewer session. Water, cliffs, blocking tree/stone nodes and blocked diagonal corners are excluded. This is cosmetic settlement wear, with no usable-road claim, route search, terrain mutation, movement-cost change or saved simulation memory.
+Actual terrain neighbours produce continuous shorelines. The four supplied shore block sprites remain reusable atlas art; they are not stamped into the map, since their painted water/rocks could misrepresent traversable tiles or resource locations. Ground texture is original procedural brush work clipped to engine diamonds, with no false resource nodes or bridges. Worn ground follows clear approaches to reported shelters and up to 256 adjacent travel segments observed in the viewer, excludes water/cliffs/blocking nodes/corner cuts, and has no mechanical effect.
 
-Water ripples and slight foliage motion are restrained procedural presentation effects over real tiles/nodes. Fire frames are used only for `view.fires`. Reduced motion and the visual pause control freeze cosmetic loops, wind, water, fire and interpolation; authoritative positions still update. Recorded preview positions and creature poses stay frozen. No extra buildings or resource-bearing decoration are invented.
+## License and limits
 
-`GroundCache` retains at most 96 fixed 8×8-tile rasters at 32 pixels per half tile, independent of camera position, zoom and DPR. The signature includes received tile data and a one-tile shoreline halo. Offscreen rasters are culled and least-recently-used paint is released. Changed terrain and world identity/rollback invalidate paint; a new view can rebuild newly exposed or changed edge chunks. Camera changes otherwise scale and translate cached chunks instead of repainting the entire view. A separate viewport-sized composition at the current DPR is reused between camera/terrain changes, avoiding repeated chunk compositing during stationary animation and between follow updates.
+Original generated art and extraction: STRATOKS contributors, 2026, MIT; the full notice is `docs/living/LICENSE.txt` and `web/public/licenses/living-art.txt`. New integration/procedural/SVG work follows the repository's client/art MIT notice. Local Manrope retains its OFL notice. No third-party art was intentionally added. A license notice does not independently certify copyright eligibility or uniqueness.
 
-## Honest limits
-
-Generated silhouettes vary subtly between poses; these loops are not anatomically rigid. There are no eight-direction or skeletal animations, growth/age body stages, material-specific carrying art beyond confirmed wood, or engine-unreported shelter stages. Interpolation cannot reconstruct a path omitted between polls. Coarse biome decoration can differ from a sub-chunk biome boundary. New terrain rasterization still has startup spikes; fixed-size caches can soften at high zoom. The revision validation measures pan, zoom and follow separately from the earlier live test and static synthetic population measurements.
+Generated shapes vary subtly between frames. There is no rig, layered painting, eight-direction work cycle, growth-specific body art, exact-count inventory drawing or supplied unlit-house variant. Warm windows are baked illustration in completed, standing homes; actual insulation follows shelter integrity, and windows are not a fire record. These limitations are disclosed rather than filled with invented activity.

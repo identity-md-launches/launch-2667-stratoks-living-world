@@ -48,7 +48,7 @@ export function WorldMap({
   selected: number | null;
   knowledge: boolean;
   borders: boolean;
-  onAspect: (aspect: number) => void;
+  onAspect: (aspect: number, width: number) => void;
   motion: boolean;
   recorded: boolean;
 }) {
@@ -58,6 +58,7 @@ export function WorldMap({
     [assetError, setAssetError] = useState(false);
   const [size, setSize] = useState<Size>({ w: 800, h: 600 });
   const [hover, setHover] = useState("");
+  const [pickedTile,setPickedTile]=useState<{x:number;y:number}|null>(null);
   const current = useRef({
     frame,
     camera,
@@ -114,7 +115,7 @@ export function WorldMap({
         h = e.contentRect.height;
       if (!w || !h) return;
       setSize({ w, h });
-      onAspect(w / h);
+      onAspect(w / h, w);
     });
     observer.observe(el);
     return () => observer.disconnect();
@@ -146,6 +147,7 @@ export function WorldMap({
           el.dataset.drawTimes = JSON.stringify(
             renderer.current!.stats.drawTimes.slice(-120),
           );
+          el.dataset.hits = JSON.stringify(renderer.current!.hits);
         }
       }
       request = requestAnimationFrame(draw);
@@ -312,7 +314,8 @@ export function WorldMap({
           if (gesture.current && !gesture.current.moved && !pinched.current) {
             const p = point(e),
               id = renderer.current?.pick(p.x, p.y);
-            if (id !== null && id !== undefined) onSelect(id);
+            if (id !== null && id !== undefined) { setPickedTile(null); onSelect(id); }
+            else { const tile=unproject(p,current.current.camera,current.current.size);setPickedTile({x:Math.floor(tile.x),y:Math.floor(tile.y)}); }
           }
           pointers.current.delete(e.pointerId);
           if (pointers.current.size === 0) pinched.current = false;
@@ -332,6 +335,7 @@ export function WorldMap({
             : "Opening the world…"}
         </div>
       )}
+      {pickedTile && <TileEvidence tile={pickedTile} frame={frame} close={()=>setPickedTile(null)}/>}
       <div className="exp-compass" aria-hidden="true">
         <span>N</span>
         <svg width="32" height="34" viewBox="0 0 32 34">
@@ -360,7 +364,7 @@ export function WorldMap({
           onClick={() =>
             onCamera(
               clampCamera(
-                { x: 26, y: 26, span: innerWidth < 600 ? 12 : 22 },
+                { x: 26, y: 26, span: (innerWidth < 600 ? 9.5 : 22) * size.w / innerWidth },
                 frame.bounds,
                 size.w / size.h,
               ),
@@ -460,6 +464,7 @@ export function MiniMap({
             };
             if (dirs[e.key]) {
               e.preventDefault();
+              setExpanded(false);
               onCamera(
                 clampCamera(
                   {
@@ -485,6 +490,7 @@ export function MiniMap({
                 },
                 b,
               );
+            setExpanded(false);
             onCamera(clampCamera({ ...camera, ...p }, b, aspect));
           }}
         />
@@ -494,4 +500,21 @@ export function MiniMap({
       </div>
     </div>
   );
+}
+
+function TileEvidence({tile,frame,close}:{tile:{x:number;y:number};frame:WorldFrame;close:()=>void}){
+ const v=frame.view,{x,y}=tile,index=(y-v.y0)*v.w+x-v.x0;
+ const available=x>=v.x0&&y>=v.y0&&x<v.x0+v.w&&y<v.y0+v.h;
+ const node=v.nodes.find(n=>n[2]===x&&n[3]===y),home=v.shelters.find(s=>s[1]===x&&s[2]===y),site=v.sites?.find(s=>s.x===x&&s.y===y);
+ const stores=v.stores?.filter(s=>s.x===x&&s.y===y)??[],piles=v.piles?.filter(s=>s.x===x&&s.y===y)??[];
+ return <aside className="exp-tile-evidence" aria-label="Tile evidence" data-coordinate={`${x},${y}`}>
+   <div><strong>{x}, {y}</strong><button className="exp-icon" onClick={close} aria-label="Close tile evidence"><Icon name="close" size={16}/></button></div>
+   <p>{available?TILE_NAMES[v.tiles[index]]:'Awaiting terrain'}</p>
+   {available&&<p className="exp-small exp-muted">{BIOME_NAMES[v.biomes?.[index]??v.biome]}</p>}
+   {node&&<p>{node[1].replaceAll('_',' ')} · {node[4]} units</p>}
+   {home&&<p>{home[3]?.replaceAll('_',' ')??'Shelter'} · {home[4]??'Unknown'}% integrity</p>}
+   {site&&<><p>{site.kind.replaceAll('_',' ')} · stage {site.stage}/3</p><p className="exp-small">Materials: {Object.entries(site.need).map(([k,n])=>`${k} ${site.materials[k]??0}/${n}`).join(', ')}. Labour: {Math.round(site.work)}/{site.workNeed}.</p></>}
+   {[...stores,...piles].map((s,i)=><p key={i} className="exp-small">{i<stores.length?'Store':'Ground pile'}: {Object.entries(s.items).map(([k,n])=>`${n} ${k.replaceAll('_',' ')}`).join(', ')}</p>)}
+   <p className="exp-small exp-muted">Received tick {frame.tick.toLocaleString()}. Observer evidence; agents have their own local knowledge.</p>
+ </aside>;
 }

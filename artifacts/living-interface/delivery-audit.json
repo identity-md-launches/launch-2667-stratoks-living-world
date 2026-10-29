@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "method": "Sum of full added/modified files, ignoring deletions as savings; git diff + untracked nonignored paths.",
+  "bytes": 8226517,
+  "limit": 8388608,
+  "remaining": 162091,
+  "pathBudgets": {
+    "runtime": {
+      "paths": [
+        "web/public/art/**",
+        "web/public/demo/**",
+        "dist/**"
+      ],
+      "bytes": 6411357,
+      "limit": 6422528
+    },
+    "evidence": {
+      "paths": [
+        "artifacts/living-interface/**"
+      ],
+      "bytes": 1476093,
+      "limit": 1703936
+    }
+  },
+  "forbiddenChanges": [],
+  "unnecessaryArchives": [],
+  "submodules": [],
+  "files": 97,
+  "largest": [
+    {
+      "path": "dist/demo/checkpoint.json.gz",
+      "bytes": 1912937
+    },
+    {
+      "path": "web/public/demo/checkpoint.json.gz",
+      "bytes": 1912937
+    },
+    {
+      "path": "dist/art/living-world.webp",
+      "bytes": 461134
+    },
+    {
+      "path": "web/public/art/living-world.webp",
+      "bytes": 461134
+    },
+    {
+      "path": "dist/assets/index-Cks6kMzT.js",
+      "bytes": 377271
+    },
+    {
+      "path": "dist/art/living-characters.webp",
+      "bytes": 308812
+    },
+    {
+      "path": "web/public/art/living-characters.webp",
+      "bytes": 308812
+    },
+    {
+      "path": "dist/art/model.webp",
+      "bytes": 140036
+    },
+    {
+      "path": "web/public/art/model.webp",
+      "bytes": 140036
+    },
+    {
+      "path": "artifacts/living-interface/biomes-1280.webm",
+      "bytes": 135707
+    },
+    {
+      "path": "artifacts/living-interface/browser-results.json",
+      "bytes": 131713
+    },
+    {
+      "path": "artifacts/living-interface/first-screen-1440.jpg",
+      "bytes": 127289
+    }
+  ],
+  "status": "pass"
+}

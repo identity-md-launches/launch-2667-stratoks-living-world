@@ -191,17 +191,14 @@ export function Mascot({
         strokeWidth="6"
         strokeLinecap="round"
       />
-      <path d="M16 28c0-17 32-17 32 0v15c0 19-32 19-32 0Z" fill="#f0cc57" />
+      <path d="M15 24c-5-7 3-14 10-12 5-6 14-4 17 2 9-2 15 7 11 13 7 5 5 14-2 16 2 8-7 14-14 10-6 5-15 1-15-4-9 3-15-5-12-12-6-4-4-11 5-13Z" fill="#f0cc57" />
       <path
         d="M20 30c0-14 23-16 25-5-9-3-15 3-15 22-8-1-10-8-10-17"
         fill="#fce48a"
       />
       <path
-        d="M25 16c-3-8-8-9-9-6m23 6c3-8 8-9 9-6"
-        stroke="#f0cc57"
-        strokeWidth="5"
-        fill="none"
-        strokeLinecap="round"
+        d="M31 14C19 10 18 3 22 3c9-1 13 4 9 11m1 0C30 5 37 1 44 4c0 6-6 11-12 10"
+        fill="#8da85c"
       />
       <path
         d="m16 33-5 9m37-9 5 9"
@@ -218,8 +215,8 @@ export function Mascot({
         />
       ) : (
         <>
-          <ellipse cx="25" cy="31" rx="2.3" ry="3.2" fill="#3b442e" />
-          <ellipse cx="39" cy="31" rx="2.3" ry="3.2" fill="#3b442e" />
+          <ellipse cx="25" cy="31" rx="3.5" ry="4.5" fill="#3b442e" />
+          <ellipse cx="39" cy="31" rx="3.5" ry="4.5" fill="#3b442e" />
         </>
       )}
       <path

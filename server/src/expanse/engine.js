@@ -718,7 +718,7 @@ export class Expanse {
     const a = c.act, load = this.invWeight(c);
     const carrying = Object.fromEntries(Object.entries(c.inventory).filter(([k, n]) => n > 0 && STORABLE.has(k)));
     const tools = Object.keys(c.inventory).filter((k) => c.inventory[k] > 0 && (TOOLS[k] || k === 'hand_axe' || k === 'stone_club'));
-    if (!a) return { state: c.following ? 'follow' : 'idle', prim: null, phase: null, progress: 0, target: null, item: null, load, carrying, tools };
+    if (!a) return { state: c.following ? 'follow' : 'idle', prim: null, phase: null, progress: 0, target: null, item: null, load, capacity: this.cfg.invCapacity, carrying, tools };
     const night = this.daylight() < -0.3;
     let state = { gather: a.kind === 'fish' ? 'fish' : 'gather', rest: night ? 'sleep' : 'rest', build: 'construct', repair: 'repair', deposit: 'store', retrieve: 'store', combine: 'craft', place: 'place', carry: 'gather', inspect: 'inspect', share: 'social', socialize: 'social', follow: 'social', threaten: 'social', attack: 'fight', move: 'travel' }[a.prim] ?? a.prim;
     if (a.prim === 'use') state = a.on === 'water' ? 'drink' : a.on === 'self' ? 'eat' : a.on === 'fire' ? 'tend-fire' : 'make-fire';
@@ -729,7 +729,7 @@ export class Expanse {
     const dur = { rest: 20, inspect: 1, combine: 4, place: 2, repair: 6, deposit: 2, retrieve: 2, socialize: 8, use: a.on === 'water' ? 3 : 2 }[a.prim] ?? (a.prim === 'gather' ? (a.kind === 'fish' ? 12 : c.inventory.hand_axe && TOOL_GATHER.has(a.kind) ? 3 : 6) : 1);
     let progress = a.phase === 'travel' ? 0 : Math.min(1, a.work / dur);
     if (a.prim === 'build' && a.site !== undefined) { const s = this.shelters.find((q) => q.id === a.site); if (s) progress = s.complete ? 1 : Math.round(100 * (sum(s.materials) / sum(s.need) + s.work / s.workNeed) / 2) / 100; }
-    return { state, prim: a.prim, phase: a.phase ?? null, progress: Math.round(progress * 100) / 100, target: a.x !== undefined ? { x: a.x, y: a.y } : null, item: a.item ?? (a.kind ? NODE_KINDS[a.kind]?.item : null) ?? null, load, carrying, tools };
+    return { state, prim: a.prim, phase: a.phase ?? null, progress: Math.round(progress * 100) / 100, target: a.x !== undefined ? { x: a.x, y: a.y } : null, item: a.item ?? (a.kind ? NODE_KINDS[a.kind]?.item : null) ?? null, load, capacity: this.cfg.invCapacity, carrying, tools };
   }
   performAttack(c, target) {
     // Range 1 (reach), energy cost, hit chance, damage; injuries bleed. Death only via the health rule.
@@ -965,11 +965,11 @@ export class Expanse {
     Object.assign(e, { id: st.id, legacyArchive: st.legacyArchive, seed: st.seed, schema: st.schema, tick: st.tick, seq: st.seq, mode: cfgOverride.mode ?? st.mode, learning: cfgOverride.learning ?? st.learning, fires: st.fires, shelters: st.shelters,
       creatures: st.creatures, graveyard: st.graveyard, events: st.events, social: st.social, discoveries: st.discoveries, history: st.history, totals: st.totals, weather: st.weather, nextId: st.nextId, ...(st.migrations ? { migrations: st.migrations } : {}) });
     e.rng = new Rng(1); e.rng.s = st.rng >>> 0;
-    e.base = { tiles: Uint8Array.from(Buffer.from(st.base.tiles, 'base64')), trees: st.base.trees, stones: st.base.stones, bushes: st.base.bushes };
+    e.base = { tiles: decodeTiles(st.base.tiles), trees: st.base.trees, stones: st.base.stones, bushes: st.base.bushes };
     e.chunks = new Map();
     for (const c of st.chunks) {
       const fresh = generateChunk(e.seed, c.cx, c.cy, e.base);
-      const ch = { cx: c.cx, cy: c.cy, tiles: Uint8Array.from(Buffer.from(c.tiles, 'base64')), biome: fresh.biome, nodes: c.nodes, piles: c.piles, dirty: true };
+      const ch = { cx: c.cx, cy: c.cy, tiles: decodeTiles(c.tiles), biome: fresh.biome, nodes: c.nodes, piles: c.piles, dirty: true };
       e.indexChunk(ch); e.chunks.set(chunkKey(c.cx, c.cy), ch);
     }
     for (const [cx, cy] of st.generated ?? []) e.chunk(cx, cy); // pristine chunks regenerate deterministically
@@ -979,6 +979,9 @@ export class Expanse {
 }
 
 function usable(s) { return s.complete !== false && s.integrity > 0; }
+// The save format is unchanged. Browser workers restore the exact same snapshot
+// without a Node Buffer polyfill or a replacement simulation.
+function decodeTiles(value) { return typeof Buffer !== 'undefined' ? Uint8Array.from(Buffer.from(value, 'base64')) : Uint8Array.from(atob(value), c => c.charCodeAt(0)); }
 function sum(o) { let t = 0; for (const v of Object.values(o)) t += v; return t; }
 export function missingMaterials(s) { return Object.keys(s.need ?? {}).filter((k) => (s.materials?.[k] ?? 0) < s.need[k]).sort(); }
 // A shelter that existed before schema 4 (or came from the Phase 2A settlement) is finished: its materials were

@@ -2,7 +2,9 @@ import { drawSprite, type Art } from "./art";
 import { project, scale, type Size } from "./projection";
 import type { Camera, WorldFrame } from "./types";
 
-const COLORS = ["#89ad59", "#3bafb2", "#2b9eac", "#74cbbd", "#dfc78d", "#9ba7a1", "#e3ece9", "#778f90", "#6e964c", "#d4b779", "#69beb7"];
+const COLORS = ["#7d9b57", "#4c9b9e", "#307c90", "#80b7af", "#d8bf87", "#9c9f8b", "#e2e8df", "#727e7a", "#668750", "#cdb17a", "#5ca6a1"];
+const B = {temperate:0,arid:1,cold:2,coast:3} as Record<string,number>;
+const noise=(x:number,y:number)=>((x*374761393+y*668265263)^((x+19)*(y+37)*1274126177))>>>0;
 export const WATER = new Set([1, 2, 3, 10]);
 const CHUNK = 8, UNIT = 32, PAD = 2, LIMIT = 96;
 const RASTER = { w: 2 * CHUNK * UNIT + 2 * PAD, h: CHUNK * UNIT + 2 * PAD };
@@ -72,7 +74,7 @@ export class GroundCache {
           // A one-tile halo captures shore neighbors and partial viewport edges.
           for (let j = y - 1; j <= y + CHUNK; j++)
             for (let i = x - 1; i <= x + CHUNK; i++)
-              signature += String.fromCharCode(tileAt(f, i, j) + 2);
+              signature += String.fromCharCode(tileAt(f, i, j) + 2, B[f.view.biomes?.[(j-f.view.y0)*f.view.w+i-f.view.x0] ?? f.view.biome] ?? 0);
           this.signatures.set(key, signature);
         }
         let entry = this.chunks.get(key);
@@ -139,12 +141,29 @@ export class GroundCache {
         ctx.fill();
         if (!WATER.has(t)) {
           ctx.save();
-          diamond(ctx, p.x, p.y, UNIT + 0.7);
-          ctx.clip();
-          const biome = t === 6 ? "cold" : t === 4 || t === 9 ? "arid" : t === 5 || t === 7 ? "coast" : "temperate";
-          drawSprite(ctx, this.art, `${biome}.ground`, p.x, p.y + UNIT * 0.45, UNIT * 2.8, 0.27);
-          ctx.fillStyle = ((x * 374761393 + y * 668265263) ^ ((x + 19) * (y + 37) * 1274126177)) % 2 ? "#fff3b30c" : "#355b2a0a";
-          ctx.fillRect(p.x - UNIT, p.y - UNIT / 2, UNIT * 2, UNIT);
+          diamond(ctx,p.x,p.y,UNIT+.7);ctx.clip();
+          const biome=f.view.biomes?.[(y-f.view.y0)*f.view.w+x-f.view.x0] ?? f.view.biome;
+          const seed=noise(x,y);
+          // Ground-only brush marks: never a gatherable resource or an implied route.
+          const tint=biome==='arid'?'#e9cf98':biome==='cold'?'#cfdcd7':biome==='coast'?'#d7cdab':'#769553';
+          ctx.fillStyle=tint;ctx.globalAlpha=.13+(seed%5)*.02;
+          ctx.fillRect(p.x-UNIT,p.y-UNIT/2,UNIT*2,UNIT);ctx.globalAlpha=1;
+          for(let n=0;n<12;n++){
+            const h=noise(x*23+n,y*17-n),xx=p.x+((h%1000)/500-1)*UNIT,yy=p.y+(((h>>>10)%1000)/1000-.5)*UNIT;
+            ctx.fillStyle=n%3?'#f5ebbb22':'#29452b20';
+            ctx.beginPath();ctx.ellipse(xx,yy,1+(h%3),.6+(h%2)*.3,-.4,0,Math.PI*2);ctx.fill();
+          }
+          if((t===0||t===8)&&seed%3!==0){
+            const xx=p.x+((seed%13)-6)*2, yy=p.y+((seed%7)-3)*2;
+            ctx.strokeStyle=biome==='cold'?'#829e8c66':'#354f3180';ctx.lineWidth=.8;
+            ctx.beginPath();ctx.moveTo(xx-2,yy);ctx.lineTo(xx-4,yy-3);ctx.moveTo(xx,yy);ctx.lineTo(xx+1,yy-5);ctx.moveTo(xx+1,yy);ctx.lineTo(xx+4,yy-2);ctx.stroke();
+          }
+          if(t===9||t===4){ctx.strokeStyle='#9f794d22';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(p.x,p.y+5,UNIT*.85,UNIT*.23,-.2,Math.PI,Math.PI*2);ctx.stroke();}
+          if(t===6){ctx.strokeStyle='#f7fcf1aa';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p.x-20,p.y+3);ctx.quadraticCurveTo(p.x,p.y-4,p.x+20,p.y-2);ctx.stroke();}
+          if(t===5||t===7){
+            ctx.strokeStyle='#596d6566';ctx.lineWidth=t===7?3:1;ctx.beginPath();ctx.moveTo(p.x-18,p.y-5);ctx.lineTo(p.x-3,p.y+2);ctx.lineTo(p.x+3,p.y-2);ctx.lineTo(p.x+18,p.y+5);ctx.stroke();
+            ctx.strokeStyle='#dee0c044';ctx.beginPath();ctx.moveTo(p.x-19,p.y-7);ctx.lineTo(p.x-2,p.y);ctx.lineTo(p.x+4,p.y-4);ctx.lineTo(p.x+20,p.y+3);ctx.stroke();
+          }
           ctx.restore();
         } else {
           const verts = [{ x: p.x, y: p.y - UNIT / 2 }, { x: p.x + UNIT, y: p.y }, { x: p.x, y: p.y + UNIT / 2 }, { x: p.x - UNIT, y: p.y }];
@@ -155,7 +174,8 @@ export class GroundCache {
             const a = verts[edge], b = verts[(edge + 1) % 4];
             ctx.beginPath();
             ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = "#eee4b491"; ctx.lineWidth = UNIT * 0.12; ctx.stroke();
+            ctx.strokeStyle = "#586f5577"; ctx.lineWidth = UNIT * 0.22; ctx.stroke();
+            ctx.strokeStyle = "#e8d9abcc"; ctx.lineWidth = UNIT * 0.1; ctx.stroke();
             ctx.beginPath();
             ctx.moveTo((a.x + p.x * 0.08) / 1.08, (a.y + p.y * 0.08) / 1.08);
             ctx.lineTo((b.x + p.x * 0.08) / 1.08, (b.y + p.y * 0.08) / 1.08);

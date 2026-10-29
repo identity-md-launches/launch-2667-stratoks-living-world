@@ -1,4 +1,6 @@
 import { drawSprite, type Art } from "./art";
+import { residentPose, residentSprite, carried, constructionStage } from "./appearance";
+export { residentPose } from "./appearance";
 import { project, scale, type Size } from "./projection";
 import { GroundCache, WATER } from "./ground";
 import { settlementWear, WornPaths, type WornSegment } from "./paths";
@@ -19,33 +21,14 @@ export const TILE_NAMES = [
 export const hash = (x: number, y = 0) =>
   ((x * 374761393 + y * 668265263) ^ ((x + 19) * (y + 37) * 1274126177)) >>> 0;
 export function biomeAt(f: WorldFrame, x: number, y: number) {
+  const v=f.view;
+  if(v.biomes && x>=v.x0 && y>=v.y0 && x<v.x0+v.w && y<v.y0+v.h) return v.biomes[(y-v.y0)*v.w+x-v.x0];
   const cx = Math.floor(x / 28),
     cy = Math.floor(y / 28);
   return (
     f.minimap.biomes.find(([bx, by]) => bx === cx && by === cy)?.[2] ??
     f.view.biome
   );
-}
-export type Pose = "idle" | "walk" | "rest" | "gather" | "carry" | "build";
-export function residentPose(
-  r: Resident,
-  frame: WorldFrame,
-  moving: boolean,
-): Pose {
-  const carryingWood =
-    frame.inspector?.id === r.id &&
-    (frame.inspector.inventory.wood ?? 0) > 0;
-  // The active action is the destination task; the engine walks to it first.
-  if (moving) return carryingWood ? "carry" : "walk";
-  if (r.action === "rest") return "rest";
-  if (r.action === "build") return "build";
-  if (r.action === "gather") return "gather";
-  if (
-    (r.action === "carry" || r.action === "move") &&
-    carryingWood
-  )
-    return "carry";
-  return "idle";
 }
 type Track = {
   from: { x: number; y: number };
@@ -94,7 +77,7 @@ export class WorldRenderer {
           dx = r.x - (old?.to.x ?? r.x),
           dy = r.y - (old?.to.y ?? r.y);
         const adjacent = Math.max(Math.abs(dx), Math.abs(dy)) <= 1;
-        const moving = !!old && (dx !== 0 || dy !== 0) && adjacent && !recorded;
+        const moving = !!old && f.tick - (this.tick ?? f.tick) === 1 && (dx !== 0 || dy !== 0) && adjacent && !recorded;
         if (moving) {
           const from = { x: old!.to.x, y: old!.to.y }, to = { x: r.x, y: r.y };
           const key = [`${from.x},${from.y}`, `${to.x},${to.y}`].sort().join(":");
@@ -210,39 +193,27 @@ export class WorldRenderer {
         culled++;
         continue;
       }
-      const biome = biomeAt(f, x, y),
-        variant = hash(x, y) % 3 === 0;
-      let key: string | null = null,
-        width = 2;
-      if (kind === "tree") {
-        if (units === 0) continue;
-        key = variant ? "tree-small" : "tree";
-        width = 3.9;
-      } else if (kind === "bush") {
-        key = units === 0 ? "bush-empty" : "bush";
-        width = 2;
-      } else if (kind === "stone") {
-        key = units < 6 ? "stone-small" : "stone";
-        width = 2.2;
-      } else if (kind === "deadfall" || kind === "driftwood") {
-        if (units === 0) continue;
-        key = "wood";
-        width = 2.4;
-      } else if (kind === "scrub") {
-        if (units === 0) continue;
-        key = "scrub";
-        width = 1.5;
-      } else if (["flint", "cactus", "shellfish", "lichen"].includes(kind)) {
-        if (units === 0) continue;
-        key = kind;
-        width = kind === "cactus" ? 1.9 : 1.5;
+      const biome = biomeAt(f, x, y);
+      const prefix = biome === 'temperate' ? 'forest' : biome === 'arid' ? 'desert' : biome;
+      let sprite: string | null = null, width = 3.2;
+      if (kind === 'tree' && units > 0) { sprite = `${prefix}.tree.${{forest:'oak',desert:'palm',cold:'spruce',coast:'pine'}[prefix] ?? 'oak'}`; width = 4.4; }
+      else if (kind === 'bush') { sprite = `${prefix}.${prefix==='cold'?'berries.frost':prefix==='desert'?'cactus':prefix==='coast'?'reeds':units>0?'berries.full':'berries.depleted'}`; width = 2.9; }
+      else if (kind === 'stone' || kind === 'flint') { if (!units) continue; sprite = `${prefix}.stone.${prefix==='desert'?'sandstone':prefix==='cold'?'granite':prefix==='coast'?'coastal':'sandstone'}`; if(prefix==='forest') sprite='coast.stone.coastal'; width=2.7; }
+      else if (['deadfall','driftwood'].includes(kind) && units>0) { sprite='forest.stock.wood'; width=2.4; }
+      else if (kind === 'cactus' && units>0) { sprite='desert.cactus'; width=2.5; }
+      else if (['scrub','lichen'].includes(kind) && units>0) { sprite=prefix==='cold'?'cold.berries.frost':'coast.reeds'; width=1.8; }
+      else if(kind==='fish') {
+        // A quiet underwater stock marker, never a resident fishing animation.
+        if(units>0) objects.push({depth:p.y,draw:()=>{
+          ctx.strokeStyle='#174d5d99';ctx.lineWidth=Math.max(1,s*.035);
+          ctx.beginPath();ctx.ellipse(p.x,p.y,s*.18,s*.07,-.2,0,Math.PI*2);ctx.stroke();
+          ctx.beginPath();ctx.moveTo(p.x-s*.17,p.y);ctx.lineTo(p.x-s*.28,p.y-s*.09);ctx.lineTo(p.x-s*.28,p.y+s*.08);ctx.closePath();ctx.stroke();
+        }});
+      } else if(kind==='shellfish'&&units>0) {
+        objects.push({depth:p.y,draw:()=>{ctx.fillStyle='#e1d1b9';for(let n=0;n<Math.min(3,units);n++){ctx.beginPath();ctx.ellipse(p.x+s*(n-1)*.16,p.y,s*.11,s*.07,-.5,0,Math.PI*2);ctx.fill();}}});
       }
-      if (!key) continue;
+      if (!sprite) continue;
       drawn++;
-      const sprite =
-        key.includes("flint") || ["cactus", "shellfish", "lichen"].includes(key)
-          ? `extra.${key}`
-          : `${biome}.${key}`;
       objects.push({
         depth: p.y,
         draw: () => {
@@ -254,40 +225,49 @@ export class WorldRenderer {
         },
       });
     }
-    for (const [, x, y] of v.shelters) {
-      const p = project({ x: x + 0.5, y: y + 0.5 }, c, size);
-      if (!visible(p, s * 4)) {
-        culled++;
-        continue;
-      }
+    const prefixAt = (x:number,y:number) => { const b=biomeAt(f,x,y);return b==='temperate'?'forest':b==='arid'?'desert':b; };
+    const structure = (x:number,y:number,stage:string,integrity=100) => {
+      const p=project({x:x+.5,y:y+.5},c,size);
+      if(!visible(p,s*5)){culled++;return;}
       drawn++;
-      objects.push({
-        depth: p.y,
-        draw: () =>
-          drawSprite(
-            ctx,
-            this.art,
-            `${biomeAt(f, x, y)}.shelter`,
-            p.x,
-            p.y,
-            s * 3.8,
-          ),
-      });
+      objects.push({depth:p.y,draw:()=>{
+        drawSprite(ctx,this.art,`${prefixAt(x,y)}.shelter.${stage}`,p.x,p.y,s*5.6,integrity<=0?.35:1);
+        if(integrity<40){ctx.strokeStyle='#c49d63';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p.x-s*.6,p.y-s);ctx.lineTo(p.x-s*.3,p.y-s*.6);ctx.lineTo(p.x-s*.4,p.y);ctx.stroke();}
+      }});
+    };
+    for (const [,x,y,,integrity] of v.shelters) structure(x,y,integrity===0?'foundation':'complete',integrity);
+    for (const site of v.sites ?? []) {
+      const p=project({x:site.x+.5,y:site.y+.5},c,size);
+      const stage=constructionStage(site);
+      if(stage!=='marker') structure(site.x,site.y,stage);
+      else objects.push({depth:p.y,draw:()=>{ctx.strokeStyle='#e8c36e99';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(p.x,p.y-s*.45);ctx.lineTo(p.x+s*.9,p.y);ctx.lineTo(p.x,p.y+s*.45);ctx.lineTo(p.x-s*.9,p.y);ctx.closePath();ctx.stroke();ctx.setLineDash([]);}});
+      const n=Object.values(site.need).reduce((a,b)=>a+b,0), delivered=Object.values(site.materials).reduce((a,b)=>a+b,0);
+      if(delivered>0) objects.push({depth:p.y+.2,draw:()=>{ctx.fillStyle='#25332d';ctx.fillRect(p.x-s*.65,p.y+s*.2,s*1.3,Math.max(3,s*.1));ctx.fillStyle='#e8c36e';ctx.fillRect(p.x-s*.65,p.y+s*.2,s*1.3*Math.min(delivered/n,site.work/site.workNeed),Math.max(3,s*.1));}});
     }
-    for (const [, x, y] of v.fires) {
-      const p = project({ x: x + 0.5, y: y + 0.5 }, c, size);
-      if (!visible(p, s * 3)) {
-        culled++;
-        continue;
-      }
+    for(const stock of [...(v.piles ?? []),...(v.stores ?? [])]) {
+      const p=project({x:stock.x+.85,y:stock.y+1},c,size);
+      if(!visible(p,s*3))continue;
+      const items=Object.entries(stock.items).filter(([,n])=>n>0);
+      if(!items.length)continue;
       drawn++;
-      objects.push({
-        depth: p.y,
-        draw: () => {
-          const phase = opts.motion ? Math.floor(now / 180) % 2 : 0;
-          drawSprite(ctx, this.art, `extra.fire.${phase}`, p.x, p.y, s * 2);
-        },
-      });
+      objects.push({depth:p.y+.1,draw:()=>{
+        if(stock.items.wood>0) drawSprite(ctx,this.art,'forest.stock.wood',p.x-s*.4,p.y,s*(1.3+.15*Math.min(6,stock.items.wood)));
+        if(stock.items.stone>0) drawSprite(ctx,this.art,'desert.stock.stone-reeds',p.x+s*.4,p.y,s*(1.2+.1*Math.min(6,stock.items.stone)));
+        // Food/material containers are generic; exact item quantities stay in evidence.
+        const other=items.filter(([k])=>!['wood','stone'].includes(k)).reduce((n,[,q])=>n+q,0);
+        if(other>0){const volume=.16+.01*Math.min(12,other);ctx.fillStyle='#846247';ctx.strokeStyle='#b29b6c';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(p.x+s*.4,p.y-s*.12,s*volume,s*volume*.6,0,0,Math.PI*2);ctx.fill();ctx.stroke();}
+      }});
+    }
+    for (const [,x,y] of v.fires) {
+      const p=project({x:x+.5,y:y+.5},c,size);if(!visible(p,s*3))continue;
+      drawn++;
+      objects.push({depth:p.y,draw:()=>{
+        const flicker=opts.motion?1+.1*Math.sin(now/160+x):1;
+        const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,s*1.3);glow.addColorStop(0,'#ffd46e55');glow.addColorStop(1,'#ffd46e00');ctx.fillStyle=glow;ctx.fillRect(p.x-s*1.3,p.y-s*1.3,s*2.6,s*2.6);
+        ctx.strokeStyle='#725344';ctx.lineWidth=s*.16;ctx.beginPath();ctx.moveTo(p.x-s*.3,p.y);ctx.lineTo(p.x+s*.3,p.y-s*.15);ctx.moveTo(p.x-s*.3,p.y-s*.15);ctx.lineTo(p.x+s*.3,p.y);ctx.stroke();
+        ctx.fillStyle='#e97e39';ctx.beginPath();ctx.moveTo(p.x-s*.25,p.y-s*.1);ctx.quadraticCurveTo(p.x-s*.3,p.y-s*.5*flicker,p.x+s*.08,p.y-s*.9*flicker);ctx.quadraticCurveTo(p.x+s*.5,p.y-s*.2,p.x+s*.15,p.y);ctx.fill();
+        ctx.fillStyle='#ffe39b';ctx.beginPath();ctx.ellipse(p.x,p.y-s*.25,s*.1,s*.25,0,0,Math.PI*2);ctx.fill();
+      }});
     }
     for (const r of f.residents) {
       const tr = this.tracks.get(r.id)!;
@@ -312,27 +292,14 @@ export class WorldRenderer {
       }
       drawn++;
       const pose = residentPose(r, f, tr.moving && t < 1);
-      const walking = pose === "walk",
-        idle = pose === "idle";
-      const sequence = idle
-        ? [0, 1, 2, 3, 2, 1]
-        : walking
-          ? [0, 1, 2, 3]
-          : [0, 1];
-      const fps = walking ? 6 : idle ? 2 : pose === "rest" ? 1 : 3;
-      const phase =
-        opts.motion && !opts.recorded
-          ? sequence[
-              Math.floor((now / 1000) * fps + (hash(r.id) % 7)) %
-                sequence.length
-            ]
-          : 0;
-      const h = s * 2.6;
+      const phase = opts.motion && !opts.recorded ? Math.floor(now/(pose==='walk'||pose==='carry'?145:pose==='sleep'?900:300)) : 0;
+      const sprite = residentSprite(r,f,tr.moving && t<1,tr.direction,phase);
+      const h = s * 3.2;
       this.hits.push({
         id: r.id,
         x: p.x,
-        y: p.y - h * 0.42,
-        r: Math.max(12, h * 0.48),
+        y: p.y - h * 0.28,
+        r: Math.max(12, h * 0.28),
       });
       objects.push({
         depth: p.y + 0.1,
@@ -348,27 +315,27 @@ export class WorldRenderer {
             ctx.ellipse(p.x, p.y, s * 0.8, s * 0.4, 0, 0, 7);
             ctx.stroke();
           }
-          drawSprite(
-            ctx,
-            this.art,
-            `${tr.direction}.${pose}.${phase}`,
-            p.x,
-            p.y,
-            h,
-          );
-          // A deterministic fur glint distinguishes individuals; it conveys no learned trait.
-          ctx.fillStyle = ["#fff0b9", "#c78032", "#e4b44b", "#f4da87"][
-            hash(r.id) % 4
-          ];
-          ctx.beginPath();
-          ctx.arc(p.x + s * 0.18, p.y - h * 0.48, Math.max(1, s * 0.055), 0, 7);
-          ctx.fill();
+          const mirror = (pose==='fish' && r.target ? r.target.x-r.target.y < r.x-r.y : tr.direction === 'sw') && !sprite.startsWith('idle.');
+          ctx.save();
+          if(mirror) {ctx.translate(p.x*2,0);ctx.scale(-1,1);}
+          drawSprite(ctx,this.art,sprite,p.x,p.y,h);
+          ctx.restore();
+          const load=carried(r,f);
+          if(Object.values(load).some(n=>n>0)&&!sprite.startsWith('carry.')&&!sprite.startsWith('gather.')){
+            // Small neutral pouch for loads without a matching supplied pose; no false wood/fish.
+            ctx.fillStyle='#9b7750';ctx.beginPath();ctx.ellipse(p.x+s*.38,p.y-s*.48,s*.14,s*.19,-.3,0,Math.PI*2);ctx.fill();
+          }
+          if(pose==='fish'&&r.target){
+            const q=project({x:r.target.x+.5,y:r.target.y+.5},c,size);
+            ctx.strokeStyle='#e8d9abbb';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(p.x+s*.48*(mirror?-1:1),p.y-s*.8);ctx.quadraticCurveTo((p.x+q.x)/2,Math.min(p.y,q.y)-s*.6,q.x,q.y);ctx.stroke();
+            ctx.fillStyle='#db7954';ctx.beginPath();ctx.arc(q.x,q.y,Math.max(1.4,s*.06),0,Math.PI*2);ctx.fill();
+          }
           if (r.id === opts.selected) {
             ctx.fillStyle = "#fff3c3";
             ctx.beginPath();
-            ctx.moveTo(p.x, p.y - h * 0.9 - 8);
-            ctx.lineTo(p.x - 4, p.y - h * 0.9 - 14);
-            ctx.lineTo(p.x + 4, p.y - h * 0.9 - 14);
+            ctx.moveTo(p.x, p.y - h * 0.58 - 8);
+            ctx.lineTo(p.x - 4, p.y - h * 0.58 - 14);
+            ctx.lineTo(p.x + 4, p.y - h * 0.58 - 14);
             ctx.fill();
           }
         },

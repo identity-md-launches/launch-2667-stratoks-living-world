@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "sprites": 68,
+  "characters": 36,
+  "world": 32,
+  "minimumGutter": 32,
+  "manifestCopies": "identical",
+  "alpha": "RGBA with transparent cell gutters",
+  "limitations": [
+    "Geometry and alpha checks do not independently approve species aesthetics or animation quality.",
+    "Supplied work poses are southeast; southwest is mirrored and backward travel keeps a rear idle view."
+  ]
+}
