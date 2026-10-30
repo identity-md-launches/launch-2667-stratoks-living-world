@@ -7,7 +7,7 @@ const root = fileURLToPath(new URL('../../', import.meta.url));
 const project = spawnSync('node', ['web/scripts/task.mjs', 'path'], { cwd: root, encoding: 'utf8' }).stdout.trim();
 const lock = JSON.parse(await fs.readFile(path.join(root, 'web/package-lock.json'), 'utf8'));
 const out = path.join(root, 'web/public/licenses'); await fs.mkdir(out, { recursive: true });
-const rows = [], text = ['Stratoks client: locked runtime dependency notices', 'This conservative list includes runtime peer/type dependencies. Build-only tools are pinned in web/package-lock.json.', 'No new model/data dependency is installed. Biological datasets are not bundled.'];
+const rows = [], text = ['Stratoks client: locked runtime dependency notices', 'This conservative list includes runtime peer/type dependencies. Build-only tools are pinned in web/package-lock.json.', 'No new model/data dependency is installed. Biological datasets are not bundled.', 'Hosted export: wagmi, viem, @tanstack/react-query and @coinbase/wallet-sdk, with the packages only they require, are declared for the legacy wallet client source (web/src/Legacy.tsx, web/src/wallet.tsx). The hosted page does not import that client, so none of their code is in assets/. Their notices stay listed because web/package.json declares them.'];
 for (const [relative, pkg] of Object.entries(lock.packages)) {
   if (!relative || pkg.dev || pkg.optional) continue;
   const dir = path.join(project, relative);

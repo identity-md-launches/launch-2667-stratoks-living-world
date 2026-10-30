@@ -68,7 +68,7 @@ Original schema-4 seed-2 tick-12000 checkpoint, 156 residents, is byte-identical
 
 `tools/living/upgrade-demo.mjs` migrates a structured copy, verifies the identity digest, then runs 600 ordinary engine ticks. New schema-5 tick-12600 checkpoint hash:
 
-`9861c4664aea86ae0c22a6a8a1709d101faf93c4a657fe43070777cbb3acdebc`
+`dfd1876c94afe40505583ed4f6094891bd8f5195439238e039bc44892ef907ab` (revision 2, regenerated after engine commit b702f51; see the revision section. The resident/activity counts in the next paragraph describe the previous checkpoint `9861c466…`; the regenerated summary is in `demo-upgrade.json`.)
 
 `agency-demo.test.js` reproduces that exact compressed hash, checks both source/export copies, and compares exact state after save/restart continuation. Existing schema-5 tests additionally preserve original pre-migration bytes/manifest and verify rollback. World ID, residents, brains/weights, memories, relationships, terrain and RNG survive migration; subsequent births/deaths are ordinary simulation, not reset/culling. No actual owner save was available or accessed; preservation on the production owner world is therefore not claimed. Owner copy/migration/restart/rollback steps are in `deploy/INSTALL-LIVING.md`.
 
@@ -113,3 +113,30 @@ Sequential render test (`agency-performance.mjs`, 120 retained frame samples eac
 `forest-desktop.jpg`, `desert.jpg`, `highlands.jpg`, `coast.jpg`, `islands.jpg`, `signal-inspector.jpg`, `phone-first-screen.jpg`, `phone-landscape-evidence.jpg` are real final export screenshots. `phone-tour.webm` is a compact 8 fps / 90 kbit VP9 recording of actual worker/navigation/inspector interactions; no agent actions were forced. The recorder writes its uncompressed intermediate under scratch. Unsupported wheat/cookware/vessels/paired-actor illustrations are not rendered. The actual kneeling actor is extracted without the nominal grid's clipped feet. Direction coverage and source matte fringe remain art limits.
 
 WebKit installation was attempted; launching returned **“Host system is missing dependencies to run browsers.”** Safari, physical phones/cutouts, native screen readers, native 200% zoom and ARM VPS behavior remain unperformed checks. No paid service, wallet, payment flow, inference, live-world writes or production publication was used. The delivery is source plus the working static export for the IMD preview publisher. This local design review and its passing checks are separate from structural acceptance and do not resolve the explicitly listed emergence/performance/device limits.
+
+## Revision 2 (2026-10-30): reopened findings
+
+| Finding | Reproduced | Verdict | Change | Evidence |
+| --- | --- | --- | --- | --- |
+| `26cec351…` medium: opening a resident keeps the roster's scroll and clips the name | Yes, on the committed export. 844×390: `.exp-panel-scroll` scrollTop 47, panel top 166, name 124.9–153.7 (completely above the visible panel). 320×568: scrollTop 75, name hidden. 390×844 and 1440×900 were unaffected. | fixed | `web/src/expanse/App.tsx`: a `useLayoutEffect` keyed on `[side, selected]` sets the shared scroll container's `scrollTop` to 0 before `select()` focuses the heading (`preventScroll`), so changing panel mode or resident opens at the top. Refreshes of the same inspector keep the reader's place. | `web/scripts/check-inspector-scroll.mjs` → `inspector-scroll.json`: 844×390, 320×568, 667×375, 390×844 and 1440×900 all show scrollTop 0, the whole name inside the panel, the heading focused, and a 120 px refresh scroll kept with no console errors. `inspector-open-844x390.jpg` and `inspector-open-320x568.jpg` are screenshots. |
+| `d3e8c3f0…` low/advisory: notices and `web/package.json` declare wallet libraries absent from the hosted bundle | Yes: `wagmi`, `viem`, `coinbase`, `QueryClient` and `tanstack` each occur 0 times in `dist/assets/*.js`. | disputed (notice clarified) | `web/package.json` is protected build configuration in this assignment, so editing it gets a submission rejected automatically. `web/src/Legacy.tsx` and `web/src/wallet.tsx` still import these packages and are in `tsconfig` `include`, so removing them would also break `tsc --noEmit`. `web/scripts/licenses.mjs` now writes a header line saying these packages are declared for the legacy wallet client source and that none of their code is in `assets/`. The regenerated notices are in `web/public/licenses/` and `dist/licenses/`. | `node web/scripts/licenses.mjs`: 33 locked packages. `dependencies.json` is unchanged (it is a conservative superset). |
+
+Also found and fixed while rebuilding:
+
+- **The staged build could not run from a clean machine.** `web/scripts/task.mjs` copied `web/` and `server/src` into its temporary build tree but not `shared/`, which `web/src/expanse/surface.ts` imports (`shared/relief.js`). Vite failed with `UNRESOLVED_IMPORT` and tsc failed with two TS7006 errors. The helper now copies `shared/`.
+- **The committed export was older than its source.** Engine job a5bbae27 (commit b702f51, merged after this job's previous round) changed `server/src/expanse/{engine,agency,agent}.js`, and the committed `demo.worker` predated that. Rebuilding put that engine into the worker. With it, `tests/agency-demo.test.js` failed (1 of 206 server tests): 600 ticks now hash to `dfd1876c…`, not the committed `9861c466…`. My diff left `server/`, `shared/`, `tests/` and the demo data untouched; the failure came from the engine change. I re-ran the documented recipe, `node tools/living/upgrade-demo.mjs` (exact original `cf2dcd95…` → migrate a copy → 600 ordinary ticks, nothing injected). It produced `dfd1876c…`, the value the test had computed independently. The original checkpoint is byte-identical. New continuation: 168 residents (127 forest, 12 arid, 26 cold, 3 coast), 73 standing shelters, 21 sites, 7 crops (0 ripe), 0 ruins, 965 signals. 600-tick timing on local x64: p50 23.7 / p95 42.9 / max 132.0 ms, RSS 388 MB (`demo-upgrade.json`). Resident #154 (Ziye) is still alive.
+
+Commands and actual results after the final source change:
+
+```text
+node web/scripts/task.mjs build          ✓ built (index 392.32 kB / gzip 113.48 kB; demo.worker 133.03 kB)
+node web/scripts/task.mjs typecheck      exit 0
+node web/scripts/task.mjs test           34/34 pass
+node --test --test-concurrency=2 tests/*.test.js   206/206 pass (205/206 before the demo regeneration)
+node web/scripts/check-inspector-scroll.mjs        5/5 viewports pass
+agency-check.mjs (scratch copy, output to test/scratch)   10/10 checks pass, 0 errors
+taste.mjs --offline (pinned probe)       16/16 pass
+```
+
+These are worker observations, not independent acceptance. WebKit, physical phones and the ARM VPS remain unverified, as above.
+

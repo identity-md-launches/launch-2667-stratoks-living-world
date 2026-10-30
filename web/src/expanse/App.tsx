@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Icon } from "../icons";
 import { Modal } from "../Modal";
 import { Portrait } from "./art";
@@ -64,6 +64,7 @@ export default function ExpanseApp() {
   const [placeBiome,setPlaceBiome]=useState("all");
   const client = useRef<ExpanseClient | null>(null);
   const viewportWidth = useRef(innerWidth);
+  const panelScroll = useRef<HTMLDivElement | null>(null);
   const display = frame ?? RECORDING,
     recorded = source.kind === "recording" || !frame;
   const query = useRef({ camera, aspect, bounds: display.bounds });
@@ -194,6 +195,12 @@ export default function ExpanseApp() {
       clampCamera({ ...c, x: r.x + 0.5, y: r.y + 0.5 }, frame.bounds, aspect),
     );
   }, [frame, following, selected, aspect]);
+  // Residents and inspector share one scroll container. A new panel or a new
+  // resident opens at its top so the identity block is visible; refreshes of the
+  // same inspector keep the reader's place. Runs before select()'s heading focus.
+  useLayoutEffect(() => {
+    if (panelScroll.current) panelScroll.current.scrollTop = 0;
+  }, [side, selected]);
   const closePanel = useCallback(() => {
     setSide(null);
     requestAnimationFrame(() =>
@@ -579,7 +586,7 @@ export default function ExpanseApp() {
                 <Icon name="close" size={18} />
               </button>
             </div>
-            <div className="exp-panel-scroll">
+            <div className="exp-panel-scroll" ref={panelScroll}>
               {side === "inspector" && (
                 <CreatureInspector
                   key={selected ?? "empty"}

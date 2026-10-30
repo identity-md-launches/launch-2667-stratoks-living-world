@@ -76,7 +76,7 @@ The rejected rabbit media, old share cards and compiled archived observer have b
 
 ## Validation
 
-Actual local results: production build and TypeScript check passed; **196 existing server tests + 2 observer-contract tests + 2 demo migration/replay tests + 34 client tests passed**. Chromium interactions passed at desktop, tablet, 320/390-wide phones and 667/844-wide landscape phones. The pinned design probe passed **16/16**. These are worker observations, separate from independent structural acceptance.
+Actual local results (revision 2, 2026-10-30): production build and TypeScript check passed; **206 server tests (including the 2 demo migration/replay tests) + 34 client tests passed**. Opening a resident from a scrolled roster now starts the inspector at its identity block (`node web/scripts/check-inspector-scroll.mjs`, 5 viewports). The demo checkpoint was regenerated with the current engine using `tools/living/upgrade-demo.mjs`; details and the finding table are in `artifacts/agency-interface/VALIDATION.md`. Chromium interactions passed at desktop, tablet, 320/390-wide phones and 667/844-wide landscape phones. The pinned design probe passed **16/16**. These are worker observations, separate from independent structural acceptance.
 
 ```sh
 node --test --test-concurrency=2 tests/*.test.js
@@ -86,6 +86,7 @@ cd ..
 PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers web/node_modules/.bin/playwright install chromium
 PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers node web/scripts/agency-check.mjs
 PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers node web/scripts/agency-performance.mjs
+node web/scripts/check-inspector-scroll.mjs   # uses the dependencies staged by web/scripts/task.mjs
 IMD_PLAYWRIGHT="$PWD/web/node_modules/playwright/index.mjs" PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers node .imd/reads/skills/design-critic/scripts/taste.mjs --out test/scratch/taste --offline
 node tests/experiments/agency-ablation.mjs 3000 3,5,9 test/scratch/ablation.json
 node tests/load/living-bench.mjs 100 600

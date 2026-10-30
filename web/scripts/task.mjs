@@ -39,6 +39,11 @@ await fs.copyFile(
   path.join(root, "server", "package.json"),
   path.join(temp, "server", "package.json"),
 );
+// Relief rules are shared by the server view and the client surface.
+await fs.rm(path.join(temp, "shared"), { recursive: true, force: true });
+await fs.cp(path.join(root, "shared"), path.join(temp, "shared"), {
+  recursive: true,
+});
 const run = (args) => {
   const r = spawnSync(
     "npm",
