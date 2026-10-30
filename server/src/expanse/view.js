@@ -3,7 +3,9 @@
 import { NODE_KINDS, settleNode } from './terrain.js';
 export const VIEW_VERSION = 1;
 // Additive schema-4 fields keep `v: 1` so existing clients keep working; `living` names the extension version.
-export const LIVING_VERSION = 1;
+export const LIVING_VERSION = 2; // 2: ruins, crops, signals, goal/communication evidence in the inspector
+import { confidence } from './agency.js';
+import { GLYPHS } from './capabilities.js';
 const MAX_W = 96, MAX_H = 96;
 
 export function viewport(e, x0, y0, w, h) {
@@ -23,12 +25,17 @@ export function viewport(e, x0, y0, w, h) {
   return { v: VIEW_VERSION, tick: e.tick, x0, y0, w, h, tiles, biomes, biome: e.biome(x0 + (w >> 1), y0 + (h >> 1)), climate: { temperature: r(e.ambient(x0 + (w >> 1), y0 + (h >> 1))), rain: e.weather.rain, daylight: r(e.daylight()) }, nodes, creatures,
     fires: e.fires.filter((f) => f.x >= x0 && f.y >= y0 && f.x < x0 + w && f.y < y0 + h).map((f) => [f.id, f.x, f.y]),
     // Finished shelters only (old clients draw every entry as a home): [id, x, y, kind, integrity, storedUnits].
-    shelters: e.shelters.filter((s) => inView(s) && s.complete !== false).map((s) => [s.id, s.x, s.y, s.kind ?? null, Math.round(s.integrity), units(s.store)]),
+    // Ruins (integrity 0) are not homes and are listed separately in `ruins`, so old clients do not draw them as homes.
+    shelters: e.shelters.filter((s) => inView(s) && s.complete !== false && s.integrity > 0).map((s) => [s.id, s.x, s.y, s.kind ?? null, Math.round(s.integrity), units(s.store)]),
+    ruins: e.shelters.filter((s) => inView(s) && s.complete !== false && s.integrity <= 0).map((s) => ({ id: s.id, x: s.x, y: s.y, kind: s.kind ?? null, stored: units(s.store), usable: false })),
+    crops: e.crops.filter(inView).map((q) => ({ id: q.id, x: q.x, y: q.y, kind: q.kind, growth: q.growth, ripe: q.ripe, dry: q.moisture <= 0, planter: q.by })),
+    // Recent neutral glyphs emitted in view (observer evidence; residents only get what they perceive).
+    signals: e.signals.filter((g) => inView(g) && e.tick - g.tick <= 60).map((g) => ({ id: g.id, x: g.x, y: g.y, glyph: g.glyph, from: g.from, tick: g.tick, heardBy: g.receivers.length })),
     // Unfinished construction: actual stage, delivered materials, required materials and labour.
     sites: e.shelters.filter((s) => inView(s) && s.complete === false).map((s) => ({ id: s.id, x: s.x, y: s.y, kind: s.kind, stage: s.stage, materials: { ...s.materials }, need: { ...s.need }, work: s.work, workNeed: s.workNeed })),
     // Ground piles (material stock areas) and shelter stores, with exact contents.
     piles: pilesIn(e, x0, y0, w, h),
-    stores: e.shelters.filter((s) => inView(s) && s.complete !== false && units(s.store) > 0).map((s) => ({ shelter: s.id, x: s.x, y: s.y, items: { ...s.store } })),
+    stores: e.shelters.filter((s) => inView(s) && s.complete !== false && units(s.store) > 0).map((s) => ({ shelter: s.id, x: s.x, y: s.y, items: { ...s.store }, ...(s.integrity <= 0 ? { ruined: true } : {}) })),
     living: LIVING_VERSION };
 }
 // Minimap: biome letter per generated chunk only (unvisited chunks are not revealed or generated).
@@ -45,6 +52,14 @@ export function inspect(e, id) {
     recentPlans: m.plans, episodes: m.episodes.slice(-12), knownNodes: Object.keys(m.known).length, knownWater: m.water, discoveries: m.discoveries,
     modelEntries: Object.keys(m.model).length, mbUpdates: c.brain.mb?.updates ?? 0, mode: e.mode, learning: e.learning && e.mode !== 'frozen',
     relationships: c.relationships, reputation: c.reputation, following: c.following,
+    // What the resident itself knows about stores: last visit only (null = never visited), with its age.
+    knownStores: (m.shelters ?? []).map((s) => ({ id: s.id, x: s.x, y: s.y, stock: s.stock ?? null, visited: s.visited ?? null, staleTicks: s.visited ? e.tick - s.visited : null, ruined: !!s.ruined, integrity: s.integrity ?? null })),
+    goals: { active: (m.goals ?? []).map((g) => ({ id: g.id, kind: g.kind, status: g.status, urgency: g.urgency, since: g.since, steps: g.steps, interruptions: g.interruptions, resumed: g.resumed, avoiding: g.avoid })), history: m.goalHistory ?? [], stats: m.goalStats ?? {},
+      learned: Object.entries(m.goalModel ?? {}).sort((a, b) => b[1].n - a[1].n).slice(0, 8).map(([k, v]) => ({ goalStep: k, n: v.n, meanProgress: v.gain })) },
+    communication: { label: 'limited learned signalling: neutral glyphs, associations from local co-occurrence and outcomes; no dictionary',
+      heard: m.heard ?? [], sent: m.sent ?? [], trust: c.trust ?? {},
+      associations: Object.entries(m.signals ?? {}).map(([g, a]) => ({ glyph: g, heard: a.heard, responded: a.responded, outcomes: a.n, meanPayoff: a.payoff, confidence: confidence(a), cooccurred: a.seen })),
+      senderValues: GLYPHS.flatMap((g) => Object.entries(m.model).filter(([k]) => k.startsWith(`signal|${g}|`)).map(([k, v]) => ({ key: k, n: Math.round(v.n * 100) / 100, reward: Math.round(v.r * 1000) / 1000 }))) },
     note: 'Learned: outcome model + mb-v1 weights. Designed: physics, primitives, reflexes, drives, planner search. Not a complete fly brain.' };
 }
 const r = (v) => Math.round(v * 10) / 10;
@@ -73,6 +88,6 @@ export function frame(e, { x = 0, y = 0, w = 48, h = 32, creature = null } = {})
     inspector: creature === null ? null : inspect(e, creature),
     discoveries: e.discoveries.slice(-200), social: e.social.slice(-100),
     // Observer navigation only; never part of an agent's observation or memory.
-    places: e.shelters.map(s => ({ id: s.id, x: s.x, y: s.y, biome: s.biome ?? e.biome(s.x,s.y), kind: s.kind, complete: s.complete !== false, integrity: Math.round(s.integrity), stored: units(s.store) })),
+    places: e.shelters.map(s => ({ id: s.id, x: s.x, y: s.y, biome: s.biome ?? e.biome(s.x,s.y), kind: s.kind, complete: s.complete !== false, ruined: s.complete !== false && s.integrity <= 0, integrity: Math.round(s.integrity), stored: units(s.store) })),
     limits: { residents: 'all living', discoveries: 200, social: 100, recentPlans: 8, observation: 'last decision, not current omniscient state' } };
 }

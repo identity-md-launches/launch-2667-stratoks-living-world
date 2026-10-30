@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Upgrade a COPY of an Expanse data directory to the current schema (4: living world) and prove that identity,
+// Upgrade a COPY of an Expanse data directory to the current schema (5: agency; 4 was the living world) and prove that identity,
 // learned data and memories are unchanged. Default is a dry run that writes nothing.
 //
 //   node server/bin/expanse-upgrade.js <copied-data-dir>                 # dry run: migrate in memory, verify, simulate

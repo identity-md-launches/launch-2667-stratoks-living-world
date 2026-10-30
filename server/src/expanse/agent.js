@@ -2,10 +2,10 @@
 // (success, reward, duration, energy and produced items of each (action, argument, context) seen in the
 // creature's own or observed transitions) and the mb-v1 circuit weights. What is DESIGNED: the primitive set,
 // affordance enumeration, need-based reward, reflexes, and the planner's search procedure.
-export const OBSERVATION_VERSION = 3; // v3: shelters expose stage/integrity/store when perceived; fish only within shore range
-export const MEMORY_VERSION = 3; // v3: remembered shelters carry the last SEEN store contents, stage and integrity
+export const OBSERVATION_VERSION = 4; // v4: perceived shelters show appearance only (never store contents); ruins, crops and heard signals
+export const MEMORY_VERSION = 4; // v4: store contents only from a visit (`visited` tick); goals, signal associations, trust, homes of others
 export const MODEL_VERSION = 1;
-export const PLANNER_VERSION = 2;
+export const PLANNER_VERSION = 3; // v3: candidate utility adds the learned goal bias of the active persistent goal
 export const LIMITS = Object.freeze({ episodes: 48, modelEntries: 96, producedKinds: 3, knownNodes: 40, knownWater: 6, knownShelters: 16, visited: 384, plans: 8, horizon: 3, beam: 5 });
 
 // ---------------- bounded episodic memory ----------------
@@ -103,13 +103,16 @@ export function rememberWater(mind, x, y, tick) {
   mind.water.push({ x, y, t: tick });
   if (mind.water.length > LIMITS.knownWater) { mind.water.sort((a, b) => b.t - a.t); mind.water.length = LIMITS.knownWater; }
 }
-export function rememberShelter(mind, shelter, tick) {
+// `visit` = the resident actually interacted with the store this tick (deposit, retrieve, salvage, repair, completion).
+// Distant sight (`visit` false) updates only what is visible from afar: position, kind, finished/ruined and wear.
+// Store contents are never copied by sight; they stay as last seen on a visit (stale) or `null` (never visited).
+export function rememberShelter(mind, shelter, tick, visit = false) {
   mind.shelters ??= [];
   const known = mind.shelters.find((s) => s.id === shelter.id);
-  // Only what was actually perceived is copied; an unseen store stays `null` (unknown), never looked up later.
-  const seen = shelter.store ? { stock: { ...shelter.store }, complete: shelter.complete !== false, integrity: Math.round(shelter.integrity ?? 100) } : {};
-  if (known) { known.x = shelter.x; known.y = shelter.y; known.t = tick; Object.assign(known, seen); return; }
-  mind.shelters.push({ id: shelter.id, x: shelter.x, y: shelter.y, t: tick, stock: null, ...seen });
+  const look = { complete: shelter.complete !== false, integrity: Math.round(shelter.integrity ?? 100), ruined: shelter.complete !== false && (shelter.integrity ?? 100) <= 0, seen: tick };
+  const stock = visit && shelter.store ? { stock: { ...shelter.store }, visited: tick } : {};
+  if (known) { known.x = shelter.x; known.y = shelter.y; known.t = tick; Object.assign(known, look, stock); return; }
+  mind.shelters.push({ id: shelter.id, x: shelter.x, y: shelter.y, t: tick, stock: null, ...look, ...stock });
   if (mind.shelters.length > LIMITS.knownShelters) {
     let oldest = 0;
     for (let i = 1; i < mind.shelters.length; i++) if (mind.shelters[i].t < mind.shelters[oldest].t) oldest = i;

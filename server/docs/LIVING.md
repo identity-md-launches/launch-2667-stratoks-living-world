@@ -178,3 +178,8 @@ At the service's 1 s tick, even 250 residents use about 2 % of one core. Both en
 * `view.piles` can be dense near busy shelters (75 piles in one 48×32 view in the sample). This reflects the existing `place` primitive.
 * Multi-seed CPU timings were taken with 2–3 runs in parallel and include contention. Bench numbers are single-process.
 * No browser, screenshot or recording work was part of this assignment.
+
+---
+**Schema 5** (agency: store-knowledge fix, ruins, starting state, goals, crops, cooking, help, learned signals) is documented
+in `docs/agency/ENGINE.md`. The store-contents rule above ("from their own last visit") is now enforced: in schema 4,
+sight within the perception radius also copied store contents. That was defect 6, now fixed.

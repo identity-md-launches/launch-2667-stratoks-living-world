@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import zlib from 'node:zlib';
 import { Expanse } from '../server/src/expanse/engine.js';
 import { frame } from '../server/src/expanse/view.js';
-import { identityDigest } from '../server/src/expanse/persist.js';
+import { identityDigest, migrateExpanse } from '../server/src/expanse/persist.js';
 
 test('portable browser restore preserves the exact owner save representation and deterministic continuation',()=>{
  const e=Expanse.create({initialCount:8},{seed:17}); e.id='portable-restore-test';for(let i=0;i<120;i++)e.step();
@@ -27,10 +27,10 @@ test('living viewport biome, climate, construction and store fields describe the
  assert.equal(JSON.stringify(e.toState()),before,'observer-only fields must not edit the persistent state');
  assert.equal(e.creatures[0].lastObs.places,undefined,'world navigation must not enter individual perceptions');
 });
-test('shipped demo is a complete schema-4 world with natural histories and functional shelters across all biomes',()=>{
+test('shipped demo (schema-4 checkpoint, migrated in memory to 5) is a complete world with natural histories and functional shelters across all biomes',()=>{
  const manifest=JSON.parse(fs.readFileSync(new URL('../web/public/demo/manifest.json',import.meta.url)));
  const saved=JSON.parse(zlib.gunzipSync(fs.readFileSync(new URL('../web/public/demo/checkpoint.json.gz',import.meta.url))));
- const e=Expanse.fromState(saved);
+ const e=Expanse.fromState(migrateExpanse(structuredClone(saved)).state);
  assert.equal(e.id,'isolated-demo-seed-2');assert.equal(e.tick,12000);
  assert.equal(e.creatures.length,manifest.summary.population);
  assert.equal(e.totals.births-e.totals.deaths+24,e.creatures.length);

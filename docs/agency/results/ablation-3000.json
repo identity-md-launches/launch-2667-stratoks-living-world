@@ -1,0 +1,763 @@
+{
+ "generated": "deterministic; rerun with the same arguments to reproduce",
+ "node": "v22.23.1",
+ "arch": "x64",
+ "ticks": 3000,
+ "seeds": [
+  3,
+  5,
+  9
+ ],
+ "rows": [
+  {
+   "label": "learn+comm",
+   "seed": 3,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 2.566,
+   "heapMB": 47.5,
+   "population": 39,
+   "births": 15,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 5.1,
+   "food": {
+    "gathered": 666,
+    "eaten": 688,
+    "fish": 2
+   },
+   "farming": {
+    "planted": 26,
+    "harvested": 36,
+    "withered": 7,
+    "standingCrops": 7
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 106
+   },
+   "salvaged": 0,
+   "shelters": 16,
+   "sites": 10,
+   "ruins": 0,
+   "signals": {
+    "sent": 919,
+    "heard": 2210,
+    "misheard": 310,
+    "responses": 202,
+    "credit": 3.763,
+    "residentsWithAssociations": 33,
+    "meanLearnedPayoff": 0.004
+   },
+   "goals": {
+    "social:achieved": 113,
+    "curiosity:achieved": 71,
+    "curiosity:abandoned": 1,
+    "water:achieved": 2
+   },
+   "primitiveDiversityBits": 3.501,
+   "strategyDiversityBits": 5.136,
+   "distinctFirstSteps": 66,
+   "ledgerErrors": []
+  },
+  {
+   "label": "frozen+comm",
+   "seed": 3,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 3.497,
+   "heapMB": 32.3,
+   "population": 42,
+   "births": 19,
+   "deaths": 1,
+   "deathsByCause": {
+    "dehydration": 1
+   },
+   "meanHunger": 7.3,
+   "food": {
+    "gathered": 803,
+    "eaten": 439,
+    "fish": 2
+   },
+   "farming": {
+    "planted": 6,
+    "harvested": 9,
+    "withered": 2,
+    "standingCrops": 1
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 6
+   },
+   "salvaged": 0,
+   "shelters": 17,
+   "sites": 9,
+   "ruins": 0,
+   "signals": {
+    "sent": 433,
+    "heard": 1528,
+    "misheard": 194,
+    "responses": 194,
+    "credit": 0,
+    "residentsWithAssociations": 30,
+    "meanLearnedPayoff": -0.077
+   },
+   "goals": {
+    "social:achieved": 144,
+    "curiosity:achieved": 84,
+    "curiosity:abandoned": 1
+   },
+   "primitiveDiversityBits": 0,
+   "strategyDiversityBits": 4.462,
+   "distinctFirstSteps": 42,
+   "ledgerErrors": []
+  },
+  {
+   "label": "learn-nocomm",
+   "seed": 3,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 2.189,
+   "heapMB": 47.7,
+   "population": 44,
+   "births": 20,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 5.5,
+   "food": {
+    "gathered": 649,
+    "eaten": 666,
+    "fish": 18
+   },
+   "farming": {
+    "planted": 11,
+    "harvested": 24,
+    "withered": 2,
+    "standingCrops": 1
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 28
+   },
+   "salvaged": 0,
+   "shelters": 19,
+   "sites": 11,
+   "ruins": 0,
+   "signals": {
+    "sent": 0,
+    "heard": 0,
+    "misheard": 0,
+    "responses": 0,
+    "credit": 0,
+    "residentsWithAssociations": 0,
+    "meanLearnedPayoff": null
+   },
+   "goals": {
+    "social:achieved": 116,
+    "curiosity:achieved": 74,
+    "water:achieved": 2
+   },
+   "primitiveDiversityBits": 3.272,
+   "strategyDiversityBits": 3.315,
+   "distinctFirstSteps": 23,
+   "ledgerErrors": []
+  },
+  {
+   "label": "frozen-nocomm",
+   "seed": 3,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 2.897,
+   "heapMB": 58.7,
+   "population": 50,
+   "births": 26,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 10.3,
+   "food": {
+    "gathered": 706,
+    "eaten": 380,
+    "fish": 0
+   },
+   "farming": {
+    "planted": 3,
+    "harvested": 3,
+    "withered": 1,
+    "standingCrops": 1
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 2
+   },
+   "salvaged": 0,
+   "shelters": 20,
+   "sites": 9,
+   "ruins": 0,
+   "signals": {
+    "sent": 0,
+    "heard": 0,
+    "misheard": 0,
+    "responses": 0,
+    "credit": 0,
+    "residentsWithAssociations": 0,
+    "meanLearnedPayoff": null
+   },
+   "goals": {
+    "social:achieved": 130,
+    "curiosity:achieved": 95,
+    "curiosity:abandoned": 3
+   },
+   "primitiveDiversityBits": 0,
+   "strategyDiversityBits": 4.107,
+   "distinctFirstSteps": 30,
+   "ledgerErrors": []
+  },
+  {
+   "label": "learn+comm",
+   "seed": 5,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 1.976,
+   "heapMB": 43.1,
+   "population": 37,
+   "births": 13,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 6.9,
+   "food": {
+    "gathered": 643,
+    "eaten": 654,
+    "fish": 0
+   },
+   "farming": {
+    "planted": 19,
+    "harvested": 27,
+    "withered": 9,
+    "standingCrops": 1
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 73
+   },
+   "salvaged": 0,
+   "shelters": 16,
+   "sites": 9,
+   "ruins": 0,
+   "signals": {
+    "sent": 992,
+    "heard": 2599,
+    "misheard": 381,
+    "responses": 156,
+    "credit": 3.558,
+    "residentsWithAssociations": 31,
+    "meanLearnedPayoff": -0.034
+   },
+   "goals": {
+    "social:achieved": 119,
+    "curiosity:achieved": 56
+   },
+   "primitiveDiversityBits": 3.476,
+   "strategyDiversityBits": 4.946,
+   "distinctFirstSteps": 55,
+   "ledgerErrors": []
+  },
+  {
+   "label": "frozen+comm",
+   "seed": 5,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 2.864,
+   "heapMB": 57.3,
+   "population": 44,
+   "births": 20,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 10.3,
+   "food": {
+    "gathered": 720,
+    "eaten": 364,
+    "fish": 0
+   },
+   "farming": {
+    "planted": 1,
+    "harvested": 0,
+    "withered": 0,
+    "standingCrops": 1
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 17
+   },
+   "salvaged": 0,
+   "shelters": 17,
+   "sites": 3,
+   "ruins": 0,
+   "signals": {
+    "sent": 412,
+    "heard": 1803,
+    "misheard": 246,
+    "responses": 99,
+    "credit": 0,
+    "residentsWithAssociations": 25,
+    "meanLearnedPayoff": -0.071
+   },
+   "goals": {
+    "social:achieved": 126,
+    "curiosity:achieved": 51,
+    "water:achieved": 1
+   },
+   "primitiveDiversityBits": 0,
+   "strategyDiversityBits": 4.394,
+   "distinctFirstSteps": 42,
+   "ledgerErrors": []
+  },
+  {
+   "label": "learn-nocomm",
+   "seed": 5,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 1.575,
+   "heapMB": 34.4,
+   "population": 35,
+   "births": 11,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 6.6,
+   "food": {
+    "gathered": 571,
+    "eaten": 583,
+    "fish": 0
+   },
+   "farming": {
+    "planted": 18,
+    "harvested": 15,
+    "withered": 10,
+    "standingCrops": 3
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 47
+   },
+   "salvaged": 0,
+   "shelters": 13,
+   "sites": 12,
+   "ruins": 0,
+   "signals": {
+    "sent": 0,
+    "heard": 0,
+    "misheard": 0,
+    "responses": 0,
+    "credit": 0,
+    "residentsWithAssociations": 0,
+    "meanLearnedPayoff": null
+   },
+   "goals": {
+    "social:achieved": 98,
+    "curiosity:achieved": 63,
+    "water:achieved": 1,
+    "rest:achieved": 1,
+    "curiosity:abandoned": 1
+   },
+   "primitiveDiversityBits": 3.293,
+   "strategyDiversityBits": 4.429,
+   "distinctFirstSteps": 45,
+   "ledgerErrors": []
+  },
+  {
+   "label": "frozen-nocomm",
+   "seed": 5,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 2.206,
+   "heapMB": 33.9,
+   "population": 41,
+   "births": 17,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 10,
+   "food": {
+    "gathered": 541,
+    "eaten": 306,
+    "fish": 0
+   },
+   "farming": {
+    "planted": 4,
+    "harvested": 12,
+    "withered": 0,
+    "standingCrops": 0
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 13
+   },
+   "salvaged": 0,
+   "shelters": 11,
+   "sites": 4,
+   "ruins": 0,
+   "signals": {
+    "sent": 0,
+    "heard": 0,
+    "misheard": 0,
+    "responses": 0,
+    "credit": 0,
+    "residentsWithAssociations": 0,
+    "meanLearnedPayoff": null
+   },
+   "goals": {
+    "social:achieved": 134,
+    "curiosity:achieved": 64
+   },
+   "primitiveDiversityBits": 0,
+   "strategyDiversityBits": 3.905,
+   "distinctFirstSteps": 23,
+   "ledgerErrors": []
+  },
+  {
+   "label": "learn+comm",
+   "seed": 9,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 2.057,
+   "heapMB": 23.1,
+   "population": 36,
+   "births": 12,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 4.2,
+   "food": {
+    "gathered": 694,
+    "eaten": 700,
+    "fish": 0
+   },
+   "farming": {
+    "planted": 30,
+    "harvested": 27,
+    "withered": 19,
+    "standingCrops": 2
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 88
+   },
+   "salvaged": 0,
+   "shelters": 16,
+   "sites": 6,
+   "ruins": 0,
+   "signals": {
+    "sent": 975,
+    "heard": 2650,
+    "misheard": 323,
+    "responses": 205,
+    "credit": 3.369,
+    "residentsWithAssociations": 29,
+    "meanLearnedPayoff": 0.002
+   },
+   "goals": {
+    "curiosity:achieved": 56,
+    "curiosity:abandoned": 1,
+    "social:achieved": 99,
+    "water:achieved": 2
+   },
+   "primitiveDiversityBits": 3.54,
+   "strategyDiversityBits": 4.916,
+   "distinctFirstSteps": 54,
+   "ledgerErrors": []
+  },
+  {
+   "label": "frozen+comm",
+   "seed": 9,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 3.287,
+   "heapMB": 38.8,
+   "population": 45,
+   "births": 21,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 6.1,
+   "food": {
+    "gathered": 761,
+    "eaten": 404,
+    "fish": 0
+   },
+   "farming": {
+    "planted": 6,
+    "harvested": 6,
+    "withered": 2,
+    "standingCrops": 2
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 9
+   },
+   "salvaged": 0,
+   "shelters": 16,
+   "sites": 6,
+   "ruins": 0,
+   "signals": {
+    "sent": 374,
+    "heard": 1006,
+    "misheard": 142,
+    "responses": 167,
+    "credit": 0,
+    "residentsWithAssociations": 28,
+    "meanLearnedPayoff": 0.052
+   },
+   "goals": {
+    "curiosity:achieved": 72,
+    "water:achieved": 2,
+    "social:achieved": 113,
+    "curiosity:abandoned": 1
+   },
+   "primitiveDiversityBits": 0,
+   "strategyDiversityBits": 3.306,
+   "distinctFirstSteps": 27,
+   "ledgerErrors": []
+  },
+  {
+   "label": "learn-nocomm",
+   "seed": 9,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 1.904,
+   "heapMB": 34.5,
+   "population": 41,
+   "births": 17,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 6.5,
+   "food": {
+    "gathered": 528,
+    "eaten": 569,
+    "fish": 8
+   },
+   "farming": {
+    "planted": 15,
+    "harvested": 27,
+    "withered": 6,
+    "standingCrops": 0
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 88
+   },
+   "salvaged": 0,
+   "shelters": 17,
+   "sites": 4,
+   "ruins": 0,
+   "signals": {
+    "sent": 0,
+    "heard": 0,
+    "misheard": 0,
+    "responses": 0,
+    "credit": 0,
+    "residentsWithAssociations": 0,
+    "meanLearnedPayoff": null
+   },
+   "goals": {
+    "curiosity:achieved": 74,
+    "social:achieved": 97,
+    "curiosity:abandoned": 1
+   },
+   "primitiveDiversityBits": 3.311,
+   "strategyDiversityBits": 4.378,
+   "distinctFirstSteps": 44,
+   "ledgerErrors": []
+  },
+  {
+   "label": "frozen-nocomm",
+   "seed": 9,
+   "depleted": false,
+   "ticks": 3000,
+   "msPerTick": 2.868,
+   "heapMB": 59.2,
+   "population": 51,
+   "births": 27,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 9.5,
+   "food": {
+    "gathered": 731,
+    "eaten": 390,
+    "fish": 0
+   },
+   "farming": {
+    "planted": 4,
+    "harvested": 3,
+    "withered": 2,
+    "standingCrops": 1
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 1
+   },
+   "salvaged": 0,
+   "shelters": 17,
+   "sites": 7,
+   "ruins": 0,
+   "signals": {
+    "sent": 0,
+    "heard": 0,
+    "misheard": 0,
+    "responses": 0,
+    "credit": 0,
+    "residentsWithAssociations": 0,
+    "meanLearnedPayoff": null
+   },
+   "goals": {
+    "curiosity:achieved": 79,
+    "social:achieved": 166,
+    "rest:achieved": 1
+   },
+   "primitiveDiversityBits": 0,
+   "strategyDiversityBits": 4.084,
+   "distinctFirstSteps": 30,
+   "ledgerErrors": []
+  },
+  {
+   "label": "learn+comm+depleted",
+   "seed": 3,
+   "depleted": true,
+   "ticks": 3000,
+   "msPerTick": 2.239,
+   "heapMB": 27.6,
+   "population": 37,
+   "births": 13,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 4,
+   "food": {
+    "gathered": 598,
+    "eaten": 611,
+    "fish": 2
+   },
+   "farming": {
+    "planted": 11,
+    "harvested": 21,
+    "withered": 1,
+    "standingCrops": 3
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 66
+   },
+   "salvaged": 0,
+   "shelters": 21,
+   "sites": 9,
+   "ruins": 0,
+   "signals": {
+    "sent": 908,
+    "heard": 1851,
+    "misheard": 246,
+    "responses": 220,
+    "credit": 4.924,
+    "residentsWithAssociations": 30,
+    "meanLearnedPayoff": 0.059
+   },
+   "goals": {
+    "social:achieved": 104,
+    "curiosity:achieved": 61,
+    "water:achieved": 1,
+    "curiosity:abandoned": 3,
+    "safety:achieved": 5,
+    "food:achieved": 1
+   },
+   "primitiveDiversityBits": 3.474,
+   "strategyDiversityBits": 4.979,
+   "distinctFirstSteps": 59,
+   "ledgerErrors": []
+  },
+  {
+   "label": "learn-nocomm+depleted",
+   "seed": 3,
+   "depleted": true,
+   "ticks": 3000,
+   "msPerTick": 1.977,
+   "heapMB": 28.8,
+   "population": 36,
+   "births": 12,
+   "deaths": 0,
+   "deathsByCause": {},
+   "meanHunger": 6.5,
+   "food": {
+    "gathered": 594,
+    "eaten": 616,
+    "fish": 2
+   },
+   "farming": {
+    "planted": 25,
+    "harvested": 39,
+    "withered": 6,
+    "standingCrops": 6
+   },
+   "cooking": {
+    "cooked": 0,
+    "heatUsed": 0
+   },
+   "help": {
+    "tend": 32
+   },
+   "salvaged": 0,
+   "shelters": 21,
+   "sites": 11,
+   "ruins": 0,
+   "signals": {
+    "sent": 0,
+    "heard": 0,
+    "misheard": 0,
+    "responses": 0,
+    "credit": 0,
+    "residentsWithAssociations": 0,
+    "meanLearnedPayoff": null
+   },
+   "goals": {
+    "social:achieved": 72,
+    "curiosity:achieved": 81,
+    "food:achieved": 1
+   },
+   "primitiveDiversityBits": 3.325,
+   "strategyDiversityBits": 4.467,
+   "distinctFirstSteps": 44,
+   "ledgerErrors": []
+  }
+ ]
+}

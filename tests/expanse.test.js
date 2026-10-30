@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { World } from '../server/src/world.js';
 import { DEFAULTS, deepMerge } from '../server/src/config.js';
-import { Expanse, RECIPES } from '../server/src/expanse/engine.js';
+import { Expanse, RECIPES, EXPANSE_SCHEMA, expectedHoldings } from '../server/src/expanse/engine.js';
 import { CHUNK, BASE, T, generateChunk, NODE_KINDS } from '../server/src/expanse/terrain.js';
 import { createMind, updateModel, predict, plan, LIMITS, recordEpisode, modelKey, OBSERVATION_VERSION, MEMORY_VERSION } from '../server/src/expanse/agent.js';
 import { save, load, backup, restore, rollback, fromLegacySnapshot, migrateExpanse, readState, SNAPSHOT } from '../server/src/expanse/persist.js';
@@ -73,7 +73,7 @@ test('item and node accounting is conserved over a full simulation (no free reso
   const e = mk(5); e.run(1500);
   const h = e.holdings(), T_ = e.totals, items = new Set([...Object.keys(h), ...Object.keys(T_.gathered), ...Object.keys(T_.crafted)]);
   for (const it of items) {
-    const expected = (T_.gathered[it] ?? 0) + (T_.crafted[it] ?? 0) - (T_.craftUsed[it] ?? 0) - (T_.eaten[it] ?? 0) - (T_.burnedItems[it] ?? 0) - (T_.built[it] ?? 0);
+    const expected = expectedHoldings(T_)[it] ?? 0; // schema 5 ledger adds planted/harvested/cooked terms
     assert.equal(h[it] ?? 0, expected, `item ${it}`);
   }
   // nodes: initial + regrown - gathered - burned = current (per generated chunk)
@@ -314,13 +314,13 @@ test('legacy Phase 2A snapshot migrates without resetting brains, ids or history
   assert.equal(e.tick, w.tick); e.run(200); assert.ok(e.tick === w.tick + 200);
   // expanse v1 -> v2
   const st = e.toState(); st.schema = 1; for (const c of st.creatures) { delete c.warmth; delete c.reputation; c.knownNodes = c.mind.known; c.mind.known = {}; delete c.mind.shelters; delete c.mind.memoryVersion; }
-  const m = migrateExpanse(st); assert.equal(m.from, 1); assert.equal(m.to, 4); // schema 4 (living world) follows v3
+  const m = migrateExpanse(st); assert.equal(m.from, 1); assert.equal(m.to, EXPANSE_SCHEMA); // schema 5 (agency) follows v4
   const e2 = Expanse.fromState(m.state); assert.equal(e2.creatures[0].warmth, 90); assert.ok(Object.keys(e2.creatures[0].mind.known).length > 0);
   assert.deepEqual(e2.creatures[0].mind.shelters, []); assert.equal(e2.creatures[0].mind.memoryVersion, MEMORY_VERSION);
   assert.equal(e2.cfg.invCapacity, 12);
   const old2 = e.toState(); old2.schema = 2; old2.cfg.invCapacity = 10;
   for (const c of old2.creatures) { c.energy = -55; delete c.mind.shelters; delete c.mind.memoryVersion; }
-  const m2 = migrateExpanse(old2); assert.equal(m2.from, 2); assert.equal(m2.to, 4);
+  const m2 = migrateExpanse(old2); assert.equal(m2.from, 2); assert.equal(m2.to, EXPANSE_SCHEMA);
   const e3 = Expanse.fromState(m2.state); assert.equal(e3.cfg.invCapacity, 12); assert.equal(e3.creatures[0].energy, 0);
   assert.deepEqual(e3.creatures[0].mind.episodes, e.creatures[0].mind.episodes);
   assert.throws(() => migrateExpanse({ ...e.toState(), schema: 99 }), /newer/);

@@ -1,0 +1,15 @@
+ "from": 4,
+ "to": 5,
+ "creatures": 39,
+ "identityDigest": "c8d8b73ff331a17604127fad0d82f26bc07f89cb55cd6bf120ccdcc3cc81bc4d",
+ "identityUnchanged": true,
+ "shelters": 28,
+ "fishStocksAdded": 0,
+ "dryRun": {
+  "ticks": 300,
+  "msPerTick": 4.857,
+  "populationAfter": 40,
+  "rssMB": 133
+ },
+ "wrote": false
+}

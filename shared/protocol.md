@@ -55,3 +55,16 @@ Errors: `{error:"code", ...}` with HTTP status.
 * `view.nodes` may include `fish` nodes, which sit on water tiles (renderer-visible; residents only perceive them within 3 tiles).
 * `residents[i]` adds `state, phase, progress, load, carrying{item:n}, tools[], target{x,y}|null`. `inspector` adds `activity, toolWear, home`. `summary` adds `sites, standing, stored, fishCaught`, and `summary.shelters` counts finished shelters only.
 * New events: `site_founded, shelter_built(kind), shelter_ruined, shelter_restored, fish_depleted, tool_worn`.
+
+## Schema 5 additions (engine; additive, `v` stays 1, `view.living` = 2)
+
+See `docs/agency/ENGINE.md` for semantics.
+
+* `view.shelters`: standing finished shelters only (integrity > 0). `view.ruins`: `{id, x, y, kind, stored, usable:false}`.
+* `view.crops`: `{id, x, y, kind, growth, ripe, dry, planter}`. `view.signals`: `{id, x, y, glyph, from, tick, heardBy}` (last 60 ticks).
+* `view.stores[i].ruined: true` when the store belongs to a ruin. `frame.places[i].ruined`.
+* Activity states add `plant, tend, harvest, cook, salvage, signal, respond`; `starting` now also covers a just-chosen build
+  step (never `idle` while a step exists). Optional `activity.helping` (resident id) and `activity.glyph`.
+* `summary` adds `crops, ripeCrops, ruins, signals`.
+* Inspector adds `knownStores` (the resident's own last-visit stock knowledge, `null` = never visited, `staleTicks`), `goals`
+  (`active`, `history`, `stats`, `learned`) and `communication` (`heard`, `sent`, `trust`, `associations`, `senderValues`).

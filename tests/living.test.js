@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import { Expanse, STRUCTURES, TOOLS, RECIPES, EXPANSE_SCHEMA } from '../server/src/expanse/engine.js';
+import { Expanse, STRUCTURES, TOOLS, RECIPES, EXPANSE_SCHEMA, expectedHoldings } from '../server/src/expanse/engine.js';
 import { NODE_KINDS, T, MOVE_COST, FISH_WATER, generateChunk } from '../server/src/expanse/terrain.js';
 import { save, load, restore, readState, migrateExpanse, identityDigest, SNAPSHOT } from '../server/src/expanse/persist.js';
 import { frame, viewport } from '../server/src/expanse/view.js';
@@ -184,9 +184,9 @@ test('climate: desert heat raises thirst and walking cost, cold drains warmth, s
 test('conservation holds over long multi-seed runs including stores, construction, repair, fishing and tool wear', () => {
   for (const seed of [3, 5, 8]) {
     const e = mk(seed); e.run(3000);
-    const h = e.holdings(), T_ = e.totals, items = new Set([...Object.keys(h), ...Object.keys(T_.gathered), ...Object.keys(T_.crafted)]);
+    const h = e.holdings(), T_ = e.totals, items = new Set([...Object.keys(h), ...Object.keys(expectedHoldings(T_))]);
     for (const it of items) {
-      const expected = (T_.gathered[it] ?? 0) + (T_.crafted[it] ?? 0) - (T_.craftUsed[it] ?? 0) - (T_.eaten[it] ?? 0) - (T_.burnedItems[it] ?? 0) - (T_.built[it] ?? 0) - (T_.repaired[it] ?? 0) - (T_.wornOut[it] ?? 0);
+      const expected = expectedHoldings(T_)[it] ?? 0;
       assert.equal(h[it] ?? 0, expected, `seed ${seed} item ${it}`);
     }
     for (const s of e.shelters) if (!s.prebuilt) {
@@ -241,7 +241,7 @@ test('same seed gives identical saves (determinism) and restart mid-run equals a
   assert.equal(strip(a2.toState()), strip(b.toState()));
 });
 
-test('real schema-3 save migrates to 4 on a copy: identity, learned data and memories kept, original preserved, restart and rollback work', () => {
+test('real schema-3 save migrates (3->4->5) on a copy: identity, learned data and memories kept, original preserved, restart and rollback work', () => {
   const dir = tmp(); for (const f of [SNAPSHOT, 'manifest.json']) fs.copyFileSync(path.join(FIXTURE, f), path.join(dir, f));
   const origBytes = fs.readFileSync(path.join(FIXTURE, SNAPSHOT)), orig = readState(path.join(FIXTURE, SNAPSHOT));
   assert.equal(orig.schema, 3);
@@ -256,11 +256,11 @@ test('real schema-3 save migrates to 4 on a copy: identity, learned data and mem
   // the existing shelter is finished, typed by biome, with an empty store and unchanged position/integrity
   for (const s of orig.shelters) { const m = e.shelters.find((q) => q.id === s.id); assert.equal(m.complete, true); assert.equal(m.stage, 3); assert.equal(m.x, s.x); assert.equal(m.integrity, s.integrity); assert.deepEqual(m.store, {}); }
   for (const c of e.creatures) for (const m of c.mind.shelters) assert.ok('stock' in m);
-  assert.ok(st.migrations.at(-1).from === 3 && st.migrations.at(-1).to === 4);
+  assert.ok(st.migrations.some((m) => m.from === 3 && m.to === 4) && st.migrations.at(-1).from === 4 && st.migrations.at(-1).to === 5);
   // migrated saved chunks now carry fish identical to what a pristine v4 chunk would generate
   for (const ch of st.chunks) { const fresh = generateChunk(st.seed, ch.cx, ch.cy, e.base).nodes.filter((n) => n.kind === 'fish').map((n) => n.id); assert.deepEqual(ch.nodes.filter((n) => n.kind === 'fish').map((n) => n.id), fresh); }
   // migration is idempotent and refuses newer schemas
-  const twice = migrateExpanse(structuredClone(st)); assert.equal(twice.from, 4); assert.equal(identityDigest(twice.state), digest);
+  const twice = migrateExpanse(structuredClone(st)); assert.equal(twice.from, EXPANSE_SCHEMA); assert.equal(identityDigest(twice.state), digest);
   // restart: run, save, reload and continue equals continuing without the restart
   e.run(300); save(dir, e); const r1 = load(dir); r1.run(300); e.run(300);
   assert.equal(JSON.stringify(r1.toState().creatures), JSON.stringify(e.toState().creatures));
