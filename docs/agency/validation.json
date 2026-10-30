@@ -1,0 +1,918 @@
+{
+  "checks": "PNG bytes, CRCs, dimensions, alpha, occupied cells, measured gutters",
+  "visualApproval": "not certified by these checks",
+  "atlases": [
+    {
+      "path": "artifacts/agency/terrain.png",
+      "format": "PNG RGBA8",
+      "dimensions": [
+        1536,
+        1536
+      ],
+      "bytes": 2151865,
+      "sha256": "5fdf1a718a8fe23bdf0d87bad43f19b619f13558d62b750482dc61f4adbdba51",
+      "grid": [
+        6,
+        6
+      ],
+      "cellDimensions": [
+        256,
+        256
+      ],
+      "transparentPixelFraction": 0.72195,
+      "minimumGutter": 32,
+      "exactAlphaGutter": 32,
+      "cleanGutterCheck": true,
+      "cells": [
+        {
+          "row": 0,
+          "column": 0,
+          "alphaBounds": [
+            32,
+            52,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 0,
+          "column": 1,
+          "alphaBounds": [
+            32,
+            44,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 0,
+          "column": 2,
+          "alphaBounds": [
+            32,
+            82,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 0,
+          "column": 3,
+          "alphaBounds": [
+            32,
+            70,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 0,
+          "column": 4,
+          "alphaBounds": [
+            32,
+            45,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 0,
+          "column": 5,
+          "alphaBounds": [
+            32,
+            54,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "alphaBounds": [
+            49,
+            33,
+            207,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 1,
+          "column": 1,
+          "alphaBounds": [
+            53,
+            33,
+            203,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "alphaBounds": [
+            45,
+            33,
+            211,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 1,
+          "column": 3,
+          "alphaBounds": [
+            32,
+            70,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 1,
+          "column": 4,
+          "alphaBounds": [
+            55,
+            33,
+            202,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 1,
+          "column": 5,
+          "alphaBounds": [
+            50,
+            33,
+            207,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 2,
+          "column": 0,
+          "alphaBounds": [
+            50,
+            33,
+            206,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 2,
+          "column": 1,
+          "alphaBounds": [
+            53,
+            33,
+            204,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 2,
+          "column": 2,
+          "alphaBounds": [
+            48,
+            33,
+            208,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 2,
+          "column": 3,
+          "alphaBounds": [
+            32,
+            64,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 2,
+          "column": 4,
+          "alphaBounds": [
+            54,
+            33,
+            202,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 2,
+          "column": 5,
+          "alphaBounds": [
+            53,
+            33,
+            204,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 3,
+          "column": 0,
+          "alphaBounds": [
+            40,
+            33,
+            216,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 3,
+          "column": 1,
+          "alphaBounds": [
+            42,
+            33,
+            215,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 3,
+          "column": 2,
+          "alphaBounds": [
+            32,
+            53,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 3,
+          "column": 3,
+          "alphaBounds": [
+            32,
+            69,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 3,
+          "column": 4,
+          "alphaBounds": [
+            32,
+            49,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 3,
+          "column": 5,
+          "alphaBounds": [
+            47,
+            33,
+            209,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 4,
+          "column": 0,
+          "alphaBounds": [
+            42,
+            33,
+            215,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 4,
+          "column": 1,
+          "alphaBounds": [
+            32,
+            45,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 4,
+          "column": 2,
+          "alphaBounds": [
+            32,
+            50,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 4,
+          "column": 3,
+          "alphaBounds": [
+            42,
+            33,
+            214,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 4,
+          "column": 4,
+          "alphaBounds": [
+            45,
+            33,
+            211,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 4,
+          "column": 5,
+          "alphaBounds": [
+            50,
+            33,
+            207,
+            217
+          ],
+          "minimumGutter": 33,
+          "exactAlphaGutter": 33
+        },
+        {
+          "row": 5,
+          "column": 0,
+          "alphaBounds": [
+            32,
+            66,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 5,
+          "column": 1,
+          "alphaBounds": [
+            32,
+            69,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 5,
+          "column": 2,
+          "alphaBounds": [
+            32,
+            63,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 5,
+          "column": 3,
+          "alphaBounds": [
+            32,
+            56,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 5,
+          "column": 4,
+          "alphaBounds": [
+            32,
+            41,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        },
+        {
+          "row": 5,
+          "column": 5,
+          "alphaBounds": [
+            32,
+            49,
+            224,
+            217
+          ],
+          "minimumGutter": 32,
+          "exactAlphaGutter": 32
+        }
+      ]
+    },
+    {
+      "path": "artifacts/agency/activities.png",
+      "format": "PNG RGBA8",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 1849651,
+      "sha256": "d61b5eafc0402a39fd7c67e4f2fb83578c272972c9db0614305321cf017a6c24",
+      "grid": [
+        6,
+        6
+      ],
+      "cellDimensions": [
+        209,
+        209
+      ],
+      "transparentPixelFraction": 0.46268,
+      "minimumGutter": 0,
+      "exactAlphaGutter": 0,
+      "cleanGutterCheck": false,
+      "cells": [
+        {
+          "row": 0,
+          "column": 0,
+          "alphaBounds": [
+            36,
+            77,
+            179,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 0,
+          "column": 1,
+          "alphaBounds": [
+            37,
+            80,
+            176,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 0,
+          "column": 2,
+          "alphaBounds": [
+            41,
+            72,
+            183,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 0,
+          "column": 3,
+          "alphaBounds": [
+            30,
+            61,
+            164,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 0,
+          "column": 4,
+          "alphaBounds": [
+            27,
+            72,
+            199,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 0,
+          "column": 5,
+          "alphaBounds": [
+            23,
+            66,
+            168,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "alphaBounds": [
+            36,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 1,
+          "column": 1,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 1,
+          "column": 3,
+          "alphaBounds": [
+            0,
+            0,
+            207,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 1,
+          "column": 4,
+          "alphaBounds": [
+            21,
+            0,
+            205,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 1,
+          "column": 5,
+          "alphaBounds": [
+            15,
+            0,
+            190,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 2,
+          "column": 0,
+          "alphaBounds": [
+            22,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 2,
+          "column": 1,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 2,
+          "column": 2,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 2,
+          "column": 3,
+          "alphaBounds": [
+            0,
+            0,
+            193,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 2,
+          "column": 4,
+          "alphaBounds": [
+            22,
+            0,
+            203,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 2,
+          "column": 5,
+          "alphaBounds": [
+            14,
+            0,
+            191,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 3,
+          "column": 0,
+          "alphaBounds": [
+            23,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 3,
+          "column": 1,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 3,
+          "column": 2,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 3,
+          "column": 3,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 3,
+          "column": 4,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 3,
+          "column": 5,
+          "alphaBounds": [
+            0,
+            0,
+            206,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 4,
+          "column": 0,
+          "alphaBounds": [
+            14,
+            0,
+            209,
+            207
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 4,
+          "column": 1,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 4,
+          "column": 2,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 4,
+          "column": 3,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 4,
+          "column": 4,
+          "alphaBounds": [
+            0,
+            0,
+            209,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 4,
+          "column": 5,
+          "alphaBounds": [
+            0,
+            0,
+            206,
+            209
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 5,
+          "column": 0,
+          "alphaBounds": [
+            34,
+            33,
+            202,
+            189
+          ],
+          "minimumGutter": 7,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 5,
+          "column": 1,
+          "alphaBounds": [
+            57,
+            34,
+            209,
+            191
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 5,
+          "column": 2,
+          "alphaBounds": [
+            0,
+            15,
+            193,
+            191
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 5,
+          "column": 3,
+          "alphaBounds": [
+            26,
+            0,
+            193,
+            192
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 5,
+          "column": 4,
+          "alphaBounds": [
+            29,
+            0,
+            191,
+            192
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        },
+        {
+          "row": 5,
+          "column": 5,
+          "alphaBounds": [
+            22,
+            0,
+            180,
+            191
+          ],
+          "minimumGutter": 0,
+          "exactAlphaGutter": 0
+        }
+      ]
+    }
+  ]
+}

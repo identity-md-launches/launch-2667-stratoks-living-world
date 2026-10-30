@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STRATOKS supplementary atlas review</title>
+<style>
+  :root { font: 16px/1.5 system-ui,sans-serif; color: #f4edce; background: #202c2a; }
+  body { margin: auto; padding: 24px; max-width: 1440px; }
+  h1 { font-size: clamp(22px,4vw,38px); margin-bottom: 6px; }
+  p { max-width: 80ch; }
+  button,select { font: inherit; padding: 8px 12px; margin: 4px; }
+  button:focus-visible,select:focus-visible { outline: 3px solid #ffd36a; }
+  .controls { position: sticky; top: 0; z-index: 2; padding: 8px; background: #202c2af5; }
+  .cells { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 16px; }
+  figure { margin: 0; padding: 8px; border: 1px solid #63716a; border-radius: 8px; }
+  .sprite { width: 256px; height: 256px; max-width: 100%; margin: auto; position: relative; overflow: hidden;
+    background: repeating-conic-gradient(#77847b 0% 25%, #99a59b 0% 50%) 0/24px 24px; }
+  .sprite img { position: absolute; width: 1536px; max-width: none; height: 1536px; }
+  .anchor { width: 9px; height: 9px; position: absolute; border: 1px solid #f46; border-radius: 50%;
+    transform: translate(-50%,-50%); background: #fff8; pointer-events: none; }
+  figcaption { font-size: 13px; margin-top: 8px; }
+  .light .sprite { background: #f5efdc; } .dark .sprite { background: #172321; }
+  .noanchors .anchor { display: none; }
+  code { color: #ffdc8a; }
+  @media(max-width:560px) { body { padding: 12px; } .cells { grid-template-columns: 1fr; } }
+</style>
+<h1>STRATOKS · supplementary atlas review</h1>
+<p>Reusable pieces, not a world scene. This page reviews artwork only; it does not demonstrate simulation mechanisms or resolve engine defects. Red markers show the documented placement anchors.</p>
+<div class="controls">
+  <label>Sheet <select id="sheet"><option value="terrain">Terrain / props</option><option value="activities">Activities</option></select></label>
+  <label>Background <select id="background"><option value="checker">Checker</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+  <button id="anchors" aria-pressed="true">Anchors: on</button>
+</div>
+<p id="summary" aria-live="polite"></p>
+<div class="cells" id="cells"></div>
+<script src="manifest.js"></script>
+<script>
+  const sheet = document.querySelector('#sheet');
+  function render() {
+    const atlas = STRATOKS_AGENCY.atlases[sheet.value];
+    document.querySelector('#summary').textContent = `${atlas.width} × ${atlas.height} · ${atlas.format} · ${atlas.frames.length} cells. ${atlas.limitations.join(' ')}`;
+    const target = document.querySelector('#cells'); target.replaceChildren();
+    for (const frame of atlas.frames) {
+      const figure = document.createElement('figure');
+      const sprite = document.createElement('div'); sprite.className = 'sprite';
+      const img = document.createElement('img'); img.src = '../../' + atlas.path; img.alt = frame.name;
+      const sx = 256 / atlas.cellSize[0], sy = 256 / atlas.cellSize[1];
+      img.style.width = atlas.width*sx+'px'; img.style.height=atlas.height*sy+'px';
+      img.style.left = -frame.rect[0]*sx + 'px'; img.style.top = -frame.rect[1]*sy + 'px';
+      sprite.append(img);
+      const marker = document.createElement('span'); marker.className='anchor';
+      marker.style.left=frame.anchor[0]*sx+'px'; marker.style.top=frame.anchor[1]*sy+'px'; sprite.append(marker);
+      const caption=document.createElement('figcaption');
+      caption.textContent = `${frame.id} · ${frame.name} · anchor ${frame.anchor.join(', ')}`;
+      figure.append(sprite,caption); target.append(figure);
+    }
+  }
+  sheet.addEventListener('change',render);
+  document.querySelector('#background').addEventListener('change', e => {
+    document.body.classList.remove('light','dark');
+    if(e.target.value !== 'checker') document.body.classList.add(e.target.value);
+  });
+  document.querySelector('#anchors').addEventListener('click', e => {
+    const show = document.body.classList.toggle('noanchors') === false;
+    e.target.setAttribute('aria-pressed',String(show)); e.target.textContent='Anchors: '+(show?'on':'off');
+  });
+  render();
+</script>
+</html>

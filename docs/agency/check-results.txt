@@ -1,0 +1,23 @@
+Final local checks
+
+PNG structure: PASS (both files; signature, chunk CRCs, decompression)
+RGBA transparency: PASS (both contain fully clear and solid pixels)
+6x6 cell occupancy: PASS (36 occupied cells per atlas)
+Terrain dimensions: 1536x1536, 256x256 cells
+Activities dimensions: 1254x1254, 209x209 cells
+Terrain exact-alpha minimum gutter: 32 pixels, PASS (>=8)
+Activities exact-alpha minimum gutter: 0 pixels, FAIL (>=8)
+Checker overall exit: 1, because of the documented activity gutter defect
+Final file SHA-256 agreement with validation.json and manifest.json: PASS
+Manifest JSON/JavaScript data agreement: PASS
+72 named cell mappings: PASS
+node --check docs/agency/manifest.js: PASS
+node --check extracted review-page inline script: PASS
+
+Contributor visual inspection: references and both saved atlas revisions viewed.
+Findings and unresolved visual requirements: VISUAL-REVIEW.md
+Both cleanup tool calls returned: timed out awaiting tools/call after 300s
+Revised files were written after the timeout returns and were inspected/rechecked.
+No independent visual approval; no browser-rendered review-page test available.
+No engine build/test was run: this delivery changes art metadata/docs/tools only.
+No live state, production deployment, configuration or dependencies changed.
