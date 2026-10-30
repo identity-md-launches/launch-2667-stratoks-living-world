@@ -48,6 +48,6 @@ const server = createServer(async (req, res) => {
   }
 });
 server.listen(port, "127.0.0.1", () =>
-  console.log(`Preview: http://127.0.0.1:${port}/preview/`),
+  console.log(`Preview: http://127.0.0.1:${server.address().port}/preview/`),
 );
 process.on("SIGTERM", () => server.close());

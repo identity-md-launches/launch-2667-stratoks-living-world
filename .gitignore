@@ -32,3 +32,8 @@ artifacts/*
 # across web/public/art/**, web/public/demo/** and dist/**; no dependencies here.
 !artifacts/living-interface/
 !artifacts/living-interface/**
+
+# Agency integration evidence has an explicit 1310720-byte (1.25 MiB) path budget.
+# Source/runtime additions plus this evidence remain inside the task's 8 MiB bundle.
+!artifacts/agency-interface/
+!artifacts/agency-interface/**

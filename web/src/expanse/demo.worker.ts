@@ -21,7 +21,7 @@ async function start(data:any){
  }
  const stream=new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'));
  const saved=JSON.parse(await new Response(stream).text());
- if(saved.kind!=='stratoks-expanse'||saved.schema!==4||saved.seed!==data.seed)throw new Error('Incompatible demo checkpoint.');
+ if(saved.kind!=='stratoks-expanse'||saved.schema!==5||saved.seed!==data.seed)throw new Error('Incompatible demo checkpoint.');
  world=Expanse.fromState(saved);checkpointTick=world.tick;run();
 }
 self.onmessage=async ({data})=>{

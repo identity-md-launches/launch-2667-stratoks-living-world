@@ -1,188 +1,104 @@
-import { drawSprite, type Art } from "./art";
-import { project, scale, type Size } from "./projection";
-import type { Camera, WorldFrame } from "./types";
-
-const COLORS = ["#7d9b57", "#4c9b9e", "#307c90", "#80b7af", "#d8bf87", "#9c9f8b", "#e2e8df", "#727e7a", "#668750", "#cdb17a", "#5ca6a1"];
-const B = {temperate:0,arid:1,cold:2,coast:3} as Record<string,number>;
+import type { Art } from './art';
+import { scale, type Size, type Point } from './projection';
+import { tileAt, surfaceGeometry } from './surface';
+import type { Camera, WorldFrame } from './types';
+export { tileAt } from './surface';
+export const WATER=new Set([1,2,3,10]);
+const COLORS=['#7d9b57','#4c9b9e','#307c90','#80b7af','#d8bf87','#9c9f8b','#e2e8df','#727e7a','#668750','#cdb17a','#5ca6a1'];
 const noise=(x:number,y:number)=>((x*374761393+y*668265263)^((x+19)*(y+37)*1274126177))>>>0;
-export const WATER = new Set([1, 2, 3, 10]);
-const CHUNK = 8, UNIT = 32, PAD = 2, LIMIT = 96;
-const RASTER = { w: 2 * CHUNK * UNIT + 2 * PAD, h: CHUNK * UNIT + 2 * PAD };
-type CachedGround = { canvas: HTMLCanvasElement; signature: string };
-export function tileAt(f: WorldFrame, x: number, y: number) {
-  const v = f.view;
-  return x >= v.x0 && y >= v.y0 && x < v.x0 + v.w && y < v.y0 + v.h
-    ? v.tiles[(y - v.y0) * v.w + x - v.x0] : -1;
+export function polygon(ctx:CanvasRenderingContext2D,points:Point[]) {
+ ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);for(const p of points.slice(1))ctx.lineTo(p.x,p.y);ctx.closePath();
 }
-export function diamond(ctx: CanvasRenderingContext2D, x: number, y: number, s: number) {
-  ctx.beginPath();
-  ctx.moveTo(x, y - s / 2);
-  ctx.lineTo(x + s, y);
-  ctx.lineTo(x, y + s / 2);
-  ctx.lineTo(x - s, y);
-  ctx.closePath();
+export function diamond(ctx:CanvasRenderingContext2D,x:number,y:number,s:number){polygon(ctx,[{x,y:y-s/2},{x:x+s,y},{x,y:y+s/2},{x:x-s,y}]);}
+function dropForTexture(face:Point[]){return face[3].y-face[0].y;}
+export function drawTerrainTile(ctx:CanvasRenderingContext2D,art:Art,f:WorldFrame,x:number,y:number,c:Camera,size:Size) {
+ const t=tileAt(f,x,y);if(t<0)return;
+ const g=surfaceGeometry(f,x,y,c,size),p=g.p,s=scale(c,size),seed=noise(x,y);
+ const biome=f.view.biomes?.[(y-f.view.y0)*f.view.w+x-f.view.x0]??f.view.biome;
+ const faces=biome==='arid'?['#b88c58','#946b46']:biome==='cold'?['#8d9a99','#64787c']:biome==='coast'?['#879186','#586e6b']:['#89917c','#626e5c'];
+ for(let side=0;side<2;side++){
+  const face=g.faces[side];if(!face.length)continue;
+  polygon(ctx,face);ctx.fillStyle=faces[side];ctx.fill();
+  // The supplemental rock paint is clipped INSIDE the authoritative edge mesh.
+  // Its illustrated grass/water, disconnected fragments and false routes never render.
+  if(art.agencyTerrain && dropForTexture(face)>s*.1){
+   ctx.save();polygon(ctx,face);ctx.clip();ctx.globalAlpha=t===7?.22:.12;
+   const row=biome==='arid'?1:biome==='cold'?2:biome==='coast'?3:0;
+   const left=Math.min(...face.map(q=>q.x)),top=Math.min(...face.map(q=>q.y)),bottom=Math.max(...face.map(q=>q.y));
+   ctx.drawImage(art.agencyTerrain,row*40,0,40,64,left,top,s,bottom-top);ctx.restore();
+  }
+  const drop=face[3].y-face[0].y;
+  ctx.strokeStyle=side?'#293d3c50':'#e8d8ad66';ctx.lineWidth=Math.max(.7,s*.025);
+  for(let lift=s*.22;lift<drop;lift+=s*.22){ctx.beginPath();ctx.moveTo(face[0].x,face[0].y+lift);ctx.lineTo(face[1].x,face[1].y+lift);ctx.stroke();}
+  // The real shoreline has a rock bank, not a painted ribbon across water.
+  if(t!==7&&drop>0){ctx.strokeStyle='#efe3b680';ctx.lineWidth=Math.max(.8,s*.025);ctx.beginPath();ctx.moveTo(face[0].x,face[0].y);ctx.lineTo(face[1].x,face[1].y);ctx.stroke();}
+ }
+ polygon(ctx,g.top);ctx.fillStyle=COLORS[t]??COLORS[0];ctx.fill();ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=.65;ctx.stroke();
+ ctx.save();polygon(ctx,g.top);ctx.clip();
+ if(WATER.has(t)){
+  ctx.fillStyle=t===2?'#164b6330':'#b4e4ce20';ctx.beginPath();ctx.ellipse(p.x,p.y,s*.6,s*.12,-.18,0,Math.PI*2);ctx.fill();
+ }else{
+  ctx.fillStyle=biome==='arid'?'#f5dcb118':biome==='cold'?'#ffffff20':'#b2bc7b20';ctx.fillRect(p.x-s,p.y-s/2,s*2,s);
+  for(let n=0;n<8;n++){
+   const h=noise(x*23+n,y*17-n),xx=p.x+((h%1000)/500-1)*s,yy=p.y+(((h>>>10)%1000)/1000-.5)*s;
+   ctx.fillStyle=n%3?'#f5ebbb35':'#29452b25';ctx.beginPath();ctx.ellipse(xx,yy,s*.025+(h%3)*s*.012,s*.016,-.4,0,7);ctx.fill();
+  }
+  if((t===0||t===8)&&seed%3!==0){
+   const xx=p.x+((seed%13)-6)*s*.05,yy=p.y+((seed%7)-3)*s*.04;
+   ctx.strokeStyle='#354f3170';ctx.lineWidth=Math.max(.6,s*.018);ctx.beginPath();ctx.moveTo(xx-2,yy);ctx.lineTo(xx-4,yy-s*.12);ctx.moveTo(xx,yy);ctx.lineTo(xx+1,yy-s*.17);ctx.stroke();
+  }
+  if((t===4||t===9)&&seed%3===0){ctx.strokeStyle='#9f794d30';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(p.x,p.y+s*.15,s*.85,s*.23,-.2,Math.PI,Math.PI*2);ctx.stroke();}
+  if(t===6&&seed%4===0){ctx.strokeStyle='#f7fcf1aa';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(p.x-s*.6,p.y+s*.1);ctx.quadraticCurveTo(p.x,p.y-s*.12,p.x+s*.6,p.y-s*.06);ctx.stroke();}
+  if((t===5||t===7)&&seed%5===0){ctx.strokeStyle='#45595666';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p.x-s*.5,p.y-s*.15);ctx.lineTo(p.x-s*.1,p.y+s*.08);ctx.lineTo(p.x+s*.15,p.y-s*.05);ctx.stroke();}
+  // Blend only the seam between two walkable top surfaces; never draw a bridge.
+  const neighbors=[[x,y-1],[x+1,y],[x,y+1],[x-1,y]];
+  for(let i=0;i<4;i++){
+   const nt=tileAt(f,...neighbors[i] as [number,number]);
+   if(nt<0||nt===t||nt===7||t===7||WATER.has(nt))continue;
+   ctx.strokeStyle=COLORS[nt]+'66';ctx.lineWidth=s*.13;ctx.beginPath();ctx.moveTo(g.top[i].x,g.top[i].y);ctx.lineTo(g.top[(i+1)%4].x,g.top[(i+1)%4].y);ctx.stroke();
+  }
+ }
+ ctx.restore();
 }
-
-// Fixed world-space rasters: camera translation, zoom and DPR never invalidate paint.
-// At most 96 ~0.54 MB chunks (~52 MB RGBA) are retained, independently of DPR.
+// One DPR-capped viewport surface, no unbounded world/chunk cache. The signature
+// excludes tick: unchanged terrain is reused while residents and signals animate.
 export class GroundCache {
-  private chunks = new Map<string, CachedGround>();
-  private world = "";
-  private frame: WorldFrame | null = null;
-  private signatures = new Map<string, string>();
-  private surface = document.createElement("canvas");
-  private surfaceKey = "";
-  private surfaceCamera = "";
-  private cameraKey = "";
-  private movedAt = 0;
-  builds = 0;
-  get size() { return this.chunks.size; }
-  private clear() {
-    for (const entry of this.chunks.values()) entry.canvas.width = entry.canvas.height = 0;
-    this.chunks.clear();
-    this.surfaceKey = "";
+ private surface=document.createElement('canvas');
+ private tiles=new Map<string,HTMLCanvasElement>();
+ private key='';private frame:WorldFrame|null=null;private signature='';
+ builds=0;get size(){return this.key?1:0;}
+ constructor(private art:Art){}
+ private tile(f:WorldFrame,x:number,y:number){
+  const kind=tileAt(f,x,y),biome=f.view.biomes?.[(y-f.view.y0)*f.view.w+x-f.view.x0]??f.view.biome;
+  const g=surfaceGeometry(f,x,y,{x:x+.5,y:y+.5,span:1},{w:2,h:2});
+  const key=`${kind}:${biome}:${g.h}:${g.faces.map(face=>face.length?face[3].y-face[0].y:0)}:${[tileAt(f,x,y-1),tileAt(f,x+1,y),tileAt(f,x,y+1),tileAt(f,x-1,y)]}:${noise(x,y)%8}`;
+  let tile=this.tiles.get(key);
+  if(!tile){
+   tile=document.createElement('canvas');tile.width=68;tile.height=128;
+   const paint=tile.getContext('2d')!;
+   // 32px per half tile, top at y=64-height*32. Faces fit below.
+   drawTerrainTile(paint,this.art,f,x,y,{x:x+.5,y:y+.5,span:68/64},{w:68,h:128});
+   this.tiles.set(key,tile);
+   if(this.tiles.size>384){const old=this.tiles.keys().next().value!;const canvas=this.tiles.get(old)!;canvas.width=canvas.height=0;this.tiles.delete(old);}
   }
-  draw(ctx: CanvasRenderingContext2D, f: WorldFrame, c: Camera, size: Size, dpr = 1) {
-    const world = `${f.worldId ?? ""}:${f.seed}`;
-    if (world !== this.world || (this.frame && f.tick < this.frame.tick)) {
-      this.clear();
-      this.world = world;
-    }
-    const cameraKey = `${c.x},${c.y},${c.span},${size.w},${size.h},${dpr}`;
-    const changedFrame = this.frame !== f;
-    const now = performance.now();
-    if (cameraKey !== this.cameraKey) this.movedAt = now;
-    const blit = () => ctx.drawImage(this.surface, 0, 0, size.w * dpr, size.h * dpr, 0, 0, size.w, size.h);
-    // Reuse the viewport composition between confirmed frames/camera changes.
-    if (this.frame === f && this.surfaceCamera === cameraKey && this.surfaceKey) { this.cameraKey = cameraKey; blit(); return; }
-    if (this.frame !== f) {
-      this.frame = f;
-      this.signatures.clear();
-    }
-    const v = f.view, s = scale(c, size), ratio = s / UNIT;
-    let surfaceKey = cameraKey;
-    const pieces: { canvas: HTMLCanvasElement; x: number; y: number; w: number; h: number }[] = [];
-    for (let y = Math.floor(v.y0 / CHUNK) * CHUNK; y < v.y0 + v.h; y += CHUNK)
-      for (let x = Math.floor(v.x0 / CHUNK) * CHUNK; x < v.x0 + v.w; x += CHUNK) {
-        const p = project({ x: x + CHUNK / 2, y: y + CHUNK / 2 }, c, size),
-          w = RASTER.w * ratio, h = RASTER.h * ratio;
-        if (p.x + w / 2 < 0 || p.x - w / 2 > size.w || p.y + h / 2 < 0 || p.y - h / 2 > size.h) continue;
-        const key = `${x},${y}`;
-        let signature = this.signatures.get(key);
-        if (signature === undefined) {
-          signature = "";
-          // A one-tile halo captures shore neighbors and partial viewport edges.
-          for (let j = y - 1; j <= y + CHUNK; j++)
-            for (let i = x - 1; i <= x + CHUNK; i++)
-              signature += String.fromCharCode(tileAt(f, i, j) + 2, B[f.view.biomes?.[(j-f.view.y0)*f.view.w+i-f.view.x0] ?? f.view.biome] ?? 0);
-          this.signatures.set(key, signature);
-        }
-        let entry = this.chunks.get(key);
-        if (!entry || entry.signature !== signature) {
-          if (entry) entry.canvas.width = entry.canvas.height = 0;
-          entry = { canvas: this.build(f, x, y), signature };
-          this.builds++;
-        }
-        // Reinsert on use: evict the least recently visible raster.
-        this.chunks.delete(key);
-        this.chunks.set(key, entry);
-        surfaceKey += `:${key}:${signature}`;
-        pieces.push({ canvas: entry.canvas, x: p.x - w / 2, y: p.y - h / 2, w, h });
-      }
-    const paintGround = (paint: CanvasRenderingContext2D) => {
-      const sky = paint.createLinearGradient(0, 0, size.w, size.h);
-      sky.addColorStop(0, "#bdcecf"); sky.addColorStop(1, "#8da9ac");
-      paint.fillStyle = sky; paint.fillRect(0, 0, size.w, size.h);
-      for (const p of pieces) paint.drawImage(p.canvas, p.x, p.y, p.w, p.h);
-      const light = paint.createRadialGradient(size.w * 0.12, 0, 0, size.w * 0.12, 0, size.w * 0.9);
-      light.addColorStop(0, "#fff7ca20"); light.addColorStop(1, "#ffffff00");
-      paint.fillStyle = light; paint.fillRect(0, 0, size.w, size.h);
-    };
-    // Avoid repeatedly painting a mutable intermediate canvas during a gesture.
-    // Direct chunk blits stay cheap; compose once the camera settles or a frame arrives.
-    if (changedFrame || now - this.movedAt >= 180) {
-      if (surfaceKey !== this.surfaceKey) {
-        const w = Math.ceil(size.w * dpr), h = Math.ceil(size.h * dpr);
-        if (this.surface.width !== w || this.surface.height !== h) {
-          this.surface.width = w; this.surface.height = h;
-        }
-        const paint = this.surface.getContext("2d")!;
-        paint.setTransform(dpr, 0, 0, dpr, 0, 0);
-        paintGround(paint);
-        this.surfaceKey = surfaceKey;
-        this.surfaceCamera = cameraKey;
-      }
-      blit();
-    } else {
-      paintGround(ctx);
-    }
-    this.cameraKey = cameraKey;
-    while (this.chunks.size > LIMIT) {
-      const key = this.chunks.keys().next().value!;
-      const old = this.chunks.get(key)!;
-      old.canvas.width = old.canvas.height = 0;
-      this.chunks.delete(key);
-    }
+  return tile;
+ }
+ draw(ctx:CanvasRenderingContext2D,f:WorldFrame,c:Camera,size:Size,dpr=1){
+  if(this.frame!==f){const v=f.view;this.signature=`${f.worldId}:${f.seed}:${v.x0}:${v.y0}:${v.w}:${v.h}:${v.tiles.join('')}:${v.heights?.join(',')}:${v.biomes?.join(',')}`;this.frame=f;}
+  const key=`${c.x},${c.y},${c.span},${size.w},${size.h},${dpr}:${this.signature}`;
+  if(key!==this.key){
+   this.surface.width=Math.ceil(size.w*dpr);this.surface.height=Math.ceil(size.h*dpr);
+   const paint=this.surface.getContext('2d')!;paint.setTransform(dpr,0,0,dpr,0,0);
+   paint.fillStyle='#8fa9a4';paint.fillRect(0,0,size.w,size.h);
+   const v=f.view,s=scale(c,size);
+   // Diagonal painter order, including at negative chunk boundaries.
+   for(let sum=v.x0+v.y0;sum<=v.x0+v.w+v.y0+v.h-2;sum++)for(let y=Math.max(v.y0,sum-v.x0-v.w+1);y<=Math.min(v.y0+v.h-1,sum-v.x0);y++){
+    const x=sum-y,g=surfaceGeometry(f,x,y,c,size);
+    if(g.p.x+s<0||g.p.x-s>size.w||g.p.y+s*2<0||g.p.y-s/2>size.h)continue;
+    const tile=this.tile(f,x,y),ratio=s/32;paint.drawImage(tile,g.p.x-34*ratio,g.p.depth-64*ratio,68*ratio,128*ratio);
+   }
+   this.key=key;this.builds++;
   }
-  constructor(private art: Art) {}
-  private build(f: WorldFrame, x0: number, y0: number) {
-    const canvas = document.createElement("canvas");
-    canvas.width = RASTER.w;
-    canvas.height = RASTER.h;
-    const ctx = canvas.getContext("2d")!;
-    const c = { x: x0 + CHUNK / 2, y: y0 + CHUNK / 2, span: RASTER.w / (2 * UNIT) };
-    for (let y = y0; y < y0 + CHUNK; y++)
-      for (let x = x0; x < x0 + CHUNK; x++) {
-        const t = tileAt(f, x, y);
-        if (t < 0) continue;
-        const p = project({ x: x + 0.5, y: y + 0.5 }, c, RASTER);
-        diamond(ctx, p.x, p.y, UNIT + 0.65);
-        ctx.fillStyle = COLORS[t] ?? COLORS[0];
-        ctx.fill();
-        if (!WATER.has(t)) {
-          ctx.save();
-          diamond(ctx,p.x,p.y,UNIT+.7);ctx.clip();
-          const biome=f.view.biomes?.[(y-f.view.y0)*f.view.w+x-f.view.x0] ?? f.view.biome;
-          const seed=noise(x,y);
-          // Ground-only brush marks: never a gatherable resource or an implied route.
-          const tint=biome==='arid'?'#e9cf98':biome==='cold'?'#cfdcd7':biome==='coast'?'#d7cdab':'#769553';
-          ctx.fillStyle=tint;ctx.globalAlpha=.13+(seed%5)*.02;
-          ctx.fillRect(p.x-UNIT,p.y-UNIT/2,UNIT*2,UNIT);ctx.globalAlpha=1;
-          for(let n=0;n<12;n++){
-            const h=noise(x*23+n,y*17-n),xx=p.x+((h%1000)/500-1)*UNIT,yy=p.y+(((h>>>10)%1000)/1000-.5)*UNIT;
-            ctx.fillStyle=n%3?'#f5ebbb22':'#29452b20';
-            ctx.beginPath();ctx.ellipse(xx,yy,1+(h%3),.6+(h%2)*.3,-.4,0,Math.PI*2);ctx.fill();
-          }
-          if((t===0||t===8)&&seed%3!==0){
-            const xx=p.x+((seed%13)-6)*2, yy=p.y+((seed%7)-3)*2;
-            ctx.strokeStyle=biome==='cold'?'#829e8c66':'#354f3180';ctx.lineWidth=.8;
-            ctx.beginPath();ctx.moveTo(xx-2,yy);ctx.lineTo(xx-4,yy-3);ctx.moveTo(xx,yy);ctx.lineTo(xx+1,yy-5);ctx.moveTo(xx+1,yy);ctx.lineTo(xx+4,yy-2);ctx.stroke();
-          }
-          if(t===9||t===4){ctx.strokeStyle='#9f794d22';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(p.x,p.y+5,UNIT*.85,UNIT*.23,-.2,Math.PI,Math.PI*2);ctx.stroke();}
-          if(t===6){ctx.strokeStyle='#f7fcf1aa';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p.x-20,p.y+3);ctx.quadraticCurveTo(p.x,p.y-4,p.x+20,p.y-2);ctx.stroke();}
-          if(t===5||t===7){
-            ctx.strokeStyle='#596d6566';ctx.lineWidth=t===7?3:1;ctx.beginPath();ctx.moveTo(p.x-18,p.y-5);ctx.lineTo(p.x-3,p.y+2);ctx.lineTo(p.x+3,p.y-2);ctx.lineTo(p.x+18,p.y+5);ctx.stroke();
-            ctx.strokeStyle='#dee0c044';ctx.beginPath();ctx.moveTo(p.x-19,p.y-7);ctx.lineTo(p.x-2,p.y);ctx.lineTo(p.x+4,p.y-4);ctx.lineTo(p.x+20,p.y+3);ctx.stroke();
-          }
-          ctx.restore();
-        } else {
-          const verts = [{ x: p.x, y: p.y - UNIT / 2 }, { x: p.x + UNIT, y: p.y }, { x: p.x, y: p.y + UNIT / 2 }, { x: p.x - UNIT, y: p.y }];
-          const neighbors = [[x, y - 1], [x + 1, y], [x, y + 1], [x - 1, y]];
-          for (let edge = 0; edge < 4; edge++) {
-            const nt = tileAt(f, neighbors[edge][0], neighbors[edge][1]);
-            if (nt < 0 || WATER.has(nt)) continue;
-            const a = verts[edge], b = verts[(edge + 1) % 4];
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = "#586f5577"; ctx.lineWidth = UNIT * 0.22; ctx.stroke();
-            ctx.strokeStyle = "#e8d9abcc"; ctx.lineWidth = UNIT * 0.1; ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo((a.x + p.x * 0.08) / 1.08, (a.y + p.y * 0.08) / 1.08);
-            ctx.lineTo((b.x + p.x * 0.08) / 1.08, (b.y + p.y * 0.08) / 1.08);
-            ctx.strokeStyle = "#d5fff081"; ctx.lineWidth = 1; ctx.stroke();
-          }
-        }
-      }
-    return canvas;
-  }
+  ctx.drawImage(this.surface,0,0,this.surface.width,this.surface.height,0,0,size.w,size.h);
+ }
 }

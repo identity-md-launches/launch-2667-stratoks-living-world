@@ -1,0 +1,10 @@
+✔ exact original backup and migrated demo reproduce from 600 ordinary updated-engine ticks (17889.554129ms)
+✔ updated demo exact restart retains goals, trust, brains, families and terrain (3677.553329ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21704.637173

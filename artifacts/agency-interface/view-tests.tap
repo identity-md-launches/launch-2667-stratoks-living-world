@@ -1,0 +1,10 @@
+✔ relief is derived from authoritative terrain, with unchanged passability and RNG (47.802711ms)
+✔ view carries exact working phase, helping target, food input and actual heat, without inventory invention (4.875565ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 130.243288

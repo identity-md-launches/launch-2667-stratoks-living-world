@@ -3,7 +3,7 @@ export type Size = { w: number; h: number };
 export type Point = { x: number; y: number };
 export const DEFAULT_BOUNDS: Bounds = { x0: -112, y0: -112, x1: 168, y1: 168 };
 export const MIN_SPAN = 9;
-export const GUTTER = 3;
+export const GUTTER = 4; // includes the maximum terrain lift and object overhang
 // Camera is the world-coordinate centre. span controls the width along an isometric diagonal.
 export function scale(camera: Camera, size: Size) {
   return size.w / (2 * camera.span);
@@ -39,14 +39,15 @@ export function clampCamera(
   b: Bounds = DEFAULT_BOUNDS,
   aspect = 1.5,
 ): Camera {
+  // Clamp the focus, not an inscribed rectangular viewport: isometric corners
+  // need the surrounding off-world space to remain visible and pickable.
   const span = Math.max(MIN_SPAN, Math.min(maxSpan(aspect), c.span));
-  const r = span * (0.5 + 1 / aspect);
   const clamp = (v: number, lo: number, hi: number) =>
     lo > hi ? (lo + hi) / 2 : Math.max(lo, Math.min(hi, v));
   return {
     span,
-    x: clamp(c.x, b.x0 + r, b.x1 - r),
-    y: clamp(c.y, b.y0 + r, b.y1 - r),
+    x: clamp(c.x, b.x0 + 0.5, b.x1 - 0.5),
+    y: clamp(c.y, b.y0 + 0.5, b.y1 - 0.5),
   };
 }
 export function viewportQuery(

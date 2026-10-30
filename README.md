@@ -1,12 +1,14 @@
 # STRATOKS · A world taking root
 
-A full-screen isometric observer for the persistent 280×280 Expanse. Golden, leaf-crowned Stratoks explore, gather, fish, carry finite inventories, use shared stores, construct/repair biome-specific shelters, rest, form families, age and die in the existing learning engine. The original settlement coordinate system, owner world identity and saved-data migration tools are retained. This contribution integrates the preceding living-world art and schema-4 engine; it does not deploy or reset the live VPS.
+A full-screen isometric observer for the persistent 280×280 Expanse. Golden, leaf-crowned Stratoks explore, gather, fish, carry finite inventories, use shared stores, construct/repair biome-specific shelters, rest, form families, age and die in the existing learning engine. The original settlement coordinate system, owner world identity and saved-data migration tools are retained. This contribution integrates the preceding agency engine (schema 5), living-world art and supplementary terrain/activity art; it does not deploy or reset the live VPS.
 
-The review **opens a real isolated browser demo**, naturally simulated from 24 seed-2 founders to tick 12,000 and then continued in a worker with the production engine. Its 156 residents, families, memories, learned weights, supplies, 68 completed shelters and 26 sites come from that history. No job, tool, resource or settlement is injected for a scene. The owner capture remains available as **Recorded preview**. **Live world** is shown only after a successful owner API read. Cross-origin access needs the owner's allowed-origin configuration.
+The review **opens a real isolated browser demo**. It upgrades a copy of the existing seed-2 tick-12,000 checkpoint and runs 600 ordinary engine ticks before export. It resumes with 166 residents, 73 standing shelters, five crops, and retained goals/signaling evidence. The exact original checkpoint remains alongside it for rollback; no jobs, supplies, residents or scene events are injected. The owner capture remains **Recorded preview**. Owner/live mode reports only the server's actual fields: an older live backend does not acquire new mechanisms from a frontend update.
+
+The eight-finding resolution table, actual test results, raw evidence, screenshots, phone recording and six-domain review are in [current validation](artifacts/agency-interface/VALIDATION.md). [Integration](docs/agency/INTEGRATION.md) explains terrain geometry, animation gates and the compact runtime art. No production access or deployment occurred.
 
 ## Install, preview and rebuild
 
-Use Node 22.12+ (this task used Node 22.23.3). The existing frontend manifest, lockfile and Vite configuration are preserved.
+Use Node 22.12+ (this task used Node 24.21.0). The existing frontend manifest, lockfile and Vite configuration are preserved.
 
 ```sh
 cd web
@@ -35,9 +37,9 @@ Run those commands sequentially: the helper copies source into a shared temporar
 
 Drag or use arrow keys to pan. Scroll, pinch, use +/−, or use the zoom controls. Select a Stratok on the map, or use **Find residents** and search by name/ID. **Follow resident** tracks its confirmed position; manual pan stops following. Escape closes the resident sheet and returns focus to the map.
 
-Click empty terrain to inspect its actual coordinates, resources, construction progress, shelter integrity and stores. **Explore settlements** lists real structures by biome; choosing one moves your camera. The atlas supports pointer and arrow navigation, and closes after choosing a location. Observer travel never moves residents. Water crossings remain subject to the engine's original movement rules.
+Click empty terrain, or focus the map and press Enter, to inspect its actual coordinates, resources, construction progress, shelter integrity and observer-visible stores. Tile evidence is a safe-area-aware native dialog; Close or Escape returns focus to the map. **Explore settlements** lists real structures by biome; choosing one moves your camera. The atlas supports pointer and arrow navigation, and closes after choosing a location. Observer travel never moves residents. Water crossings remain subject to the engine's original movement rules.
 
-Plans retains predictions, uncertainty, candidates and measured outcomes. Perception is the resident's last decision observation, not current global truth. Learning retains its actual model/episode/mb-v1 evidence. JSON downloads contain the actual inspector. World records expose bounded discovery/social history and real population, births, deaths, stores, sites and fish totals. No speech, thoughts, invented events, wallet/payment UI or fake IMD control is added. The archived `#settlement` route stays unavailable with `legacyAvailable:false`.
+Goals shows persistent needs/curiosity/social priorities, suspension/resumption and learned strategies. Signals shows limited learned local signaling, perceived/sent history, response evidence, co-occurrence, confidence and individual trust. Resident store memory is explicitly stale until revisited. Plans retains predictions, uncertainty, candidates and measured outcomes. Perception is the resident's last decision observation, not current global truth. Learning retains its actual model/episode/mb-v1 evidence. JSON downloads contain the actual inspector. World records expose bounded discovery/social history and real population, births, deaths, stores, sites and fish totals. No speech, thoughts, invented events, wallet/payment UI or fake IMD control is added. The archived `#settlement` route stays unavailable with `legacyAvailable:false`.
 
 ## Mode and owner installation
 
@@ -62,7 +64,7 @@ node server/bin/expanse-upgrade.js /absolute/path/to/copied-world
 node server/bin/expanse-upgrade.js /absolute/path/to/copied-world --write
 ```
 
-The first command is a dry run. The second preserves original pre-migration bytes before applying schema 3→4; do not point either command at the only copy of a world. See [owner installation and rollback](deploy/INSTALL-LIVING.md) for concrete backup, startup, API and rollback steps, including environment settings. The frontend adds only observer fields and portable save decoding; it introduces no new persisted schema beyond the preceding schema 4. Existing IDs, brains, learned weights, family/relationship records, memories, discoveries and modified terrain are never replaced by the demo checkpoint.
+The first command is a dry run. The second preserves original pre-migration bytes before applying the versioned migrations through schema 5; do not point either command at the only copy of a world. See [owner installation and rollback](deploy/INSTALL-LIVING.md) for concrete backup, startup, API and rollback steps, including environment settings. The frontend integrates the preceding schema-5 engine, with additive observer-only relief, heat and activity fields. Schema 4→5 adds bounded agency defaults; see `docs/agency/ENGINE.md`. Existing IDs, brains, learned weights, family/relationship records, memories, discoveries and modified terrain are never replaced by the demo checkpoint.
 
 ## Art, physics and provenance
 
@@ -70,25 +72,36 @@ The first command is a dry run. The second preserves original pre-migration byte
 
 [Living rules](server/docs/LIVING.md) document the designed recipes, tool wear, fish stock limits/regrowth, storage, construction, exposure and survival rules. [Frontend contract](docs/living/FRONTEND.md) explains the demo history, engine integration and state-to-animation mapping. [DESIGN.md](DESIGN.md) documents the final implemented interface system.
 
-The rejected rabbit media, old share cards and compiled archived observer have been removed, including historical screenshot binaries. Their old numerical JSON/TAP measurements remain historical data, not evidence for this revision. Current media and worker observations are in `artifacts/living-interface/`; [MEDIA.md](MEDIA.md) identifies them. Existing original art sources under `docs/living/source/` remain intact.
+The rejected rabbit media, old share cards and compiled archived observer have been removed, including historical screenshot binaries. Their old numerical JSON/TAP measurements remain historical data, not evidence for this revision. Current media and worker observations are in `artifacts/agency-interface/`; [MEDIA.md](MEDIA.md) identifies them. Earlier `artifacts/living-interface/` results are historical. Existing original art sources under `docs/living/source/` remain intact.
 
 ## Validation
 
-The actual commands, browser results, six-domain Better Interface review, fixes and limitations are in [validation](artifacts/living-interface/VALIDATION.md), with raw JSON/TAP, desktop/mobile screenshots and recordings. These are contributor observations, not independent certification.
-
-Reproduce meaningful checks after building:
+Actual local results: production build and TypeScript check passed; **196 existing server tests + 2 observer-contract tests + 2 demo migration/replay tests + 34 client tests passed**. Chromium interactions passed at desktop, tablet, 320/390-wide phones and 667/844-wide landscape phones. The pinned design probe passed **16/16**. These are worker observations, separate from independent structural acceptance.
 
 ```sh
-node --test --test-concurrency=2 tests/expanse.test.js tests/living.test.js tests/living-interface.test.js
-node tools/living/demo-checkpoint.mjs 2 12000 test/scratch/reproduced
-node web/scripts/living-check.mjs
-node .imd/reads/skills/design-critic/scripts/taste.mjs --out test/scratch/taste
+node --test --test-concurrency=2 tests/*.test.js
+cd web && npm test && npm run typecheck && npm run build
+cd ..
+# Install browser binaries outside the submission, using the existing lockfile:
+PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers web/node_modules/.bin/playwright install chromium
+PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers node web/scripts/agency-check.mjs
+PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers node web/scripts/agency-performance.mjs
+IMD_PLAYWRIGHT="$PWD/web/node_modules/playwright/index.mjs" PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers node .imd/reads/skills/design-critic/scripts/taste.mjs --out test/scratch/taste --offline
+node tests/experiments/agency-ablation.mjs 3000 3,5,9 test/scratch/ablation.json
+node tests/load/living-bench.mjs 100 600
+node tests/load/living-bench.mjs 250 600
 ```
 
-`living-check.mjs` owns and closes a local subpath preview, tests the real export, and never contacts the owner VPS. Browser dependencies come from the existing frontend lockfile; install Chromium/WebKit with Playwright outside the submission. `IMD_PLAYWRIGHT` may name an external Playwright `index.mjs`. `STRATOKS_FFMPEG` may name a VP9 encoder. Atlas validation uses externally installed `sharp`, as described in the art integration document. Missing platform/browser tools are reported explicitly; no recording, timing or test result is inferred.
+The pinned `.imd/reads/` probe is an assignment input and is removed after submission; its raw final result is retained in the validation artifacts. The delivered interaction/performance scripts remain reproducible. They start and close their own loopback preview, exercise the actual `dist/` at `/preview/`, and never request the owner VPS. Playwright WebKit was attempted but failed because host shared libraries are missing; Safari behavior remains unverified.
+
+To reproduce the upgraded demo, run `node tools/living/upgrade-demo.mjs`, then rebuild. `tests/agency-demo.test.js` verifies its exact gzip hash from the original + 600 ticks and exact restarted continuation. The original `checkpoint.json.gz` must never be replaced with a newly generated world. The old `demo-checkpoint.mjs` fresh-founder recipe describes historical schema-4 work and is not the upgrade recipe.
+
+A short actual phone recording is delivered at `artifacts/agency-interface/phone-tour.webm`. To make a fresh raw capture, run `PLAYWRIGHT_BROWSERS_PATH=/tmp/stratoks-browsers node web/scripts/agency-record.mjs`. It writes under `test/scratch/`. The delivered clip was encoded at 8 fps/90 kbit VP9 (no audio); the recorded simulation and interactions are real, without forced agent actions. High-resolution screenshots accompany the compact recording.
 
 ## Remaining limits
 
-The supplied work/walk poses face southeast. Southwest work/walk uses mirroring; backward travel uses the supplied rear view. Some generated poses vary slightly in shape. There is no eight-direction work rig, growth-specific body art, exact-unit load depiction, unlit-house variant or catch-result API phase. The fish-on-hook catch pose is delivered but unused. Work-tool art is withheld if a resident has no held supported tool; engine construction can still proceed according to its designed rules.
+The parent engine's cooking and provisioning-help chains pass functional tests but did not emerge in the new 14-run natural ablation. Communication showed no demonstrated benefit; its confidence is evidence quantity, not semantic correctness. These are explicitly **unresolved emergence/research limits**, not features made successful by this presentation update. The existing planner and mb-v1 remain in charge; there are no scripted professions or global director.
 
-Only adjacent positions in consecutive engine ticks interpolate; skipped paths snap. A 96-chunk terrain cache and a 30 Hz visual cap bound rendering work, but newly exposed terrain can cause spikes and high zoom can soften cached paint. Learning histories and per-tick decisions are bounded; total simulation cost still grows with naturally growing populations. Local x64 CPU/RSS and emulated-browser results do not establish ARM VPS or physical-device performance. Native screen readers, physical phones, native 200% browser zoom and owner installation require further validation. No paid inference, live deployment or public-world write occurred.
+Sprites retain the original golden leaf-crowned species. Unsupported wheat, cookware, vessels and composite two-actor art are not used. Work-tool art requires a supported held tool; bare-handed construction still follows engine rules. Direction coverage is limited; backward travel uses rear idle art, and some source matte fringe remains visible when enlarged.
+
+Rendering keeps a 30 Hz cap, a DPR≤2 viewport surface and at most 384 small terrain rasters. Newly exposed terrain/camera changes can spike; timings are reported, not averaged away. Per-resident histories are bounded, while natural population growth can increase total CPU/RSS. Local x64 and emulated Chromium results do not establish ARM VPS, physical-phone, WebKit, native screen-reader or native 200% zoom performance/accessibility. No paid inference, payments, production access or public-world writes occurred.

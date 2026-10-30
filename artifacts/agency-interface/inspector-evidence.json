@@ -1,0 +1,1378 @@
+{
+  "v": 1,
+  "id": 154,
+  "name": "Ziye",
+  "age": 1188,
+  "x": 11,
+  "y": 40,
+  "needs": {
+    "hunger": 2.3,
+    "thirst": 3.5,
+    "energy": 68.8,
+    "health": 100,
+    "warmth": 100,
+    "injury": 0
+  },
+  "inventory": {
+    "stone": 1
+  },
+  "personality": {
+    "boldness": 0.6635841766837984,
+    "sociability": 0.7414065992925316,
+    "diligence": 0.16225679381750524,
+    "curiosity": 0.6152776959352195,
+    "caution": 0.13327227463014424
+  },
+  "observation": null,
+  "activity": {
+    "state": "tend",
+    "prim": "tend",
+    "phase": "tend",
+    "progress": 0.5,
+    "target": {
+      "x": 10,
+      "y": 40
+    },
+    "item": null,
+    "load": 2,
+    "capacity": 12,
+    "carrying": {
+      "stone": 1
+    },
+    "tools": []
+  },
+  "toolWear": {},
+  "home": {
+    "x": 0,
+    "y": 40
+  },
+  "currentPlan": {
+    "id": 74272,
+    "tick": 12595,
+    "source": "planner+mb-v1",
+    "steps": [
+      {
+        "prim": "move",
+        "x": 11,
+        "y": 40,
+        "purpose": "shelter",
+        "key": "move|to-shelter|",
+        "label": "REST"
+      },
+      {
+        "prim": "tend",
+        "crop": 4,
+        "x": 10,
+        "y": 40,
+        "key": "tend|berry|wet",
+        "label": "GATHER_WOOD"
+      }
+    ],
+    "predicted": [
+      {
+        "reward": -0.018,
+        "sigma": 0.109,
+        "success": 1,
+        "duration": 5.167,
+        "n": 6
+      },
+      {
+        "reward": -0.002,
+        "sigma": 1.262,
+        "success": 0,
+        "duration": 9,
+        "n": 0.3
+      }
+    ],
+    "actual": [
+      {
+        "step": 0,
+        "success": true,
+        "reason": null,
+        "reward": -0.013,
+        "duration": 4,
+        "energy": 0.26,
+        "produced": {}
+      }
+    ],
+    "utility": -0.125,
+    "mbPreference": 0.005,
+    "alternatives": 91,
+    "index": 1,
+    "plannerVersion": 3
+  },
+  "recentPlans": [
+    {
+      "id": 72896,
+      "tick": 12496,
+      "source": "planner+mb-v1",
+      "steps": [
+        {
+          "prim": "share",
+          "target": 122,
+          "item": "berry",
+          "key": "share|berry|other",
+          "label": "SOCIALIZE"
+        },
+        {
+          "prim": "gather",
+          "node": "c-1,1:35",
+          "kind": "tree",
+          "x": -8,
+          "y": 34,
+          "key": "gather|tree|bare",
+          "label": "GATHER_WOOD"
+        }
+      ],
+      "predicted": [
+        {
+          "reward": 0.203,
+          "sigma": 0.175,
+          "success": 1,
+          "duration": 5.333,
+          "n": 3
+        },
+        {
+          "reward": 0.095,
+          "sigma": 0.081,
+          "success": 0.976,
+          "duration": 17.593,
+          "n": 12.3
+        }
+      ],
+      "value": -0.236,
+      "utility": 0.691,
+      "mbPreference": 0.031,
+      "alternatives": 74,
+      "actual": [
+        {
+          "step": 0,
+          "success": true,
+          "reason": null,
+          "reward": 0.2,
+          "duration": 6,
+          "energy": 0.54,
+          "produced": {}
+        },
+        {
+          "step": 1,
+          "success": true,
+          "reason": null,
+          "reward": 0.187,
+          "duration": 11,
+          "energy": 1.8,
+          "produced": {
+            "berry": 1,
+            "wood": 1
+          }
+        }
+      ],
+      "goal": {
+        "id": 3,
+        "kind": "curiosity",
+        "urgency": 0.323,
+        "bias": 0.016,
+        "start": 3.25,
+        "avoided": [
+          "gather|stone|",
+          "signal|◇|node:bush"
+        ]
+      },
+      "predictedReward": 0.298,
+      "actualReward": 0.387,
+      "completed": true
+    },
+    {
+      "id": 73120,
+      "tick": 12511,
+      "source": "planner+mb-v1",
+      "steps": [
+        {
+          "prim": "use",
+          "item": "berry",
+          "on": "self",
+          "key": "use|berry@self|",
+          "label": "EAT"
+        },
+        {
+          "prim": "place",
+          "item": "wood",
+          "key": "place|wood|ground",
+          "label": "GATHER_WOOD"
+        }
+      ],
+      "predicted": [
+        {
+          "reward": 0.27,
+          "sigma": 0.181,
+          "success": 1,
+          "duration": 3,
+          "n": 6
+        },
+        {
+          "reward": -0.007,
+          "sigma": 0.145,
+          "success": 1,
+          "duration": 3,
+          "n": 4
+        }
+      ],
+      "value": 0.299,
+      "utility": 0.845,
+      "mbPreference": 0.13,
+      "alternatives": 95,
+      "actual": [
+        {
+          "step": 0,
+          "success": true,
+          "reason": null,
+          "reward": 0.26,
+          "duration": 3,
+          "energy": 0.04,
+          "produced": {}
+        },
+        {
+          "step": 1,
+          "success": true,
+          "reason": null,
+          "reward": -0.007,
+          "duration": 3,
+          "energy": 0.04,
+          "produced": {}
+        }
+      ],
+      "goal": {
+        "id": 3,
+        "kind": "curiosity",
+        "urgency": 0.323,
+        "bias": 0,
+        "start": 3.25,
+        "avoided": [
+          "gather|stone|",
+          "signal|◇|node:bush"
+        ]
+      },
+      "predictedReward": 0.263,
+      "actualReward": 0.253,
+      "completed": true
+    },
+    {
+      "id": 73168,
+      "tick": 12515,
+      "source": "planner+mb-v1",
+      "steps": [
+        {
+          "prim": "socialize",
+          "target": 32,
+          "key": "socialize|other|",
+          "label": "SOCIALIZE"
+        }
+      ],
+      "predicted": [
+        {
+          "reward": 0.097,
+          "sigma": 0.099,
+          "success": 1,
+          "duration": 24.275,
+          "n": 6.9
+        }
+      ],
+      "value": -0.599,
+      "utility": 0.442,
+      "mbPreference": 0.054,
+      "alternatives": 60,
+      "actual": [
+        {
+          "step": 0,
+          "success": true,
+          "reason": null,
+          "reward": 0.1,
+          "duration": 13,
+          "energy": 0.64,
+          "produced": {}
+        }
+      ],
+      "goal": {
+        "id": 3,
+        "kind": "curiosity",
+        "urgency": 0.323,
+        "bias": 0,
+        "start": 3.25,
+        "avoided": [
+          "gather|stone|",
+          "signal|◇|node:bush"
+        ]
+      },
+      "predictedReward": 0.097,
+      "actualReward": 0.1,
+      "completed": true
+    },
+    {
+      "id": 73327,
+      "tick": 12527,
+      "source": "planner+mb-v1",
+      "steps": [
+        {
+          "prim": "use",
+          "item": null,
+          "on": "water",
+          "x": 9,
+          "y": 34,
+          "key": "drink|known-fresh|",
+          "label": "EAT"
+        },
+        {
+          "prim": "use",
+          "item": "stone",
+          "on": "pile",
+          "key": "use|stone@pile|",
+          "label": "GATHER_WOOD"
+        }
+      ],
+      "predicted": [
+        {
+          "reward": 0.147,
+          "sigma": 0.07,
+          "success": 1,
+          "duration": 11.319,
+          "n": 18.2
+        },
+        {
+          "reward": 0,
+          "sigma": 1,
+          "success": 0.5,
+          "duration": 4,
+          "n": 0
+        }
+      ],
+      "value": 0.012,
+      "utility": 0.416,
+      "mbPreference": 0.139,
+      "alternatives": 83,
+      "actual": [
+        {
+          "step": 0,
+          "success": true,
+          "reason": null,
+          "reward": 0.265,
+          "duration": 16,
+          "energy": 1.416,
+          "produced": {}
+        },
+        {
+          "step": 1,
+          "success": false,
+          "reason": "no-ignition",
+          "reward": -0.122,
+          "duration": 3,
+          "energy": 1.54,
+          "produced": {}
+        }
+      ],
+      "goal": {
+        "id": 3,
+        "kind": "curiosity",
+        "urgency": 0.323,
+        "bias": 0,
+        "start": 3.25,
+        "avoided": [
+          "gather|stone|",
+          "signal|◇|node:bush",
+          "socialize|other|"
+        ]
+      },
+      "predictedReward": 0.147,
+      "actualReward": 0.143,
+      "completed": false
+    },
+    {
+      "id": 73582,
+      "tick": 12544,
+      "source": "planner+mb-v1",
+      "steps": [
+        {
+          "prim": "signal",
+          "glyph": "△",
+          "ctx": "node:bush",
+          "key": "signal|△|node:bush",
+          "label": "SOCIALIZE"
+        },
+        {
+          "prim": "gather",
+          "node": "b35",
+          "kind": "bush",
+          "x": 8,
+          "y": 30,
+          "key": "gather|bush|",
+          "label": "EAT"
+        }
+      ],
+      "predicted": [
+        {
+          "reward": -0.004,
+          "sigma": 0.957,
+          "success": 1,
+          "duration": 2,
+          "n": 1
+        },
+        {
+          "reward": 0.078,
+          "sigma": 0.038,
+          "success": 0.885,
+          "duration": 11.31,
+          "n": 26.1
+        }
+      ],
+      "value": 0.321,
+      "utility": 1.343,
+      "mbPreference": 0.062,
+      "alternatives": 98,
+      "actual": [
+        {
+          "step": 0,
+          "success": true,
+          "reason": null,
+          "reward": -0.004,
+          "duration": 2,
+          "energy": 0.07,
+          "produced": {}
+        },
+        {
+          "step": 1,
+          "success": false,
+          "reason": "inventory-full",
+          "reward": -0.136,
+          "duration": 10,
+          "energy": 0.48,
+          "produced": {}
+        }
+      ],
+      "goal": {
+        "id": 3,
+        "kind": "curiosity",
+        "urgency": 0.323,
+        "bias": 0,
+        "start": 3.25,
+        "avoided": [
+          "gather|stone|",
+          "signal|◇|node:bush",
+          "socialize|other|"
+        ]
+      },
+      "predictedReward": 0.074,
+      "actualReward": -0.14,
+      "completed": false
+    },
+    {
+      "id": 73729,
+      "tick": 12554,
+      "source": "planner+mb-v1",
+      "steps": [
+        {
+          "prim": "gather",
+          "node": "b10",
+          "kind": "bush",
+          "x": 7,
+          "y": 34,
+          "key": "gather|bush|",
+          "label": "EAT"
+        }
+      ],
+      "predicted": [
+        {
+          "reward": 0.071,
+          "sigma": 0.037,
+          "success": 0.854,
+          "duration": 11.303,
+          "n": 27.4
+        }
+      ],
+      "value": -0.291,
+      "utility": 0.003,
+      "mbPreference": 0.161,
+      "alternatives": 100,
+      "actual": [
+        {
+          "step": 0,
+          "success": false,
+          "reason": "inventory-full",
+          "reward": -0.131,
+          "duration": 9,
+          "energy": 0.36,
+          "produced": {}
+        }
+      ],
+      "goal": {
+        "id": 3,
+        "kind": "curiosity",
+        "urgency": 0.323,
+        "bias": -0.161,
+        "start": 3.25,
+        "avoided": [
+          "gather|stone|",
+          "signal|◇|node:bush",
+          "socialize|other|",
+          "gather|bush|"
+        ]
+      },
+      "predictedReward": 0.071,
+      "actualReward": -0.131,
+      "completed": false
+    },
+    {
+      "id": 73845,
+      "tick": 12562,
+      "source": "planner+mb-v1",
+      "steps": [
+        {
+          "prim": "socialize",
+          "target": 122,
+          "key": "socialize|friend|",
+          "label": "SOCIALIZE"
+        },
+        {
+          "prim": "combine",
+          "a": "berry",
+          "b": "stone",
+          "key": "combine|berry+stone|",
+          "label": "GATHER_WOOD"
+        }
+      ],
+      "predicted": [
+        {
+          "reward": 0.226,
+          "sigma": 0.263,
+          "success": 1,
+          "duration": 11.8,
+          "n": 1.5
+        },
+        {
+          "reward": 0,
+          "sigma": 1,
+          "success": 0.5,
+          "duration": 4,
+          "n": 0
+        }
+      ],
+      "value": 0.213,
+      "utility": 1.206,
+      "mbPreference": 0.05,
+      "alternatives": 80,
+      "actual": [
+        {
+          "step": 0,
+          "success": true,
+          "reason": null,
+          "reward": 0.04,
+          "duration": 27,
+          "energy": 1.82,
+          "produced": {}
+        },
+        {
+          "step": 1,
+          "success": false,
+          "reason": "missing-item",
+          "reward": -0.115,
+          "duration": 5,
+          "energy": 0.08,
+          "produced": {}
+        }
+      ],
+      "goal": {
+        "id": 3,
+        "kind": "curiosity",
+        "urgency": 0.323,
+        "bias": 0.016,
+        "start": 3.25,
+        "avoided": [
+          "gather|stone|",
+          "signal|◇|node:bush",
+          "socialize|other|",
+          "gather|bush|"
+        ]
+      },
+      "predictedReward": 0.226,
+      "actualReward": -0.075,
+      "completed": false
+    },
+    {
+      "id": 74243,
+      "tick": 12592,
+      "source": "planner+mb-v1",
+      "steps": [
+        {
+          "prim": "signal",
+          "glyph": "△",
+          "ctx": "water",
+          "key": "signal|△|water",
+          "label": "SOCIALIZE"
+        },
+        {
+          "prim": "use",
+          "item": "stone",
+          "on": "pile",
+          "key": "use|stone@pile|",
+          "label": "GATHER_WOOD"
+        },
+        {
+          "prim": "tend",
+          "crop": 4,
+          "x": 10,
+          "y": 40,
+          "key": "tend|berry|wet",
+          "label": "GATHER_WOOD"
+        }
+      ],
+      "predicted": [
+        {
+          "reward": 0,
+          "sigma": 1,
+          "success": 0.5,
+          "duration": 4,
+          "n": 0
+        },
+        {
+          "reward": -0.122,
+          "sigma": 0.957,
+          "success": 0,
+          "duration": 3,
+          "n": 1
+        },
+        {
+          "reward": -0.002,
+          "sigma": 1.262,
+          "success": 0,
+          "duration": 9,
+          "n": 0.3
+        }
+      ],
+      "value": -0.15,
+      "utility": 0.8,
+      "mbPreference": 0.044,
+      "alternatives": 87,
+      "actual": [
+        {
+          "step": 0,
+          "success": true,
+          "reason": null,
+          "reward": -0.004,
+          "duration": 2,
+          "energy": 0.07,
+          "produced": {}
+        },
+        {
+          "step": 1,
+          "success": false,
+          "reason": "no-ignition",
+          "reward": -0.122,
+          "duration": 3,
+          "energy": 1.54,
+          "produced": {}
+        }
+      ],
+      "goal": {
+        "id": 3,
+        "kind": "curiosity",
+        "urgency": 0.323,
+        "bias": 0.016,
+        "start": 3.25,
+        "avoided": [
+          "gather|stone|",
+          "signal|◇|node:bush",
+          "socialize|other|",
+          "gather|bush|"
+        ]
+      },
+      "predictedReward": -0.124,
+      "actualReward": -0.126,
+      "completed": false
+    }
+  ],
+  "episodes": [
+    {
+      "tick": 12511,
+      "key": "gather|tree|bare",
+      "success": true,
+      "reward": 0.187,
+      "duration": 11,
+      "produced": {
+        "berry": 1,
+        "wood": 1
+      },
+      "reason": null,
+      "x": -7,
+      "y": 35,
+      "novel": false
+    },
+    {
+      "tick": 12513,
+      "key": "use|berry@self|",
+      "success": true,
+      "reward": 0.26,
+      "duration": 3,
+      "produced": {},
+      "reason": null,
+      "x": -7,
+      "y": 35,
+      "novel": false
+    },
+    {
+      "tick": 12542,
+      "key": "drink|known-fresh|",
+      "success": true,
+      "reward": 0.265,
+      "duration": 16,
+      "produced": {},
+      "reason": null,
+      "x": 8,
+      "y": 34,
+      "novel": false
+    },
+    {
+      "tick": 12544,
+      "key": "use|stone@pile|",
+      "success": false,
+      "reward": -0.122,
+      "duration": 3,
+      "produced": {},
+      "reason": "no-ignition",
+      "x": 8,
+      "y": 34,
+      "novel": false
+    },
+    {
+      "tick": 12545,
+      "key": "signal|△|node:bush",
+      "success": true,
+      "reward": -0.004,
+      "duration": 2,
+      "produced": {},
+      "reason": null,
+      "x": 8,
+      "y": 34,
+      "novel": false
+    },
+    {
+      "tick": 12554,
+      "key": "gather|bush|",
+      "success": false,
+      "reward": -0.136,
+      "duration": 10,
+      "produced": {},
+      "reason": "inventory-full",
+      "x": 8,
+      "y": 31,
+      "novel": false
+    },
+    {
+      "tick": 12562,
+      "key": "gather|bush|",
+      "success": false,
+      "reward": -0.131,
+      "duration": 9,
+      "produced": {},
+      "reason": "inventory-full",
+      "x": 8,
+      "y": 33,
+      "novel": false
+    },
+    {
+      "tick": 12588,
+      "key": "socialize|friend|",
+      "success": true,
+      "reward": 0.04,
+      "duration": 27,
+      "produced": {},
+      "reason": null,
+      "x": 9,
+      "y": 40,
+      "novel": false
+    },
+    {
+      "tick": 12592,
+      "key": "combine|berry+stone|",
+      "success": false,
+      "reward": -0.115,
+      "duration": 5,
+      "produced": {},
+      "reason": "missing-item",
+      "x": 9,
+      "y": 40,
+      "novel": false
+    },
+    {
+      "tick": 12593,
+      "key": "signal|△|water",
+      "success": true,
+      "reward": -0.004,
+      "duration": 2,
+      "produced": {},
+      "reason": null,
+      "x": 9,
+      "y": 40,
+      "novel": false
+    },
+    {
+      "tick": 12595,
+      "key": "use|stone@pile|",
+      "success": false,
+      "reward": -0.122,
+      "duration": 3,
+      "produced": {},
+      "reason": "no-ignition",
+      "x": 9,
+      "y": 40,
+      "novel": false
+    },
+    {
+      "tick": 12598,
+      "key": "move|to-shelter|",
+      "success": true,
+      "reward": -0.013,
+      "duration": 4,
+      "produced": {},
+      "reason": null,
+      "x": 11,
+      "y": 40,
+      "novel": false
+    }
+  ],
+  "knownNodes": 40,
+  "knownWater": [
+    {
+      "x": 9,
+      "y": 34,
+      "t": 12595
+    },
+    {
+      "x": 14,
+      "y": 31,
+      "t": 11824
+    }
+  ],
+  "discoveries": [],
+  "modelEntries": 64,
+  "mbUpdates": 84,
+  "mode": "full",
+  "learning": true,
+  "relationships": {
+    "18": 0.1,
+    "28": 0.06,
+    "29": 0.04,
+    "30": 0.16,
+    "32": 0.12,
+    "69": 0.04,
+    "71": 0.6,
+    "88": 0.06,
+    "118": 0.1,
+    "122": 0.51,
+    "136": 0.06,
+    "147": 0.25,
+    "148": 0.04
+  },
+  "reputation": {
+    "10": 0.02,
+    "17": 0.08,
+    "18": 0.18,
+    "26": 0.08,
+    "28": 0.08,
+    "29": 0.26,
+    "30": 0.12,
+    "32": 0.02,
+    "40": 0.02,
+    "41": 0.08,
+    "46": 0.1,
+    "59": 0.08,
+    "67": 0.02,
+    "69": 0.02,
+    "78": 0.18,
+    "84": 0.08,
+    "86": 0.16,
+    "88": 0.04,
+    "92": 0.04,
+    "93": 0.02,
+    "106": 0.1,
+    "107": 0.04,
+    "115": 0.1,
+    "118": 0.02,
+    "122": 0.18,
+    "129": 0.1,
+    "132": 0.02,
+    "136": 0.02,
+    "137": 0.02,
+    "138": 0.02,
+    "142": 0.18,
+    "145": 0.1,
+    "147": 0.08,
+    "148": 0.02,
+    "157": 0.02,
+    "159": 0.02,
+    "166": 0.02
+  },
+  "following": null,
+  "knownStores": [
+    {
+      "id": 18,
+      "x": 7,
+      "y": 35,
+      "stock": {
+        "stone": 25,
+        "stick": 6,
+        "flint": 1,
+        "fiber": 2,
+        "wood": 6
+      },
+      "visited": 12267,
+      "staleTicks": 333,
+      "ruined": false,
+      "integrity": 78
+    },
+    {
+      "id": 43,
+      "x": -5,
+      "y": 29,
+      "stock": {
+        "wood": 12,
+        "flint": 3,
+        "stone": 9,
+        "stick": 3
+      },
+      "visited": null,
+      "staleTicks": null,
+      "ruined": false,
+      "integrity": 71
+    },
+    {
+      "id": 6,
+      "x": 15,
+      "y": 30,
+      "stock": {
+        "stone": 18,
+        "stick": 3,
+        "wood": 16,
+        "fiber": 3
+      },
+      "visited": null,
+      "staleTicks": null,
+      "ruined": false,
+      "integrity": 93
+    },
+    {
+      "id": 8,
+      "x": 11,
+      "y": 40,
+      "stock": {
+        "stone": 20,
+        "stick": 5,
+        "wood": 11,
+        "fiber": 4
+      },
+      "visited": null,
+      "staleTicks": null,
+      "ruined": false,
+      "integrity": 99
+    },
+    {
+      "id": 27,
+      "x": 0,
+      "y": 40,
+      "stock": {
+        "stone": 21,
+        "wood": 9,
+        "stick": 6,
+        "fiber": 4
+      },
+      "visited": null,
+      "staleTicks": null,
+      "ruined": false,
+      "integrity": 83
+    },
+    {
+      "id": 56,
+      "x": -8,
+      "y": 40,
+      "stock": {
+        "stone": 5,
+        "wood": 3,
+        "fiber": 2
+      },
+      "visited": null,
+      "staleTicks": null,
+      "ruined": false,
+      "integrity": 78
+    },
+    {
+      "id": 30,
+      "x": -12,
+      "y": 29,
+      "stock": {
+        "stone": 3,
+        "wood": 4
+      },
+      "visited": 12469,
+      "staleTicks": 131,
+      "ruined": false,
+      "integrity": 73
+    },
+    {
+      "id": 38,
+      "x": -20,
+      "y": 32,
+      "stock": null,
+      "visited": null,
+      "staleTicks": null,
+      "ruined": false,
+      "integrity": 94
+    }
+  ],
+  "goals": {
+    "active": [
+      {
+        "id": 3,
+        "kind": "curiosity",
+        "status": "active",
+        "urgency": 0.323,
+        "since": 12430,
+        "steps": 24,
+        "interruptions": 0,
+        "resumed": 0,
+        "avoiding": [
+          "signal|◇|node:bush",
+          "socialize|other|",
+          "gather|bush|",
+          "use|stone@pile|"
+        ]
+      },
+      {
+        "id": 6,
+        "kind": "social",
+        "status": "pending",
+        "urgency": 0.298,
+        "since": 12592,
+        "steps": 0,
+        "interruptions": 0,
+        "resumed": 0,
+        "avoiding": []
+      }
+    ],
+    "history": [
+      {
+        "id": 1,
+        "kind": "curiosity",
+        "since": 12002,
+        "ended": 12430,
+        "how": "achieved",
+        "steps": 52,
+        "interruptions": 0,
+        "resumed": 0,
+        "avoided": [
+          "respond|△|unknown",
+          "signal|◁|node:bush",
+          "drink|known-fresh|",
+          "gather|tree|bare"
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "social",
+        "since": 12002,
+        "ended": 12489,
+        "how": "achieved",
+        "steps": 0,
+        "interruptions": 0,
+        "resumed": 0,
+        "avoided": []
+      },
+      {
+        "id": 4,
+        "kind": "social",
+        "since": 12489,
+        "ended": 12511,
+        "how": "achieved",
+        "steps": 0,
+        "interruptions": 0,
+        "resumed": 0,
+        "avoided": []
+      },
+      {
+        "id": 5,
+        "kind": "social",
+        "since": 12511,
+        "ended": 12592,
+        "how": "achieved",
+        "steps": 0,
+        "interruptions": 0,
+        "resumed": 0,
+        "avoided": []
+      }
+    ],
+    "stats": {
+      "curiosity": {
+        "achieved": 1,
+        "abandoned": 0,
+        "displaced": 0
+      },
+      "social": {
+        "achieved": 3,
+        "abandoned": 0,
+        "displaced": 0
+      }
+    },
+    "learned": [
+      {
+        "goalStep": "curiosity|move|to-shelter|rain",
+        "n": 7,
+        "meanProgress": 0
+      },
+      {
+        "goalStep": "curiosity|gather|tree|bare",
+        "n": 7,
+        "meanProgress": 0
+      },
+      {
+        "goalStep": "curiosity|gather|bush|",
+        "n": 7,
+        "meanProgress": 0
+      },
+      {
+        "goalStep": "curiosity|drink|known-fresh|",
+        "n": 6,
+        "meanProgress": 0
+      },
+      {
+        "goalStep": "curiosity|rest|shelter|temperate",
+        "n": 5,
+        "meanProgress": 0
+      },
+      {
+        "goalStep": "curiosity|place|wood|ground",
+        "n": 4,
+        "meanProgress": 0
+      },
+      {
+        "goalStep": "curiosity|gather|deadfall|bare",
+        "n": 3,
+        "meanProgress": 0
+      },
+      {
+        "goalStep": "curiosity|use|berry@self|",
+        "n": 3,
+        "meanProgress": 0
+      }
+    ]
+  },
+  "communication": {
+    "label": "limited learned signalling: neutral glyphs, associations from local co-occurrence and outcomes; no dictionary",
+    "heard": [
+      {
+        "sig": 867,
+        "from": 122,
+        "glyph": "□",
+        "x": 7,
+        "y": 37,
+        "tick": 12535,
+        "dist": 4,
+        "conf": 0.6
+      },
+      {
+        "sig": 876,
+        "from": 41,
+        "glyph": "○",
+        "x": 12,
+        "y": 40,
+        "tick": 12539,
+        "dist": 6,
+        "conf": 0.4
+      },
+      {
+        "sig": 880,
+        "from": 115,
+        "glyph": "□",
+        "x": 11,
+        "y": 40,
+        "tick": 12539,
+        "dist": 6,
+        "conf": 0.4
+      },
+      {
+        "sig": 942,
+        "from": 118,
+        "glyph": "◇",
+        "x": 7,
+        "y": 37,
+        "tick": 12572,
+        "dist": 2,
+        "conf": 0.8
+      },
+      {
+        "sig": 954,
+        "from": 62,
+        "glyph": "○",
+        "x": 7,
+        "y": 35,
+        "tick": 12579,
+        "dist": 5,
+        "conf": 0.5
+      },
+      {
+        "sig": 962,
+        "from": 17,
+        "glyph": "◇",
+        "x": 11,
+        "y": 40,
+        "tick": 12582,
+        "dist": 1,
+        "conf": 0.9
+      }
+    ],
+    "sent": [
+      {
+        "sig": 442,
+        "glyph": "◁",
+        "ctx": "node:bush",
+        "tick": 12342,
+        "heardBy": 2,
+        "credit": 0
+      },
+      {
+        "sig": 549,
+        "glyph": "◁",
+        "ctx": "node:bush",
+        "tick": 12384,
+        "heardBy": 13,
+        "credit": 0
+      },
+      {
+        "sig": 672,
+        "glyph": "◇",
+        "ctx": "node:bush",
+        "tick": 12444,
+        "heardBy": 0,
+        "credit": 0
+      },
+      {
+        "sig": 777,
+        "glyph": "◇",
+        "ctx": "node:bush",
+        "tick": 12490,
+        "heardBy": 2,
+        "credit": 0
+      },
+      {
+        "sig": 891,
+        "glyph": "△",
+        "ctx": "node:bush",
+        "tick": 12545,
+        "heardBy": 10,
+        "credit": 0
+      },
+      {
+        "sig": 991,
+        "glyph": "△",
+        "ctx": "water",
+        "tick": 12593,
+        "heardBy": 4,
+        "credit": 0
+      }
+    ],
+    "trust": {
+      "29": -0.06,
+      "86": -0.06
+    },
+    "associations": [
+      {
+        "glyph": "◇",
+        "heard": 13,
+        "responded": 1,
+        "outcomes": 1,
+        "meanPayoff": 0.057,
+        "confidence": 0.25,
+        "cooccurred": {
+          "node:fish": 1
+        }
+      },
+      {
+        "glyph": "☆",
+        "heard": 3,
+        "responded": 1,
+        "outcomes": 0,
+        "meanPayoff": 0,
+        "confidence": 0,
+        "cooccurred": {
+          "node:bush": 1
+        }
+      },
+      {
+        "glyph": "□",
+        "heard": 3,
+        "responded": 0,
+        "outcomes": 0,
+        "meanPayoff": 0,
+        "confidence": 0,
+        "cooccurred": {}
+      },
+      {
+        "glyph": "△",
+        "heard": 6,
+        "responded": 2,
+        "outcomes": 1,
+        "meanPayoff": -0.101,
+        "confidence": 0.25,
+        "cooccurred": {
+          "water": 2
+        }
+      },
+      {
+        "glyph": "○",
+        "heard": 4,
+        "responded": 0,
+        "outcomes": 0,
+        "meanPayoff": 0,
+        "confidence": 0,
+        "cooccurred": {}
+      },
+      {
+        "glyph": "◁",
+        "heard": 2,
+        "responded": 0,
+        "outcomes": 0,
+        "meanPayoff": 0,
+        "confidence": 0,
+        "cooccurred": {}
+      }
+    ],
+    "senderValues": [
+      {
+        "key": "signal|◇|node:fish",
+        "n": 1,
+        "reward": -0.004
+      },
+      {
+        "key": "signal|◇|node:bush",
+        "n": 3,
+        "reward": -0.004
+      },
+      {
+        "key": "signal|△|node:bush",
+        "n": 2,
+        "reward": -0.004
+      },
+      {
+        "key": "signal|△|water",
+        "n": 1,
+        "reward": -0.004
+      },
+      {
+        "key": "signal|□|node:bush",
+        "n": 1,
+        "reward": -0.004
+      },
+      {
+        "key": "signal|◁|node:bush",
+        "n": 2,
+        "reward": -0.004
+      }
+    ]
+  },
+  "note": "Learned: outcome model + mb-v1 weights. Designed: physics, primitives, reflexes, drives, planner search. Not a complete fly brain."
+}

@@ -24,7 +24,7 @@ export class ExpanseClient {
   constructor(private url?: string, seed = demoManifest.seed) {
     if (url) return;
     this.worker = new Worker(new URL('./demo.worker.ts', import.meta.url), { type: 'module' });
-    this.worker.postMessage({ type: 'start', seed, sha256: demoManifest.sha256, checkpointUrl: new URL(`${import.meta.env.BASE_URL}demo/checkpoint.json.gz`,location.href).href });
+    this.worker.postMessage({ type: 'start', seed, sha256: demoManifest.sha256, checkpointUrl: new URL(`${import.meta.env.BASE_URL}demo/${demoManifest.file}`,location.href).href });
     this.worker.onmessage = ({ data }) => {
       const call = this.calls.get(data.id); if (!call) return;
       clearTimeout(call.timer); this.calls.delete(data.id);

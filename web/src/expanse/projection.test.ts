@@ -41,7 +41,7 @@ test("isometric basis points preserve existing coordinates, including negative c
           assert.equal(Math.floor(back.y), y);
         }
 });
-test("all screen corners are covered by the bounded API query at every zoom and aspect", () => {
+test("all visible in-world screen samples are covered by the bounded API query at every zoom and aspect", () => {
   for (const size of widths)
     for (const span of [9, 12, maxSpan(size.w / size.h)])
       for (const x of [-1000, -112, -28, 24, 168, 1000])
@@ -55,7 +55,8 @@ test("all screen corners are covered by the bounded API query at every zoom and 
           assert.ok(q.w <= 96 && q.h <= 96);
           assert.ok(q.x >= -112 && q.y >= -112);
           assert.ok(q.x + q.w <= 168 && q.y + q.h <= 168);
-          for (const p of visiblePolygon(c, size)) {
+          for (const outside of visiblePolygon(c, size)) {
+            const p={x:Math.max(DEFAULT_BOUNDS.x0,Math.min(DEFAULT_BOUNDS.x1,outside.x)),y:Math.max(DEFAULT_BOUNDS.y0,Math.min(DEFAULT_BOUNDS.y1,outside.y))};
             assert.ok(p.x >= q.x - 1e-8 && p.x <= q.x + q.w + 1e-8);
             assert.ok(p.y >= q.y - 1e-8 && p.y <= q.y + q.h + 1e-8);
           }
@@ -85,4 +86,11 @@ test("zoom keeps the pointer world coordinate stable, while minimap uses the sam
     near(result.x, p.x);
     near(result.y, p.y);
   }
+});
+
+test("defect 2: every corner tile can be centred at all supported zooms and aspects",()=>{
+ for(const size of [...widths,{w:320,h:800},{w:667,h:253},{w:844,h:268}])for(const span of [9,12,24,48])for(const x of [-111.5,167.5])for(const y of [-111.5,167.5]){
+  const c=clampCamera({x,y,span},DEFAULT_BOUNDS,size.w/size.h),p=project({x,y},c,size),q=viewportQuery(c,size.w/size.h);
+  near(p.x,size.w/2);near(p.y,size.h/2);assert.ok(x>=q.x&&x<q.x+q.w&&y>=q.y&&y<q.y+q.h);
+ }
 });

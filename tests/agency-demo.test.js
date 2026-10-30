@@ -1,0 +1,29 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import zlib from 'node:zlib';
+import crypto from 'node:crypto';
+import {Expanse} from '../server/src/expanse/engine.js';
+import {migrateExpanse,identityDigest} from '../server/src/expanse/persist.js';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const original=fs.readFileSync('web/public/demo/checkpoint.json.gz');
+const manifest=JSON.parse(fs.readFileSync('web/public/demo/agency-manifest.json'));
+test('exact original backup and migrated demo reproduce from 600 ordinary updated-engine ticks',()=>{
+ assert.equal(hash(original),'cf2dcd95a83ffa1cc50975b40f9c6cb5829637ae0b3b9ff3f07846be12a5d716');
+ const old=JSON.parse(zlib.gunzipSync(original)), migrated=migrateExpanse(structuredClone(old)).state;
+ assert.equal(identityDigest(old),identityDigest(migrated));
+ assert.equal(old.schema,4);assert.equal(migrated.schema,5);
+ const e=Expanse.fromState(migrated);e.run(600);
+ const bytes=zlib.gzipSync(JSON.stringify(e.toState()),{level:9});
+ assert.equal(hash(bytes),manifest.sha256);
+ assert.equal(hash(fs.readFileSync('web/public/demo/agency-checkpoint.json.gz')),manifest.sha256);
+ assert.equal(hash(fs.readFileSync('dist/demo/checkpoint.json.gz')),hash(original));
+ assert.equal(hash(fs.readFileSync('dist/demo/agency-checkpoint.json.gz')),manifest.sha256);
+ assert.equal(e.id,old.id);assert.equal(e.tick,old.tick+600);
+});
+test('updated demo exact restart retains goals, trust, brains, families and terrain',()=>{
+ const saved=JSON.parse(zlib.gunzipSync(fs.readFileSync('web/public/demo/agency-checkpoint.json.gz')));
+ const a=Expanse.fromState(saved);a.run(40);
+ const b=Expanse.fromState(a.toState());a.run(40);b.run(40);
+ assert.deepEqual(a.toState(),b.toState());
+});

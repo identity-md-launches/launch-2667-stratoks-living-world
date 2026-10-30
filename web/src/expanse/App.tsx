@@ -7,6 +7,7 @@ import { BIOME_NAMES, MiniMap, WorldMap } from "./Map";
 import { clampCamera, viewportQuery } from "./projection";
 import { ExpanseClient, validateServer } from "./transport";
 import type { Camera, Source, WorldFrame } from "./types";
+import demoManifest from "./demoManifest.json";
 import recordedData from "./recording.json";
 import "./expanse.css";
 import "./living.css";
@@ -568,7 +569,7 @@ export default function ExpanseApp() {
                   ? "Residents"
                   : side === "records"
                     ? "World records"
-                    : "Resident inspector"}
+                    : side === "places" ? "Settlements" : "Resident inspector"}
               </h2>
               <button
                 className="exp-icon"
@@ -856,7 +857,7 @@ export default function ExpanseApp() {
             <h3>Three separate views</h3>
             <p>
               Live reads the owner’s server. Recorded preview is a frozen API capture.
-              The default isolated demo resumes seed 2 after 12,000 natural engine ticks,
+              The default isolated demo resumes seed 2 after {demoManifest.tick.toLocaleString()} natural engine ticks,
               then runs privately in this browser. It resets on exit and never writes to the shared world.
             </p>
             <button
@@ -954,14 +955,13 @@ function WorldSettings({
           <Icon name="leaf" />
           <span>
             <strong>Explore isolated demo</strong>
-            <span>Resumes 12,000 natural ticks of seed 2. Resets on exit.</span>
+            <span>Resumes {demoManifest.tick.toLocaleString()} ticks of seed 2 with the updated engine. Resets on exit.</span>
           </span>
           <Icon name="chevron" size={16} />
         </button>
       </div>
       <p className="exp-small exp-muted">
-        The previous settlement client is retired on the production world. No
-        world reset, account, wallet or payment is needed.
+        The isolated demo uses the updated engine. An older live server may not expose goals, signals or crops. No account or payment is needed.
       </p>
     </div>
   );

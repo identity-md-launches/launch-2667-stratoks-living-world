@@ -15,6 +15,7 @@ import {
   zoomAt,
   type Size,
 } from "./projection";
+import { pickSurface, heightAt } from "./surface";
 import type { Camera, WorldFrame } from "./types";
 export { clampCamera, DEFAULT_BOUNDS } from "./projection";
 export const BIOME_NAMES: Record<string, string> = {
@@ -236,7 +237,7 @@ export function WorldMap({
         tabIndex={0}
         data-camera={JSON.stringify(camera)}
         data-size={JSON.stringify(size)}
-        aria-label="Isometric world. Drag or use arrow keys to pan. Pinch or use plus and minus to zoom. Select a resident here or open Find residents."
+        aria-label="Isometric world. Drag or use arrow keys to pan. Pinch or use plus and minus to zoom. Press Enter to inspect the centre tile. Select a resident here or open Find residents."
         onKeyDown={(e) => {
           const d = 70;
           const dirs: Record<string, number[]> = {
@@ -248,12 +249,16 @@ export function WorldMap({
           if (dirs[e.key]) {
             e.preventDefault();
             pan(...(dirs[e.key] as [number, number]));
+          } else if (e.key === "Enter") {
+            e.preventDefault();
+            setPickedTile(pickSurface({x:size.w/2,y:size.h/2},frame,camera,size));
           } else if (["+", "=", "-"].includes(e.key)) {
             e.preventDefault();
             zoom(e.key === "-" ? 1.2 : 1 / 1.2);
           }
         }}
         onPointerDown={(e) => {
+          e.currentTarget.focus({preventScroll:true});
           e.currentTarget.setPointerCapture(e.pointerId);
           if (pointers.current.size === 0) pinched.current = false;
           pointers.current.set(e.pointerId, point(e));
@@ -299,15 +304,11 @@ export function WorldMap({
               }
             }
           } else if (e.pointerType !== "touch") {
-            const w = unproject(p, camera, size),
-              x = Math.floor(w.x),
-              y = Math.floor(w.y),
-              v = frame.view,
-              t =
-                x >= v.x0 && x < v.x0 + v.w && y >= v.y0 && y < v.y0 + v.h
-                  ? v.tiles[(y - v.y0) * v.w + x - v.x0]
-                  : -1;
-            setHover(`${TILE_NAMES[t] ?? "Awaiting terrain"} · ${x}, ${y}`);
+            const w = pickSurface(p,frame,camera,size);
+            if(w) {
+              const t=frame.view.tiles[(w.y-frame.view.y0)*frame.view.w+w.x-frame.view.x0];
+              setHover(`${TILE_NAMES[t]} · ${w.x}, ${w.y}`);
+            } else setHover("World boundary");
           }
         }}
         onPointerUp={(e) => {
@@ -315,7 +316,7 @@ export function WorldMap({
             const p = point(e),
               id = renderer.current?.pick(p.x, p.y);
             if (id !== null && id !== undefined) { setPickedTile(null); onSelect(id); }
-            else { const tile=unproject(p,current.current.camera,current.current.size);setPickedTile({x:Math.floor(tile.x),y:Math.floor(tile.y)}); }
+            else { setPickedTile(pickSurface(p,current.current.frame,current.current.camera,current.current.size)); }
           }
           pointers.current.delete(e.pointerId);
           if (pointers.current.size === 0) pinched.current = false;
@@ -503,18 +504,29 @@ export function MiniMap({
 }
 
 function TileEvidence({tile,frame,close}:{tile:{x:number;y:number};frame:WorldFrame;close:()=>void}){
+ const dialog=useRef<HTMLDialogElement>(null);
+ useEffect(()=>{
+   const previous=document.activeElement as HTMLElement | null;
+   const d=dialog.current!;d.showModal();
+   return ()=>{d.close();previous?.focus({preventScroll:true});};
+ },[]);
  const v=frame.view,{x,y}=tile,index=(y-v.y0)*v.w+x-v.x0;
  const available=x>=v.x0&&y>=v.y0&&x<v.x0+v.w&&y<v.y0+v.h;
  const node=v.nodes.find(n=>n[2]===x&&n[3]===y),home=v.shelters.find(s=>s[1]===x&&s[2]===y),site=v.sites?.find(s=>s.x===x&&s.y===y);
  const stores=v.stores?.filter(s=>s.x===x&&s.y===y)??[],piles=v.piles?.filter(s=>s.x===x&&s.y===y)??[];
- return <aside className="exp-tile-evidence" aria-label="Tile evidence" data-coordinate={`${x},${y}`}>
-   <div><strong>{x}, {y}</strong><button className="exp-icon" onClick={close} aria-label="Close tile evidence"><Icon name="close" size={16}/></button></div>
-   <p>{available?TILE_NAMES[v.tiles[index]]:'Awaiting terrain'}</p>
+ const ruin=v.ruins?.find(s=>s.x===x&&s.y===y),crop=v.crops?.find(q=>q.x===x&&q.y===y);
+ return <dialog ref={dialog} className="exp-tile-evidence" aria-label="Tile evidence" onKeyDown={e=>{if(e.key==='Escape')e.stopPropagation();}} onCancel={e=>{e.preventDefault();close();}} data-coordinate={`${x},${y}`}>
+   <div className="exp-tile-head"><h2>Tile {x}, {y}</h2><button className="exp-icon" onClick={close} aria-label="Close tile evidence"><Icon name="close" size={16}/></button></div>
+   <div className="exp-tile-body"><p>{available?TILE_NAMES[v.tiles[index]]:'Awaiting terrain'}</p>
    {available&&<p className="exp-small exp-muted">{BIOME_NAMES[v.biomes?.[index]??v.biome]}</p>}
+   {available&&<p className="exp-small">Surface lift {heightAt(frame,x,y).toFixed(2)} half-tile units · {v.tiles[index]===7?'Cliff · impassable':[1,2].includes(v.tiles[index])?'Deep water · impassable':'Terrain movement rules unchanged'}</p>}
+   {ruin&&<p>Ruined {ruin.kind.replaceAll('_',' ')} · no protection or normal storage use. Contents remain until repair or nearby salvage.</p>}
+   {crop&&<p>{crop.kind.replaceAll('_',' ')} crop · {crop.ripe?'ripe':`growth ${crop.growth}`} · {crop.dry?'dry':'moist'} · planted by #{crop.planter}</p>}
    {node&&<p>{node[1].replaceAll('_',' ')} · {node[4]} units</p>}
    {home&&<p>{home[3]?.replaceAll('_',' ')??'Shelter'} · {home[4]??'Unknown'}% integrity</p>}
    {site&&<><p>{site.kind.replaceAll('_',' ')} · stage {site.stage}/3</p><p className="exp-small">Materials: {Object.entries(site.need).map(([k,n])=>`${k} ${site.materials[k]??0}/${n}`).join(', ')}. Labour: {Math.round(site.work)}/{site.workNeed}.</p></>}
-   {[...stores,...piles].map((s,i)=><p key={i} className="exp-small">{i<stores.length?'Store':'Ground pile'}: {Object.entries(s.items).map(([k,n])=>`${n} ${k.replaceAll('_',' ')}`).join(', ')}</p>)}
+   {[...stores,...piles].map((s,i)=><p key={i} className="exp-small">{i<stores.length?(ruin?'Preserved ruin contents':'Store'):'Ground pile'}: {Object.entries(s.items).map(([k,n])=>`${n} ${k.replaceAll('_',' ')}`).join(', ')}</p>)}
    <p className="exp-small exp-muted">Received tick {frame.tick.toLocaleString()}. Observer evidence; agents have their own local knowledge.</p>
- </aside>;
+   </div>
+ </dialog>;
 }

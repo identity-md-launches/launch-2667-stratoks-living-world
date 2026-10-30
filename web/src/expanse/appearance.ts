@@ -1,9 +1,10 @@
+import { cap } from '../../../server/src/expanse/capabilities.js';
 import type { Resident, WorldFrame } from './types';
 export function constructionStage(site: NonNullable<WorldFrame['view']['sites']>[number]) {
   if (!Object.values(site.materials).some(n=>n>0)) return 'marker';
   return site.stage>=1 ? 'frame' : 'foundation';
 }
-export type Pose = 'idle' | 'walk' | 'rest' | 'sleep' | 'gather' | 'carry' | 'build' | 'fish';
+export type Pose = 'idle' | 'walk' | 'rest' | 'sleep' | 'gather' | 'carry' | 'build' | 'fish' | 'plant' | 'tend' | 'harvest' | 'cook';
 export function carried(r: Resident, f: WorldFrame) {
   return r.carrying ?? (f.inspector?.id === r.id ? f.inspector.inventory : {});
 }
@@ -11,12 +12,18 @@ export function carried(r: Resident, f: WorldFrame) {
 // not evidence of arrival/work; legacy frames therefore use a neutral pose.
 export function residentPose(r: Resident, f: WorldFrame, moving: boolean): Pose {
   const load=carried(r,f);
-  if (moving || r.state === 'travel') return Object.values(load).some(n=>n>0) ? 'carry' : moving ? 'walk' : 'idle';
+  if (moving || r.state === 'travel' || r.state === 'respond') return Object.values(load).some(n=>n>0) ? 'carry' : moving ? 'walk' : 'idle';
   if (r.state === 'fish' && r.tools?.includes('fish_line') && ['cast','wait','reel'].includes(r.phase ?? '')) return 'fish';
   if (r.state === 'sleep') return 'sleep';
   if (r.state === 'rest') return 'rest';
+  const near=(q:{x:number;y:number})=>Math.max(Math.abs(q.x-r.x),Math.abs(q.y-r.y))<=1;
+  const targetCrop=f.view.crops?.find(q=>q.x===r.target?.x&&q.y===r.target?.y&&near(q));
+  if(r.state==='plant'&&r.phase==='plant'&&Object.keys(load).some(k=>cap(k,'plantable')&&(load[k]??0)>0))return 'plant';
+  if(r.state==='tend'&&r.phase==='tend'&&targetCrop&&!targetCrop.ripe&&targetCrop.waterReachable)return 'tend';
+  if(r.state==='harvest'&&r.phase==='harvest'&&targetCrop?.ripe)return 'harvest';
+  if(r.state==='cook'&&r.phase==='cook'&&r.item&&cap(r.item,'heatable')&&(load[r.item]??0)>0&&f.view.fireState?.some(q=>near(q)&&q.x===r.target?.x&&q.y===r.target?.y&&q.fuel>=1.5))return 'cook';
   const workTool=r.tools?.some(t=>t==='hand_axe'||t==='stone_club');
-  if (workTool && ((r.state === 'construct' && r.phase === 'construct' && (f.view.sites ?? []).some(s=>s.x===r.target?.x && s.y===r.target?.y && Object.values(s.materials).some(n=>n>0))) || (r.state === 'repair' && r.phase === 'work' && Object.values(load).some(n=>n>0)))) return 'build';
+  if (workTool && ((r.state === 'construct' && r.phase === 'construct' && (f.view.sites ?? []).some(s=>s.x===r.target?.x && s.y===r.target?.y && Object.values(s.materials).some(n=>n>0))) || (r.state === 'repair' && r.phase === 'repair' && Object.keys(load).some(k=>cap(k,'building')&&(load[k]??0)>0)))) return 'build';
   // Gathering art contains berries: don't show a harvested berry before one exists.
   if (r.state === 'gather' && (load.berry ?? 0)>0) return 'gather';
   if ((load.wood ?? 0)>0 || (load.berry ?? 0)>0) return 'carry';
@@ -25,6 +32,7 @@ export function residentPose(r: Resident, f: WorldFrame, moving: boolean): Pose 
 export function residentSprite(r: Resident, f: WorldFrame, moving: boolean, direction: string, phase: number): string {
   const pose=residentPose(r,f,moving), load=carried(r,f);
   const backward = direction === 'ne' || direction === 'nw';
+  if (['plant','tend','harvest'].includes(pose)) return 'agency.kneel';
   if (pose==='fish') return r.phase==='cast' ? `fish.cast.${phase%2}` : r.phase==='wait' ? 'fish.wait' : 'fish.reel';
   if(pose==='sleep') return `rest.sleep.${phase%2}`;
   if(pose==='rest') return 'rest.settle';

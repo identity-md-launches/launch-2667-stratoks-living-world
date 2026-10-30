@@ -1,0 +1,25 @@
+{
+  "method": "Conservative sum of complete added or modified regular files; excludes unchanged inherited files and deletions. Includes this audit. No Git metadata was written.",
+  "addedOrModifiedFileCount": 80,
+  "addedOrModifiedFullFileBytes": 6391467,
+  "limitBytes": 8388608,
+  "remainingBytes": 1997141,
+  "evidencePath": "artifacts/agency-interface/**",
+  "evidenceBytes": 967430,
+  "evidencePathBudgetBytes": 1310720,
+  "protectedPathChanges": [],
+  "dependencyCacheOrUnnecessaryArchivePaths": [],
+  "gitSubmodules": [],
+  "diffCheckPassed": true,
+  "existingBuildConfigurationAndDependencyManifestsUnchanged": true,
+  "distEntry": "dist/index.html",
+  "entryRelativeLocalReferences": [
+    "./favicon.png",
+    "./assets/index-BIRmkZRo.js",
+    "./assets/index-B7VaOQjw.css"
+  ],
+  "originalDemoSourceExportHash": "cf2dcd95a83ffa1cc50975b40f9c6cb5829637ae0b3b9ff3f07846be12a5d716",
+  "updatedDemoSourceExportHash": "9861c4664aea86ae0c22a6a8a1709d101faf93c4a657fe43070777cbb3acdebc",
+  "dependenciesExcluded": "Installed packages are ignored at every nesting level; source and required runtime assets remain complete.",
+  "publication": "Static export prepared for IMD review; no production deployment or publishing command."
+}

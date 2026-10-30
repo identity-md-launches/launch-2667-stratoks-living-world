@@ -1,0 +1,4 @@
+Raw recording: test/scratch/phone-tour.webm. Recorded real evolving demo and phone inspection/biome navigation; no forced agent actions.
+
+Delivered encoding: VP9, 8 fps, 90 kbit target, CRF 45, no audio; 312x676.
+Raw scratch capture ~9.6 seconds; delivered ~9.75 seconds.
