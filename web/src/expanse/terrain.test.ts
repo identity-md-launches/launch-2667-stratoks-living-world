@@ -5,11 +5,11 @@ import { settlementWear } from "./paths";
 import type { WorldFrame } from "./types";
 
 const frame = (): WorldFrame => ({
-  worldId: "unit-test", seed: 42, tick: 1,
+  worldId: "unit-test", seed: 42, tick: 1, bounds:{x0:-112,y0:-112,x1:168,y1:168},
   view: { x0: 0, y0: 0, w: 16, h: 16, tiles: Array(256).fill(0), nodes: [], shelters: [], fires: [] },
 }) as unknown as WorldFrame;
 
-test("paint caches survive pan/zoom and invalidate changed terrain and world identity", () => {
+test("bounded viewport cache reuses unchanged ticks and invalidates camera, terrain and world identity", () => {
   const gradient = { addColorStop() {} };
   const context = new Proxy({}, { get: (_, name) => name === "createLinearGradient" || name === "createRadialGradient" ? () => gradient : () => {} });
   const original = Object.getOwnPropertyDescriptor(globalThis, "document");
@@ -20,8 +20,10 @@ test("paint caches survive pan/zoom and invalidate changed terrain and world ide
     cache.draw(ctx, f, { x: 8, y: 8, span: 8 }, size);
     const initial = cache.builds;
     assert.ok(initial > 0);
-    for (let i = 0; i < 20; i++) cache.draw(ctx, f, { x: 8 + i / 100, y: 8, span: 8 - i / 20 }, size);
-    assert.equal(cache.builds, initial, "camera changes must blit existing world rasters");
+    for (let i = 0; i < 20; i++) cache.draw(ctx, {...f,tick:i+2}, { x: 8, y: 8, span: 8 }, size);
+    assert.equal(cache.builds, initial, "unchanged terrain must not repaint for simulation ticks");
+    cache.draw(ctx,f,{x:9,y:8,span:7},size);
+    assert.equal(cache.builds,initial+1,"changed projection invalidates screen raster");
     const changed = { ...f, tick: 2, view: { ...f.view, tiles: [...f.view.tiles] } };
     changed.view.tiles[8 * 16 + 8] = 1;
     cache.draw(ctx, changed, { x: 8, y: 8, span: 8 }, size);
@@ -29,7 +31,7 @@ test("paint caches survive pan/zoom and invalidate changed terrain and world ide
     const beforeWorldChange = cache.builds;
     cache.draw(ctx, { ...changed, worldId: "another-world" }, { x: 8, y: 8, span: 8 }, size);
     assert.ok(cache.builds > beforeWorldChange);
-    assert.ok(cache.size <= 96);
+    assert.equal(cache.size, 1, "only one DPR-capped viewport surface is retained");
   } finally {
     if (original) Object.defineProperty(globalThis, "document", original);
     else Reflect.deleteProperty(globalThis, "document");

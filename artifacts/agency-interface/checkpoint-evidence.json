@@ -1,0 +1,494 @@
+{
+  "schema": 5,
+  "tick": 12600,
+  "worldId": "isolated-demo-seed-2",
+  "summary": {
+    "tick": 12600,
+    "population": 166,
+    "byBiome": {
+      "temperate": 122,
+      "arid": 17,
+      "cold": 20,
+      "coast": 7
+    },
+    "fires": 0,
+    "shelters": 73,
+    "sites": 21,
+    "standing": 73,
+    "stored": 1369,
+    "fishCaught": 112,
+    "crops": 5,
+    "ripeCrops": 1,
+    "ruins": 0,
+    "signals": 1001,
+    "chunks": 30,
+    "births": 157,
+    "deaths": 15
+  },
+  "activityCounts": {
+    "drink": 8,
+    "respond": 3,
+    "travel": 98,
+    "starting": 17,
+    "gather": 9,
+    "eat": 1,
+    "rest": 12,
+    "social": 8,
+    "store": 1,
+    "place": 1,
+    "tend": 2,
+    "inspect": 2,
+    "craft": 3,
+    "construct": 1
+  },
+  "crops": [
+    {
+      "id": 1,
+      "x": 21,
+      "y": 64,
+      "kind": "berry",
+      "by": 19,
+      "planted": 12332,
+      "growth": 6,
+      "moisture": 4,
+      "stress": 0,
+      "ripe": true,
+      "tended": 81
+    },
+    {
+      "id": 3,
+      "x": 59,
+      "y": 25,
+      "kind": "berry",
+      "by": 64,
+      "planted": 12476,
+      "growth": 3,
+      "moisture": 3,
+      "stress": 0,
+      "ripe": false,
+      "tended": 18
+    },
+    {
+      "id": 4,
+      "x": 10,
+      "y": 40,
+      "kind": "berry",
+      "by": 71,
+      "planted": 12476,
+      "growth": 3,
+      "moisture": 4,
+      "stress": 0,
+      "ripe": false,
+      "tended": 20
+    },
+    {
+      "id": 5,
+      "x": 29,
+      "y": 64,
+      "kind": "berry",
+      "by": 19,
+      "planted": 12490,
+      "growth": 1,
+      "moisture": 0,
+      "stress": 2,
+      "ripe": false,
+      "tended": 0
+    },
+    {
+      "id": 6,
+      "x": 9,
+      "y": 32,
+      "kind": "berry",
+      "by": 69,
+      "planted": 12491,
+      "growth": 3,
+      "moisture": 4,
+      "stress": 0,
+      "ripe": false,
+      "tended": 2
+    }
+  ],
+  "totals": {
+    "planted": {
+      "berry": 6
+    },
+    "harvested": {},
+    "cooked": {},
+    "helped": {
+      "tend": 118,
+      "repair": 1
+    },
+    "signals": 1001,
+    "signalsHeard": 7174,
+    "misheard": 983,
+    "responses": 506
+  },
+  "resident154": {
+    "activity": {
+      "state": "tend",
+      "prim": "tend",
+      "phase": "tend",
+      "progress": 0.5,
+      "target": {
+        "x": 10,
+        "y": 40
+      },
+      "item": null,
+      "load": 2,
+      "capacity": 12,
+      "carrying": {
+        "stone": 1
+      },
+      "tools": []
+    },
+    "goals": {
+      "active": [
+        {
+          "id": 3,
+          "kind": "curiosity",
+          "status": "active",
+          "urgency": 0.323,
+          "since": 12430,
+          "steps": 24,
+          "interruptions": 0,
+          "resumed": 0,
+          "avoiding": [
+            "signal|◇|node:bush",
+            "socialize|other|",
+            "gather|bush|",
+            "use|stone@pile|"
+          ]
+        },
+        {
+          "id": 6,
+          "kind": "social",
+          "status": "pending",
+          "urgency": 0.298,
+          "since": 12592,
+          "steps": 0,
+          "interruptions": 0,
+          "resumed": 0,
+          "avoiding": []
+        }
+      ],
+      "history": [
+        {
+          "id": 1,
+          "kind": "curiosity",
+          "since": 12002,
+          "ended": 12430,
+          "how": "achieved",
+          "steps": 52,
+          "interruptions": 0,
+          "resumed": 0,
+          "avoided": [
+            "respond|△|unknown",
+            "signal|◁|node:bush",
+            "drink|known-fresh|",
+            "gather|tree|bare"
+          ]
+        },
+        {
+          "id": 2,
+          "kind": "social",
+          "since": 12002,
+          "ended": 12489,
+          "how": "achieved",
+          "steps": 0,
+          "interruptions": 0,
+          "resumed": 0,
+          "avoided": []
+        },
+        {
+          "id": 4,
+          "kind": "social",
+          "since": 12489,
+          "ended": 12511,
+          "how": "achieved",
+          "steps": 0,
+          "interruptions": 0,
+          "resumed": 0,
+          "avoided": []
+        },
+        {
+          "id": 5,
+          "kind": "social",
+          "since": 12511,
+          "ended": 12592,
+          "how": "achieved",
+          "steps": 0,
+          "interruptions": 0,
+          "resumed": 0,
+          "avoided": []
+        }
+      ],
+      "stats": {
+        "curiosity": {
+          "achieved": 1,
+          "abandoned": 0,
+          "displaced": 0
+        },
+        "social": {
+          "achieved": 3,
+          "abandoned": 0,
+          "displaced": 0
+        }
+      },
+      "learned": [
+        {
+          "goalStep": "curiosity|move|to-shelter|rain",
+          "n": 7,
+          "meanProgress": 0
+        },
+        {
+          "goalStep": "curiosity|gather|tree|bare",
+          "n": 7,
+          "meanProgress": 0
+        },
+        {
+          "goalStep": "curiosity|gather|bush|",
+          "n": 7,
+          "meanProgress": 0
+        },
+        {
+          "goalStep": "curiosity|drink|known-fresh|",
+          "n": 6,
+          "meanProgress": 0
+        },
+        {
+          "goalStep": "curiosity|rest|shelter|temperate",
+          "n": 5,
+          "meanProgress": 0
+        },
+        {
+          "goalStep": "curiosity|place|wood|ground",
+          "n": 4,
+          "meanProgress": 0
+        },
+        {
+          "goalStep": "curiosity|gather|deadfall|bare",
+          "n": 3,
+          "meanProgress": 0
+        },
+        {
+          "goalStep": "curiosity|use|berry@self|",
+          "n": 3,
+          "meanProgress": 0
+        }
+      ]
+    },
+    "communication": {
+      "label": "limited learned signalling: neutral glyphs, associations from local co-occurrence and outcomes; no dictionary",
+      "heard": [
+        {
+          "sig": 867,
+          "from": 122,
+          "glyph": "□",
+          "x": 7,
+          "y": 37,
+          "tick": 12535,
+          "dist": 4,
+          "conf": 0.6
+        },
+        {
+          "sig": 876,
+          "from": 41,
+          "glyph": "○",
+          "x": 12,
+          "y": 40,
+          "tick": 12539,
+          "dist": 6,
+          "conf": 0.4
+        },
+        {
+          "sig": 880,
+          "from": 115,
+          "glyph": "□",
+          "x": 11,
+          "y": 40,
+          "tick": 12539,
+          "dist": 6,
+          "conf": 0.4
+        },
+        {
+          "sig": 942,
+          "from": 118,
+          "glyph": "◇",
+          "x": 7,
+          "y": 37,
+          "tick": 12572,
+          "dist": 2,
+          "conf": 0.8
+        },
+        {
+          "sig": 954,
+          "from": 62,
+          "glyph": "○",
+          "x": 7,
+          "y": 35,
+          "tick": 12579,
+          "dist": 5,
+          "conf": 0.5
+        },
+        {
+          "sig": 962,
+          "from": 17,
+          "glyph": "◇",
+          "x": 11,
+          "y": 40,
+          "tick": 12582,
+          "dist": 1,
+          "conf": 0.9
+        }
+      ],
+      "sent": [
+        {
+          "sig": 442,
+          "glyph": "◁",
+          "ctx": "node:bush",
+          "tick": 12342,
+          "heardBy": 2,
+          "credit": 0
+        },
+        {
+          "sig": 549,
+          "glyph": "◁",
+          "ctx": "node:bush",
+          "tick": 12384,
+          "heardBy": 13,
+          "credit": 0
+        },
+        {
+          "sig": 672,
+          "glyph": "◇",
+          "ctx": "node:bush",
+          "tick": 12444,
+          "heardBy": 0,
+          "credit": 0
+        },
+        {
+          "sig": 777,
+          "glyph": "◇",
+          "ctx": "node:bush",
+          "tick": 12490,
+          "heardBy": 2,
+          "credit": 0
+        },
+        {
+          "sig": 891,
+          "glyph": "△",
+          "ctx": "node:bush",
+          "tick": 12545,
+          "heardBy": 10,
+          "credit": 0
+        },
+        {
+          "sig": 991,
+          "glyph": "△",
+          "ctx": "water",
+          "tick": 12593,
+          "heardBy": 4,
+          "credit": 0
+        }
+      ],
+      "trust": {
+        "29": -0.06,
+        "86": -0.06
+      },
+      "associations": [
+        {
+          "glyph": "◇",
+          "heard": 13,
+          "responded": 1,
+          "outcomes": 1,
+          "meanPayoff": 0.057,
+          "confidence": 0.25,
+          "cooccurred": {
+            "node:fish": 1
+          }
+        },
+        {
+          "glyph": "☆",
+          "heard": 3,
+          "responded": 1,
+          "outcomes": 0,
+          "meanPayoff": 0,
+          "confidence": 0,
+          "cooccurred": {
+            "node:bush": 1
+          }
+        },
+        {
+          "glyph": "□",
+          "heard": 3,
+          "responded": 0,
+          "outcomes": 0,
+          "meanPayoff": 0,
+          "confidence": 0,
+          "cooccurred": {}
+        },
+        {
+          "glyph": "△",
+          "heard": 6,
+          "responded": 2,
+          "outcomes": 1,
+          "meanPayoff": -0.101,
+          "confidence": 0.25,
+          "cooccurred": {
+            "water": 2
+          }
+        },
+        {
+          "glyph": "○",
+          "heard": 4,
+          "responded": 0,
+          "outcomes": 0,
+          "meanPayoff": 0,
+          "confidence": 0,
+          "cooccurred": {}
+        },
+        {
+          "glyph": "◁",
+          "heard": 2,
+          "responded": 0,
+          "outcomes": 0,
+          "meanPayoff": 0,
+          "confidence": 0,
+          "cooccurred": {}
+        }
+      ],
+      "senderValues": [
+        {
+          "key": "signal|◇|node:fish",
+          "n": 1,
+          "reward": -0.004
+        },
+        {
+          "key": "signal|◇|node:bush",
+          "n": 3,
+          "reward": -0.004
+        },
+        {
+          "key": "signal|△|node:bush",
+          "n": 2,
+          "reward": -0.004
+        },
+        {
+          "key": "signal|△|water",
+          "n": 1,
+          "reward": -0.004
+        },
+        {
+          "key": "signal|□|node:bush",
+          "n": 1,
+          "reward": -0.004
+        },
+        {
+          "key": "signal|◁|node:bush",
+          "n": 2,
+          "reward": -0.004
+        }
+      ]
+    }
+  }
+}

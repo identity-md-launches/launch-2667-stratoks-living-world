@@ -1,4 +1,4 @@
-// CPU/RSS bench for the schema-4 engine. Usage: node tests/load/living-bench.mjs <population> <ticks> [seed]
+// CPU/RSS bench for the current Expanse engine (schema 5). Usage: node tests/load/living-bench.mjs <population> <ticks> [seed]
 // Population is the initial count; the world then evolves freely (births/deaths). Reports per-tick timing.
 import { Expanse } from '../../server/src/expanse/engine.js';
 import { frame } from '../../server/src/expanse/view.js';

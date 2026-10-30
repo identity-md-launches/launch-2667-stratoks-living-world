@@ -1,5 +1,6 @@
 // Read-only views of the expanse for clients: a bounded viewport, a coarse minimap and a creature inspector.
 // These never mutate the world; generating a viewport may materialize pristine chunks deterministically.
+import { terrainHeight, RELIEF_VERSION } from '../../../shared/relief.js';
 import { NODE_KINDS, settleNode } from './terrain.js';
 export const VIEW_VERSION = 1;
 // Additive schema-4 fields keep `v: 1` so existing clients keep working; `living` names the extension version.
@@ -22,13 +23,14 @@ export function viewport(e, x0, y0, w, h) {
   // Tuple elements 0..5 are unchanged; 6 = activity state, 7 = phase, 8 = progress 0..1, 9 = carried load weight.
   const creatures = e.creaturesNear(x0 + (w >> 1), y0 + (h >> 1), Math.max(w, h) >> 1).filter((c) => c.x >= x0 && c.y >= y0 && c.x < x0 + w && c.y < y0 + h).map((c) => { const a = e.activity(c); return [c.id, c.name, c.x, c.y, c.act?.prim ?? null, Math.round(c.health), a.state, a.phase, a.progress, a.load]; });
   const inView = (s) => s.x >= x0 && s.y >= y0 && s.x < x0 + w && s.y < y0 + h;
-  return { v: VIEW_VERSION, tick: e.tick, x0, y0, w, h, tiles, biomes, biome: e.biome(x0 + (w >> 1), y0 + (h >> 1)), climate: { temperature: r(e.ambient(x0 + (w >> 1), y0 + (h >> 1))), rain: e.weather.rain, daylight: r(e.daylight()) }, nodes, creatures,
+  return { v: VIEW_VERSION, tick: e.tick, x0, y0, w, h, tiles, heights: tiles.map(terrainHeight), relief: RELIEF_VERSION, biomes, biome: e.biome(x0 + (w >> 1), y0 + (h >> 1)), climate: { temperature: r(e.ambient(x0 + (w >> 1), y0 + (h >> 1))), rain: e.weather.rain, daylight: r(e.daylight()) }, nodes, creatures,
     fires: e.fires.filter((f) => f.x >= x0 && f.y >= y0 && f.x < x0 + w && f.y < y0 + h).map((f) => [f.id, f.x, f.y]),
+    fireState: e.fires.filter(inView).map(f => ({ id: f.id, x: f.x, y: f.y, fuel: f.fuel })),
     // Finished shelters only (old clients draw every entry as a home): [id, x, y, kind, integrity, storedUnits].
     // Ruins (integrity 0) are not homes and are listed separately in `ruins`, so old clients do not draw them as homes.
     shelters: e.shelters.filter((s) => inView(s) && s.complete !== false && s.integrity > 0).map((s) => [s.id, s.x, s.y, s.kind ?? null, Math.round(s.integrity), units(s.store)]),
     ruins: e.shelters.filter((s) => inView(s) && s.complete !== false && s.integrity <= 0).map((s) => ({ id: s.id, x: s.x, y: s.y, kind: s.kind ?? null, stored: units(s.store), usable: false })),
-    crops: e.crops.filter(inView).map((q) => ({ id: q.id, x: q.x, y: q.y, kind: q.kind, growth: q.growth, ripe: q.ripe, dry: q.moisture <= 0, planter: q.by })),
+    crops: e.crops.filter(inView).map((q) => ({ id: q.id, x: q.x, y: q.y, kind: q.kind, growth: q.growth, ripe: q.ripe, dry: q.moisture <= 0, planter: q.by, moisture: q.moisture, waterReachable: e.naturalWater(q.x, q.y, 4) })),
     // Recent neutral glyphs emitted in view (observer evidence; residents only get what they perceive).
     signals: e.signals.filter((g) => inView(g) && e.tick - g.tick <= 60).map((g) => ({ id: g.id, x: g.x, y: g.y, glyph: g.glyph, from: g.from, tick: g.tick, heardBy: g.receivers.length })),
     // Unfinished construction: actual stage, delivered materials, required materials and labour.
@@ -84,7 +86,7 @@ export function frame(e, { x = 0, y = 0, w = 48, h = 32, creature = null } = {})
   y = Math.max(bounds.y0, Math.min(bounds.y1 - h, finite(y, 0)));
   const view = viewport(e, x, y, w, h);
   return { worldId: e.id ?? null, v: VIEW_VERSION, tick: e.tick, seed: e.seed, mode: e.mode, bounds, summary: e.summary(), view, minimap: minimap(e),
-    residents: e.creatures.map((c) => { const a = e.activity(c); return { id: c.id, name: c.name, x: c.x, y: c.y, health: Math.round(c.health), action: c.act?.prim ?? null, state: a.state, phase: a.phase, progress: a.progress, load: a.load, carrying: a.carrying, tools: a.tools, target: a.target }; }),
+    residents: e.creatures.map((c) => { const a = e.activity(c); return { id: c.id, name: c.name, x: c.x, y: c.y, health: Math.round(c.health), action: c.act?.prim ?? null, state: a.state, phase: a.phase, progress: a.progress, load: a.load, carrying: a.carrying, tools: a.tools, target: a.target, item: a.item, helping: a.helping, glyph: a.glyph }; }),
     inspector: creature === null ? null : inspect(e, creature),
     discoveries: e.discoveries.slice(-200), social: e.social.slice(-100),
     // Observer navigation only; never part of an agent's observation or memory.

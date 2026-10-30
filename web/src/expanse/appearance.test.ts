@@ -35,3 +35,28 @@ test('loads and construction follow confirmed inventory/materials instead of des
  assert.equal(residentPose(builder,building,true),'walk','confirmed motion always wins');
  assert.equal(residentPose(builder,{...building,view:{...building.view,sites:[{...site,materials:{}}]}},false),'idle');
 });
+
+test('defect 4: repair phase requires work tool and repair material, never food alone',()=>{
+ const repair={...r,state:'repair',phase:'repair',tools:['hand_axe'],carrying:{wood:1}};
+ assert.equal(residentPose(repair,f,false),'build');
+ assert.notEqual(residentPose({...repair,tools:[]},f,false),'build');
+ assert.notEqual(residentPose({...repair,carrying:{berry:1}},f,false),'build');
+ assert.notEqual(residentPose({...repair,phase:'work'},f,false),'build');
+});
+test('new activity art needs actual work, local object, input and heat/water',()=>{
+ const crop={id:3,x:28,y:-1,kind:'berry',growth:1,ripe:false,dry:false,planter:2,waterReachable:true};
+ const ff={...f,view:{...f.view,crops:[crop],fireState:[{id:4,x:28,y:-1,fuel:2}]}};
+ const here={...r,target:{x:28,y:-1}};
+ assert.equal(residentPose({...here,state:'plant',phase:'plant',carrying:{berry:1}},ff,false),'plant');
+ assert.equal(residentPose({...here,state:'plant',phase:'travel'},ff,false),'idle');
+ assert.equal(residentPose({...here,state:'tend',phase:'tend'},ff,false),'tend');
+ assert.equal(residentPose({...here,state:'tend',phase:'tend'},{...ff,view:{...ff.view,crops:[{...crop,waterReachable:false}]}},false),'idle');
+ assert.equal(residentPose({...here,state:'harvest',phase:'harvest'},ff,false),'idle');
+ assert.equal(residentPose({...here,state:'harvest',phase:'harvest'},{...ff,view:{...ff.view,crops:[{...crop,ripe:true}]}},false),'harvest');
+ const cook={...here,state:'cook',phase:'cook',item:'fish',carrying:{fish:1}};
+ assert.equal(residentPose(cook,ff,false),'cook');
+ assert.equal(residentPose({...cook,carrying:{}},ff,false),'idle');
+ assert.equal(residentPose(cook,{...ff,view:{...ff.view,fireState:[]}},false),'idle');
+ assert.equal(residentPose({...cook,x:60},ff,false),'idle');
+ assert.equal(residentSprite({...here,state:'tend',phase:'tend'},ff,false,'se',0),'agency.kneel');
+});

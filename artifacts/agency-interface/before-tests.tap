@@ -1,0 +1,49 @@
+✖ defect 2: all four world corner tile centres can be centred at every aspect (1.895127ms)
+✖ defect 4: emitted repair phase uses the actual work tool and material (0.816939ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 238.601912
+
+✖ failing tests:
+
+test at test/scratch/reproduce.test.ts:5:1
+✖ defect 2: all four world corner tile centres can be centred at every aspect (1.895127ms)
+  AssertionError [ERR_ASSERTION]: {"size":{"w":390,"h":722},"c":{"span":9,"x":-90.83846153846153,"y":-90.83846153846153},"p":{"x":195,"y":-86.66666666666686}}
+      at TestContext.<anonymous> (<repo>/test/scratch/reproduce.test.ts:8:8)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at test/scratch/reproduce.test.ts:10:1
+✖ defect 4: emitted repair phase uses the actual work tool and material (0.816939ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'carry' !== 'build'
+  
+      at TestContext.<anonymous> (<repo>/test/scratch/reproduce.test.ts:12:8)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'carry',
+    expected: 'build',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

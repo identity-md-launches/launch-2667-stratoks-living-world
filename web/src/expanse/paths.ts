@@ -2,6 +2,7 @@ import { tileAt, WATER } from "./ground";
 import { project, scale, type Point, type Size } from "./projection";
 import { type Art } from "./art";
 import type { Camera, WorldFrame } from "./types";
+import { projectSurface } from "./surface";
 export type WornSegment = { from: Point; to: Point };
 const key = (p: Point) => `${p.x},${p.y}`;
 
@@ -41,14 +42,14 @@ export function settlementWear(f: WorldFrame, travelled: Iterable<WornSegment> =
 export class WornPaths {
   private texture: CanvasPattern | null = null;
   constructor(private art: Art) {}
-  draw(ctx: CanvasRenderingContext2D, segments: WornSegment[], c: Camera, size: Size) {
+  draw(ctx: CanvasRenderingContext2D, segments: WornSegment[], c: Camera, size: Size, f: WorldFrame) {
     if (!segments.length) return;
     const s = scale(c, size);
     ctx.save();
     ctx.lineCap = "round"; ctx.lineJoin = "round";
     ctx.beginPath();
     for (const { from, to } of segments) {
-      const a = project({ x: from.x + 0.5, y: from.y + 0.5 }, c, size), b = project({ x: to.x + 0.5, y: to.y + 0.5 }, c, size);
+      const a = projectSurface({ x: from.x + 0.5, y: from.y + 0.5 }, f, c, size), b = projectSurface({ x: to.x + 0.5, y: to.y + 0.5 }, f, c, size);
       if (Math.max(a.x, b.x) < -s || Math.min(a.x, b.x) > size.w + s || Math.max(a.y, b.y) < -s || Math.min(a.y, b.y) > size.h + s) continue;
       ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
     }

@@ -1,6 +1,7 @@
 import { Icon } from "../icons";
 import { Portrait } from "./art";
 import type { Inspector as Detail, Plan, Step, Resident } from "./types";
+import { AgencyEvidence, StoreKnowledge } from "./AgencyEvidence";
 import { BIOME_NAMES } from "./Map";
 const label = (s: string) => s.replaceAll("_", " ");
 const num = (n: number | undefined, digits = 2) =>
@@ -16,7 +17,7 @@ export function stepName(s: Step): string {
   if (s.prim === "move") return `Move${s.purpose ? ` · ${s.purpose}` : ""}`;
   return `${s.prim[0].toUpperCase()}${s.prim.slice(1)}${s.item ? ` ${label(s.item)}` : ""}${s.target ? ` · #${s.target}` : ""}`;
 }
-function PlanEvidence({ plan, current }: { plan: Plan; current: boolean }) {
+function PlanEvidence({ plan, current, activity }: { plan: Plan; current: boolean; activity?: Detail["activity"] }) {
   return (
     <div className="exp-plan" data-plan-id={plan.id}>
       <div className="exp-evidence-heading">
@@ -49,7 +50,7 @@ function PlanEvidence({ plan, current }: { plan: Plan; current: boolean }) {
                       ? "Succeeded"
                       : "Failed"
                     : current
-                      ? "Pending"
+                      ? (i===(plan.index??0)?(activity?.state==="starting"?"Starting":"In progress"):"Pending")
                       : "Not executed"}
                 </span>
               </div>
@@ -275,11 +276,13 @@ export function CreatureInspector({
               <div><dt>State / phase</dt><dd>{label(detail.activity.state)} · {detail.activity.phase ?? "between actions"}</dd></div>
               <div><dt>Carried weight</dt><dd>{detail.activity.load} / {detail.activity.capacity ?? "unknown"}</dd></div>
               <div><dt>Target</dt><dd>{detail.activity.target ? `${detail.activity.target.x}, ${detail.activity.target.y}` : "None"}</dd></div>
+              <div><dt>Helping</dt><dd>{detail.activity.helping!==undefined?`Resident #${detail.activity.helping}`:"No help target"}</dd></div>
               <div><dt>Tools</dt><dd>{detail.activity.tools.length ? detail.activity.tools.map(label).join(", ") : "None"}</dd></div>
             </dl>
             {detail.activity.progress > 0 && <><meter min={0} max={1} value={detail.activity.progress} aria-label="Current action progress"/><p className="exp-small exp-muted">{Math.round(detail.activity.progress*100)}% of this action</p></>}
             <p className="exp-small exp-muted">{detail.activity.state === "fish" ? "A line is held; casting, waiting and reeling follow the engine phase. Catch is not guaranteed." : detail.activity.state === "inspect" ? "Looking is not fishing. No cast is shown without a line." : "This is the received engine state. The plan below may describe a destination still being approached."}</p>
           </section>}
+          <AgencyEvidence detail={detail} tick={tick??0}/>
           <details className="exp-science exp-details" open>
             <summary>
               <Icon name="leaf" size={17} />
@@ -291,7 +294,7 @@ export function CreatureInspector({
                 result.
               </p>
               {detail.currentPlan ? (
-                <PlanEvidence plan={detail.currentPlan} current />
+                <PlanEvidence plan={detail.currentPlan} current activity={detail.activity} />
               ) : (
                 <p className="exp-empty-note">
                   Between plans. The next decision has not been recorded.
@@ -380,6 +383,7 @@ export function CreatureInspector({
                   ) : (
                     <p className="exp-small">No resource nodes recorded.</p>
                   )}
+                  <StoreKnowledge detail={detail}/>
                   <h3>Water in perception</h3>
                   <p className="exp-small">
                     Fresh:{" "}
@@ -477,6 +481,12 @@ export function CreatureInspector({
                       </li>
                     ))}
                 </ul>
+              </details>
+              <details className="exp-details">
+                <summary>Individual traits & relationships</summary>
+                <p className="exp-small exp-muted">Traits are resident parameters. Relationship values reflect that resident’s history.</p>
+                <ul className="exp-data-list">{Object.entries(detail.personality).map(([key,value])=><li key={key}><span>{label(key)}</span><b>{num(value)}</b></li>)}</ul>
+                <ul className="exp-data-list">{Object.entries(detail.relationships).map(([id,value])=><li key={id}><span>Relationship with #{id}</span><b>{num(value)}</b></li>)}</ul>
               </details>
               <details className="exp-details">
                 <summary>Social evidence</summary>

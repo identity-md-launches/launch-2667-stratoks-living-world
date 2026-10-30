@@ -13,6 +13,9 @@ export type Resident = {
   load?: number;
   carrying?: Record<string, number>;
   tools?: string[];
+  item?: string | null;
+  helping?: number;
+  glyph?: string;
   target?: { x: number; y: number } | null;
 };
 export type Step = {
@@ -103,9 +106,24 @@ export type Inspector = {
   reputation: Record<string, number>;
   following: { id: number; until: number } | null;
   note: string;
-  activity?: { state: string; prim: string | null; phase: string | null; progress: number; target: {x: number; y: number} | null; item: string | null; load: number; capacity?: number; carrying: Record<string, number>; tools: string[] };
+  activity?: { state: string; prim: string | null; phase: string | null; progress: number; target: {x: number; y: number} | null; item: string | null; load: number; capacity?: number; helping?: number; glyph?: string; carrying: Record<string, number>; tools: string[] };
   toolWear?: Record<string, number>;
   home?: { x: number; y: number };
+  goals?: {
+    active: {id:number;kind:string;status:string;urgency:number;since:number;steps:number;interruptions:number;resumed:number;avoiding:string[]}[];
+    history: {id:number;kind:string;since:number;ended:number;how:string;steps:number;interruptions:number;resumed:number;avoided:string[]}[];
+    learned: {goalStep:string;n:number;meanProgress:number}[];
+    stats: Record<string,Record<string,number>>;
+  };
+  communication?: {
+    label:string;
+    heard:{sig:number;from:number;glyph:string;x:number;y:number;tick:number;dist:number;conf:number}[];
+    sent:{sig:number;glyph:string;tick:number;credit:number;ctx:string;heardBy:number}[];
+    trust:Record<string,number>;
+    associations:{glyph:string;heard:number;responded:number;outcomes:number;meanPayoff:number;confidence:number;cooccurred:Record<string,number>}[];
+    senderValues:{key:string;n:number;reward:number}[];
+  };
+  knownStores?: {id:number;x:number;y:number;stock:Record<string,number>|null;visited:number|null;staleTicks:number|null;ruined:boolean;integrity:number|null}[];
 };
 export type Discovery = {
   tick: number;
@@ -142,6 +160,12 @@ export type WorldFrame = {
     w: number;
     h: number;
     tiles: number[];
+    heights?: number[];
+    relief?: number;
+    fireState?: {id:number;x:number;y:number;fuel:number}[];
+    ruins?: {id:number;x:number;y:number;kind:string;stored:number;usable:false}[];
+    crops?: {id:number;x:number;y:number;kind:string;growth:number;ripe:boolean;dry:boolean;planter:number;moisture?:number;waterReachable?:boolean}[];
+    signals?: {id:number;x:number;y:number;glyph:string;from:number;tick:number;heardBy:number}[];
     biomes?: string[];
     biome: string;
     climate?: {temperature: number; rain: boolean; daylight: number};
@@ -150,8 +174,8 @@ export type WorldFrame = {
     fires: [number, number, number][];
     shelters: [number, number, number, string?, number?, number?][];
     sites?: {id:number; x:number; y:number; kind:string; stage:number; materials:Record<string,number>; need:Record<string,number>; work:number; workNeed:number}[];
-    stores?: {shelter:number; x:number; y:number; items:Record<string,number>}[];
-    piles?: {id:string; x:number; y:number; items:Record<string,number>}[];
+    stores?: {shelter:number; x:number; y:number; items:Record<string,number>;ruined?:boolean}[];
+    piles?: {id:string; x:number; y:number; items:Record<string,number>;ruined?:boolean}[];
     living?: number;
   };
   minimap: {

@@ -1,0 +1,46 @@
+{
+  "engine": "Chromium; local headless; software rendering; no CPU throttle",
+  "results": [
+    {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "settled": {
+        "n": 120,
+        "p50": 1.6999999284744263,
+        "p95": 2.5,
+        "max": 4.700000047683716,
+        "viewportSurfaces": 1
+      },
+      "withCameraChanges": {
+        "n": 120,
+        "p50": 1.6999999284744263,
+        "p95": 56.60000002384186,
+        "max": 67.20000004768372,
+        "viewportSurfaces": 1
+      }
+    },
+    {
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "settled": {
+        "n": 120,
+        "p50": 1,
+        "p95": 1.899999976158142,
+        "max": 2.200000047683716,
+        "viewportSurfaces": 1
+      },
+      "withCameraChanges": {
+        "n": 120,
+        "p50": 1.2000000476837158,
+        "p95": 18.600000023841858,
+        "max": 25,
+        "viewportSurfaces": 1
+      }
+    }
+  ],
+  "limit": "Emulated viewports on x64. Not a physical phone or ARM VPS benchmark."
+}

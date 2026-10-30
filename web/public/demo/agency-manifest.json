@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "schema": 5,
+  "seed": 2,
+  "tick": 12600,
+  "worldId": "isolated-demo-seed-2",
+  "file": "agency-checkpoint.json.gz",
+  "sha256": "9861c4664aea86ae0c22a6a8a1709d101faf93c4a657fe43070777cbb3acdebc",
+  "bytes": 2268624,
+  "original": {
+    "file": "checkpoint.json.gz",
+    "sha256": "cf2dcd95a83ffa1cc50975b40f9c6cb5829637ae0b3b9ff3f07846be12a5d716",
+    "schema": 4,
+    "tick": 12000,
+    "residents": 156
+  },
+  "migrationIdentityUnchanged": true,
+  "stepsAfterMigration": 600,
+  "summary": {
+    "tick": 12600,
+    "population": 166,
+    "byBiome": {
+      "temperate": 122,
+      "arid": 17,
+      "cold": 20,
+      "coast": 7
+    },
+    "fires": 0,
+    "shelters": 73,
+    "sites": 21,
+    "standing": 73,
+    "stored": 1369,
+    "fishCaught": 112,
+    "crops": 5,
+    "ripeCrops": 1,
+    "ruins": 0,
+    "signals": 1001,
+    "chunks": 30,
+    "births": 157,
+    "deaths": 15
+  },
+  "recipe": "migrateExpanse(structuredClone(original)), Expanse.fromState, 600 ordinary steps. No positions, materials, residents or actions injected.",
+  "measurements": {
+    "elapsedMs": 16636.974238,
+    "p50": 25.46599999999853,
+    "p95": 41.7848699999995,
+    "max": 95.78960599999982,
+    "rssMB": 394.0546875,
+    "arch": "x64",
+    "node": "v24.21.0"
+  },
+  "warning": "Isolated browser demo. The original schema-4 checkpoint remains byte-identical for rollback; this is not the live owner world."
+}

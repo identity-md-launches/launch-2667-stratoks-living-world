@@ -1,0 +1,10 @@
+{
+  "compared": "new run versus preceding docs/agency/results/ablation-3000.json",
+  "excludedMeasurementFields": [
+    "msPerTick",
+    "heapMB"
+  ],
+  "rows": 14,
+  "allBehaviorFieldsIdentical": true,
+  "ledgerErrors": 0
+}

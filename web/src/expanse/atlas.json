@@ -11,6 +11,16 @@
       "file": "living-world.webp",
       "width": 2560,
       "height": 1280
+    },
+    "agencyTerrain": {
+      "file": "agency-terrain.webp",
+      "width": 160,
+      "height": 64
+    },
+    "agencyActivities": {
+      "file": "agency-activities.webp",
+      "width": 209,
+      "height": 250
     }
   },
   "sprites": {
@@ -1373,6 +1383,20 @@
         2500,
         1240
       ]
+    },
+    "agency.kneel": {
+      "sheet": "agencyActivities",
+      "rect": [
+        0,
+        0,
+        209,
+        250
+      ],
+      "anchor": [
+        110,
+        222
+      ],
+      "widthInHalfTiles": 1.25
     }
   },
   "provenance": [

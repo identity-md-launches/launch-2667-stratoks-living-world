@@ -3,3 +3,5 @@ import "./expanse/projection.test";
 import "./expanse/appearance.test";
 import "./expanse/transport.test";
 import "./expanse/terrain.test";
+
+import "./expanse/surface.test";
