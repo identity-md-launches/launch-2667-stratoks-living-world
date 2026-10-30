@@ -19,7 +19,9 @@ export function goalMetric(kind, c) {
     case 'warmth': return c.warmth / 20;
     case 'rest': return c.energy / 20;
     case 'safety': return (c.health - c.injury / 10) / 20;
-    case 'curiosity': return (c.mind.visited?.length ?? 0) / 4;
+    // curiosity uses the lifetime count of novel cells, not the retained (capped) list of locations:
+    // a resident whose cell memory is full still recognises newly explored ground.
+    case 'curiosity': return (c.mind.novelCells ?? c.mind.visited?.length ?? 0) / 4;
     case 'social': return Object.values(c.relationships ?? {}).reduce((s, v) => s + Math.max(0, v), 0);
     default: return 0;
   }
@@ -45,7 +47,9 @@ function satisfied(g, c, tick) {
     case 'rest': return c.energy > 75;
     case 'safety': return tick - (c.lastDanger ?? -1e9) > 60;
     case 'curiosity': return goalMetric('curiosity', c) - g.start >= 0.75;
-    case 'social': return goalMetric('social', c) - g.start >= 0.08;
+    // A social goal persists across several interactions: a share raises the metric ~0.1 and a socialize ~0.06,
+    // so 0.3 needs roughly three or more positive exchanges, not a single one.
+    case 'social': return goalMetric('social', c) - g.start >= 0.3;
     default: return true;
   }
 }
@@ -53,6 +57,8 @@ export function ensureAgency(c) {
   const m = c.mind;
   m.goals ??= []; m.goalModel ??= {}; m.goalHistory ??= []; m.goalSeq ??= 0;
   m.heard ??= []; m.signals ??= {}; m.sent ??= [];
+  // Versioned default: residents from before the counter existed get credit for the cells they still remember.
+  m.novelCells ??= m.visited?.length ?? 0;
   c.trust ??= {}; c.signalWatch ??= null;
   return c;
 }
@@ -98,10 +104,11 @@ export function goalBias(m, goal, key) {
 export function learnGoal(m, goal, key, gain, success, tick, learn) {
   if (!goal) return;
   goal.steps++;
+  // Strategy switching is learned behaviour: in frozen mode neither the avoid list nor the goal model moves.
+  if (!learn) return;
   if (success && gain > 0) delete goal.fails[key];
   else { goal.fails[key] = (goal.fails[key] ?? 0) + 1; if (goal.fails[key] >= GOAL_LIMITS.failsToAvoid && !goal.avoid.includes(key)) { goal.avoid.push(key); if (goal.avoid.length > GOAL_LIMITS.avoid) goal.avoid.shift(); goal.switched = (goal.switched ?? 0) + 1; } }
   const fk = Object.keys(goal.fails); if (fk.length > 8) delete goal.fails[fk[0]];
-  if (!learn) return;
   const k = `${goal.kind}|${key}`;
   let e = m.goalModel[k];
   if (!e) {
@@ -123,10 +130,11 @@ export function perceiveSignal(rng, sender, receiver, glyph, dist, sig) {
   let heard = glyph, mis = false;
   if (rng.next() < SIGNAL.misperceive + SIGNAL.distMisperceive * dist) { const others = GLYPHS.filter((g) => g !== glyph); heard = others[rng.int(others.length)]; mis = true; }
   const m = receiver.mind;
-  m.heard.push({ sig: sig.id, from: sender.id, glyph: heard, x: sender.x, y: sender.y, tick: sig.tick, dist, conf: Math.round(clamp(1 - 0.1 * dist, 0.2, 1) * 100) / 100 });
+  const conf = Math.round(clamp(1 - 0.1 * dist, 0.2, 1) * 100) / 100;
+  m.heard.push({ sig: sig.id, from: sender.id, glyph: heard, x: sender.x, y: sender.y, tick: sig.tick, dist, conf });
   if (m.heard.length > SIGNAL.heard) m.heard.shift();
   const a = association(m, heard); a.heard++;
-  return { heard, mis };
+  return { heard, mis, conf };
 }
 export function association(m, glyph) {
   let a = m.signals[glyph];

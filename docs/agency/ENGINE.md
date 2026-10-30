@@ -20,6 +20,20 @@ defects 1–5 are not resolved here. See the table below.
 | 7 | Ruins (integrity 0) work as stores / finished homes | engine + views | **Resolved** | test `defect 7` |
 | 8 | Newly chosen build step reports `idle` | engine | **Resolved** | test `defect 8` |
 
+## Revision findings (second independent review)
+
+Each finding was reproduced first; only the ones that held were changed. Tests live in `tests/agency.test.js`.
+
+| Finding | Verdict | What changed |
+|---|---|---|
+| Repeated place/carry earns acquisition reward (`carry` outcome) | **Fixed** | `carry` now ends with `{transfer:true}` like retrieve/salvage: no per-unit acquisition reward, no social-observation broadcast, produced map still recorded for planner predictions. Test `ground place/carry is a transfer`. |
+| Sender learns receiver's private outcome at any distance (`settleWatch`) | **Fixed** | Sender credit moved behind a bounded acknowledgement signal: emitted by the responder only on a positive gain with a positive tie, only inside signal range, gated by the normal attention and misperception rules, attributed by heard glyph against the sender's bounded sent history, scaled by perceived confidence. The global gain accounting remains only as `signal.outcomes` observer telemetry. Test `sender credit is local`. |
+| Frozen mode still wrote associations/co-occurrence/avoid lists | **Fixed** | `settleWatch` association `n`/`payoff`, `onRespond` co-occurrence and `learnGoal` fails/avoid/switched are now all inside the learning guard. Frozen runs keep `model`, `goalModel`, `trust`, `seen`, `n`, `payoff`, `avoid` empty. Test `frozen mode writes no learned structures`. |
+| Curiosity goal unreachable once `visited` hits the 384 cap | **Fixed** | New persisted counter `mind.novelCells` (versioned default `visited.length`) counts every novel cell; `goalMetric('curiosity')` uses it. Test `curiosity survives the visited-cell memory cap`. |
+| `share` overfills the recipient | **Fixed** | Recipient capacity checked at execution before the giver's item is removed; rejection is `inventory-full`. Offer is still made — the giver cannot see inside the recipient inventory. Test `share respects the recipient capacity`. |
+| Social goal closed by a single interaction | **Fixed** | Satisfaction threshold raised 0.08 → 0.3 (~3+ exchanges). Test `a social goal persists`. |
+| Cook/provision chains absent from engine-driven runs | **Disputed (disclosure already present)** | No code change: the "Known gaps" section below and the ablation table have always reported `cookedOut`/`helped.provision` as 0 and never counted them as demonstrated chains. |
+
 ### 6 — distant stock leakage
 *Before:* `perceive()` copied `shelter.store` into every observation within 7 tiles, and `rememberShelter()` stored it as
 `mind.shelters[].stock`. `livingAffordances()` then offered `retrieve` for goods the resident had only seen from a distance. This was a planner leak.
@@ -87,6 +101,10 @@ existing planner and mb-v1 choose among them.
 ### Persistent goals (`agency.js`, extends planner/mb-v1)
 * Goal kinds: food, water, warmth, rest, safety, curiosity, social. Triggers and satisfaction thresholds are **designed**.
   Each resident has at most 4 goals. A goal persists until it is achieved, displaced (by bound) or abandoned (after 1,500 ticks).
+* Curiosity is measured by `mind.novelCells`, a persisted lifetime count of newly explored 8×8 cells, not by the retained
+  `visited` list (capped at 384). A resident whose cell memory is full still progresses on new ground; the counter migrates
+  with the versioned default `visited.length`. A social goal needs ~0.3 of new positive relationship — about three or more
+  exchanges — so it persists across several interactions instead of closing after one.
 * The top-urgency goal is `active`. Goals that are outranked become `suspended` (`interruptions` counter), and resume later (`resumed`).
 * Planner integration: each candidate's utility adds `goalWeight × urgency × goalBias`. `goalBias` is the **learned** mean
   change in the goal's metric after that first step while that goal was active (`mind.goalModel`, at most 64 entries). Unknown steps
@@ -102,9 +120,14 @@ existing planner and mb-v1 choose among them.
 * Reception: within 6 tiles (Chebyshev). Attention is `0.85 − 0.08·dist` (−0.4 when resting), so the chance of hearing is 5–100 %.
   The glyph is misheard as another one with probability `0.06 + 0.03·dist`. The receiver stores only `{glyph, from, x, y, tick, dist, conf}`.
 * Sender side: the step key is `signal|glyph|<own salient perception category>`. Which glyph a resident uses in which
-  situation is therefore learned from credit. **Signalling earns no intrinsic reward.** A sender is credited only when a responder it has a
-  positive tie with realises a **positive wellbeing gain** within 90 ticks of arriving. The credit is capped at 0.3 per response and applied
-  at weight 0.5.
+  situation is therefore learned from credit. **Signalling earns no intrinsic reward.** The receiver's outcome is private to the
+  receiver. A sender is credited **only through a bounded acknowledgement it actually perceives**: when a response settles with a
+  positive wellbeing gain and the responder has a positive tie back, the responder emits the glyph it responded to. That
+  acknowledgement reaches the sender only if the sender is still within signal range and attends to it, under the same distance,
+  attention and misperception rules as any signal. The sender attributes it to the most recent matching glyph in its own bounded
+  sent history; a misheard acknowledgement can credit a different glyph, and a forgotten send earns nothing. Credit is capped at
+  0.3 per response, scaled by the perceived confidence, and applied at weight 0.5. The realised gain itself is never copied to the
+  sender: it exists only as observer telemetry (`signal.outcomes`).
 * Receiver side: a response is `move` to the source (key `respond|glyph|trust-bucket`). On arrival the receiver records what *it*
   perceives there (co-occurrence counts). After 90 ticks it compares its own wellbeing with its wellbeing at arrival. This change updates
   the association payoff, the outcome model and its trust in the sender.
@@ -121,6 +144,7 @@ existing planner and mb-v1 choose among them.
 | Goal triggers, metrics, satisfaction thresholds, bounds | goalModel: which first steps advance which goal; avoid lists |
 | Signal range, attention, misperception, credit cap; no dictionary | Glyph use per context, payoff of responding per glyph and trust, trust per sender |
 | Reflexes, needBias, wellbeing reward (existing) | Whose home is which shelter (observed); store contents (visited) |
+| Production vs transfer: only new material earns acquisition reward; carry/retrieve/salvage/share are transfers | — |
 
 ## Migration 4 → 5 (`persist.js MIGRATIONS[4]`)
 Adds empty `crops` and `signals`, schema-5 totals, `nextId.crop` and `nextId.signal`, and per resident empty goals, goalModel, heard, signals, trust and homes.
@@ -142,37 +166,45 @@ Schema-4 code refuses schema-5 saves by design. Dry run on the v4 fixture: `resu
 
 ## Checks run (this machine: x86_64, 8 vCPU, Node v22.23.1, not the ARM VPS)
 
-* `cd server && npm test` → **196/196 pass** (`results/test-run.txt`). This includes 13 new tests in `tests/agency.test.js`. Five existing
-  tests were updated only for the schema number and the extended item ledger (`expectedHoldings()`, which adds planted, harvested and cooked terms).
+* `cd server && npm test` → **202/202 pass** (`results/test-run.txt`). This includes 19 tests in `tests/agency.test.js`
+  (6 added in this revision for the findings above) plus a restart-exactness fix in `settle()` that the revision exposed.
 * Ablation: `node tests/experiments/agency-ablation.mjs 3000 3,5,9 docs/agency/results/ablation-3000.json`. Deterministic.
-  It covers seeds 3, 5 and 9 × {learning, frozen} × {communication on, off}, plus seed 3 with bush food in the 3×3 starting chunks depleted. **Item ledger errors: 0 in all 14 runs.**
-* Benchmark: `tests/load/living-bench.mjs <pop> 600` → `results/bench-schema5-*.json`.
+  It covers seeds 3, 5 and 9 × {learning, frozen} × {communication on, off}, plus seed 3 with bush food in the 3×3 starting chunks depleted. **Item ledger errors: 0 in all 14 runs.** Re-run for this revision; the numbers below are the current engine.
+* Benchmark: `tests/load/living-bench.mjs <pop> 600` → `results/bench-schema5-*.json` (schema-5 numbers from the previous measurement; this revision adds one range check, one capacity check and one bounded feedback call per settled response).
 
-### Results (raw numbers in `results/ablation-3000.json`)
+### Results (raw numbers in `results/ablation-3000.json`, re-run after the revision fixes)
 
 | Run (3000 ticks) | Pop | Deaths | Planted / harvested / withered | Help tend / provision / repair | Signals sent / heard / misheard / responses | Mean learned response payoff | Distinct first steps |
 |---|---|---|---|---|---|---|---|
-| s3 learn+comm | 39 | 0 | 26 / 36 / 7 | 106 / 0 / 0 | 919 / 2210 / 310 / 202 | +0.004 | 66 |
-| s3 learn, no comm | 44 | 0 | 11 / 24 / 2 | 28 / 0 / 0 | 0 | — | 23 |
-| s3 frozen+comm | 42 | 1 | 6 / 9 / 2 | 6 / 0 / 0 | 433 / 1528 / 194 / 194 | −0.077 | 42 |
-| s5 learn+comm | 37 | 0 | 19 / 27 / 9 | 73 / 0 / 0 | 992 / 2599 / 381 / 156 | −0.034 | 55 |
-| s5 learn, no comm | 35 | 0 | 18 / 15 / 10 | 47 / 0 / 0 | 0 | — | 45 |
-| s9 learn+comm | 36 | 0 | 30 / 27 / 19 | 88 / 0 / 0 | 975 / 2650 / 323 / 205 | +0.002 | 54 |
-| s9 learn, no comm | 41 | 0 | 15 / 27 / 6 | 88 / 0 / 0 | 0 | — | 44 |
-| s3 depleted, learn+comm | 37 | 0 | 11 / 21 / 1 | 66 / 0 / 0 | 908 / 1851 / 246 / 220 | +0.059 | 59 |
+| s3 learn+comm | 39 | 0 | 30 / 57 / 11 | 56 / 0 / 0 | 902 / 1915 / 274 / 210 | −0.006 | 42 |
+| s3 learn, no comm | 41 | 0 | 18 / 27 / 8 | 43 / 0 / 0 | 0 | — | 50 |
+| s3 frozen+comm | 44 | 0 | 0 / 0 / 0 | 0 / 0 / 0 | 376 / 1070 / 133 / 122 | — | 48 |
+| s3 frozen, no comm | 47 | 0 | 5 / 6 / 3 | 5 / 0 / 0 | 0 | — | 33 |
+| s5 learn+comm | 41 | 0 | 11 / 15 / 5 | 46 / 0 / 0 | 1007 / 2869 / 399 / 217 | −0.023 | 45 |
+| s5 learn, no comm | 49 | 0 | 17 / 12 / 13 | 27 / 0 / 0 | 0 | — | 25 |
+| s5 frozen+comm | 41 | 0 | 0 / 0 / 0 | 0 / 0 / 0 | 376 / 1261 / 151 / 119 | — | 43 |
+| s5 frozen, no comm | 41 | 0 | 3 / 3 / 2 | 0 / 0 / 0 | 0 | — | 27 |
+| s9 learn+comm | 39 | 0 | 28 / 18 / 20 | 38 / 0 / 0 | 1071 / 2349 / 335 / 217 | +0.009 | 60 |
+| s9 learn, no comm | 37 | 0 | 25 / 33 / 9 | 51 / 0 / 0 | 0 | — | 37 |
+| s9 frozen+comm | 45 | 0 | 6 / 3 / 5 | 0 / 0 / 0 | 453 / 1341 / 184 / 162 | — | 42 |
+| s9 frozen, no comm | 47 | 0 | 6 / 9 / 3 | 16 / 0 / 0 | 0 | — | 36 |
+| s3 depleted, learn+comm | 31 | 0 | 20 / 30 / 6 | 48 / 0 / 0 | 832 / 1531 / 192 / 193 | +0.107 | 57 |
+| s3 depleted, learn, no comm | 38 | 0 | 10 / 21 / 1 | 18 / 0 / 0 | 0 | — | 28 |
 
 Longer single run (seed 2, 8,000 ticks): 84 residents (62 births, 2 deaths), residents in all four biomes, 43 standing shelters,
 21 fish caught, 5 **voluntary repairs of another resident's shelter**, 211 tends of others' crops, 2 fires lit, **0 cooking**.
 
 Interpretation, stated plainly:
-* Learning enabled vs frozen: learning residents plant and harvest 3–20× more and eat more (they reach low hunger),
-  and their strategy diversity is higher. Frozen populations grow somewhat larger in 3,000 ticks (41–51 vs 35–44). Learning is
-  **not** better for population on this horizon.
-* Communication on vs off: signalling multiplies the number of distinct first steps (54–66 vs 23–45) because signal/respond
-  are new options. **No measurable benefit was found.** Learned mean response payoff is about 0 (−0.03 to +0.06), and populations
+* Learning enabled vs frozen: learning residents plant and harvest far more (e.g. 30/57 vs 0/0 on seed 3) and eat more.
+  The frozen arm is now a true no-learning baseline: outcome model, goal model, signal associations, trust and avoid
+  lists all stay empty (earlier numbers still had association and strategy learning inside it). Frozen populations grow
+  somewhat larger in 3,000 ticks (41–47 vs 37–49). Learning is **not** better for population on this horizon.
+* Communication on vs off: signalling multiplies the number of distinct first steps (42–60 vs 25–50) because signal/respond
+  are new options. **No measurable benefit was found.** Learned mean response payoff is about 0 (−0.02 to +0.11), and populations
   without communication are similar or larger. On this evidence the signals are mostly noise. Signals are about 2× more frequent
   with learning than frozen. The credit-cap test shows this is bounded (credit ≤ 0.3 × responses; signal values ≤ 0.3; signals < 25 % of decisions).
-  It is not a runaway loop.
+  It is not a runaway loop. Sender credit is also much rarer now — `signalCredit` totals 0.3–1.8 across 3,000 ticks —
+  because an acknowledgement only reaches a sender that stayed in range and attended; that is the intended locality, not a bug.
 * Frozen mode shows `primitiveDiversityBits = 0` because frozen residents never write to their outcome model. That metric is
   computed from model entries, so it is meaningless for frozen runs. Use `strategyDiversityBits` / `distinctFirstSteps` instead.
 

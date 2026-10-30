@@ -125,5 +125,8 @@ export function markVisited(mind, x, y) {
   if (i >= 0) mind.visited.splice(i, 1);
   mind.visited.push(k);
   if (mind.visited.length > LIMITS.visited) mind.visited.shift();
+  // The retained list is capped; the lifetime count of novel cells is not. Curiosity measures the count,
+  // so a resident at the memory cap still gets credit for exploring new ground.
+  if (i < 0) mind.novelCells = (mind.novelCells ?? mind.visited.length - 1) + 1;
   return i < 0;
 }

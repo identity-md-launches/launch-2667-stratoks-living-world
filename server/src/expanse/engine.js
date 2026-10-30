@@ -108,7 +108,14 @@ export class Expanse {
   biome(x, y) { const ch = this.chunkAt(x, y); return ch ? ch.biome[(y - ch.cy * CHUNK) * CHUNK + (x - ch.cx * CHUNK)] : 'cold'; }
   nodeAt(x, y) { const ch = this.chunkAt(x, y); const n = ch?.at.get(y * 100000 + x); return n ? this.settle(n) : null; }
   pileAt(x, y) { return this.chunkAt(x, y)?.pileAt.get(y * 100000 + x) ?? null; }
-  settle(n) { const before = n.units; settleNode(n, this.tick); if (n.units > before) { const it = NODE_KINDS[n.kind].item; this.totals.regrown[it] = (this.totals.regrown[it] ?? 0) + n.units - before; this.dirty(n.x, n.y); } return n; }
+  // Lazily evaluate regrowth. Nodes that are dead or already full are returned untouched: settleNode would only
+  // stamp n.t with the read tick, a read-only mutation that is invisible to snapshots (only dirty chunks are
+  // saved) and so made a reloaded world serialize differently from an uninterrupted one. Every real change to
+  // n.t comes from a depletion/regrowth event, and those mark the chunk dirty.
+  settle(n) {
+    if (n.dead || n.units >= NODE_KINDS[n.kind].max) return n;
+    const before = n.units; settleNode(n, this.tick); if (n.units > before) { const it = NODE_KINDS[n.kind].item; this.totals.regrown[it] = (this.totals.regrown[it] ?? 0) + n.units - before; this.dirty(n.x, n.y); } return n;
+  }
   moveCost(x, y) {
     const c = MOVE_COST[this.tile(x, y)]; if (c === Infinity) return Infinity;
     const n = this.chunkAt(x, y).at.get(y * 100000 + x);
@@ -596,7 +603,10 @@ export class Expanse {
         if (!p || !p.items[a.item]) return this.endStep(c, false, 'nothing-there');
         if (this.invWeight(c) + (WEIGHT[a.item] ?? 1) > this.cfg.invCapacity) return this.endStep(c, false, 'inventory-full');
         p.items[a.item]--; if (!p.items[a.item]) delete p.items[a.item]; this.removePileIfEmpty(p); this.addItem(c, a.item); this.dirty(c.x, c.y);
-        return this.endStep(c, true, null, { produced: { [a.item]: 1 } });
+        // Picking a ground item up is a transfer, like retrieve/salvage: no material entered the world,
+        // so it earns no acquisition reward and teaches observers nothing. The produced map is still
+        // recorded in the outcome model so the planner keeps predicting the inventory change.
+        return this.endStep(c, true, null, { transfer: true });
       }
       case 'build': return this.performBuild(c, a, target);
       case 'repair': return this.performRepair(c, a, target);
@@ -610,6 +620,8 @@ export class Expanse {
       case 'signal': return this.performSignal(c, a);
       case 'use': return this.performUse(c, a, target);
       case 'share': {
+        // The recipient has the same finite carrying capacity as anyone else; the giver keeps the item on refusal.
+        if (this.invWeight(target) + (WEIGHT[a.item] ?? 1) > this.cfg.invCapacity) return this.endStep(c, false, 'inventory-full');
         if (!this.takeItem(c, a.item)) return this.endStep(c, false, 'missing-item');
         this.addItem(target, a.item);
         target.relationships[c.id] = clamp((target.relationships[c.id] ?? 0) + 0.25, -1, 1); c.relationships[target.id] = clamp((c.relationships[target.id] ?? 0) + 0.1, -1, 1);
@@ -911,8 +923,8 @@ export class Expanse {
   }
   // Responding = walking to where a glyph was heard. On arrival the resident notes what IT perceives there.
   onRespond(c, a) {
-    const obs = this.perceive(c), cat = salientCategory(obs, c), m = c.mind, as = association(m, a.glyph);
-    as.responded++; noteCooccurrence(as, [cat]);
+    const obs = this.perceive(c), cat = salientCategory(obs, c), m = c.mind, as = association(m, a.glyph), learn = this.learning && this.mode !== 'frozen';
+    as.responded++; if (learn) noteCooccurrence(as, [cat]);
     c.signalWatch = { sig: a.sig, glyph: a.glyph, from: a.from, until: this.tick + SIGNAL.watch, wb: this.wellbeing(c), key: a.key, cat };
     this.totals.responses++;
   }
@@ -921,17 +933,42 @@ export class Expanse {
   settleWatch(c) {
     const w = c.signalWatch; c.signalWatch = null;
     const gain = clamp(this.wellbeing(c) - w.wb, -2, 2), as = association(c.mind, w.glyph), learn = this.learning && this.mode !== 'frozen';
-    as.n++; as.payoff = r3(as.payoff + (gain - as.payoff) / as.n);
-    if (learn) { updateModel(c.mind, w.key, { tick: this.tick, success: gain > 0.1, reward: gain, duration: SIGNAL.watch, energy: 0, produced: {} }); updateTrust(c, w.from, gain > 0.1); }
+    // Only the receiver learns from the outcome it realised: its own association payoff, outcome model and
+    // trust. In frozen mode none of these learned structures move (heard/responded stay perception counters).
+    if (learn) {
+      as.n++; as.payoff = r3(as.payoff + (gain - as.payoff) / as.n);
+      updateModel(c.mind, w.key, { tick: this.tick, success: gain > 0.1, reward: gain, duration: SIGNAL.watch, energy: 0, produced: {} });
+      updateTrust(c, w.from, gain > 0.1);
+    }
     const s = this.signals.find((q) => q.id === w.sig);
     if (s) { s.outcomes ??= []; s.outcomes.push({ by: c.id, gain: r3(gain) }); if (s.outcomes.length > 6) s.outcomes.shift(); }
-    // Sender credit: bounded share of a POSITIVE realised gain of a responder, only if the sender has a tie to it.
+    // Sender credit is not global knowledge: the receiver's realised gain is private. When the response paid
+    // off and the responder has a positive tie back, it emits a bounded acknowledgement (the glyph it
+    // responded to) that reaches the sender only if the sender is still within signal range AND attends to
+    // it - the same distance, attention and misperception rules as any signal. A sender that walked away or
+    // did not notice learns nothing; a misheard acknowledgement can credit a different glyph than the one sent.
     const snd = this.getCreature(w.from);
     if (learn && snd && s && gain > 0.1 && (snd.relationships[c.id] ?? 0) > 0) {
-      const credit = Math.min(SIGNAL.creditCap, SIGNAL.credit * gain * (0.5 + snd.personality.sociability * 0.5));
-      updateModel(snd.mind, modelKey('signal', s.glyph, s.ctx), { tick: this.tick, success: true, reward: credit, duration: 1, energy: 0.05, produced: {} }, 0.5);
-      const rec = snd.mind.sent.find((q) => q.sig === s.id); if (rec) rec.credit = r3(rec.credit + credit);
-      this.totals.signalCredit = r3((this.totals.signalCredit ?? 0) + credit);
+      const dist = Math.max(Math.abs(c.x - snd.x), Math.abs(c.y - snd.y));
+      if (dist <= SIGNAL.range) {
+        const fb = { id: this.nextId.signal++, tick: this.tick, from: c.id, glyph: w.glyph, ctx: 'ack', x: c.x, y: c.y, receivers: [], misheard: 0, for: s.id };
+        const got = perceiveSignal(this.rng, c, snd, w.glyph, dist, fb);
+        if (got) { fb.receivers.push(snd.id); if (got.mis) fb.misheard++; }
+        this.signals.push(fb); if (this.signals.length > SIGNAL.ring) this.signals.shift();
+        this.totals.signalsFeedback = (this.totals.signalsFeedback ?? 0) + 1;
+        this.totals.signalsHeard += fb.receivers.length; this.totals.signalsMisheard += fb.misheard;
+        if (got) {
+          // Attribution is by the glyph heard back, matched against the sender's own bounded sent history:
+          // the most recent matching emission is credited. A forgotten or mismatched send earns nothing.
+          const rec = snd.mind.sent.slice().reverse().find((q) => q.glyph === got.heard);
+          if (rec) {
+            const credit = Math.min(SIGNAL.creditCap, SIGNAL.credit * gain * (0.5 + snd.personality.sociability * 0.5) * got.conf);
+            updateModel(snd.mind, modelKey('signal', got.heard, rec.ctx ?? ''), { tick: this.tick, success: true, reward: credit, duration: 1, energy: 0.05, produced: {} }, 0.5);
+            rec.credit = r3(rec.credit + credit); rec.acknowledged = this.tick;
+            this.totals.signalCredit = r3((this.totals.signalCredit ?? 0) + credit);
+          }
+        }
+      }
     }
   }
   stepShelters() {
@@ -1231,7 +1268,7 @@ export function expectedHoldings(t) {
   return out;
 }
 // Totals added in schema 5 (conservation terms and evidence counters).
-export function schema5Totals() { return { planted: {}, harvested: {}, withered: {}, cookedIn: {}, cookedOut: {}, salvaged: {}, helped: {}, heatUsed: 0, signals: 0, signalsHeard: 0, signalsMisheard: 0, responses: 0, signalCredit: 0 }; }
+export function schema5Totals() { return { planted: {}, harvested: {}, withered: {}, cookedIn: {}, cookedOut: {}, salvaged: {}, helped: {}, heatUsed: 0, signals: 0, signalsHeard: 0, signalsMisheard: 0, signalsFeedback: 0, responses: 0, signalCredit: 0 }; }
 function usable(s) { return s.complete !== false && s.integrity > 0; }
 // The save format is unchanged. Browser workers restore the exact same snapshot
 // without a Node Buffer polyfill or a replacement simulation.

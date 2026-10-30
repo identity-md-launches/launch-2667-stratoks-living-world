@@ -11,7 +11,8 @@ import { T, FISH_WATER, NODE_KINDS } from '../server/src/expanse/terrain.js';
 import { save, load, restore, readState, identityDigest, migrateExpanse, SNAPSHOT } from '../server/src/expanse/persist.js';
 import { frame, viewport, inspect } from '../server/src/expanse/view.js';
 import { CROPS, CROP, COOK, GLYPHS } from '../server/src/expanse/capabilities.js';
-import { GOAL_LIMITS, SIGNAL, updateGoals, goalBias } from '../server/src/expanse/agency.js';
+import { GOAL_LIMITS, SIGNAL, updateGoals, goalBias, goalMetric, ensureAgency } from '../server/src/expanse/agency.js';
+import { markVisited, LIMITS } from '../server/src/expanse/agent.js';
 
 const here = path.dirname(new URL(import.meta.url).pathname);
 const V4 = path.join(here, 'fixtures', 'expanse-v4');
@@ -293,6 +294,131 @@ test('conservation with crops, cooking, salvage and help over multiple seeds and
     for (const s of e.shelters) { assert.ok(sum(s.store) <= e.cfg.storeCapacity); assert.ok(s.integrity >= 0 && s.integrity <= 100); }
     for (const c of e.creatures) assert.ok(e.invWeight(c) <= e.cfg.invCapacity);
   }
+});
+
+test('ground place/carry is a transfer: no repeatable acquisition reward, nothing taught to observers, predictions kept', () => {
+  const e = mk(11), [a, o] = e.creatures, p = freeSpot(e, 24, 24);
+  stage(e, a, { wood: 1 }); place(e, a, p.x, p.y);
+  stage(e, o); place(e, o, p.x + 2, p.y); // an observer inside perception range
+  const gathered0 = { ...e.totals.gathered }, rewards = [];
+  for (let i = 0; i < 3; i++) {
+    assert.equal(run(e, a, { prim: 'place', item: 'wood', key: 'place|wood|ground', label: 'GATHER_WOOD' }).success, true);
+    rewards.push(run(e, a, { prim: 'carry', item: 'wood', key: 'carry|wood|', label: 'GATHER_WOOD' }).reward);
+  }
+  assert.deepEqual(a.inventory, { wood: 1 }); assert.deepEqual(e.totals.gathered, gathered0, 'no resource entered the world');
+  // only the first pickup may carry the one-off novelty bonus; repeated cycles earn nothing
+  assert.ok(rewards[1] <= 0.01 && rewards[2] <= 0.01, `repeated place/carry earns no acquisition reward (${rewards})`);
+  // the produced map still reaches the outcome model, so the planner predicts the inventory change...
+  assert.ok(a.mind.model['carry|wood|'].produced.wood >= 1, 'inventory prediction preserved');
+  // ...but the artificial outcome is never broadcast to watchers
+  assert.equal(o.mind.model['carry|wood|'], undefined, 'observer learned nothing from a transfer');
+  ledgerOk(e, 'carry-transfer');
+});
+
+test('sender credit is local: a settled outcome reaches the sender only through a perceived acknowledgement', () => {
+  const e = mk(11), [a, b] = e.creatures, p = freeSpot(e, 28, 28);
+  stage(e, a); stage(e, b); place(e, a, p.x, p.y); place(e, b, p.x + 1, p.y);
+  a.relationships[b.id] = 0.5;
+  const s = { id: e.nextId.signal++, tick: e.tick, from: a.id, glyph: '◇', ctx: 'none', x: p.x, y: p.y, receivers: [b.id], misheard: 0 };
+  e.signals.push(s);
+  a.mind.sent.push({ sig: s.id, glyph: '◇', ctx: 'none', tick: e.tick, heardBy: 1, credit: 0 });
+  const watch = () => { b.signalWatch = { sig: s.id, glyph: '◇', from: a.id, until: e.tick + SIGNAL.watch, wb: e.wellbeing(b) - 1, key: 'respond|◇|unknown', cat: 'node:bush' }; };
+  const rng = e.rng.next, withRng = (v, f) => { e.rng.next = () => v; try { f(); } finally { e.rng.next = rng; } };
+  // 1. Sender beyond signal range: no acknowledgement is emitted and nothing is credited. The receiver
+  //    still learns its own outcome.
+  place(e, a, p.x + SIGNAL.range + 6, p.y); watch();
+  const n0 = a.mind.total;
+  e.settleWatch(b);
+  assert.equal(e.totals.signalsFeedback ?? 0, 0, 'no ack emitted out of range');
+  assert.equal(a.mind.total, n0, 'sender model untouched');
+  assert.equal(a.mind.sent.at(-1).credit, 0);
+  assert.equal(b.mind.model['respond|◇|unknown'].n, 1, 'receiver learned its own outcome');
+  assert.ok(b.mind.signals['◇'].n >= 1 && (b.trust[a.id] ?? 0) > 0);
+  // 2. In range but not attending: the ack is emitted (world telemetry) but unheard, so no credit.
+  place(e, a, p.x + 1, p.y); watch();
+  withRng(0.99, () => e.settleWatch(b));
+  assert.equal(e.totals.signalsFeedback, 1, 'ack emitted');
+  assert.equal(a.mind.sent.at(-1).credit, 0); assert.equal(a.mind.total, n0);
+  // 3. In range, attending, glyph heard correctly: bounded credit on the sender's own model and sent history.
+  watch();
+  withRng(0.5, () => e.settleWatch(b));
+  assert.ok(a.mind.sent.at(-1).credit > 0, `credit paid (${a.mind.sent.at(-1).credit})`);
+  assert.ok(a.mind.sent.at(-1).credit <= SIGNAL.creditCap + 1e-9);
+  assert.ok(a.mind.total > n0); assert.ok((a.mind.model['signal|◇|none']?.n ?? 0) >= 0.5);
+  assert.equal(a.mind.heard.at(-1).from, b.id, 'the sender heard a real signal from the responder');
+  // 4. A misheard acknowledgement credits only what was heard: no matching sent glyph, no credit.
+  const c0 = a.mind.sent.at(-1).credit;
+  watch();
+  withRng(0, () => e.settleWatch(b));
+  assert.notEqual(a.mind.heard.at(-1).glyph, '◇', 'ack misheard');
+  assert.equal(a.mind.sent.at(-1).credit, c0, 'misheard ack cannot credit the sent glyph');
+});
+
+test('frozen mode writes no learned structures: associations, trust, strategies and models all stay empty', () => {
+  const e = Expanse.create({ initialCount: 24, mode: 'frozen', learning: false, goals: true, communication: true }, { seed: 3 });
+  e.run(2000);
+  assert.ok(e.totals.responses > 0, 'residents still signal and respond');
+  assert.equal(e.totals.signalCredit, 0);
+  for (const c of e.creatures) {
+    assert.equal(Object.keys(c.mind.model).length, 0); assert.equal(c.mind.total, 0);
+    assert.equal(Object.keys(c.mind.goalModel).length, 0); assert.equal(Object.keys(c.trust).length, 0);
+    for (const a of Object.values(c.mind.signals)) { assert.equal(a.n, 0); assert.equal(a.payoff, 0); assert.deepEqual(a.seen, {}); }
+    for (const g of c.mind.goals) assert.deepEqual(g.avoid, []);
+    for (const h of c.mind.goalHistory) assert.deepEqual(h.avoided, []);
+  }
+});
+
+test('curiosity survives the visited-cell memory cap: a lifetime novel-cell count keeps the goal achievable', () => {
+  const e = mk(11), c = e.creatures[0];
+  stage(e, c); Object.assign(c, { hunger: 0, thirst: 0, energy: 100, warmth: 100 });
+  c.personality.curiosity = 1; c.personality.sociability = 0;
+  c.mind.visited = []; c.mind.novelCells = 0;
+  for (let x = -14; x <= 20; x++) for (let y = -14; y <= -4; y++) markVisited(c.mind, x * 8, y * 8);
+  assert.equal(c.mind.visited.length, LIMITS.visited, 'retained cells are capped');
+  const g = updateGoals(c, e.tick, false); assert.equal(g.kind, 'curiosity');
+  const m0 = goalMetric('curiosity', c);
+  for (let y = 0; y <= 16; y += 8) assert.equal(markVisited(c.mind, 0, y), true, 'novel cell');
+  assert.ok(goalMetric('curiosity', c) - m0 >= 0.75, 'new ground still counts at the cap');
+  updateGoals(c, e.tick + 1, false);
+  assert.ok(c.mind.goalHistory.some((h) => h.kind === 'curiosity' && h.how === 'achieved'), 'goal completed at full memory');
+  // migrated residents without the counter get a versioned default from what they still remember
+  const old = mk(12).creatures[0]; delete old.mind.novelCells; old.mind.visited = ['0,0', '1,1'];
+  ensureAgency(old); assert.equal(old.mind.novelCells, 2);
+});
+
+test('share respects the recipient capacity: refused transfers keep both inventories conserved', () => {
+  const e = mk(11), [a, b] = e.creatures, p = freeSpot(e, 25, 25);
+  stage(e, a, { berry: 1 }); place(e, a, p.x, p.y);
+  stage(e, b, { wood: 6 }); place(e, b, p.x, p.y + 1);
+  assert.equal(e.invWeight(b), e.cfg.invCapacity);
+  const share = e.affordances(a, e.perceive(a))(a.inventory, null).find((s) => s.prim === 'share');
+  assert.ok(share, 'offered: the giver cannot see inside the recipient inventory');
+  const r = run(e, a, share);
+  assert.equal(r.reason, 'inventory-full'); assert.equal(r.success, false);
+  assert.deepEqual(b.inventory, { wood: 6 }); assert.equal(a.inventory.berry, 1, 'giver keeps the item on refusal');
+  // a capacity change during travel is caught at arrival
+  const dir = [[0, 3], [3, 0], [0, -3], [-3, 0]].find(([dx, dy]) => [...Array(3)].every((_, k) => e.passable(p.x + (dx / 3) * (k + 1), p.y + (dy / 3) * (k + 1)) && !FISH_WATER.has(e.tile(p.x + (dx / 3) * (k + 1), p.y + (dy / 3) * (k + 1)))));
+  assert.ok(dir, 'a passable approach exists');
+  stage(e, b, {}); place(e, b, p.x + dir[0], p.y + dir[1]);
+  const share2 = e.affordances(a, e.perceive(a))(a.inventory, null).find((s) => s.prim === 'share');
+  let filled = false;
+  const r2 = run(e, a, share2, 400, () => { if (!filled && a.act?.phase === 'travel') { stage(e, b, { wood: 6 }); filled = true; } });
+  assert.ok(filled, 'recipient filled while the giver walked');
+  assert.equal(r2.reason, 'inventory-full'); assert.equal(a.inventory.berry, 1); assert.deepEqual(b.inventory, { wood: 6 });
+  ledgerOk(e, 'share-capacity');
+});
+
+test('a social goal persists across several interactions, not a single one', () => {
+  const e = mk(11), c = e.creatures[0];
+  stage(e, c); Object.assign(c, { hunger: 0, thirst: 0, energy: 90, warmth: 90 });
+  c.personality.sociability = 1; c.personality.curiosity = 0;
+  const g = updateGoals(c, e.tick, false); assert.equal(g.kind, 'social');
+  c.relationships[99] = 0.1; // one share's worth of relationship gain
+  updateGoals(c, e.tick + 1, false);
+  assert.equal(c.mind.goals.find((q) => q.id === g.id)?.status, 'active', 'one interaction does not close it');
+  c.relationships[99] = 0.35; // several interactions of gain
+  updateGoals(c, e.tick + 2, false);
+  assert.ok(c.mind.goalHistory.some((h) => h.id === g.id && h.how === 'achieved'));
 });
 
 test('determinism and exact restart with schema 5 state (goals, crops, signals)', () => {
